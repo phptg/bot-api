@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type\Sticker;
+namespace Phptg\BotApi\Type\Sticker;
 
-use Vjik\TelegramBot\Api\Type\Chat;
+use Phptg\BotApi\Type\Chat;
 
 /**
  * @see https://core.telegram.org/bots/api#gift

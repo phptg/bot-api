@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type;
+namespace Phptg\BotApi\Type;
 
 use Psr\Http\Message\StreamInterface;
 use RuntimeException;

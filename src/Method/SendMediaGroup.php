@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Method;
+namespace Phptg\BotApi\Method;
 
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\ArrayOfObjectsValue;
-use Vjik\TelegramBot\Api\Transport\HttpMethod;
-use Vjik\TelegramBot\Api\FileCollector;
-use Vjik\TelegramBot\Api\MethodInterface;
-use Vjik\TelegramBot\Api\Type\InputMediaAudio;
-use Vjik\TelegramBot\Api\Type\InputMediaDocument;
-use Vjik\TelegramBot\Api\Type\InputMediaPhoto;
-use Vjik\TelegramBot\Api\Type\InputMediaVideo;
-use Vjik\TelegramBot\Api\Type\Message;
-use Vjik\TelegramBot\Api\Type\ReplyParameters;
+use Phptg\BotApi\ParseResult\ValueProcessor\ArrayOfObjectsValue;
+use Phptg\BotApi\Transport\HttpMethod;
+use Phptg\BotApi\FileCollector;
+use Phptg\BotApi\MethodInterface;
+use Phptg\BotApi\Type\InputMediaAudio;
+use Phptg\BotApi\Type\InputMediaDocument;
+use Phptg\BotApi\Type\InputMediaPhoto;
+use Phptg\BotApi\Type\InputMediaVideo;
+use Phptg\BotApi\Type\Message;
+use Phptg\BotApi\Type\ReplyParameters;
 
 /**
  * @see https://core.telegram.org/bots/api#sendmediagroup

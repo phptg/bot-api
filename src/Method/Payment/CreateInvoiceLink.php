@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Method\Payment;
+namespace Phptg\BotApi\Method\Payment;
 
 use SensitiveParameter;
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\StringValue;
-use Vjik\TelegramBot\Api\Transport\HttpMethod;
-use Vjik\TelegramBot\Api\MethodInterface;
-use Vjik\TelegramBot\Api\Type\Payment\LabeledPrice;
+use Phptg\BotApi\ParseResult\ValueProcessor\StringValue;
+use Phptg\BotApi\Transport\HttpMethod;
+use Phptg\BotApi\MethodInterface;
+use Phptg\BotApi\Type\Payment\LabeledPrice;
 
 /**
  * @see https://core.telegram.org/bots/api#createinvoicelink

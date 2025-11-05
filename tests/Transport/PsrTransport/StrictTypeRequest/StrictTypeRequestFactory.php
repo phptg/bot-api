@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Transport\PsrTransport\StrictTypeRequest;
+namespace Phptg\BotApi\Tests\Transport\PsrTransport\StrictTypeRequest;
 
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;

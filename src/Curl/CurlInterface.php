@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Curl;
+namespace Phptg\BotApi\Curl;
 
 use CurlHandle;
 use CurlShareHandle;

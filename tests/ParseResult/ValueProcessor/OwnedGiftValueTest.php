@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\ParseResult\ValueProcessor;
+namespace Phptg\BotApi\Tests\ParseResult\ValueProcessor;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\ParseResult\TelegramParseResultException;
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\OwnedGiftValue;
-use Vjik\TelegramBot\Api\Type\OwnedGiftRegular;
-use Vjik\TelegramBot\Api\Type\OwnedGiftUnique;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\ParseResult\TelegramParseResultException;
+use Phptg\BotApi\ParseResult\ValueProcessor\OwnedGiftValue;
+use Phptg\BotApi\Type\OwnedGiftRegular;
+use Phptg\BotApi\Type\OwnedGiftUnique;
 
 use function PHPUnit\Framework\assertInstanceOf;
 

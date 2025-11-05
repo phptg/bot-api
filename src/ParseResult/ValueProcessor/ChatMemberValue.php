@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\ParseResult\ValueProcessor;
+namespace Phptg\BotApi\ParseResult\ValueProcessor;
 
-use Vjik\TelegramBot\Api\Type\ChatMember;
-use Vjik\TelegramBot\Api\Type\ChatMemberAdministrator;
-use Vjik\TelegramBot\Api\Type\ChatMemberBanned;
-use Vjik\TelegramBot\Api\Type\ChatMemberLeft;
-use Vjik\TelegramBot\Api\Type\ChatMemberMember;
-use Vjik\TelegramBot\Api\Type\ChatMemberOwner;
-use Vjik\TelegramBot\Api\Type\ChatMemberRestricted;
+use Phptg\BotApi\Type\ChatMember;
+use Phptg\BotApi\Type\ChatMemberAdministrator;
+use Phptg\BotApi\Type\ChatMemberBanned;
+use Phptg\BotApi\Type\ChatMemberLeft;
+use Phptg\BotApi\Type\ChatMemberMember;
+use Phptg\BotApi\Type\ChatMemberOwner;
+use Phptg\BotApi\Type\ChatMemberRestricted;
 
 /**
  * @template-extends InterfaceValue<ChatMember>

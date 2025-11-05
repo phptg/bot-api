@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\Sticker\Sticker;
-use Vjik\TelegramBot\Api\Type\UniqueGiftBackdrop;
-use Vjik\TelegramBot\Api\Type\UniqueGiftBackdropColors;
-use Vjik\TelegramBot\Api\Type\UniqueGiftInfo;
-use Vjik\TelegramBot\Api\Type\UniqueGift;
-use Vjik\TelegramBot\Api\Type\UniqueGiftModel;
-use Vjik\TelegramBot\Api\Type\UniqueGiftSymbol;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\Sticker\Sticker;
+use Phptg\BotApi\Type\UniqueGiftBackdrop;
+use Phptg\BotApi\Type\UniqueGiftBackdropColors;
+use Phptg\BotApi\Type\UniqueGiftInfo;
+use Phptg\BotApi\Type\UniqueGift;
+use Phptg\BotApi\Type\UniqueGiftModel;
+use Phptg\BotApi\Type\UniqueGiftSymbol;
 
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertNull;

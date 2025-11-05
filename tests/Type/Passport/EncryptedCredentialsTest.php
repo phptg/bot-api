@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type\Passport;
+namespace Phptg\BotApi\Tests\Type\Passport;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\Passport\EncryptedCredentials;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\Passport\EncryptedCredentials;
 
 use function PHPUnit\Framework\assertSame;
 

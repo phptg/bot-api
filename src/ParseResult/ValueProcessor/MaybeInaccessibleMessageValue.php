@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\ParseResult\ValueProcessor;
+namespace Phptg\BotApi\ParseResult\ValueProcessor;
 
 use Attribute;
-use Vjik\TelegramBot\Api\ParseResult\InvalidTypeOfValueInResultException;
-use Vjik\TelegramBot\Api\ParseResult\NotFoundKeyInResultException;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\InaccessibleMessage;
-use Vjik\TelegramBot\Api\Type\Message;
+use Phptg\BotApi\ParseResult\InvalidTypeOfValueInResultException;
+use Phptg\BotApi\ParseResult\NotFoundKeyInResultException;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\InaccessibleMessage;
+use Phptg\BotApi\Type\Message;
 
 use function is_array;
 use function is_int;

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\ChecklistTask;
-use Vjik\TelegramBot\Api\Type\MessageEntity;
-use Vjik\TelegramBot\Api\Type\User;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\ChecklistTask;
+use Phptg\BotApi\Type\MessageEntity;
+use Phptg\BotApi\Type\User;
 
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertFalse;

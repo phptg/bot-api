@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\ParseResult\ValueProcessor;
+namespace Phptg\BotApi\ParseResult\ValueProcessor;
 
-use Vjik\TelegramBot\Api\Type\PaidMedia;
-use Vjik\TelegramBot\Api\Type\PaidMediaPhoto;
-use Vjik\TelegramBot\Api\Type\PaidMediaPreview;
-use Vjik\TelegramBot\Api\Type\PaidMediaVideo;
+use Phptg\BotApi\Type\PaidMedia;
+use Phptg\BotApi\Type\PaidMediaPhoto;
+use Phptg\BotApi\Type\PaidMediaPreview;
+use Phptg\BotApi\Type\PaidMediaVideo;
 
 /**
  * @template-extends InterfaceValue<PaidMedia>

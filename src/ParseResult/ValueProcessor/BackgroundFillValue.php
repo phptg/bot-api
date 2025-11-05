@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\ParseResult\ValueProcessor;
+namespace Phptg\BotApi\ParseResult\ValueProcessor;
 
-use Vjik\TelegramBot\Api\Type\BackgroundFill;
-use Vjik\TelegramBot\Api\Type\BackgroundFillFreeformGradient;
-use Vjik\TelegramBot\Api\Type\BackgroundFillGradient;
-use Vjik\TelegramBot\Api\Type\BackgroundFillSolid;
+use Phptg\BotApi\Type\BackgroundFill;
+use Phptg\BotApi\Type\BackgroundFillFreeformGradient;
+use Phptg\BotApi\Type\BackgroundFillGradient;
+use Phptg\BotApi\Type\BackgroundFillSolid;
 
 /**
  * @template-extends InterfaceValue<BackgroundFill>

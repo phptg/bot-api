@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Transport\NativeTransport\StreamMock;
+namespace Phptg\BotApi\Tests\Transport\NativeTransport\StreamMock;
 
 use function strlen;
 

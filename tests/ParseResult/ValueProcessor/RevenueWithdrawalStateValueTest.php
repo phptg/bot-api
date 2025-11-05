@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\ParseResult\ValueProcessor;
+namespace Phptg\BotApi\Tests\ParseResult\ValueProcessor;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\ParseResult\TelegramParseResultException;
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\RevenueWithdrawalStateValue;
-use Vjik\TelegramBot\Api\Type\Payment\RevenueWithdrawalStateFailed;
-use Vjik\TelegramBot\Api\Type\Payment\RevenueWithdrawalStatePending;
-use Vjik\TelegramBot\Api\Type\Payment\RevenueWithdrawalStateSucceeded;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\ParseResult\TelegramParseResultException;
+use Phptg\BotApi\ParseResult\ValueProcessor\RevenueWithdrawalStateValue;
+use Phptg\BotApi\Type\Payment\RevenueWithdrawalStateFailed;
+use Phptg\BotApi\Type\Payment\RevenueWithdrawalStatePending;
+use Phptg\BotApi\Type\Payment\RevenueWithdrawalStateSucceeded;
 
 use function PHPUnit\Framework\assertInstanceOf;
 

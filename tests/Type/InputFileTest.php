@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Throwable;
-use Vjik\TelegramBot\Api\Type\InputFile;
+use Phptg\BotApi\Type\InputFile;
 
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertIsResource;

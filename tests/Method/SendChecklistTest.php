@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Method;
+namespace Phptg\BotApi\Tests\Method;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Method\SendChecklist;
-use Vjik\TelegramBot\Api\Tests\Support\TestHelper;
-use Vjik\TelegramBot\Api\Transport\HttpMethod;
-use Vjik\TelegramBot\Api\Type\InlineKeyboardMarkup;
-use Vjik\TelegramBot\Api\Type\InputChecklist;
-use Vjik\TelegramBot\Api\Type\InputChecklistTask;
-use Vjik\TelegramBot\Api\Type\ReplyParameters;
+use Phptg\BotApi\Method\SendChecklist;
+use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Transport\HttpMethod;
+use Phptg\BotApi\Type\InlineKeyboardMarkup;
+use Phptg\BotApi\Type\InputChecklist;
+use Phptg\BotApi\Type\InputChecklistTask;
+use Phptg\BotApi\Type\ReplyParameters;
 
 use function PHPUnit\Framework\assertSame;
 

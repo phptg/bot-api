@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Transport\NativeTransport;
+namespace Phptg\BotApi\Tests\Transport\NativeTransport;
 
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use Vjik\TelegramBot\Api\Tests\Transport\NativeTransport\StreamMock\StreamMock;
-use Vjik\TelegramBot\Api\Transport\NativeTransport;
+use Phptg\BotApi\Tests\Transport\NativeTransport\StreamMock\StreamMock;
+use Phptg\BotApi\Transport\NativeTransport;
 
 use function PHPUnit\Framework\assertSame;
 

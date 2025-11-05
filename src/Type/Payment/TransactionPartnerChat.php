@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type\Payment;
+namespace Phptg\BotApi\Type\Payment;
 
-use Vjik\TelegramBot\Api\Type\Chat;
-use Vjik\TelegramBot\Api\Type\Sticker\Gift;
+use Phptg\BotApi\Type\Chat;
+use Phptg\BotApi\Type\Sticker\Gift;
 
 /**
  * @see https://core.telegram.org/bots/api#transactionpartnerchat

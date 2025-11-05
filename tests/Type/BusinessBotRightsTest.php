@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\BusinessBotRights;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\BusinessBotRights;
 
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertTrue;

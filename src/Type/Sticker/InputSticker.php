@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type\Sticker;
+namespace Phptg\BotApi\Type\Sticker;
 
-use Vjik\TelegramBot\Api\FileCollector;
-use Vjik\TelegramBot\Api\Type\InputFile;
+use Phptg\BotApi\FileCollector;
+use Phptg\BotApi\Type\InputFile;
 
 /**
  * @see https://core.telegram.org/bots/api#inputsticker

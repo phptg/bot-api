@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\ParseResult\ValueProcessor;
+namespace Phptg\BotApi\Tests\ParseResult\ValueProcessor;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\ParseResult\TelegramParseResultException;
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\ChatMemberValue;
-use Vjik\TelegramBot\Api\Type\ChatMemberAdministrator;
-use Vjik\TelegramBot\Api\Type\ChatMemberBanned;
-use Vjik\TelegramBot\Api\Type\ChatMemberLeft;
-use Vjik\TelegramBot\Api\Type\ChatMemberMember;
-use Vjik\TelegramBot\Api\Type\ChatMemberOwner;
-use Vjik\TelegramBot\Api\Type\ChatMemberRestricted;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\ParseResult\TelegramParseResultException;
+use Phptg\BotApi\ParseResult\ValueProcessor\ChatMemberValue;
+use Phptg\BotApi\Type\ChatMemberAdministrator;
+use Phptg\BotApi\Type\ChatMemberBanned;
+use Phptg\BotApi\Type\ChatMemberLeft;
+use Phptg\BotApi\Type\ChatMemberMember;
+use Phptg\BotApi\Type\ChatMemberOwner;
+use Phptg\BotApi\Type\ChatMemberRestricted;
 
 use function PHPUnit\Framework\assertInstanceOf;
 

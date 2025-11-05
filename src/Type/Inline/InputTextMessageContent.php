@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type\Inline;
+namespace Phptg\BotApi\Type\Inline;
 
-use Vjik\TelegramBot\Api\Type\LinkPreviewOptions;
-use Vjik\TelegramBot\Api\Type\MessageEntity;
+use Phptg\BotApi\Type\LinkPreviewOptions;
+use Phptg\BotApi\Type\MessageEntity;
 
 /**
  * @see https://core.telegram.org/bots/api#inputtextmessagecontent

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type\Payment;
+namespace Phptg\BotApi\Tests\Type\Payment;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\TelegramParseResultException;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\Payment\RevenueWithdrawalStateFailed;
-use Vjik\TelegramBot\Api\Type\Payment\TransactionPartnerFragment;
+use Phptg\BotApi\ParseResult\TelegramParseResultException;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\Payment\RevenueWithdrawalStateFailed;
+use Phptg\BotApi\Type\Payment\TransactionPartnerFragment;
 
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertNull;

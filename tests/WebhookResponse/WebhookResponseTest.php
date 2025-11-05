@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\WebhookResponse;
+namespace Phptg\BotApi\Tests\WebhookResponse;
 
 use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Method\SendMessage;
-use Vjik\TelegramBot\Api\Method\SendPhoto;
-use Vjik\TelegramBot\Api\Type\InputFile;
-use Vjik\TelegramBot\Api\WebhookResponse\MethodNotSupportedException;
-use Vjik\TelegramBot\Api\WebhookResponse\WebhookResponse;
+use Phptg\BotApi\Method\SendMessage;
+use Phptg\BotApi\Method\SendPhoto;
+use Phptg\BotApi\Type\InputFile;
+use Phptg\BotApi\WebhookResponse\MethodNotSupportedException;
+use Phptg\BotApi\WebhookResponse\WebhookResponse;
 
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;

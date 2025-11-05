@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\PaidMediaVideo;
-use Vjik\TelegramBot\Api\Type\Video;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\PaidMediaVideo;
+use Phptg\BotApi\Type\Video;
 
 use function PHPUnit\Framework\assertSame;
 

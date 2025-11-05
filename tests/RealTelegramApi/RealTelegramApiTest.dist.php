@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\RealTelegramApi;
+namespace Phptg\BotApi\Tests\RealTelegramApi;
 
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\TelegramBotApi;
+use Phptg\BotApi\TelegramBotApi;
 
 #[Group('realApi')]
 final class RealTelegramApiTest extends TestCase

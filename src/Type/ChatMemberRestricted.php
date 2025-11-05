@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type;
+namespace Phptg\BotApi\Type;
 
 use DateTimeImmutable;
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\ChatMemberUntilDateValue;
+use Phptg\BotApi\ParseResult\ValueProcessor\ChatMemberUntilDateValue;
 
 /**
  * @see https://core.telegram.org/bots/api#chatmemberrestricted

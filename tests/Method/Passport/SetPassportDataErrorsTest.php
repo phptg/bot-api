@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Method\Passport;
+namespace Phptg\BotApi\Tests\Method\Passport;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Method\Passport\SetPassportDataErrors;
-use Vjik\TelegramBot\Api\Transport\HttpMethod;
-use Vjik\TelegramBot\Api\Tests\Support\TestHelper;
-use Vjik\TelegramBot\Api\Type\Passport\PassportElementErrorSelfie;
+use Phptg\BotApi\Method\Passport\SetPassportDataErrors;
+use Phptg\BotApi\Transport\HttpMethod;
+use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\Passport\PassportElementErrorSelfie;
 
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;

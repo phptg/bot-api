@@ -2,32 +2,32 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type\Update;
+namespace Phptg\BotApi\Type\Update;
 
 use JsonException;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
-use Vjik\TelegramBot\Api\LogContextFactory;
-use Vjik\TelegramBot\Api\ParseResult\ResultFactory;
-use Vjik\TelegramBot\Api\ParseResult\TelegramParseResultException;
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\ObjectValue;
-use Vjik\TelegramBot\Api\Type\BusinessConnection;
-use Vjik\TelegramBot\Api\Type\BusinessMessagesDeleted;
-use Vjik\TelegramBot\Api\Type\CallbackQuery;
-use Vjik\TelegramBot\Api\Type\ChatBoostRemoved;
-use Vjik\TelegramBot\Api\Type\ChatBoostUpdated;
-use Vjik\TelegramBot\Api\Type\ChatJoinRequest;
-use Vjik\TelegramBot\Api\Type\ChatMemberUpdated;
-use Vjik\TelegramBot\Api\Type\Inline\ChosenInlineResult;
-use Vjik\TelegramBot\Api\Type\Inline\InlineQuery;
-use Vjik\TelegramBot\Api\Type\Message;
-use Vjik\TelegramBot\Api\Type\MessageReactionCountUpdated;
-use Vjik\TelegramBot\Api\Type\MessageReactionUpdated;
-use Vjik\TelegramBot\Api\Type\Payment\PaidMediaPurchased;
-use Vjik\TelegramBot\Api\Type\Payment\PreCheckoutQuery;
-use Vjik\TelegramBot\Api\Type\Payment\ShippingQuery;
-use Vjik\TelegramBot\Api\Type\Poll;
-use Vjik\TelegramBot\Api\Type\PollAnswer;
+use Phptg\BotApi\LogContextFactory;
+use Phptg\BotApi\ParseResult\ResultFactory;
+use Phptg\BotApi\ParseResult\TelegramParseResultException;
+use Phptg\BotApi\ParseResult\ValueProcessor\ObjectValue;
+use Phptg\BotApi\Type\BusinessConnection;
+use Phptg\BotApi\Type\BusinessMessagesDeleted;
+use Phptg\BotApi\Type\CallbackQuery;
+use Phptg\BotApi\Type\ChatBoostRemoved;
+use Phptg\BotApi\Type\ChatBoostUpdated;
+use Phptg\BotApi\Type\ChatJoinRequest;
+use Phptg\BotApi\Type\ChatMemberUpdated;
+use Phptg\BotApi\Type\Inline\ChosenInlineResult;
+use Phptg\BotApi\Type\Inline\InlineQuery;
+use Phptg\BotApi\Type\Message;
+use Phptg\BotApi\Type\MessageReactionCountUpdated;
+use Phptg\BotApi\Type\MessageReactionUpdated;
+use Phptg\BotApi\Type\Payment\PaidMediaPurchased;
+use Phptg\BotApi\Type\Payment\PreCheckoutQuery;
+use Phptg\BotApi\Type\Payment\ShippingQuery;
+use Phptg\BotApi\Type\Poll;
+use Phptg\BotApi\Type\PollAnswer;
 
 /**
  * @see https://core.telegram.org/bots/api#update

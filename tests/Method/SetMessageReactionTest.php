@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Method;
+namespace Phptg\BotApi\Tests\Method;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Method\SetMessageReaction;
-use Vjik\TelegramBot\Api\Transport\HttpMethod;
-use Vjik\TelegramBot\Api\Tests\Support\TestHelper;
-use Vjik\TelegramBot\Api\Type\ReactionTypeEmoji;
+use Phptg\BotApi\Method\SetMessageReaction;
+use Phptg\BotApi\Transport\HttpMethod;
+use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\ReactionTypeEmoji;
 
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;

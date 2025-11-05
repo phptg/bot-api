@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Type\Payment;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\Payment\PaidMediaPurchased;
-use Vjik\TelegramBot\Api\Type\User;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\Payment\PaidMediaPurchased;
+use Phptg\BotApi\Type\User;
 
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;

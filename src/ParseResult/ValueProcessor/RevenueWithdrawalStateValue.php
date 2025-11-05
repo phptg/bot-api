@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\ParseResult\ValueProcessor;
+namespace Phptg\BotApi\ParseResult\ValueProcessor;
 
-use Vjik\TelegramBot\Api\Type\Payment\RevenueWithdrawalState;
-use Vjik\TelegramBot\Api\Type\Payment\RevenueWithdrawalStateFailed;
-use Vjik\TelegramBot\Api\Type\Payment\RevenueWithdrawalStatePending;
-use Vjik\TelegramBot\Api\Type\Payment\RevenueWithdrawalStateSucceeded;
+use Phptg\BotApi\Type\Payment\RevenueWithdrawalState;
+use Phptg\BotApi\Type\Payment\RevenueWithdrawalStateFailed;
+use Phptg\BotApi\Type\Payment\RevenueWithdrawalStatePending;
+use Phptg\BotApi\Type\Payment\RevenueWithdrawalStateSucceeded;
 
 /**
  * @template-extends InterfaceValue<RevenueWithdrawalState>

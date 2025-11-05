@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\WebhookResponse;
+namespace Phptg\BotApi\WebhookResponse;
 
 use InvalidArgumentException;
 

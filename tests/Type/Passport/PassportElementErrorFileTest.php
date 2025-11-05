@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type\Passport;
+namespace Phptg\BotApi\Tests\Type\Passport;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Type\Passport\PassportElementErrorFile;
+use Phptg\BotApi\Type\Passport\PassportElementErrorFile;
 
 use function PHPUnit\Framework\assertSame;
 

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Transport;
+namespace Phptg\BotApi\Transport;
 
 use CurlShareHandle;
 use CURLStringFile;
-use Vjik\TelegramBot\Api\Curl\Curl;
-use Vjik\TelegramBot\Api\Curl\CurlException;
-use Vjik\TelegramBot\Api\Curl\CurlInterface;
+use Phptg\BotApi\Curl\Curl;
+use Phptg\BotApi\Curl\CurlException;
+use Phptg\BotApi\Curl\CurlInterface;
 
 use function is_int;
 

@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\ParseResult\ValueProcessor;
+namespace Phptg\BotApi\Tests\ParseResult\ValueProcessor;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\ParseResult\TelegramParseResultException;
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\BackgroundTypeValue;
-use Vjik\TelegramBot\Api\Type\BackgroundTypeChatTheme;
-use Vjik\TelegramBot\Api\Type\BackgroundTypeFill;
-use Vjik\TelegramBot\Api\Type\BackgroundTypePattern;
-use Vjik\TelegramBot\Api\Type\BackgroundTypeWallpaper;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\ParseResult\TelegramParseResultException;
+use Phptg\BotApi\ParseResult\ValueProcessor\BackgroundTypeValue;
+use Phptg\BotApi\Type\BackgroundTypeChatTheme;
+use Phptg\BotApi\Type\BackgroundTypeFill;
+use Phptg\BotApi\Type\BackgroundTypePattern;
+use Phptg\BotApi\Type\BackgroundTypeWallpaper;
 
 use function PHPUnit\Framework\assertInstanceOf;
 

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Curl;
+namespace Phptg\BotApi\Tests\Curl;
 
 use CurlHandle;
 use CurlShareHandle;
 use Throwable;
-use Vjik\TelegramBot\Api\Curl\CurlInterface;
+use Phptg\BotApi\Curl\CurlInterface;
 
 use function curl_init;
 use function is_array;

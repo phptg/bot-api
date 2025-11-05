@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type\Sticker;
+namespace Phptg\BotApi\Tests\Type\Sticker;
 
 use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Constant\Sticker\StickerFormat;
-use Vjik\TelegramBot\Api\FileCollector;
-use Vjik\TelegramBot\Api\Type\InputFile;
-use Vjik\TelegramBot\Api\Type\Sticker\InputSticker;
-use Vjik\TelegramBot\Api\Type\Sticker\MaskPosition;
+use Phptg\BotApi\Constant\Sticker\StickerFormat;
+use Phptg\BotApi\FileCollector;
+use Phptg\BotApi\Type\InputFile;
+use Phptg\BotApi\Type\Sticker\InputSticker;
+use Phptg\BotApi\Type\Sticker\MaskPosition;
 
 use function PHPUnit\Framework\assertEmpty;
 use function PHPUnit\Framework\assertSame;

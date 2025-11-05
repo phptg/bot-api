@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Method;
+namespace Phptg\BotApi\Tests\Method;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Method\SendMessage;
-use Vjik\TelegramBot\Api\Transport\HttpMethod;
-use Vjik\TelegramBot\Api\Tests\Support\TestHelper;
-use Vjik\TelegramBot\Api\Type\ForceReply;
-use Vjik\TelegramBot\Api\Type\LinkPreviewOptions;
-use Vjik\TelegramBot\Api\Type\MessageEntity;
-use Vjik\TelegramBot\Api\Type\ReplyParameters;
-use Vjik\TelegramBot\Api\Type\SuggestedPostParameters;
-use Vjik\TelegramBot\Api\Type\SuggestedPostPrice;
+use Phptg\BotApi\Method\SendMessage;
+use Phptg\BotApi\Transport\HttpMethod;
+use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\ForceReply;
+use Phptg\BotApi\Type\LinkPreviewOptions;
+use Phptg\BotApi\Type\MessageEntity;
+use Phptg\BotApi\Type\ReplyParameters;
+use Phptg\BotApi\Type\SuggestedPostParameters;
+use Phptg\BotApi\Type\SuggestedPostPrice;
 
 use function PHPUnit\Framework\assertSame;
 

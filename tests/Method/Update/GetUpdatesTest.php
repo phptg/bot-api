@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Method\Update;
+namespace Phptg\BotApi\Tests\Method\Update;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Transport\HttpMethod;
-use Vjik\TelegramBot\Api\Method\Update\GetUpdates;
-use Vjik\TelegramBot\Api\Tests\Support\TestHelper;
+use Phptg\BotApi\Transport\HttpMethod;
+use Phptg\BotApi\Method\Update\GetUpdates;
+use Phptg\BotApi\Tests\Support\TestHelper;
 
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertSame;

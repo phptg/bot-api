@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Type\InputChecklist;
-use Vjik\TelegramBot\Api\Type\InputChecklistTask;
-use Vjik\TelegramBot\Api\Type\MessageEntity;
+use Phptg\BotApi\Type\InputChecklist;
+use Phptg\BotApi\Type\InputChecklistTask;
+use Phptg\BotApi\Type\MessageEntity;
 
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;

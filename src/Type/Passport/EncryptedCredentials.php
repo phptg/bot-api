@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type\Passport;
+namespace Phptg\BotApi\Type\Passport;
 
 /**
  * @see https://core.telegram.org/bots/api#encryptedcredentials

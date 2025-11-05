@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Type\ResponseParameters;
+use Phptg\BotApi\Type\ResponseParameters;
 
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;

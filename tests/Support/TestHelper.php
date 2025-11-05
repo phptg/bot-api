@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Support;
+namespace Phptg\BotApi\Tests\Support;
 
 use Psr\Log\LoggerInterface;
-use Vjik\TelegramBot\Api\Transport\ApiResponse;
-use Vjik\TelegramBot\Api\TelegramBotApi;
+use Phptg\BotApi\Transport\ApiResponse;
+use Phptg\BotApi\TelegramBotApi;
 
 final readonly class TestHelper
 {

@@ -1,5 +1,5 @@
 {
-    "name": "vjik/telegram-bot-api",
+    "name": "phptg/bot-api",
     "type": "library",
     "description": "PHP library for working with Telegram API",
     "keywords": [
@@ -9,8 +9,8 @@
     ],
     "license": "BSD-3-Clause",
     "support": {
-        "issues": "https://github.com/vjik/telegram-bot-api/issues?state=open",
-        "source": "https://github.com/vjik/telegram-bot-api",
+        "issues": "https://github.com/phptg/bot-api/issues?state=open",
+        "source": "https://github.com/phptg/bot-api",
         "chat": "https://t.me/predvoditelev_chat"
     },
     "authors": [
@@ -43,12 +43,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Vjik\\TelegramBot\\Api\\": "src"
+            "Phptg\\BotApi\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Vjik\\TelegramBot\\Api\\Tests\\": "tests"
+            "Phptg\\BotApi\\Tests\\": "tests"
         }
     },
     "scripts": {

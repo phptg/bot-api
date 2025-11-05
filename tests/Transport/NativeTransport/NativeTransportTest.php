@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Transport\NativeTransport;
+namespace Phptg\BotApi\Tests\Transport\NativeTransport;
 
 use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use Vjik\TelegramBot\Api\Tests\Transport\NativeTransport\StreamMock\StreamMock;
-use Vjik\TelegramBot\Api\Transport\MimeTypeResolver\MimeTypeResolverInterface;
-use Vjik\TelegramBot\Api\Transport\NativeTransport;
-use Vjik\TelegramBot\Api\Type\InputFile;
+use Phptg\BotApi\Tests\Transport\NativeTransport\StreamMock\StreamMock;
+use Phptg\BotApi\Transport\MimeTypeResolver\MimeTypeResolverInterface;
+use Phptg\BotApi\Transport\NativeTransport;
+use Phptg\BotApi\Type\InputFile;
 
 use function PHPUnit\Framework\assertMatchesRegularExpression;
 use function PHPUnit\Framework\assertSame;

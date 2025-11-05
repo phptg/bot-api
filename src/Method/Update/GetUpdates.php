@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Method\Update;
+namespace Phptg\BotApi\Method\Update;
 
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\ArrayOfObjectsValue;
-use Vjik\TelegramBot\Api\Transport\HttpMethod;
-use Vjik\TelegramBot\Api\MethodInterface;
-use Vjik\TelegramBot\Api\Type\Update\Update;
+use Phptg\BotApi\ParseResult\ValueProcessor\ArrayOfObjectsValue;
+use Phptg\BotApi\Transport\HttpMethod;
+use Phptg\BotApi\MethodInterface;
+use Phptg\BotApi\Type\Update\Update;
 
 /**
  * @see https://core.telegram.org/bots/api#getupdates

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type\Payment;
+namespace Phptg\BotApi\Type\Payment;
 
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\ArrayMap;
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\PaidMediaValue;
-use Vjik\TelegramBot\Api\Type\User;
+use Phptg\BotApi\ParseResult\ValueProcessor\ArrayMap;
+use Phptg\BotApi\ParseResult\ValueProcessor\PaidMediaValue;
+use Phptg\BotApi\Type\User;
 
 /**
  * @see https://core.telegram.org/bots/api#transactionpartneruser

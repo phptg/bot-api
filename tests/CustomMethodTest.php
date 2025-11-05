@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests;
+namespace Phptg\BotApi\Tests;
 
 use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\IntegerValue;
-use Vjik\TelegramBot\Api\Transport\HttpMethod;
-use Vjik\TelegramBot\Api\CustomMethod;
-use Vjik\TelegramBot\Api\Tests\Support\TestHelper;
-use Vjik\TelegramBot\Api\Type\InputFile;
+use Phptg\BotApi\ParseResult\ValueProcessor\IntegerValue;
+use Phptg\BotApi\Transport\HttpMethod;
+use Phptg\BotApi\CustomMethod;
+use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\InputFile;
 
 use function PHPUnit\Framework\assertSame;
 

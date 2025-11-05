@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type\Sticker;
+namespace Phptg\BotApi\Type\Sticker;
 
-use Vjik\TelegramBot\Api\Type\File;
-use Vjik\TelegramBot\Api\Type\PhotoSize;
+use Phptg\BotApi\Type\File;
+use Phptg\BotApi\Type\PhotoSize;
 
 /**
  * @see https://core.telegram.org/bots/api#sticker

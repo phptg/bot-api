@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\WebhookResponse;
+namespace Phptg\BotApi\Tests\WebhookResponse;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Method\SendMessage;
-use Vjik\TelegramBot\Api\WebhookResponse\JsonWebhookResponseFactory;
-use Vjik\TelegramBot\Api\WebhookResponse\WebhookResponse;
+use Phptg\BotApi\Method\SendMessage;
+use Phptg\BotApi\WebhookResponse\JsonWebhookResponseFactory;
+use Phptg\BotApi\WebhookResponse\WebhookResponse;
 
 use function PHPUnit\Framework\assertSame;
 

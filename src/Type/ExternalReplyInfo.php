@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type;
+namespace Phptg\BotApi\Type;
 
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\ArrayOfObjectsValue;
-use Vjik\TelegramBot\Api\Type\Game\Game;
-use Vjik\TelegramBot\Api\Type\Payment\Invoice;
-use Vjik\TelegramBot\Api\Type\Sticker\Sticker;
+use Phptg\BotApi\ParseResult\ValueProcessor\ArrayOfObjectsValue;
+use Phptg\BotApi\Type\Game\Game;
+use Phptg\BotApi\Type\Payment\Invoice;
+use Phptg\BotApi\Type\Sticker\Sticker;
 
 /**
  * @see https://core.telegram.org/bots/api#externalreplyinfo

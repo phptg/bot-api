@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type\Inline;
+namespace Phptg\BotApi\Type\Inline;
 
-use Vjik\TelegramBot\Api\Type\WebAppInfo;
+use Phptg\BotApi\Type\WebAppInfo;
 
 /**
  * @see https://core.telegram.org/bots/api#inlinequeryresultsbutton

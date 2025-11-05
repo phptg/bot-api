@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type\Passport;
+namespace Phptg\BotApi\Tests\Type\Passport;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\Passport\EncryptedPassportElement;
-use Vjik\TelegramBot\Api\Type\Passport\PassportFile;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\Passport\EncryptedPassportElement;
+use Phptg\BotApi\Type\Passport\PassportFile;
 
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertInstanceOf;

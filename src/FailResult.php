@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api;
+namespace Phptg\BotApi;
 
-use Vjik\TelegramBot\Api\Transport\ApiResponse;
-use Vjik\TelegramBot\Api\Type\ResponseParameters;
+use Phptg\BotApi\Transport\ApiResponse;
+use Phptg\BotApi\Type\ResponseParameters;
 
 /**
  * @api

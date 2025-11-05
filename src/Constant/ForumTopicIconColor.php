@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Constant;
+namespace Phptg\BotApi\Constant;
 
 /**
  * @api

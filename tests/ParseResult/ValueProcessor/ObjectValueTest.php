@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\ParseResult\ValueProcessor;
+namespace Phptg\BotApi\Tests\ParseResult\ValueProcessor;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\InvalidTypeOfValueInResultException;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\ObjectValue;
-use Vjik\TelegramBot\Api\Type\BotName;
+use Phptg\BotApi\ParseResult\InvalidTypeOfValueInResultException;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\ParseResult\ValueProcessor\ObjectValue;
+use Phptg\BotApi\Type\BotName;
 
 final class ObjectValueTest extends TestCase
 {

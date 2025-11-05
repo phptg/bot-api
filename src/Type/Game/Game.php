@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type\Game;
+namespace Phptg\BotApi\Type\Game;
 
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\ArrayOfObjectsValue;
-use Vjik\TelegramBot\Api\Type\Animation;
-use Vjik\TelegramBot\Api\Type\MessageEntity;
-use Vjik\TelegramBot\Api\Type\PhotoSize;
+use Phptg\BotApi\ParseResult\ValueProcessor\ArrayOfObjectsValue;
+use Phptg\BotApi\Type\Animation;
+use Phptg\BotApi\Type\MessageEntity;
+use Phptg\BotApi\Type\PhotoSize;
 
 /**
  * @see https://core.telegram.org/bots/api#game

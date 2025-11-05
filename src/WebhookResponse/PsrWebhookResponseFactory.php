@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\WebhookResponse;
+namespace Phptg\BotApi\WebhookResponse;
 
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
-use Vjik\TelegramBot\Api\MethodInterface;
+use Phptg\BotApi\MethodInterface;
 
 use function json_encode;
 

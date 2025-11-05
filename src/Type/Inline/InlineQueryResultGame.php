@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type\Inline;
+namespace Phptg\BotApi\Type\Inline;
 
-use Vjik\TelegramBot\Api\Type\InlineKeyboardMarkup;
+use Phptg\BotApi\Type\InlineKeyboardMarkup;
 
 /**
  * @see https://core.telegram.org/bots/api#inlinequeryresultgame

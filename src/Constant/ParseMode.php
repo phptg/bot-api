@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Constant;
+namespace Phptg\BotApi\Constant;
 
 /**
  * @see https://core.telegram.org/bots/api#formatting-options

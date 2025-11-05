@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Method\Sticker;
+namespace Phptg\BotApi\Tests\Method\Sticker;
 
 use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Method\Sticker\SetStickerSetThumbnail;
-use Vjik\TelegramBot\Api\Transport\HttpMethod;
-use Vjik\TelegramBot\Api\Tests\Support\TestHelper;
-use Vjik\TelegramBot\Api\Type\InputFile;
+use Phptg\BotApi\Method\Sticker\SetStickerSetThumbnail;
+use Phptg\BotApi\Transport\HttpMethod;
+use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\InputFile;
 
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;

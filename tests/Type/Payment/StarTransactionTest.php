@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type\Payment;
+namespace Phptg\BotApi\Tests\Type\Payment;
 
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\TelegramParseResultException;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\Payment\StarTransaction;
-use Vjik\TelegramBot\Api\Type\Payment\TransactionPartnerOther;
+use Phptg\BotApi\ParseResult\TelegramParseResultException;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\Payment\StarTransaction;
+use Phptg\BotApi\Type\Payment\TransactionPartnerOther;
 
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertInstanceOf;

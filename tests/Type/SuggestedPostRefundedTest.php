@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\Chat;
-use Vjik\TelegramBot\Api\Type\Message;
-use Vjik\TelegramBot\Api\Type\SuggestedPostRefunded;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\Chat;
+use Phptg\BotApi\Type\Message;
+use Phptg\BotApi\Type\SuggestedPostRefunded;
 
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertNull;

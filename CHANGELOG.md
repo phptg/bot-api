@@ -1,8 +1,10 @@
 # Telegram Bot API for PHP Change Log
 
-## 0.9.4 under development
+## 0.10.0 November 1, 2025
 
-- Enh #170: Improve `CurlTransport` performance by sharing data between cURL handles (@vjik)
+- Chg #172: Rename package from `vjik/telegram-bot-api` to `phptg/bot-api` and change namespace
+  `Vjik\TelegramBot\Api` to `Phptg\BotApi`.
+- Enh #170: Improve `CurlTransport` performance by sharing data between cURL handles.
 
 ## 0.9.3 October 22, 2025
 

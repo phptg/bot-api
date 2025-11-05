@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Transport;
+namespace Phptg\BotApi\Transport;
 
 use RuntimeException;
-use Vjik\TelegramBot\Api\Transport\MimeTypeResolver\ApacheMimeTypeResolver;
-use Vjik\TelegramBot\Api\Transport\MimeTypeResolver\MimeTypeResolverInterface;
-use Vjik\TelegramBot\Api\Type\InputFile;
+use Phptg\BotApi\Transport\MimeTypeResolver\ApacheMimeTypeResolver;
+use Phptg\BotApi\Transport\MimeTypeResolver\MimeTypeResolverInterface;
+use Phptg\BotApi\Type\InputFile;
 
 use function is_string;
 use function json_encode;

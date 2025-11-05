@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Transport\CurlTransport;
+namespace Phptg\BotApi\Tests\Transport\CurlTransport;
 
 use CurlShareHandle;
 use CURLStringFile;
@@ -10,9 +10,9 @@ use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Throwable;
-use Vjik\TelegramBot\Api\Tests\Curl\CurlMock;
-use Vjik\TelegramBot\Api\Transport\CurlTransport;
-use Vjik\TelegramBot\Api\Type\InputFile;
+use Phptg\BotApi\Tests\Curl\CurlMock;
+use Phptg\BotApi\Transport\CurlTransport;
+use Phptg\BotApi\Type\InputFile;
 
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertEquals;

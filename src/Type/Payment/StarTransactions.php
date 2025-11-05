@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type\Payment;
+namespace Phptg\BotApi\Type\Payment;
 
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\ArrayOfObjectsValue;
+use Phptg\BotApi\ParseResult\ValueProcessor\ArrayOfObjectsValue;
 
 /**
  * @see https://core.telegram.org/bots/api#startransactions

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Constant\Sticker;
+namespace Phptg\BotApi\Constant\Sticker;
 
 /**
  * @api

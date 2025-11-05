@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\AcceptedGiftTypes;
-use Vjik\TelegramBot\Api\Type\Birthdate;
-use Vjik\TelegramBot\Api\Type\BusinessIntro;
-use Vjik\TelegramBot\Api\Type\BusinessLocation;
-use Vjik\TelegramBot\Api\Type\BusinessOpeningHours;
-use Vjik\TelegramBot\Api\Type\Chat;
-use Vjik\TelegramBot\Api\Type\ChatFullInfo;
-use Vjik\TelegramBot\Api\Type\ChatLocation;
-use Vjik\TelegramBot\Api\Type\ChatPermissions;
-use Vjik\TelegramBot\Api\Type\ChatPhoto;
-use Vjik\TelegramBot\Api\Type\Message;
-use Vjik\TelegramBot\Api\Type\ReactionTypeCustomEmoji;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\AcceptedGiftTypes;
+use Phptg\BotApi\Type\Birthdate;
+use Phptg\BotApi\Type\BusinessIntro;
+use Phptg\BotApi\Type\BusinessLocation;
+use Phptg\BotApi\Type\BusinessOpeningHours;
+use Phptg\BotApi\Type\Chat;
+use Phptg\BotApi\Type\ChatFullInfo;
+use Phptg\BotApi\Type\ChatLocation;
+use Phptg\BotApi\Type\ChatPermissions;
+use Phptg\BotApi\Type\ChatPhoto;
+use Phptg\BotApi\Type\Message;
+use Phptg\BotApi\Type\ReactionTypeCustomEmoji;
 
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertFalse;

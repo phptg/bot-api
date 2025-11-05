@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Transport\NativeTransport\DownloadFileTo;
+namespace Phptg\BotApi\Tests\Transport\NativeTransport\DownloadFileTo;
 
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Throwable;
-use Vjik\TelegramBot\Api\Tests\Transport\NativeTransport\StreamMock\StreamMock;
-use Vjik\TelegramBot\Api\Transport\NativeTransport;
+use Phptg\BotApi\Tests\Transport\NativeTransport\StreamMock\StreamMock;
+use Phptg\BotApi\Transport\NativeTransport;
 use Yiisoft\Files\FileHelper;
 
 use function PHPUnit\Framework\assertFileExists;

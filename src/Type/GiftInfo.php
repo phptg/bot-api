@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type;
+namespace Phptg\BotApi\Type;
 
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\ArrayOfObjectsValue;
-use Vjik\TelegramBot\Api\Type\Sticker\Gift;
+use Phptg\BotApi\ParseResult\ValueProcessor\ArrayOfObjectsValue;
+use Phptg\BotApi\Type\Sticker\Gift;
 
 /**
  * @see https://core.telegram.org/bots/api#giftinfo

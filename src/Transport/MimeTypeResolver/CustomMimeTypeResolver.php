@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Transport\MimeTypeResolver;
+namespace Phptg\BotApi\Transport\MimeTypeResolver;
 
-use Vjik\TelegramBot\Api\Transport\FileHelper;
-use Vjik\TelegramBot\Api\Type\InputFile;
+use Phptg\BotApi\Transport\FileHelper;
+use Phptg\BotApi\Type\InputFile;
 
 /**
  * @api

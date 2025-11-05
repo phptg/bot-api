@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type\Payment;
+namespace Phptg\BotApi\Tests\Type\Payment;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\TelegramParseResultException;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\PaidMediaPhoto;
-use Vjik\TelegramBot\Api\Type\PaidMediaPreview;
-use Vjik\TelegramBot\Api\Type\Payment\AffiliateInfo;
-use Vjik\TelegramBot\Api\Type\Payment\TransactionPartnerUser;
-use Vjik\TelegramBot\Api\Type\PhotoSize;
-use Vjik\TelegramBot\Api\Type\User;
+use Phptg\BotApi\ParseResult\TelegramParseResultException;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\PaidMediaPhoto;
+use Phptg\BotApi\Type\PaidMediaPreview;
+use Phptg\BotApi\Type\Payment\AffiliateInfo;
+use Phptg\BotApi\Type\Payment\TransactionPartnerUser;
+use Phptg\BotApi\Type\PhotoSize;
+use Phptg\BotApi\Type\User;
 
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNull;

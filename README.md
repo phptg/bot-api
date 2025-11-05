@@ -1,11 +1,17 @@
-# Telegram Bot API for PHP
+<div align="center">
+    <a href="https://github.com/phptg">
+        <img src="logo.png" alt="PHPTG">
+    </a>
+    <h1 align="center">Telegram Bot API for PHP</h1>
+    <br>
+</div>
 
-[![Latest Stable Version](https://poser.pugx.org/vjik/telegram-bot-api/v)](https://packagist.org/packages/vjik/telegram-bot-api)
-[![Total Downloads](https://poser.pugx.org/vjik/telegram-bot-api/downloads)](https://packagist.org/packages/vjik/telegram-bot-api)
-[![Build status](https://github.com/vjik/telegram-bot-api/actions/workflows/build.yml/badge.svg)](https://github.com/vjik/telegram-bot-api/actions/workflows/build.yml)
-[![Coverage Status](https://coveralls.io/repos/github/vjik/telegram-bot-api/badge.svg)](https://coveralls.io/github/vjik/telegram-bot-api)
-[![Mutation score](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fvjik%2Ftelegram-bot-api%2Fmaster)](https://dashboard.stryker-mutator.io/reports/github.com/vjik/telegram-bot-api/master)
-[![Static analysis](https://github.com/vjik/telegram-bot-api/actions/workflows/static.yml/badge.svg?branch=master)](https://github.com/vjik/telegram-bot-api/actions/workflows/static.yml?query=branch%3Amaster)
+[![Latest Stable Version](https://poser.pugx.org/phptg/bot-api/v)](https://packagist.org/packages/phptg/bot-api)
+[![Total Downloads](https://poser.pugx.org/phptg/bot-api/downloads)](https://packagist.org/packages/phptg/bot-api)
+[![Build status](https://github.com/phptg/bot-api/actions/workflows/build.yml/badge.svg)](https://github.com/phptg/bot-api/actions/workflows/build.yml)
+[![Coverage Status](https://coveralls.io/repos/github/phptg/bot-api/badge.svg)](https://coveralls.io/github/phptg/bot-api)
+[![Mutation score](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fphptg%2Fbot-api%2Fmaster)](https://dashboard.stryker-mutator.io/reports/github.com/phptg/bot-api/master)
+[![Static analysis](https://github.com/phptg/bot-api/actions/workflows/static.yml/badge.svg?branch=master)](https://github.com/phptg/bot-api/actions/workflows/static.yml?query=branch%3Amaster)
 
 The package provides a simple and convenient way to interact with the Telegram Bot API.
 
@@ -20,7 +26,7 @@ The package provides a simple and convenient way to interact with the Telegram B
 The package can be installed with [Composer](https://getcomposer.org/download/):
 
 ```shell
-composer require vjik/telegram-bot-api
+composer require phptg/bot-api
 ```
 
 ## General usage
@@ -28,7 +34,7 @@ composer require vjik/telegram-bot-api
 To make requests to the Telegram Bot API, you need to create an instance of the `TelegramBotApi` class.
 
 ```php
-use Vjik\TelegramBot\Api\TelegramBotApi;
+use Phptg\BotApi\TelegramBotApi;
 
 // API
 $api = new TelegramBotApi(
@@ -41,7 +47,7 @@ Now you can use the `$api` instance to interact with the Telegram Bot API. Metho
 the [Telegram Bot API documentation](https://core.telegram.org/bots/api). For example:
 
 ```php
-use Vjik\TelegramBot\Api\Type\InputFile
+use Phptg\BotApi\Type\InputFile
 
 // Specify a URL for outgoing webhook
 $api->setWebhook('https://example.com/webhook');
@@ -63,7 +69,7 @@ The result will be either a `FailResult` instance (occurring on an error) or an 
 (occurring on success). For example:
 
 ```php
-// Result is an array of `Vjik\TelegramBot\Api\Update\Update` objects
+// Result is an array of `Phptg\BotApi\Update\Update` objects
 $updates = $api->getUpdates();
 ```
 
@@ -90,8 +96,8 @@ Use `TelegramBotApi::makeFileUrl()` method to make a URL for downloading a file 
 
 ```php
 /**
- * @var \Vjik\TelegramBot\Api\TelegramBotApi $api
- * @var \Vjik\TelegramBot\Api\Type\File $file 
+ * @var \Phptg\BotApi\TelegramBotApi $api
+ * @var \Phptg\BotApi\Type\File $file 
  */
  
 // By `File` instance
@@ -108,8 +114,8 @@ server. For example:
 
 ```php
 /**
- * @var \Vjik\TelegramBot\Api\TelegramBotApi $api
- * @var \Vjik\TelegramBot\Api\Type\File $file
+ * @var \Phptg\BotApi\TelegramBotApi $api
+ * @var \Phptg\BotApi\Type\File $file
  */
  
 // Get file content by `File` instance
@@ -137,7 +143,7 @@ If you have any questions or problems with this package, use [author telegram ch
 
 ## License
 
-The `vjik/telegram-bot-api` is free software. It is released under the terms of the BSD License.
+The `phptg/bot-api` is free software. It is released under the terms of the BSD License.
 Please see [`LICENSE`](./LICENSE.md) for more information.
 
 ## Credits

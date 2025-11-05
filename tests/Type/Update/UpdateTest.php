@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type\Update;
+namespace Phptg\BotApi\Tests\Type\Update;
 
 use HttpSoft\Message\StreamTrait;
 use PHPUnit\Framework\Attributes\TestWith;
@@ -10,9 +10,9 @@ use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Throwable;
-use Vjik\TelegramBot\Api\ParseResult\TelegramParseResultException;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\Update\Update;
+use Phptg\BotApi\ParseResult\TelegramParseResultException;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\Update\Update;
 use Yiisoft\Test\Support\Log\SimpleLogger;
 
 use function PHPUnit\Framework\assertInstanceOf;

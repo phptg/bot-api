@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Type\KeyboardButton;
-use Vjik\TelegramBot\Api\Type\KeyboardButtonPollType;
-use Vjik\TelegramBot\Api\Type\KeyboardButtonRequestChat;
-use Vjik\TelegramBot\Api\Type\KeyboardButtonRequestUsers;
-use Vjik\TelegramBot\Api\Type\WebAppInfo;
+use Phptg\BotApi\Type\KeyboardButton;
+use Phptg\BotApi\Type\KeyboardButtonPollType;
+use Phptg\BotApi\Type\KeyboardButtonRequestChat;
+use Phptg\BotApi\Type\KeyboardButtonRequestUsers;
+use Phptg\BotApi\Type\WebAppInfo;
 
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertNull;

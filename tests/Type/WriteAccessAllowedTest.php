@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\WriteAccessAllowed;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\WriteAccessAllowed;
 
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertNull;

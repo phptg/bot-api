@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\WebhookResponse\PsrWebhookResponseFactory\StrictTypeResponse;
+namespace Phptg\BotApi\Tests\WebhookResponse\PsrWebhookResponseFactory\StrictTypeResponse;
 
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;

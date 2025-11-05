@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\ParseResult\ValueProcessor;
+namespace Phptg\BotApi\ParseResult\ValueProcessor;
 
-use Vjik\TelegramBot\Api\Type\OwnedGift;
-use Vjik\TelegramBot\Api\Type\OwnedGiftRegular;
-use Vjik\TelegramBot\Api\Type\OwnedGiftUnique;
+use Phptg\BotApi\Type\OwnedGift;
+use Phptg\BotApi\Type\OwnedGiftRegular;
+use Phptg\BotApi\Type\OwnedGiftUnique;
 
 /**
  * @template-extends InterfaceValue<OwnedGift>

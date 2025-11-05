@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Method\Game;
+namespace Phptg\BotApi\Tests\Method\Game;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Method\Game\SendGame;
-use Vjik\TelegramBot\Api\Transport\HttpMethod;
-use Vjik\TelegramBot\Api\Tests\Support\TestHelper;
-use Vjik\TelegramBot\Api\Type\InlineKeyboardButton;
-use Vjik\TelegramBot\Api\Type\InlineKeyboardMarkup;
-use Vjik\TelegramBot\Api\Type\ReplyParameters;
+use Phptg\BotApi\Method\Game\SendGame;
+use Phptg\BotApi\Transport\HttpMethod;
+use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\InlineKeyboardButton;
+use Phptg\BotApi\Type\InlineKeyboardMarkup;
+use Phptg\BotApi\Type\ReplyParameters;
 
 use function PHPUnit\Framework\assertSame;
 

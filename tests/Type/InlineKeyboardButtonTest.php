@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\CopyTextButton;
-use Vjik\TelegramBot\Api\Type\Game\CallbackGame;
-use Vjik\TelegramBot\Api\Type\InlineKeyboardButton;
-use Vjik\TelegramBot\Api\Type\LoginUrl;
-use Vjik\TelegramBot\Api\Type\SwitchInlineQueryChosenChat;
-use Vjik\TelegramBot\Api\Type\WebAppInfo;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\CopyTextButton;
+use Phptg\BotApi\Type\Game\CallbackGame;
+use Phptg\BotApi\Type\InlineKeyboardButton;
+use Phptg\BotApi\Type\LoginUrl;
+use Phptg\BotApi\Type\SwitchInlineQueryChosenChat;
+use Phptg\BotApi\Type\WebAppInfo;
 
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertNull;

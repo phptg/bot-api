@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\WebhookResponse;
+namespace Phptg\BotApi\WebhookResponse;
 
-use Vjik\TelegramBot\Api\MethodInterface;
-use Vjik\TelegramBot\Api\Type\InputFile;
+use Phptg\BotApi\MethodInterface;
+use Phptg\BotApi\Type\InputFile;
 
 /**
  * Represents a Telegram Bot API method as a webhook response.

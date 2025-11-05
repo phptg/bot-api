@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\MessageEntity;
-use Vjik\TelegramBot\Api\Type\OwnedGiftRegular;
-use Vjik\TelegramBot\Api\Type\Sticker\Gift;
-use Vjik\TelegramBot\Api\Type\Sticker\Sticker;
-use Vjik\TelegramBot\Api\Type\User;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\MessageEntity;
+use Phptg\BotApi\Type\OwnedGiftRegular;
+use Phptg\BotApi\Type\Sticker\Gift;
+use Phptg\BotApi\Type\Sticker\Sticker;
+use Phptg\BotApi\Type\User;
 
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertFalse;

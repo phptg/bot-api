@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type;
+namespace Phptg\BotApi\Type;
 
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\ArrayMap;
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\OwnedGiftValue;
+use Phptg\BotApi\ParseResult\ValueProcessor\ArrayMap;
+use Phptg\BotApi\ParseResult\ValueProcessor\OwnedGiftValue;
 
 /**
  * @see https://core.telegram.org/bots/api#ownedgifts

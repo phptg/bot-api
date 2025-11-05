@@ -10,7 +10,7 @@ Pass logger to `TelegramBotApi` constructor:
 
 ```php
 use Psr\Log\LoggerInterface;
-use Vjik\TelegramBot\Api\TelegramBotApi;
+use Phptg\BotApi\TelegramBotApi;
 
 /**
  * @var string $token
@@ -26,7 +26,7 @@ You can use logger on create `Update` object also:
 ```php
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
-use Vjik\TelegramBot\Api\Type\Update\Update;
+use Phptg\BotApi\Type\Update\Update;
 
 /**
  * @var ServerRequestInterface $request

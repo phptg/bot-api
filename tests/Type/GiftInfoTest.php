@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\GiftInfo;
-use Vjik\TelegramBot\Api\Type\MessageEntity;
-use Vjik\TelegramBot\Api\Type\Sticker\Gift;
-use Vjik\TelegramBot\Api\Type\Sticker\Sticker;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\GiftInfo;
+use Phptg\BotApi\Type\MessageEntity;
+use Phptg\BotApi\Type\Sticker\Gift;
+use Phptg\BotApi\Type\Sticker\Sticker;
 
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertNull;

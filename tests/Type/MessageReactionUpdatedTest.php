@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\Chat;
-use Vjik\TelegramBot\Api\Type\MessageReactionUpdated;
-use Vjik\TelegramBot\Api\Type\ReactionTypeCustomEmoji;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\Chat;
+use Phptg\BotApi\Type\MessageReactionUpdated;
+use Phptg\BotApi\Type\ReactionTypeCustomEmoji;
 
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertSame;

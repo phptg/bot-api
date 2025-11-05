@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\FileCollector;
-use Vjik\TelegramBot\Api\Type\InputFile;
-use Vjik\TelegramBot\Api\Type\InputPaidMediaPhoto;
+use Phptg\BotApi\FileCollector;
+use Phptg\BotApi\Type\InputFile;
+use Phptg\BotApi\Type\InputPaidMediaPhoto;
 
 use function PHPUnit\Framework\assertEmpty;
 use function PHPUnit\Framework\assertSame;

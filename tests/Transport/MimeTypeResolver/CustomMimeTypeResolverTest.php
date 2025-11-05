@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Transport\MimeTypeResolver;
+namespace Phptg\BotApi\Tests\Transport\MimeTypeResolver;
 
 use HttpSoft\Message\Stream;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Transport\MimeTypeResolver\CustomMimeTypeResolver;
-use Vjik\TelegramBot\Api\Type\InputFile;
+use Phptg\BotApi\Transport\MimeTypeResolver\CustomMimeTypeResolver;
+use Phptg\BotApi\Type\InputFile;
 
 use function PHPUnit\Framework\assertSame;
 

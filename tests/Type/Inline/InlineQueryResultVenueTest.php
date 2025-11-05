@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type\Inline;
+namespace Phptg\BotApi\Tests\Type\Inline;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Type\Inline\InlineQueryResultVenue;
-use Vjik\TelegramBot\Api\Type\Inline\InputContactMessageContent;
-use Vjik\TelegramBot\Api\Type\InlineKeyboardButton;
-use Vjik\TelegramBot\Api\Type\InlineKeyboardMarkup;
+use Phptg\BotApi\Type\Inline\InlineQueryResultVenue;
+use Phptg\BotApi\Type\Inline\InputContactMessageContent;
+use Phptg\BotApi\Type\InlineKeyboardButton;
+use Phptg\BotApi\Type\InlineKeyboardMarkup;
 
 use function PHPUnit\Framework\assertSame;
 

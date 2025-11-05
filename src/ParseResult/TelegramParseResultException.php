@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\ParseResult;
+namespace Phptg\BotApi\ParseResult;
 
-use Vjik\TelegramBot\Api\TelegramRuntimeException;
+use Phptg\BotApi\TelegramRuntimeException;
 
 class TelegramParseResultException extends TelegramRuntimeException {}

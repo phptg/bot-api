@@ -14,7 +14,7 @@ If `Update` created by `fromJson()` or `fromServerRequest()` method, you can get
 
 ```php
 /**
- * @var Vjik\TelegramBot\Api\Type\Update\Update $update 
+ * @var Phptg\BotApi\Type\Update\Update $update 
  */
  
 /**
@@ -61,8 +61,8 @@ Creating `Update` object from the incoming webhook PSR-7 request:
 
 ```php
 use Psr\Http\Message\ServerRequestInterface;
-use Vjik\TelegramBot\Api\ParseResult\TelegramParseResultException;
-use Vjik\TelegramBot\Api\Type\Update\Update;
+use Phptg\BotApi\ParseResult\TelegramParseResultException;
+use Phptg\BotApi\Type\Update\Update;
 
 /**
  * @var ServerRequestInterface $request
@@ -80,8 +80,8 @@ try {
 Creating `Update` object from JSON string received from POST request body:
 
 ```php
-use Vjik\TelegramBot\Api\Type\Update\Update;
-use Vjik\TelegramBot\Api\ParseResult\TelegramParseResultException;
+use Phptg\BotApi\Type\Update\Update;
+use Phptg\BotApi\ParseResult\TelegramParseResultException;
 
 /**
  * @var string $jsonString 
@@ -99,8 +99,8 @@ try {
 If needed, you can create `Update` object manually via constructor:
 
 ```php
-use Vjik\TelegramBot\Api\Type\Message;
-use Vjik\TelegramBot\Api\Type\Update\Update;
+use Phptg\BotApi\Type\Message;
+use Phptg\BotApi\Type\Update\Update;
 
 /**
  * @var Message $message
@@ -124,8 +124,8 @@ make one Bot API request without waiting for a response from your server.
 The `WebhookResponse` class represents a method as a response to a webhook. You can create it from any method object:
 
 ```php
-use Vjik\TelegramBot\Api\Method\SendMessage;
-use Vjik\TelegramBot\Api\WebhookResponse\WebhookResponse;
+use Phptg\BotApi\Method\SendMessage;
+use Phptg\BotApi\WebhookResponse\WebhookResponse;
 
 $method = new SendMessage(chatId: 12345, text: 'Hello!');
 $webhookResponse = new WebhookResponse($method);
@@ -144,9 +144,9 @@ The `PsrWebhookResponseFactory` creates PSR-7 compliant HTTP responses for webho
 ```php
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
-use Vjik\TelegramBot\Api\Method\SendMessage;
-use Vjik\TelegramBot\Api\WebhookResponse\PsrWebhookResponseFactory;
-use Vjik\TelegramBot\Api\WebhookResponse\WebhookResponse;
+use Phptg\BotApi\Method\SendMessage;
+use Phptg\BotApi\WebhookResponse\PsrWebhookResponseFactory;
+use Phptg\BotApi\WebhookResponse\WebhookResponse;
 
 /**
  * @var ResponseFactoryInterface $responseFactory
@@ -175,9 +175,9 @@ The factory automatically:
 The `JsonWebhookResponseFactory` creates JSON strings for webhook responses:
 
 ```php
-use Vjik\TelegramBot\Api\Method\SendMessage;
-use Vjik\TelegramBot\Api\WebhookResponse\JsonWebhookResponseFactory;
-use Vjik\TelegramBot\Api\WebhookResponse\WebhookResponse;
+use Phptg\BotApi\Method\SendMessage;
+use Phptg\BotApi\WebhookResponse\JsonWebhookResponseFactory;
+use Phptg\BotApi\WebhookResponse\WebhookResponse;
 
 $factory = new JsonWebhookResponseFactory();
 
@@ -205,10 +205,10 @@ If you try to create a webhook response with a method that uses `InputFile`, the
 - `getData()` will throw `MethodNotSupportedException`.
 
 ```php
-use Vjik\TelegramBot\Api\Method\SendPhoto;
-use Vjik\TelegramBot\Api\Type\InputFile;
-use Vjik\TelegramBot\Api\WebhookResponse\WebhookResponse;
-use Vjik\TelegramBot\Api\WebhookResponse\MethodNotSupportedException;
+use Phptg\BotApi\Method\SendPhoto;
+use Phptg\BotApi\Type\InputFile;
+use Phptg\BotApi\WebhookResponse\WebhookResponse;
+use Phptg\BotApi\WebhookResponse\MethodNotSupportedException;
 
 $method = new SendPhoto(
     chatId: 12345,

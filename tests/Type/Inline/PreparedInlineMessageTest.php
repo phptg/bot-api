@@ -6,8 +6,8 @@ namespace Type\Inline;
 
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\Inline\PreparedInlineMessage;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\Inline\PreparedInlineMessage;
 
 use function PHPUnit\Framework\assertSame;
 

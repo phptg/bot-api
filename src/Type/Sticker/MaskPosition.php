@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type\Sticker;
+namespace Phptg\BotApi\Type\Sticker;
 
 /**
  * @see https://core.telegram.org/bots/api#maskposition

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Transport;
+namespace Phptg\BotApi\Transport;
 
 use Psr\Http\Message\StreamInterface;
-use Vjik\TelegramBot\Api\Type\InputFile;
+use Phptg\BotApi\Type\InputFile;
 
 use function is_resource;
 

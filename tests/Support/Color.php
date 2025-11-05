@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Support;
+namespace Phptg\BotApi\Tests\Support;
 
 final readonly class Color
 {

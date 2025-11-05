@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Transport\CurlTransport\DownloadFileTo;
+namespace Phptg\BotApi\Tests\Transport\CurlTransport\DownloadFileTo;
 
 use CurlShareHandle;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Throwable;
-use Vjik\TelegramBot\Api\Curl\CurlException;
-use Vjik\TelegramBot\Api\Tests\Curl\CurlMock;
-use Vjik\TelegramBot\Api\Transport\CurlTransport;
-use Vjik\TelegramBot\Api\Transport\DownloadFileException;
-use Vjik\TelegramBot\Api\Transport\SaveFileException;
+use Phptg\BotApi\Curl\CurlException;
+use Phptg\BotApi\Tests\Curl\CurlMock;
+use Phptg\BotApi\Transport\CurlTransport;
+use Phptg\BotApi\Transport\DownloadFileException;
+use Phptg\BotApi\Transport\SaveFileException;
 use Yiisoft\Files\FileHelper;
 
 use function PHPUnit\Framework\assertCount;

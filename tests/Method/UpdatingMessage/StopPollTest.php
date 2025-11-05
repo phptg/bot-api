@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Method\UpdatingMessage;
+namespace Phptg\BotApi\Tests\Method\UpdatingMessage;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Method\UpdatingMessage\StopPoll;
-use Vjik\TelegramBot\Api\Transport\HttpMethod;
-use Vjik\TelegramBot\Api\Tests\Support\TestHelper;
-use Vjik\TelegramBot\Api\Type\InlineKeyboardButton;
-use Vjik\TelegramBot\Api\Type\InlineKeyboardMarkup;
+use Phptg\BotApi\Method\UpdatingMessage\StopPoll;
+use Phptg\BotApi\Transport\HttpMethod;
+use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\InlineKeyboardButton;
+use Phptg\BotApi\Type\InlineKeyboardMarkup;
 
 use function PHPUnit\Framework\assertSame;
 

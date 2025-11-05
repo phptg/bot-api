@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\ParseResult\ValueProcessor;
+namespace Phptg\BotApi\Tests\ParseResult\ValueProcessor;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\ParseResult\TelegramParseResultException;
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\PaidMediaValue;
-use Vjik\TelegramBot\Api\Type\PaidMediaPhoto;
-use Vjik\TelegramBot\Api\Type\PaidMediaPreview;
-use Vjik\TelegramBot\Api\Type\PaidMediaVideo;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\ParseResult\TelegramParseResultException;
+use Phptg\BotApi\ParseResult\ValueProcessor\PaidMediaValue;
+use Phptg\BotApi\Type\PaidMediaPhoto;
+use Phptg\BotApi\Type\PaidMediaPreview;
+use Phptg\BotApi\Type\PaidMediaVideo;
 
 use function PHPUnit\Framework\assertInstanceOf;
 

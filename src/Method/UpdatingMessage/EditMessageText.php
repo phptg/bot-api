@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Method\UpdatingMessage;
+namespace Phptg\BotApi\Method\UpdatingMessage;
 
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\ObjectOrTrueValue;
-use Vjik\TelegramBot\Api\Transport\HttpMethod;
-use Vjik\TelegramBot\Api\MethodInterface;
-use Vjik\TelegramBot\Api\Type\InlineKeyboardMarkup;
-use Vjik\TelegramBot\Api\Type\LinkPreviewOptions;
-use Vjik\TelegramBot\Api\Type\Message;
-use Vjik\TelegramBot\Api\Type\MessageEntity;
+use Phptg\BotApi\ParseResult\ValueProcessor\ObjectOrTrueValue;
+use Phptg\BotApi\Transport\HttpMethod;
+use Phptg\BotApi\MethodInterface;
+use Phptg\BotApi\Type\InlineKeyboardMarkup;
+use Phptg\BotApi\Type\LinkPreviewOptions;
+use Phptg\BotApi\Type\Message;
+use Phptg\BotApi\Type\MessageEntity;
 
 /**
  * @see https://core.telegram.org/bots/api#editmessagetext

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Transport\PsrTransport;
+namespace Phptg\BotApi\Tests\Transport\PsrTransport;
 
 use HttpSoft\Message\Request;
 use HttpSoft\Message\Response;
@@ -11,8 +11,8 @@ use PHPUnit\Framework\Constraint\Callback;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
-use Vjik\TelegramBot\Api\Transport\PsrTransport;
-use Vjik\TelegramBot\Api\Type\InputFile;
+use Phptg\BotApi\Transport\PsrTransport;
+use Phptg\BotApi\Type\InputFile;
 
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;

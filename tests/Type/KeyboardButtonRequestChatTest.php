@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Type\ChatAdministratorRights;
-use Vjik\TelegramBot\Api\Type\KeyboardButtonRequestChat;
+use Phptg\BotApi\Type\ChatAdministratorRights;
+use Phptg\BotApi\Type\KeyboardButtonRequestChat;
 
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertNull;

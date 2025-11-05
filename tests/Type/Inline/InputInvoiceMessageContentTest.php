@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type\Inline;
+namespace Phptg\BotApi\Tests\Type\Inline;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Type\Inline\InputInvoiceMessageContent;
-use Vjik\TelegramBot\Api\Type\Payment\LabeledPrice;
+use Phptg\BotApi\Type\Inline\InputInvoiceMessageContent;
+use Phptg\BotApi\Type\Payment\LabeledPrice;
 
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertNull;

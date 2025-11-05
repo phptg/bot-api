@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type\Payment;
+namespace Phptg\BotApi\Tests\Type\Payment;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Type\Payment\LabeledPrice;
+use Phptg\BotApi\Type\Payment\LabeledPrice;
 
 use function PHPUnit\Framework\assertSame;
 

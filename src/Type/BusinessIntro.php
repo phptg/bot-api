@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type;
+namespace Phptg\BotApi\Type;
 
-use Vjik\TelegramBot\Api\Type\Sticker\Sticker;
+use Phptg\BotApi\Type\Sticker\Sticker;
 
 /**
  * @see https://core.telegram.org/bots/api#businessintro

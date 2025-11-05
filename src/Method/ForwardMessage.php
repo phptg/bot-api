@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Method;
+namespace Phptg\BotApi\Method;
 
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\ObjectValue;
-use Vjik\TelegramBot\Api\Transport\HttpMethod;
-use Vjik\TelegramBot\Api\MethodInterface;
-use Vjik\TelegramBot\Api\Type\Message;
-use Vjik\TelegramBot\Api\Type\SuggestedPostParameters;
+use Phptg\BotApi\ParseResult\ValueProcessor\ObjectValue;
+use Phptg\BotApi\Transport\HttpMethod;
+use Phptg\BotApi\MethodInterface;
+use Phptg\BotApi\Type\Message;
+use Phptg\BotApi\Type\SuggestedPostParameters;
 
 /**
  * @see https://core.telegram.org/bots/api#forwardmessage

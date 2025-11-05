@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Type\ReactionTypeCustomEmoji;
-use Vjik\TelegramBot\Api\Type\StoryAreaTypeSuggestedReaction;
+use Phptg\BotApi\Type\ReactionTypeCustomEmoji;
+use Phptg\BotApi\Type\StoryAreaTypeSuggestedReaction;
 
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Type\BotCommandScopeAllGroupChats;
+use Phptg\BotApi\Type\BotCommandScopeAllGroupChats;
 
 use function PHPUnit\Framework\assertSame;
 

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type;
+namespace Phptg\BotApi\Type;
 
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\ArrayOfArraysOfObjectsValue;
+use Phptg\BotApi\ParseResult\ValueProcessor\ArrayOfArraysOfObjectsValue;
 
 /**
  * @see https://core.telegram.org/bots/api#inlinekeyboardmarkup

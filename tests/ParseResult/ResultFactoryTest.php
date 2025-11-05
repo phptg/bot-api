@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\ParseResult;
+namespace Phptg\BotApi\Tests\ParseResult;
 
 use LogicException;
 use PHPUnit\Framework\TestCase;
 use Throwable;
-use Vjik\TelegramBot\Api\ParseResult\InvalidTypeOfValueInResultException;
-use Vjik\TelegramBot\Api\ParseResult\NotFoundKeyInResultException;
-use Vjik\TelegramBot\Api\ParseResult\ResultFactory;
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\ObjectValue;
-use Vjik\TelegramBot\Api\Tests\Support\Car;
-use Vjik\TelegramBot\Api\Tests\Support\Color;
-use Vjik\TelegramBot\Api\Type\BotName;
-use Vjik\TelegramBot\Api\Type\ChatLocation;
+use Phptg\BotApi\ParseResult\InvalidTypeOfValueInResultException;
+use Phptg\BotApi\ParseResult\NotFoundKeyInResultException;
+use Phptg\BotApi\ParseResult\ResultFactory;
+use Phptg\BotApi\ParseResult\ValueProcessor\ObjectValue;
+use Phptg\BotApi\Tests\Support\Car;
+use Phptg\BotApi\Tests\Support\Color;
+use Phptg\BotApi\Type\BotName;
+use Phptg\BotApi\Type\ChatLocation;
 
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
@@ -55,7 +55,7 @@ final class ResultFactoryTest extends TestCase
         $factory = new ResultFactory();
 
         $this->expectException(LogicException::class);
-        $this->expectExceptionMessage('Unsupported PHP type: Vjik\TelegramBot\Api\Tests\Support\NotExists');
+        $this->expectExceptionMessage('Unsupported PHP type: Phptg\BotApi\Tests\Support\NotExists');
         $factory->create([], new ObjectValue(Color::class));
     }
 

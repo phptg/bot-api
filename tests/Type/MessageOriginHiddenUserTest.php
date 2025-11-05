@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\MessageOriginHiddenUser;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\MessageOriginHiddenUser;
 
 use function PHPUnit\Framework\assertSame;
 

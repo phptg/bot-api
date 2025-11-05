@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type\Payment;
+namespace Phptg\BotApi\Type\Payment;
 
 /**
  * @see https://core.telegram.org/bots/api#labeledprice

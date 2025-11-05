@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Support;
+namespace Phptg\BotApi\Tests\Support;
 
-use Vjik\TelegramBot\Api\Transport\TransportInterface;
-use Vjik\TelegramBot\Api\Transport\ApiResponse;
+use Phptg\BotApi\Transport\TransportInterface;
+use Phptg\BotApi\Transport\ApiResponse;
 
 final class TransportMock implements TransportInterface
 {

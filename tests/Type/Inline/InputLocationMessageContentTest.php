@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type\Inline;
+namespace Phptg\BotApi\Tests\Type\Inline;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Type\Inline\InputLocationMessageContent;
+use Phptg\BotApi\Type\Inline\InputLocationMessageContent;
 
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;

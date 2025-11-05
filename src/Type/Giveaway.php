@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type;
+namespace Phptg\BotApi\Type;
 
 use DateTimeImmutable;
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\ArrayMap;
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\ArrayOfObjectsValue;
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\StringValue;
+use Phptg\BotApi\ParseResult\ValueProcessor\ArrayMap;
+use Phptg\BotApi\ParseResult\ValueProcessor\ArrayOfObjectsValue;
+use Phptg\BotApi\ParseResult\ValueProcessor\StringValue;
 
 /**
  * @see https://core.telegram.org/bots/api#giveaway

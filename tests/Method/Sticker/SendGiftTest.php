@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Method\Sticker;
+namespace Phptg\BotApi\Tests\Method\Sticker;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Method\Sticker\SendGift;
-use Vjik\TelegramBot\Api\Transport\HttpMethod;
-use Vjik\TelegramBot\Api\Tests\Support\TestHelper;
-use Vjik\TelegramBot\Api\Type\MessageEntity;
+use Phptg\BotApi\Method\Sticker\SendGift;
+use Phptg\BotApi\Transport\HttpMethod;
+use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\MessageEntity;
 
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;

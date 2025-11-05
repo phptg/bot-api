@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\ParseResult\ValueProcessor;
+namespace Phptg\BotApi\ParseResult\ValueProcessor;
 
-use Vjik\TelegramBot\Api\Type\ChatBoostSource;
-use Vjik\TelegramBot\Api\Type\ChatBoostSourceGiftCode;
-use Vjik\TelegramBot\Api\Type\ChatBoostSourceGiveaway;
-use Vjik\TelegramBot\Api\Type\ChatBoostSourcePremium;
+use Phptg\BotApi\Type\ChatBoostSource;
+use Phptg\BotApi\Type\ChatBoostSourceGiftCode;
+use Phptg\BotApi\Type\ChatBoostSourceGiveaway;
+use Phptg\BotApi\Type\ChatBoostSourcePremium;
 
 /**
  * @template-extends InterfaceValue<ChatBoostSource>

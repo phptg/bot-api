@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\ParseResult\ValueProcessor;
+namespace Phptg\BotApi\ParseResult\ValueProcessor;
 
-use Vjik\TelegramBot\Api\Type\MessageOrigin;
-use Vjik\TelegramBot\Api\Type\MessageOriginChannel;
-use Vjik\TelegramBot\Api\Type\MessageOriginChat;
-use Vjik\TelegramBot\Api\Type\MessageOriginHiddenUser;
-use Vjik\TelegramBot\Api\Type\MessageOriginUser;
+use Phptg\BotApi\Type\MessageOrigin;
+use Phptg\BotApi\Type\MessageOriginChannel;
+use Phptg\BotApi\Type\MessageOriginChat;
+use Phptg\BotApi\Type\MessageOriginHiddenUser;
+use Phptg\BotApi\Type\MessageOriginUser;
 
 /**
  * @template-extends InterfaceValue<MessageOrigin>

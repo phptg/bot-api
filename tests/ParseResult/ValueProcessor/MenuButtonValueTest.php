@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\ParseResult\ValueProcessor;
+namespace Phptg\BotApi\Tests\ParseResult\ValueProcessor;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\ParseResult\TelegramParseResultException;
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\MenuButtonValue;
-use Vjik\TelegramBot\Api\Type\MenuButtonCommands;
-use Vjik\TelegramBot\Api\Type\MenuButtonDefault;
-use Vjik\TelegramBot\Api\Type\MenuButtonWebApp;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\ParseResult\TelegramParseResultException;
+use Phptg\BotApi\ParseResult\ValueProcessor\MenuButtonValue;
+use Phptg\BotApi\Type\MenuButtonCommands;
+use Phptg\BotApi\Type\MenuButtonDefault;
+use Phptg\BotApi\Type\MenuButtonWebApp;
 
 use function PHPUnit\Framework\assertInstanceOf;
 

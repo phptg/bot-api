@@ -2,7 +2,7 @@
 
 By default `TelegramBotApi` uses cURL to make requests to the Telegram Bot API and download files from Telegram servers.
 But you can use any other transport implementation that implements
-the `Vjik\TelegramBot\Api\Transport\TransportInterface` interface.
+the `Phptg\BotApi\Transport\TransportInterface` interface.
 
 Out of the box, available three transport implementations: cURL, native and PSR.
 
@@ -15,8 +15,8 @@ since the cURL extension is included in most PHP installations.
 General usage:
 
 ```php
-use Vjik\TelegramBot\Api\TelegramBotApi;
-use Vjik\TelegramBot\Api\Transport\CurlTransport;
+use Phptg\BotApi\TelegramBotApi;
+use Phptg\BotApi\Transport\CurlTransport;
 
 // Telegram bot authentication token
 $token = '110201543:AAHdqTcvCH1vGWJxfSeofSAs0K5PALDsaw';
@@ -38,8 +38,8 @@ the Telegram Bot API and not require any additional extensions.
 General usage:
 
 ```php
-use Vjik\TelegramBot\Api\TelegramBotApi;
-use Vjik\TelegramBot\Api\Transport\NativeTransport;
+use Phptg\BotApi\TelegramBotApi;
+use Phptg\BotApi\Transport\NativeTransport;
 
 // Telegram bot authentication token
 $token = '110201543:AAHdqTcvCH1vGWJxfSeofSAs0K5PALDsaw';
@@ -77,8 +77,8 @@ use Http\Client\Curl\Client;
 use HttpSoft\Message\RequestFactory;
 use HttpSoft\Message\ResponseFactory;
 use HttpSoft\Message\StreamFactory;
-use Vjik\TelegramBot\Api\TelegramBotApi;
-use Vjik\TelegramBot\Api\Transport\PsrTransport;
+use Phptg\BotApi\TelegramBotApi;
+use Phptg\BotApi\Transport\PsrTransport;
 
 $streamFactory = new StreamFactory();
 $responseFactory = new ResponseFactory();

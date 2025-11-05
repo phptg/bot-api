@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type;
+namespace Phptg\BotApi\Type;
 
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\ArrayMap;
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\PaidMediaValue;
+use Phptg\BotApi\ParseResult\ValueProcessor\ArrayMap;
+use Phptg\BotApi\ParseResult\ValueProcessor\PaidMediaValue;
 
 /**
  * @see https://core.telegram.org/bots/api#paidmediainfo

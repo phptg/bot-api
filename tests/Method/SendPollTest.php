@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Method;
+namespace Phptg\BotApi\Tests\Method;
 
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Method\SendPoll;
-use Vjik\TelegramBot\Api\Transport\HttpMethod;
-use Vjik\TelegramBot\Api\Tests\Support\TestHelper;
-use Vjik\TelegramBot\Api\Type\ForceReply;
-use Vjik\TelegramBot\Api\Type\InputPollOption;
-use Vjik\TelegramBot\Api\Type\MessageEntity;
-use Vjik\TelegramBot\Api\Type\ReplyParameters;
+use Phptg\BotApi\Method\SendPoll;
+use Phptg\BotApi\Transport\HttpMethod;
+use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\ForceReply;
+use Phptg\BotApi\Type\InputPollOption;
+use Phptg\BotApi\Type\MessageEntity;
+use Phptg\BotApi\Type\ReplyParameters;
 
 use function PHPUnit\Framework\assertSame;
 

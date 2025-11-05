@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Transport;
+namespace Phptg\BotApi\Transport;
 
 use RuntimeException;
 

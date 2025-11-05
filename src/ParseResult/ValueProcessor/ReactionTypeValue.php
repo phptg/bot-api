@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\ParseResult\ValueProcessor;
+namespace Phptg\BotApi\ParseResult\ValueProcessor;
 
-use Vjik\TelegramBot\Api\Type\ReactionType;
-use Vjik\TelegramBot\Api\Type\ReactionTypeCustomEmoji;
-use Vjik\TelegramBot\Api\Type\ReactionTypeEmoji;
-use Vjik\TelegramBot\Api\Type\ReactionTypePaid;
+use Phptg\BotApi\Type\ReactionType;
+use Phptg\BotApi\Type\ReactionTypeCustomEmoji;
+use Phptg\BotApi\Type\ReactionTypeEmoji;
+use Phptg\BotApi\Type\ReactionTypePaid;
 
 /**
  * @template-extends InterfaceValue<ReactionType>

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type\Inline;
+namespace Phptg\BotApi\Type\Inline;
 
-use Vjik\TelegramBot\Api\Type\Location;
-use Vjik\TelegramBot\Api\Type\User;
+use Phptg\BotApi\Type\Location;
+use Phptg\BotApi\Type\User;
 
 /**
  * @see https://core.telegram.org/bots/api#choseninlineresult

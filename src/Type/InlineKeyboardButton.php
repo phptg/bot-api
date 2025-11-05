@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type;
+namespace Phptg\BotApi\Type;
 
-use Vjik\TelegramBot\Api\Type\Game\CallbackGame;
+use Phptg\BotApi\Type\Game\CallbackGame;
 
 /**
  * @see https://core.telegram.org/bots/api#inlinekeyboardbutton

@@ -6,10 +6,10 @@ namespace Transport\MimeTypeResolver;
 
 use HttpSoft\Message\Stream;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Transport\MimeTypeResolver\ApacheMimeTypeResolver;
-use Vjik\TelegramBot\Api\Transport\MimeTypeResolver\CompositeMimeTypeResolver;
-use Vjik\TelegramBot\Api\Transport\MimeTypeResolver\CustomMimeTypeResolver;
-use Vjik\TelegramBot\Api\Type\InputFile;
+use Phptg\BotApi\Transport\MimeTypeResolver\ApacheMimeTypeResolver;
+use Phptg\BotApi\Transport\MimeTypeResolver\CompositeMimeTypeResolver;
+use Phptg\BotApi\Transport\MimeTypeResolver\CustomMimeTypeResolver;
+use Phptg\BotApi\Type\InputFile;
 
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;

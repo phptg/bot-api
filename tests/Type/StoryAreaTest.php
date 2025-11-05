@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Type\StoryArea;
-use Vjik\TelegramBot\Api\Type\StoryAreaPosition;
-use Vjik\TelegramBot\Api\Type\StoryAreaTypeUniqueGift;
+use Phptg\BotApi\Type\StoryArea;
+use Phptg\BotApi\Type\StoryAreaPosition;
+use Phptg\BotApi\Type\StoryAreaTypeUniqueGift;
 
 use function PHPUnit\Framework\assertSame;
 

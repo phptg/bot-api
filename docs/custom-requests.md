@@ -3,11 +3,11 @@
 You can make custom requests to API using the `call()` method and `CustomMethod` object:
 
 ```php
-use Vjik\TelegramBot\Api\CustomMethod;
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\ObjectValue;
+use Phptg\BotApi\CustomMethod;
+use Phptg\BotApi\ParseResult\ValueProcessor\ObjectValue;
 
 /** 
- * @var \Vjik\TelegramBot\Api\TelegramBotApi $api 
+ * @var \Phptg\BotApi\TelegramBotApi $api 
  */
 
 $method = new CustomMethod(
@@ -17,6 +17,6 @@ $method = new CustomMethod(
     httpMethod: HttpMethod::GET,
 );
 
-// Result is an object of `Vjik\TelegramBot\Api\Type\ChatFullInfo`
+// Result is an object of `Phptg\BotApi\Type\ChatFullInfo`
 $result = $api->call($method);
 ```

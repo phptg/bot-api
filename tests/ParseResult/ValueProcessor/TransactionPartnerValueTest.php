@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\ParseResult\ValueProcessor;
+namespace Phptg\BotApi\Tests\ParseResult\ValueProcessor;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\ParseResult\TelegramParseResultException;
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\TransactionPartnerValue;
-use Vjik\TelegramBot\Api\Type\Payment\TransactionPartnerAffiliateProgram;
-use Vjik\TelegramBot\Api\Type\Payment\TransactionPartnerChat;
-use Vjik\TelegramBot\Api\Type\Payment\TransactionPartnerFragment;
-use Vjik\TelegramBot\Api\Type\Payment\TransactionPartnerOther;
-use Vjik\TelegramBot\Api\Type\Payment\TransactionPartnerTelegramAds;
-use Vjik\TelegramBot\Api\Type\Payment\TransactionPartnerTelegramApi;
-use Vjik\TelegramBot\Api\Type\Payment\TransactionPartnerUser;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\ParseResult\TelegramParseResultException;
+use Phptg\BotApi\ParseResult\ValueProcessor\TransactionPartnerValue;
+use Phptg\BotApi\Type\Payment\TransactionPartnerAffiliateProgram;
+use Phptg\BotApi\Type\Payment\TransactionPartnerChat;
+use Phptg\BotApi\Type\Payment\TransactionPartnerFragment;
+use Phptg\BotApi\Type\Payment\TransactionPartnerOther;
+use Phptg\BotApi\Type\Payment\TransactionPartnerTelegramAds;
+use Phptg\BotApi\Type\Payment\TransactionPartnerTelegramApi;
+use Phptg\BotApi\Type\Payment\TransactionPartnerUser;
 
 use function PHPUnit\Framework\assertInstanceOf;
 

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\SuggestedPostInfo;
-use Vjik\TelegramBot\Api\Type\SuggestedPostPrice;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\SuggestedPostInfo;
+use Phptg\BotApi\Type\SuggestedPostPrice;
 
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertNull;

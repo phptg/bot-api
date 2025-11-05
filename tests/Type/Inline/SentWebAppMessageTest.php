@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type\Inline;
+namespace Phptg\BotApi\Tests\Type\Inline;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\Inline\SentWebAppMessage;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\Inline\SentWebAppMessage;
 
 use function PHPUnit\Framework\assertSame;
 

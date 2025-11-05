@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Method\Payment;
+namespace Phptg\BotApi\Method\Payment;
 
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\TrueValue;
-use Vjik\TelegramBot\Api\Transport\HttpMethod;
-use Vjik\TelegramBot\Api\MethodInterface;
-use Vjik\TelegramBot\Api\Type\Payment\ShippingOption;
+use Phptg\BotApi\ParseResult\ValueProcessor\TrueValue;
+use Phptg\BotApi\Transport\HttpMethod;
+use Phptg\BotApi\MethodInterface;
+use Phptg\BotApi\Type\Payment\ShippingOption;
 
 /**
  * @see https://core.telegram.org/bots/api#answershippingquery

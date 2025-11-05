@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests;
+namespace Phptg\BotApi\Tests;
 
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\CustomMethod;
-use Vjik\TelegramBot\Api\LogContextFactory;
-use Vjik\TelegramBot\Api\MethodInterface;
-use Vjik\TelegramBot\Api\Transport\ApiResponse;
-use Vjik\TelegramBot\Api\LogType;
+use Phptg\BotApi\CustomMethod;
+use Phptg\BotApi\LogContextFactory;
+use Phptg\BotApi\MethodInterface;
+use Phptg\BotApi\Transport\ApiResponse;
+use Phptg\BotApi\LogType;
 
 use function PHPUnit\Framework\assertSame;
 

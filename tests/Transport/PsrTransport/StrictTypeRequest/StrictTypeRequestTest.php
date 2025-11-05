@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Transport\PsrTransport\StrictTypeRequest;
+namespace Phptg\BotApi\Tests\Transport\PsrTransport\StrictTypeRequest;
 
 use HttpSoft\Message\Response;
 use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
-use Vjik\TelegramBot\Api\Transport\PsrTransport;
+use Phptg\BotApi\Transport\PsrTransport;
 
 use function PHPUnit\Framework\assertSame;
 

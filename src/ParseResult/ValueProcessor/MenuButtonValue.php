@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\ParseResult\ValueProcessor;
+namespace Phptg\BotApi\ParseResult\ValueProcessor;
 
-use Vjik\TelegramBot\Api\Type\MenuButton;
-use Vjik\TelegramBot\Api\Type\MenuButtonCommands;
-use Vjik\TelegramBot\Api\Type\MenuButtonDefault;
-use Vjik\TelegramBot\Api\Type\MenuButtonWebApp;
+use Phptg\BotApi\Type\MenuButton;
+use Phptg\BotApi\Type\MenuButtonCommands;
+use Phptg\BotApi\Type\MenuButtonDefault;
+use Phptg\BotApi\Type\MenuButtonWebApp;
 
 /**
  * @template-extends InterfaceValue<MenuButton>

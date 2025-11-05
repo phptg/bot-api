@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\BackgroundFillSolid;
-use Vjik\TelegramBot\Api\Type\BackgroundTypePattern;
-use Vjik\TelegramBot\Api\Type\Document;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\BackgroundFillSolid;
+use Phptg\BotApi\Type\BackgroundTypePattern;
+use Phptg\BotApi\Type\Document;
 
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertNull;

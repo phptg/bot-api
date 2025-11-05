@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Type\KeyboardButton;
-use Vjik\TelegramBot\Api\Type\ReplyKeyboardMarkup;
+use Phptg\BotApi\Type\KeyboardButton;
+use Phptg\BotApi\Type\ReplyKeyboardMarkup;
 
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertNull;

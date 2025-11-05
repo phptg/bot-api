@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api;
+namespace Phptg\BotApi;
 
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\ValueProcessorInterface;
-use Vjik\TelegramBot\Api\Transport\HttpMethod;
+use Phptg\BotApi\ParseResult\ValueProcessor\ValueProcessorInterface;
+use Phptg\BotApi\Transport\HttpMethod;
 
 /**
  * @template TResult

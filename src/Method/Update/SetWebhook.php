@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Method\Update;
+namespace Phptg\BotApi\Method\Update;
 
 use SensitiveParameter;
-use Vjik\TelegramBot\Api\ParseResult\ValueProcessor\TrueValue;
-use Vjik\TelegramBot\Api\Transport\HttpMethod;
-use Vjik\TelegramBot\Api\MethodInterface;
+use Phptg\BotApi\ParseResult\ValueProcessor\TrueValue;
+use Phptg\BotApi\Transport\HttpMethod;
+use Phptg\BotApi\MethodInterface;
 
 /**
  * @see https://core.telegram.org/bots/api#setwebhook

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type\Sticker;
+namespace Phptg\BotApi\Tests\Type\Sticker;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\File;
-use Vjik\TelegramBot\Api\Type\PhotoSize;
-use Vjik\TelegramBot\Api\Type\Sticker\MaskPosition;
-use Vjik\TelegramBot\Api\Type\Sticker\Sticker;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\File;
+use Phptg\BotApi\Type\PhotoSize;
+use Phptg\BotApi\Type\Sticker\MaskPosition;
+use Phptg\BotApi\Type\Sticker\Sticker;
 
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertInstanceOf;

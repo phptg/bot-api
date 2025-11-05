@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Transport\PsrTransport;
+namespace Phptg\BotApi\Tests\Transport\PsrTransport;
 
 use Http\Client\Exception\RequestException;
 use HttpSoft\Message\Request;
@@ -12,8 +12,8 @@ use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Throwable;
-use Vjik\TelegramBot\Api\Transport\DownloadFileException;
-use Vjik\TelegramBot\Api\Transport\PsrTransport;
+use Phptg\BotApi\Transport\DownloadFileException;
+use Phptg\BotApi\Transport\PsrTransport;
 
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;

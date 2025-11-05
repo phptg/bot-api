@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type\Inline;
+namespace Phptg\BotApi\Tests\Type\Inline;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Type\Inline\InputTextMessageContent;
-use Vjik\TelegramBot\Api\Type\LinkPreviewOptions;
-use Vjik\TelegramBot\Api\Type\MessageEntity;
+use Phptg\BotApi\Type\Inline\InputTextMessageContent;
+use Phptg\BotApi\Type\LinkPreviewOptions;
+use Phptg\BotApi\Type\MessageEntity;
 
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;

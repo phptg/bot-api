@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Method\Inline;
+namespace Phptg\BotApi\Tests\Method\Inline;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Method\Inline\AnswerInlineQuery;
-use Vjik\TelegramBot\Api\Transport\HttpMethod;
-use Vjik\TelegramBot\Api\Tests\Support\TestHelper;
-use Vjik\TelegramBot\Api\Type\Inline\InlineQueryResultContact;
-use Vjik\TelegramBot\Api\Type\Inline\InlineQueryResultsButton;
+use Phptg\BotApi\Method\Inline\AnswerInlineQuery;
+use Phptg\BotApi\Transport\HttpMethod;
+use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\Inline\InlineQueryResultContact;
+use Phptg\BotApi\Type\Inline\InlineQueryResultsButton;
 
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;

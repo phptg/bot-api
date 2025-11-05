@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Method\UpdatingMessage;
+namespace Phptg\BotApi\Tests\Method\UpdatingMessage;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Method\UpdatingMessage\DeleteBusinessMessages;
-use Vjik\TelegramBot\Api\Tests\Support\TestHelper;
-use Vjik\TelegramBot\Api\Transport\HttpMethod;
+use Phptg\BotApi\Method\UpdatingMessage\DeleteBusinessMessages;
+use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Transport\HttpMethod;
 
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;

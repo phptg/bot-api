@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\ParseResult;
+namespace Phptg\BotApi\ParseResult;
 
 final class InvalidTypeOfValueInResultException extends TelegramParseResultException
 {

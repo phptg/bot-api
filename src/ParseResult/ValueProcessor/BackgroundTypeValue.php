@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\ParseResult\ValueProcessor;
+namespace Phptg\BotApi\ParseResult\ValueProcessor;
 
-use Vjik\TelegramBot\Api\Type\BackgroundType;
-use Vjik\TelegramBot\Api\Type\BackgroundTypeChatTheme;
-use Vjik\TelegramBot\Api\Type\BackgroundTypeFill;
-use Vjik\TelegramBot\Api\Type\BackgroundTypePattern;
-use Vjik\TelegramBot\Api\Type\BackgroundTypeWallpaper;
+use Phptg\BotApi\Type\BackgroundType;
+use Phptg\BotApi\Type\BackgroundTypeChatTheme;
+use Phptg\BotApi\Type\BackgroundTypeFill;
+use Phptg\BotApi\Type\BackgroundTypePattern;
+use Phptg\BotApi\Type\BackgroundTypeWallpaper;
 
 /**
  * @template-extends InterfaceValue<BackgroundType>

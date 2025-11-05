@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\ParseResult\ValueProcessor;
+namespace Phptg\BotApi\ParseResult\ValueProcessor;
 
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
+use Phptg\BotApi\ParseResult\ObjectFactory;
 
 /**
  * @template TValue

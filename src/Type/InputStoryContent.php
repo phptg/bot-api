@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Type;
+namespace Phptg\BotApi\Type;
 
-use Vjik\TelegramBot\Api\FileCollector;
+use Phptg\BotApi\FileCollector;
 
 /**
  * @see https://core.telegram.org/bots/api#inputstorycontent

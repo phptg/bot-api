@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\WebhookResponse\PsrWebhookResponseFactory\StrictTypeResponse;
+namespace Phptg\BotApi\Tests\WebhookResponse\PsrWebhookResponseFactory\StrictTypeResponse;
 
 use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Method\SendMessage;
-use Vjik\TelegramBot\Api\WebhookResponse\PsrWebhookResponseFactory;
-use Vjik\TelegramBot\Api\WebhookResponse\WebhookResponse;
+use Phptg\BotApi\Method\SendMessage;
+use Phptg\BotApi\WebhookResponse\PsrWebhookResponseFactory;
+use Phptg\BotApi\WebhookResponse\WebhookResponse;
 
 use function PHPUnit\Framework\assertSame;
 

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Method\Payment;
+namespace Phptg\BotApi\Tests\Method\Payment;
 
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\Method\Payment\AnswerShippingQuery;
-use Vjik\TelegramBot\Api\Transport\HttpMethod;
-use Vjik\TelegramBot\Api\Tests\Support\TestHelper;
-use Vjik\TelegramBot\Api\Type\Payment\ShippingOption;
+use Phptg\BotApi\Method\Payment\AnswerShippingQuery;
+use Phptg\BotApi\Transport\HttpMethod;
+use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\Payment\ShippingOption;
 
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;

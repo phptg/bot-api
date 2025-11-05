@@ -2,28 +2,28 @@
 
 declare(strict_types=1);
 
-namespace Vjik\TelegramBot\Api\Tests\Type;
+namespace Phptg\BotApi\Tests\Type;
 
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
-use Vjik\TelegramBot\Api\ParseResult\ObjectFactory;
-use Vjik\TelegramBot\Api\Type\Chat;
-use Vjik\TelegramBot\Api\Type\Checklist;
-use Vjik\TelegramBot\Api\Type\ChecklistTask;
-use Vjik\TelegramBot\Api\Type\ChecklistTasksAdded;
-use Vjik\TelegramBot\Api\Type\ChecklistTasksDone;
-use Vjik\TelegramBot\Api\Type\DirectMessagePriceChanged;
-use Vjik\TelegramBot\Api\Type\ExternalReplyInfo;
-use Vjik\TelegramBot\Api\Type\ForumTopicClosed;
-use Vjik\TelegramBot\Api\Type\ForumTopicReopened;
-use Vjik\TelegramBot\Api\Type\GeneralForumTopicHidden;
-use Vjik\TelegramBot\Api\Type\GeneralForumTopicUnhidden;
-use Vjik\TelegramBot\Api\Type\GiveawayCreated;
-use Vjik\TelegramBot\Api\Type\Message;
-use Vjik\TelegramBot\Api\Type\MessageOriginHiddenUser;
-use Vjik\TelegramBot\Api\Type\PaidMediaPhoto;
-use Vjik\TelegramBot\Api\Type\Payment\RefundedPayment;
-use Vjik\TelegramBot\Api\Type\VideoChatStarted;
+use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\Chat;
+use Phptg\BotApi\Type\Checklist;
+use Phptg\BotApi\Type\ChecklistTask;
+use Phptg\BotApi\Type\ChecklistTasksAdded;
+use Phptg\BotApi\Type\ChecklistTasksDone;
+use Phptg\BotApi\Type\DirectMessagePriceChanged;
+use Phptg\BotApi\Type\ExternalReplyInfo;
+use Phptg\BotApi\Type\ForumTopicClosed;
+use Phptg\BotApi\Type\ForumTopicReopened;
+use Phptg\BotApi\Type\GeneralForumTopicHidden;
+use Phptg\BotApi\Type\GeneralForumTopicUnhidden;
+use Phptg\BotApi\Type\GiveawayCreated;
+use Phptg\BotApi\Type\Message;
+use Phptg\BotApi\Type\MessageOriginHiddenUser;
+use Phptg\BotApi\Type\PaidMediaPhoto;
+use Phptg\BotApi\Type\Payment\RefundedPayment;
+use Phptg\BotApi\Type\VideoChatStarted;
 
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertEquals;
