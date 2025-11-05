@@ -17,25 +17,35 @@ final class TransportMock implements TransportInterface
     private array $savedFiles = [];
 
     public function __construct(
-        private readonly ?ApiResponse $response = null,
+        private readonly ApiResponse $response = new ApiResponse(200, '{"ok":true,"result":true}'),
     ) {}
+
+    public static function successResult(mixed $result): self
+    {
+        return new self(
+            new ApiResponse(
+                200,
+                json_encode(['ok' => true, 'result' => $result], JSON_THROW_ON_ERROR),
+            ),
+        );
+    }
 
     public function get(string $url): ApiResponse
     {
         $this->url = $url;
-        return $this->response ?? new ApiResponse(200, '{"ok":true,"result":true}');
+        return $this->response;
     }
 
     public function post(string $url, string $body, array $headers): ApiResponse
     {
         $this->url = $url;
-        return $this->response ?? new ApiResponse(200, '{"ok":true,"result":true}');
+        return $this->response;
     }
 
     public function postWithFiles(string $url, array $data, array $files): ApiResponse
     {
         $this->url = $url;
-        return $this->response ?? new ApiResponse(200, '{"ok":true,"result":true}');
+        return $this->response;
     }
 
     public function downloadFile(string $url): string

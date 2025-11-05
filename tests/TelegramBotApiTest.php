@@ -1328,6 +1328,19 @@ final class TelegramBotApiTest extends TestCase
         assertSame(2, $result[1]->updateId);
     }
 
+    public function testGetMethodWithParams(): void
+    {
+        $transport = TransportMock::successResult([]);
+        $api = new TelegramBotApi('stub-token', transport: $transport);
+
+        $api->getUpdates(offset: 5, allowedUpdates: ['message', 'edited_message', 'channel_post']);
+
+        assertSame(
+            'https://api.telegram.org/botstub-token/getUpdates?offset=5&allowed_updates=%5B%22message%22%2C%22edited_message%22%2C%22channel_post%22%5D',
+            $transport->url(),
+        );
+    }
+
     public function testGetUserChatBoosts(): void
     {
         $api = TestHelper::createSuccessStubApi([
