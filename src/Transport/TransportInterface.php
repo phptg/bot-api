@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Transport;
 
-use Vjik\TelegramBot\Api\Type\InputFile;
+use Phptg\BotApi\Type\InputFile;
 
 /**
  * @api
