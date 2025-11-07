@@ -11,8 +11,12 @@ final class TransportMock implements TransportInterface
 {
     private ?string $url = null;
     private array $savedFiles = [];
-    private array $sentData = [];
-    private array $sentFiles = [];
+
+    private ?string $sentBody = null;
+    private ?array $sentHeaders = null;
+
+    private ?array $sentData = null;
+    private ?array $sentFiles = null;
 
     public function __construct(
         private readonly ApiResponse $response = new ApiResponse(200, '{"ok":true,"result":true}'),
@@ -37,6 +41,8 @@ final class TransportMock implements TransportInterface
     public function post(string $url, string $body, array $headers): ApiResponse
     {
         $this->url = $url;
+        $this->sentBody = $body;
+        $this->sentHeaders = $headers;
         return $this->response;
     }
 
@@ -68,12 +74,22 @@ final class TransportMock implements TransportInterface
         return $this->url;
     }
 
-    public function sentData(): array
+    public function sentHeaders(): ?array
+    {
+        return $this->sentHeaders;
+    }
+
+    public function sentBody(): ?string
+    {
+        return $this->sentBody;
+    }
+
+    public function sentData(): ?array
     {
         return $this->sentData;
     }
 
-    public function sentFiles(): array
+    public function sentFiles(): ?array
     {
         return $this->sentFiles;
     }

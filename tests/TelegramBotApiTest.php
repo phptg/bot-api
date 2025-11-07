@@ -1341,6 +1341,37 @@ final class TelegramBotApiTest extends TestCase
         );
     }
 
+    public function testPostMethodWithParams(): void
+    {
+        $transport = TransportMock::successResult([
+            'message_id' => 7,
+            'date' => 1620000000,
+            'chat' => [
+                'id' => 1,
+                'type' => 'private',
+            ],
+        ]);
+        $api = new TelegramBotApi('stub-token', transport: $transport);
+
+        $api->sendMessage('id1', 'hello');
+
+        assertSame(
+            'https://api.telegram.org/botstub-token/sendMessage',
+            $transport->url(),
+        );
+        assertSame(
+            '{"chat_id":"id1","text":"hello"}',
+            $transport->sentBody(),
+        );
+        assertSame(
+            [
+                'Content-Length' => '32',
+                'Content-Type' => 'application/json; charset=utf-8',
+            ],
+            $transport->sentHeaders(),
+        );
+    }
+
     public function testPostMethodWithFiles(): void
     {
         $transport = TransportMock::successResult([
