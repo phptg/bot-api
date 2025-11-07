@@ -10,11 +10,9 @@ use Phptg\BotApi\Transport\ApiResponse;
 final class TransportMock implements TransportInterface
 {
     private ?string $url = null;
-
-    /**
-     * @psalm-var list<list{string, string}>
-     */
     private array $savedFiles = [];
+    private array $sentData = [];
+    private array $sentFiles = [];
 
     public function __construct(
         private readonly ApiResponse $response = new ApiResponse(200, '{"ok":true,"result":true}'),
@@ -45,6 +43,8 @@ final class TransportMock implements TransportInterface
     public function postWithFiles(string $url, array $data, array $files): ApiResponse
     {
         $this->url = $url;
+        $this->sentData = $data;
+        $this->sentFiles = $files;
         return $this->response;
     }
 
@@ -58,9 +58,6 @@ final class TransportMock implements TransportInterface
         $this->savedFiles[] = [$url, $savePath];
     }
 
-    /**
-     * @psalm-return list<list{string, string}>
-     */
     public function savedFiles(): array
     {
         return $this->savedFiles;
@@ -69,5 +66,15 @@ final class TransportMock implements TransportInterface
     public function url(): ?string
     {
         return $this->url;
+    }
+
+    public function sentData(): array
+    {
+        return $this->sentData;
+    }
+
+    public function sentFiles(): array
+    {
+        return $this->sentFiles;
     }
 }
