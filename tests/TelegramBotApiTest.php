@@ -6,6 +6,7 @@ namespace Phptg\BotApi\Tests;
 
 use HttpSoft\Message\StreamFactory;
 use LogicException;
+use Phptg\BotApi\Type\MessageEntity;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
@@ -346,7 +347,7 @@ final class TelegramBotApiTest extends TestCase
 
         $api->logout();
 
-        assertSame('https://api.telegram.org/botstub-token/logOut', $transport->urlPath());
+        assertSame('https://api.telegram.org/botstub-token/logOut', $transport->url());
     }
 
     public static function dataMakeFileUrl(): iterable
@@ -1326,6 +1327,88 @@ final class TelegramBotApiTest extends TestCase
         assertInstanceOf(Update::class, $result[1]);
         assertSame(1, $result[0]->updateId);
         assertSame(2, $result[1]->updateId);
+    }
+
+    public function testGetMethodWithParams(): void
+    {
+        $transport = TransportMock::successResult([]);
+        $api = new TelegramBotApi('stub-token', transport: $transport);
+
+        $api->getUpdates(offset: 5, allowedUpdates: ['message', 'edited_message', 'channel_post']);
+
+        assertSame(
+            'https://api.telegram.org/botstub-token/getUpdates?offset=5&allowed_updates=%5B%22message%22%2C%22edited_message%22%2C%22channel_post%22%5D',
+            $transport->url(),
+        );
+    }
+
+    public function testPostMethodWithParams(): void
+    {
+        $transport = TransportMock::successResult([
+            'message_id' => 7,
+            'date' => 1620000000,
+            'chat' => [
+                'id' => 1,
+                'type' => 'private',
+            ],
+        ]);
+        $api = new TelegramBotApi('stub-token', transport: $transport);
+
+        $api->sendMessage('id1', 'hello');
+
+        assertSame(
+            'https://api.telegram.org/botstub-token/sendMessage',
+            $transport->url(),
+        );
+        assertSame(
+            '{"chat_id":"id1","text":"hello"}',
+            $transport->sentBody(),
+        );
+        assertSame(
+            [
+                'Content-Length' => '32',
+                'Content-Type' => 'application/json; charset=utf-8',
+            ],
+            $transport->sentHeaders(),
+        );
+    }
+
+    public function testPostMethodWithFiles(): void
+    {
+        $transport = TransportMock::successResult([
+            'message_id' => 7,
+            'date' => 1620000000,
+            'chat' => [
+                'id' => 1,
+                'type' => 'private',
+            ],
+        ]);
+        $api = new TelegramBotApi('stub-token', transport: $transport);
+
+        $file =  new InputFile(
+            (new StreamFactory())->createStream('test1'),
+        );
+        $api->sendDocument(
+            'id1',
+            $file,
+            captionEntities: [new MessageEntity('bold', 0, 4)],
+        );
+
+        assertSame(
+            'https://api.telegram.org/botstub-token/sendDocument',
+            $transport->url(),
+        );
+        assertSame(
+            [
+                'chat_id' => 'id1',
+                'caption_entities' => '[{"type":"bold","offset":0,"length":4}]',
+            ],
+            $transport->sentData(),
+        );
+        assertSame(
+            ['document' => $file],
+            $transport->sentFiles(),
+        );
     }
 
     public function testGetUserChatBoosts(): void
