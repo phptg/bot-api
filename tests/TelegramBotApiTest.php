@@ -6,6 +6,7 @@ namespace Phptg\BotApi\Tests;
 
 use HttpSoft\Message\StreamFactory;
 use LogicException;
+use Phptg\BotApi\Type\MessageEntity;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
@@ -1387,14 +1388,21 @@ final class TelegramBotApiTest extends TestCase
         $file =  new InputFile(
             (new StreamFactory())->createStream('test1'),
         );
-        $api->sendDocument('id1', $file);
+        $api->sendDocument(
+            'id1',
+            $file,
+            captionEntities: [new MessageEntity('bold', 0, 4)],
+        );
 
         assertSame(
             'https://api.telegram.org/botstub-token/sendDocument',
             $transport->url(),
         );
         assertSame(
-            ['chat_id' => 'id1'],
+            [
+                'chat_id' => 'id1',
+                'caption_entities' => '[{"type":"bold","offset":0,"length":4}]',
+            ],
             $transport->sentData(),
         );
         assertSame(
