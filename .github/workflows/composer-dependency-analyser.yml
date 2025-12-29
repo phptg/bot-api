@@ -3,7 +3,7 @@ on:
   push:
     branches: [ 'master' ]
 
-name: Composer require checker
+name: Composer Dependency Analyser
 
 jobs:
   composer-require-checker:
