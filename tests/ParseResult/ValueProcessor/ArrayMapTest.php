@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\ParseResult\ValueProcessor;
 
-use phpDocumentor\Reflection\PseudoTypes\StringValue;
+use Phptg\BotApi\ParseResult\ValueProcessor\StringValue;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\ParseResult\InvalidTypeOfValueInResultException;
 use Phptg\BotApi\ParseResult\ObjectFactory;

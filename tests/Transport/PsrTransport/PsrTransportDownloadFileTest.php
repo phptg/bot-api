@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Transport\PsrTransport;
 
-use Http\Client\Exception\RequestException;
 use HttpSoft\Message\Request;
 use HttpSoft\Message\Response;
 use HttpSoft\Message\StreamFactory;
+use Phptg\BotApi\Tests\Support\RequestException;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
