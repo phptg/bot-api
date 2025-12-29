@@ -1,6 +1,6 @@
 # Telegram Bot API for PHP Change Log
 
-## 0.11.0 under development
+## 0.11.0 December 29, 2025
 
 - Chg #171: Simplify `TransportInterface` implementations by replacing single `send()` method with specific methods: 
   `get()`, `post()`, and `postWithFiles()`.
