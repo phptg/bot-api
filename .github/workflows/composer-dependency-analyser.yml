@@ -3,7 +3,7 @@ on:
   push:
     branches: [ 'master' ]
 
-name: Composer require checker
+name: Composer Dependency Analyser
 
 jobs:
   composer-require-checker:
@@ -34,5 +34,5 @@ jobs:
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v3
 
-      - name: Check dependencies.
-        run: vendor/bin/composer-require-checker
+      - name: Check dependencies
+        run: vendor/bin/composer-dependency-analyser

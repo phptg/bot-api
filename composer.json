@@ -54,7 +54,8 @@
         "test-real": "phpunit --group=realApi",
         "cs-fix": "php-cs-fixer fix",
         "rector": "rector",
-        "infection": "infection --threads=max"
+        "infection": "infection --threads=max",
+        "dependency-analyser": "composer-dependency-analyser"
     },
     "extra": {
         "bamarni-bin": {

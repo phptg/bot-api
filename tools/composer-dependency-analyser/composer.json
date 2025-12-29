@@ -1,0 +1,5 @@
+{
+    "require-dev": {
+        "shipmonk/composer-dependency-analyser": "^1.8.4"
+    }
+}
