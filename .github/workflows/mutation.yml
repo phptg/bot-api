@@ -16,11 +16,11 @@ jobs:
         os:
           - ubuntu-latest
         php:
-          - "8.4"
+          - "8.5"
 
     steps:
       - name: Checkout.
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Install PHP with extensions.
         uses: shivammathur/setup-php@v2
@@ -33,6 +33,6 @@ jobs:
         uses: ramsey/composer-install@v3
 
       - name: Run infection.
-        run: vendor/bin/infection --threads=2 --ignore-msi-with-no-mutations --only-covered
+        run: vendor/bin/infection --threads=max --ignore-msi-with-no-mutations
         env:
           STRYKER_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}

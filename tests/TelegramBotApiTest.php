@@ -58,6 +58,7 @@ use Phptg\BotApi\Type\Update\Update;
 use Phptg\BotApi\Type\Update\WebhookInfo;
 use Yiisoft\Test\Support\Log\SimpleLogger;
 
+use function count;
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertEmpty;
 use function PHPUnit\Framework\assertFalse;
@@ -250,6 +251,29 @@ final class TelegramBotApiTest extends TestCase
         assertSame('Not found "result" field in response. Status code: 200.', $exception->getMessage());
     }
 
+    public function testSuccessResponseWithoutResultWithLogger(): void
+    {
+        $logger = new SimpleLogger();
+        $api = TestHelper::createSuccessStubApi(
+            new ApiResponse(200, json_encode(['ok' => true])),
+            $logger,
+        );
+
+        $exception = null;
+        try {
+            $api->call(new GetMe());
+        } catch (Throwable $exception) {
+        }
+        assertInstanceOf(TelegramParseResultException::class, $exception);
+        assertSame('Not found "result" field in response. Status code: 200.', $exception->getMessage());
+
+        $messages = $logger->getMessages();
+        $lastMessage = $messages[count($messages) - 1] ?? null;
+        assertIsArray($lastMessage, 'Logger does not contain the expected error message.');
+        assertSame('error', $lastMessage['level']);
+        assertSame('Not found "result" field in telegram response.', $lastMessage['message']);
+    }
+
     public function testResponseWithInvalidJson(): void
     {
         $api = TestHelper::createSuccessStubApi(
@@ -263,6 +287,30 @@ final class TelegramBotApiTest extends TestCase
         }
         assertInstanceOf(TelegramParseResultException::class, $exception);
         assertSame('Failed to decode JSON response. Status code: 200.', $exception->getMessage());
+    }
+
+    public function testResponseWithInvalidJsonWithLogger(): void
+    {
+        $logger = new SimpleLogger();
+        $api = TestHelper::createSuccessStubApi(
+            new ApiResponse(200, 'g {12}'),
+            $logger,
+        );
+
+        $exception = null;
+        try {
+            $api->call(new GetMe());
+        } catch (Throwable $exception) {
+        }
+
+        assertInstanceOf(TelegramParseResultException::class, $exception);
+        assertSame('Failed to decode JSON response. Status code: 200.', $exception->getMessage());
+
+        $messages = $logger->getMessages();
+        $lastMessage = $messages[count($messages) - 1] ?? null;
+        assertIsArray($lastMessage, 'Logger does not contain the expected error message.');
+        assertSame('error', $lastMessage['level']);
+        assertSame('Failed to decode JSON from telegram response.', $lastMessage['message']);
     }
 
     #[TestWith([true])]
@@ -322,6 +370,30 @@ final class TelegramBotApiTest extends TestCase
 
         assertInstanceOf(TelegramParseResultException::class, $exception);
         assertSame('Expected telegram response as array. Got "string".', $exception->getMessage());
+    }
+
+    public function testNotArrayResponseWithLogger(): void
+    {
+        $logger = new SimpleLogger();
+        $api = TestHelper::createSuccessStubApi(
+            new ApiResponse(200, '"hello"'),
+            $logger,
+        );
+
+        $exception = null;
+        try {
+            $api->call(new GetMe());
+        } catch (Throwable $exception) {
+        }
+
+        assertInstanceOf(TelegramParseResultException::class, $exception);
+        assertSame('Expected telegram response as array. Got "string".', $exception->getMessage());
+
+        $messages = $logger->getMessages();
+        $lastMessage = $messages[count($messages) - 1] ?? null;
+        assertIsArray($lastMessage, 'Logger does not contain the expected error message.');
+        assertSame('error', $lastMessage['level']);
+        assertSame('Incorrect telegram response.', $lastMessage['message']);
     }
 
     public function testResponseWithNotBooleanOk(): void

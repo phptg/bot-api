@@ -4,6 +4,7 @@
 
 - Chg #171: Simplify `TransportInterface` implementations by replacing single `send()` method with specific methods: 
   `get()`, `post()`, and `postWithFiles()`.
+- Chg #175: Change PHP constraint in `composer.json` to `8.2 - 8.5`.
 
 ## 0.10.0 November 1, 2025
 
