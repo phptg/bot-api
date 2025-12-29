@@ -1,5 +1,10 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.11.0 under development
+
+- Chg #171: Simplify `TransportInterface` implementations by replacing single `send()` method with specific methods: 
+  `get()`, `post()`, and `postWithFiles()`.
+
 ## 0.10.0 November 1, 2025
 
 - Chg #172: Rename package from `vjik/telegram-bot-api` to `phptg/bot-api` and change namespace

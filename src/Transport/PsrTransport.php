@@ -11,11 +11,6 @@ use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
-use Phptg\BotApi\Type\InputFile;
-
-use function is_scalar;
-use function is_string;
-use function json_encode;
 
 /**
  * @api
@@ -28,27 +23,50 @@ final readonly class PsrTransport implements TransportInterface
         private StreamFactoryInterface $streamFactory,
     ) {}
 
-    public function send(
-        string $urlPath,
-        array $data = [],
-        HttpMethod $httpMethod = HttpMethod::POST,
-    ): ApiResponse {
-        $response = $this->client->sendRequest(
-            match ($httpMethod) {
-                HttpMethod::GET => $this->createGetRequest($urlPath, $data),
-                HttpMethod::POST => $this->createPostRequest($urlPath, $data),
-            },
+    public function get(string $url): ApiResponse
+    {
+        return $this->send(
+            $this->requestFactory->createRequest('GET', $url),
         );
+    }
 
-        $body = $response->getBody();
-        if ($body->isSeekable()) {
-            $body->rewind();
+    public function post(string $url, string $body, array $headers): ApiResponse
+    {
+        $request = $this->requestFactory->createRequest('POST', $url);
+
+        $stream = $this->streamFactory->createStream($body);
+        $request = $request->withBody($stream);
+
+        foreach ($headers as $name => $value) {
+            $request = $request->withHeader($name, $value);
         }
 
-        return new ApiResponse(
-            $response->getStatusCode(),
-            $body->getContents(),
-        );
+        return $this->send($request);
+    }
+
+    public function postWithFiles(string $url, array $data, array $files): ApiResponse
+    {
+        $streamBuilder = new MultipartStreamBuilder($this->streamFactory);
+        foreach ($data as $key => $value) {
+            $streamBuilder->addResource($key, (string) $value);
+        }
+        foreach ($files as $key => $file) {
+            $streamBuilder->addResource(
+                $key,
+                $file->resource,
+                $file->filename === null ? [] : ['filename' => $file->filename],
+            );
+        }
+        $body = $streamBuilder->build();
+        $contentType = 'multipart/form-data; boundary=' . $streamBuilder->getBoundary() . '; charset=utf-8';
+
+        $request = $this->requestFactory
+            ->createRequest('POST', $url)
+            ->withHeader('Content-Length', (string) $body->getSize())
+            ->withHeader('Content-Type', $contentType)
+            ->withBody($body);
+
+        return $this->send($request);
     }
 
     public function downloadFile(string $url): string
@@ -75,6 +93,21 @@ final readonly class PsrTransport implements TransportInterface
         }
     }
 
+    private function send(RequestInterface $request): ApiResponse
+    {
+        $response = $this->client->sendRequest($request);
+
+        $body = $response->getBody();
+        if ($body->isSeekable()) {
+            $body->rewind();
+        }
+
+        return new ApiResponse(
+            $response->getStatusCode(),
+            $body->getContents(),
+        );
+    }
+
     /**
      * @throws DownloadFileException
      */
@@ -94,70 +127,5 @@ final readonly class PsrTransport implements TransportInterface
         }
 
         return $body;
-    }
-
-    /**
-     * @psalm-param array<string, mixed> $data
-     */
-    private function createPostRequest(string $urlPath, array $data): RequestInterface
-    {
-        $request = $this->requestFactory->createRequest('POST', $urlPath);
-
-        $files = [];
-        foreach ($data as $key => $value) {
-            if ($value instanceof InputFile) {
-                $files[$key] = $value;
-                unset($data[$key]);
-            }
-        }
-
-        if (empty($data) && empty($files)) {
-            return $request;
-        }
-        if (empty($files)) {
-            $content = json_encode($data, JSON_THROW_ON_ERROR);
-            $body = $this->streamFactory->createStream($content);
-            $contentType = 'application/json; charset=utf-8';
-        } else {
-            $streamBuilder = new MultipartStreamBuilder($this->streamFactory);
-            foreach ($data as $key => $value) {
-                $streamBuilder->addResource(
-                    $key,
-                    is_string($value) ? $value : json_encode($value, JSON_THROW_ON_ERROR),
-                );
-            }
-            foreach ($files as $key => $file) {
-                $streamBuilder->addResource(
-                    $key,
-                    $file->resource,
-                    $file->filename === null ? [] : ['filename' => $file->filename],
-                );
-            }
-            $body = $streamBuilder->build();
-            $contentType = 'multipart/form-data; boundary=' . $streamBuilder->getBoundary() . '; charset=utf-8';
-        }
-
-        return $request
-            ->withHeader('Content-Length', (string) $body->getSize())
-            ->withHeader('Content-Type', $contentType)
-            ->withBody($body);
-    }
-
-    /**
-     * @psalm-param array<string, mixed> $data
-     */
-    private function createGetRequest(string $urlPath, array $data): RequestInterface
-    {
-        $queryParameters = [];
-        foreach ($data as $key => $value) {
-            $queryParameters[$key] = is_scalar($value) ? $value : json_encode($value, JSON_THROW_ON_ERROR);
-        }
-
-        $url = $urlPath;
-        if (!empty($queryParameters)) {
-            $url .= '?' . http_build_query($queryParameters);
-        }
-
-        return $this->requestFactory->createRequest('GET', $url);
     }
 }

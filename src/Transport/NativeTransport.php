@@ -9,7 +9,6 @@ use Phptg\BotApi\Transport\MimeTypeResolver\ApacheMimeTypeResolver;
 use Phptg\BotApi\Transport\MimeTypeResolver\MimeTypeResolverInterface;
 use Phptg\BotApi\Type\InputFile;
 
-use function is_scalar;
 use function is_string;
 use function json_encode;
 
@@ -29,40 +28,44 @@ final readonly class NativeTransport implements TransportInterface
         $this->mimeTypeResolver = $mimeTypeResolver ?? new ApacheMimeTypeResolver();
     }
 
-    public function send(string $urlPath, array $data = [], HttpMethod $httpMethod = HttpMethod::POST): ApiResponse
+    public function get(string $url): ApiResponse
     {
-        global $http_response_header;
-
-        [$url, $options] = match ($httpMethod) {
-            HttpMethod::GET => $this->createGetRequest($urlPath, $data),
-            HttpMethod::POST => $this->createPostRequest($urlPath, $data),
-        };
-        $options['ignore_errors'] = true;
-
-        $context = stream_context_create(['http' => $options]);
-
-        set_error_handler(
-            static function (int $errorNumber, string $errorString): bool {
-                throw new RuntimeException($errorString);
-            },
+        return $this->send(
+            $url,
+            ['method' => 'GET'],
         );
-        try {
-            /**
-             * @var string $body We throw exception on error, so `file_get_contents()` returns string.
-             */
-            $body = file_get_contents($url, context: $context);
-        } finally {
-            restore_error_handler();
+    }
+
+    public function post(string $url, string $body, array $headers): ApiResponse
+    {
+        $header = [];
+        foreach ($headers as $name => $value) {
+            $header[] = $name . ': ' . $value;
         }
 
-        /**
-         * @psalm-var non-empty-list<string> $http_response_header
-         * @see https://www.php.net/manual/reserved.variables.httpresponseheader.php
-         */
+        return $this->send(
+            $url,
+            [
+                'method' => 'POST',
+                'header' => $header,
+                'content' => $body,
+            ],
+        );
+    }
 
-        return new ApiResponse(
-            $this->parseStatusCode($http_response_header),
-            $body,
+    public function postWithFiles(string $url, array $data, array $files): ApiResponse
+    {
+        $boundary = uniqid('', true);
+        $content = $this->buildMultipartFormData($data, $files, $boundary);
+        $contentType = 'multipart/form-data; boundary=' . $boundary . '; charset=utf-8';
+
+        return $this->send(
+            $url,
+            [
+                'method' => 'POST',
+                'header' => 'Content-type: ' . $contentType,
+                'content' => $content,
+            ],
         );
     }
 
@@ -99,63 +102,37 @@ final readonly class NativeTransport implements TransportInterface
         }
     }
 
-    /**
-     * @psalm-param array<string, mixed> $data
-     * @psalm-return list{string, array}
-     */
-    private function createGetRequest(string $urlPath, array $data): array
+    private function send(string $url, array $options): ApiResponse
     {
-        $queryParameters = array_map(
-            static fn($value) => is_scalar($value) ? $value : json_encode($value, JSON_THROW_ON_ERROR),
-            $data,
+        global $http_response_header;
+
+        $options['ignore_errors'] = true;
+
+        $context = stream_context_create(['http' => $options]);
+
+        set_error_handler(
+            static function (int $errorNumber, string $errorString): bool {
+                throw new RuntimeException($errorString);
+            },
         );
-
-        $url = $urlPath;
-        if (!empty($queryParameters)) {
-            $url .= '?' . http_build_query($queryParameters);
+        try {
+            /**
+             * @var string $body We throw an exception on error, so `file_get_contents()` returns the string.
+             */
+            $body = file_get_contents($url, context: $context);
+        } finally {
+            restore_error_handler();
         }
 
-        return [
-            $url,
-            ['method' => 'GET'],
-        ];
-    }
+        /**
+         * @psalm-var non-empty-list<string> $http_response_header
+         * @see https://www.php.net/manual/reserved.variables.httpresponseheader.php
+         */
 
-    /**
-     * @psalm-param array<string, mixed> $data
-     * @psalm-return list{string, array}
-     */
-    private function createPostRequest(string $urlPath, array $data): array
-    {
-        $files = [];
-        foreach ($data as $key => $value) {
-            if ($value instanceof InputFile) {
-                $files[$key] = $value;
-                unset($data[$key]);
-            }
-        }
-
-        if (empty($files)) {
-            $fields = array_map(
-                static fn($value) => is_scalar($value) ? $value : json_encode($value, JSON_THROW_ON_ERROR),
-                $data,
-            );
-            $content = http_build_query($fields);
-            $contentType = 'application/x-www-form-urlencoded';
-        } else {
-            $boundary = uniqid('', true);
-            $content = $this->buildMultipartFormData($data, $files, $boundary);
-            $contentType = 'multipart/form-data; boundary=' . $boundary . '; charset=utf-8';
-        }
-
-        return [
-            $urlPath,
-            [
-                'method' => 'POST',
-                'header' => 'Content-type: ' . $contentType,
-                'content' => $content,
-            ],
-        ];
+        return new ApiResponse(
+            $this->parseStatusCode($http_response_header),
+            $body,
+        );
     }
 
     /**

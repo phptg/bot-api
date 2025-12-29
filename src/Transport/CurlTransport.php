@@ -9,11 +9,8 @@ use CURLStringFile;
 use Phptg\BotApi\Curl\Curl;
 use Phptg\BotApi\Curl\CurlException;
 use Phptg\BotApi\Curl\CurlInterface;
-use Phptg\BotApi\Type\InputFile;
 
 use function is_int;
-use function is_scalar;
-use function json_encode;
 
 /**
  * @api
@@ -28,37 +25,46 @@ final readonly class CurlTransport implements TransportInterface
         $this->curlShareHandle = $this->createCurlShareHandle();
     }
 
-    /**
-     * @psalm-param array<string, mixed> $data
-     */
-    public function send(string $urlPath, array $data = [], HttpMethod $httpMethod = HttpMethod::POST): ApiResponse
+    public function get(string $url): ApiResponse
     {
-        $options = match ($httpMethod) {
-            HttpMethod::GET => $this->createGetOptions($urlPath, $data),
-            HttpMethod::POST => $this->createPostOptions($urlPath, $data),
-        };
-        $options[CURLOPT_RETURNTRANSFER] = true;
-        $options[CURLOPT_SHARE] = $this->curlShareHandle;
+        $options = [
+            CURLOPT_HTTPGET => true,
+            CURLOPT_URL => $url,
+        ];
+        return $this->send($options);
+    }
 
-        $curl = $this->curl->init();
-
-        try {
-            $this->curl->setopt_array($curl, $options);
-
-            /**
-             * @var string $body `curl_exec` returns string because `CURLOPT_RETURNTRANSFER` is set to `true`.
-             */
-            $body = $this->curl->exec($curl);
-
-            $statusCode = $this->curl->getinfo($curl, CURLINFO_HTTP_CODE);
-            if (!is_int($statusCode)) {
-                $statusCode = 0;
-            }
-        } finally {
-            $this->curl->close($curl);
+    public function post(string $url, string $body, array $headers): ApiResponse
+    {
+        $header = [];
+        foreach ($headers as $name => $value) {
+            $header[] = $name . ': ' . $value;
         }
 
-        return new ApiResponse($statusCode, $body);
+        $options = [
+            CURLOPT_POST => true,
+            CURLOPT_URL => $url,
+            CURLOPT_POSTFIELDS => $body,
+            CURLOPT_HTTPHEADER => $header,
+        ];
+        return $this->send($options);
+    }
+
+    public function postWithFiles(string $url, array $data, array $files): ApiResponse
+    {
+        foreach ($files as $key => $file) {
+            $data[$key] = new CURLStringFile(
+                FileHelper::read($file),
+                $file->filename ?? '',
+            );
+        }
+
+        $options = [
+            CURLOPT_POST => true,
+            CURLOPT_URL => $url,
+            CURLOPT_POSTFIELDS => $data,
+        ];
+        return $this->send($options);
     }
 
     public function downloadFile(string $url): string
@@ -128,55 +134,30 @@ final readonly class CurlTransport implements TransportInterface
         }
     }
 
-    /**
-     * @psalm-param array<string, mixed> $data
-     */
-    private function createPostOptions(string $urlPath, array $data): array
+    private function send(array $options): ApiResponse
     {
-        $postFields = [];
-        foreach ($data as $key => $value) {
-            if (is_scalar($value)) {
-                $postFields[$key] = $value;
-                continue;
+        $options[CURLOPT_RETURNTRANSFER] = true;
+        $options[CURLOPT_SHARE] = $this->curlShareHandle;
+
+        $curl = $this->curl->init();
+
+        try {
+            $this->curl->setopt_array($curl, $options);
+
+            /**
+             * @var string $body `curl_exec` returns string because `CURLOPT_RETURNTRANSFER` is set to `true`.
+             */
+            $body = $this->curl->exec($curl);
+
+            $statusCode = $this->curl->getinfo($curl, CURLINFO_HTTP_CODE);
+            if (!is_int($statusCode)) {
+                $statusCode = 0;
             }
-
-            if ($value instanceof InputFile) {
-                $postFields[$key] = new CURLStringFile(
-                    FileHelper::read($value),
-                    $value->filename ?? '',
-                );
-                continue;
-            }
-
-            $postFields[$key] = json_encode($value, JSON_THROW_ON_ERROR);
+        } finally {
+            $this->curl->close($curl);
         }
 
-        return [
-            CURLOPT_POST => true,
-            CURLOPT_URL => $urlPath,
-            CURLOPT_POSTFIELDS => $postFields,
-        ];
-    }
-
-    /**
-     * @psalm-param array<string, mixed> $data
-     */
-    private function createGetOptions(string $urlPath, array $data): array
-    {
-        $queryParameters = [];
-        foreach ($data as $key => $value) {
-            $queryParameters[$key] = is_scalar($value) ? $value : json_encode($value, JSON_THROW_ON_ERROR);
-        }
-
-        $url = $urlPath;
-        if (!empty($queryParameters)) {
-            $url .= '?' . http_build_query($queryParameters);
-        }
-
-        return [
-            CURLOPT_HTTPGET => true,
-            CURLOPT_URL => $url,
-        ];
+        return new ApiResponse($statusCode, $body);
     }
 
     private function createCurlShareHandle(): CurlShareHandle

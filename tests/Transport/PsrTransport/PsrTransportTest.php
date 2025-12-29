@@ -12,7 +12,6 @@ use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Phptg\BotApi\Transport\PsrTransport;
-use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Type\InputFile;
 
 use function PHPUnit\Framework\assertInstanceOf;
@@ -45,14 +44,7 @@ final class PsrTransportTest extends TestCase
             new StreamFactory(),
         );
 
-        $response = $transport->send(
-            '//url/getMe',
-            [
-                'key' => 'value',
-                'array' => [1, 'test'],
-            ],
-            HttpMethod::GET,
-        );
+        $response = $transport->get('//url/getMe?key=value&array=%5B1%2C%22test%22%5D');
 
         assertSame(201, $response->statusCode);
     }
@@ -65,7 +57,20 @@ final class PsrTransportTest extends TestCase
         $client
             ->expects($this->once())
             ->method('sendRequest')
-            ->with($httpRequest)
+            ->with(
+                new Callback(function ($request): bool {
+                    assertInstanceOf(Request::class, $request);
+                    assertSame(
+                        [
+                            'Content-Length' => ['0'],
+                            'Content-Type' => ['application/json; charset=utf-8'],
+                        ],
+                        $request->getHeaders(),
+                    );
+                    assertSame('', $request->getBody()->getContents());
+                    return true;
+                }),
+            )
             ->willReturn(new Response(201));
 
         $requestFactory = $this->createMock(RequestFactoryInterface::class);
@@ -81,7 +86,14 @@ final class PsrTransportTest extends TestCase
             new StreamFactory(),
         );
 
-        $response = $transport->send('//url/logOut');
+        $response = $transport->post(
+            '//url/logOut',
+            '',
+            [
+                'Content-Length' => '0',
+                'Content-Type' => 'application/json; charset=utf-8',
+            ],
+        );
 
         assertSame(201, $response->statusCode);
     }
@@ -97,7 +109,6 @@ final class PsrTransportTest extends TestCase
             ->with(
                 new Callback(function ($request): bool {
                     assertInstanceOf(Request::class, $request);
-                    /** @var Request $request */
                     assertSame(
                         [
                             'Content-Length' => ['29'],
@@ -124,12 +135,19 @@ final class PsrTransportTest extends TestCase
             new StreamFactory(),
         );
 
-        $response = $transport->send('//url/sendMessage', ['chat_id' => 123, 'text' => 'test']);
+        $response = $transport->post(
+            '//url/sendMessage',
+            '{"chat_id":123,"text":"test"}',
+            [
+                'Content-Length' => '29',
+                'Content-Type' => 'application/json; charset=utf-8',
+            ],
+        );
 
         assertSame(201, $response->statusCode);
     }
 
-    public function testPostWithDataAndFiles(): void
+    public function testPostWithFiles(): void
     {
         $httpRequest = new Request();
 
@@ -190,11 +208,13 @@ final class PsrTransportTest extends TestCase
             new StreamFactory(),
         );
 
-        $response = $transport->send(
+        $response = $transport->postWithFiles(
             '//url/sendPhoto',
             [
                 'chat_id' => 123,
                 'caption' => 'hello',
+            ],
+            [
                 'photo' => new InputFile(
                     (new StreamFactory())->createStream('test-file-body'),
                     'face.png',
@@ -223,7 +243,7 @@ final class PsrTransportTest extends TestCase
             $streamFactory,
         );
 
-        $response = $transport->send('getMe');
+        $response = $transport->get('getMe');
 
         assertSame(201, $response->statusCode);
         assertSame('hello', $response->body);

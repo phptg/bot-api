@@ -10,15 +10,19 @@ use SensitiveParameter;
 use Phptg\BotApi\ParseResult\ResultFactory;
 use Phptg\BotApi\ParseResult\TelegramParseResultException;
 use Phptg\BotApi\Transport\ApiResponse;
+use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Transport\TransportInterface;
+use Phptg\BotApi\Type\InputFile;
 use Phptg\BotApi\Type\ResponseParameters;
 
 use function array_key_exists;
 use function is_array;
 use function is_bool;
 use function is_int;
+use function is_scalar;
 use function is_string;
 use function json_decode;
+use function strlen;
 
 /**
  * @internal
@@ -50,11 +54,11 @@ final readonly class Api
             LogContextFactory::sendRequest($method),
         );
 
-        $response = $this->transport->send(
-            $this->makeUrlPath($method->getApiMethod()),
-            $method->getData(),
-            $method->getHttpMethod(),
-        );
+        $url = $this->baseUrl . '/bot' . $this->token . '/' . $method->getApiMethod();
+        $response = match ($method->getHttpMethod()) {
+            HttpMethod::GET => $this->sendGetRequest($url, $method->getData()),
+            HttpMethod::POST => $this->sendPostRequest($url, $method->getData()),
+        };
 
         try {
             $decodedBody = json_decode($response->body, true, flags: JSON_THROW_ON_ERROR);
@@ -106,9 +110,54 @@ final readonly class Api
         return $result;
     }
 
-    private function makeUrlPath(string $apiMethod): string
+    /**
+     * @psalm-param array<string, mixed> $data
+     */
+    private function sendGetRequest(string $url, array $data): ApiResponse
     {
-        return $this->baseUrl . '/bot' . $this->token . '/' . $apiMethod;
+        $queryParameters = array_map(
+            static fn($value) => is_scalar($value) ? $value : json_encode($value, JSON_THROW_ON_ERROR),
+            $data,
+        );
+
+        if (!empty($queryParameters)) {
+            $url .= '?' . http_build_query($queryParameters);
+        }
+
+        return $this->transport->get($url);
+    }
+
+    /**
+     * @psalm-param array<string, mixed> $data
+     */
+    private function sendPostRequest(string $url, array $data): ApiResponse
+    {
+        $files = [];
+        foreach ($data as $key => $value) {
+            if ($value instanceof InputFile) {
+                $files[$key] = $value;
+                unset($data[$key]);
+            }
+        }
+
+        if (empty($files)) {
+            $content = json_encode($data, JSON_THROW_ON_ERROR);
+            return $this->transport->post(
+                $url,
+                $content,
+                [
+                    'Content-Length' => (string) strlen($content),
+                    'Content-Type' => 'application/json; charset=utf-8',
+                ],
+            );
+        }
+
+        $data = array_map(
+            static fn(mixed $value) => is_scalar($value) ? $value : json_encode($value, JSON_THROW_ON_ERROR),
+            $data,
+        );
+
+        return $this->transport->postWithFiles($url, $data, $files);
     }
 
     /**

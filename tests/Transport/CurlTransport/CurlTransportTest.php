@@ -9,11 +9,9 @@ use CURLStringFile;
 use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use stdClass;
 use Throwable;
 use Phptg\BotApi\Tests\Curl\CurlMock;
 use Phptg\BotApi\Transport\CurlTransport;
-use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Type\InputFile;
 
 use function PHPUnit\Framework\assertCount;
@@ -32,14 +30,7 @@ final class CurlTransportTest extends TestCase
         );
         $transport = new CurlTransport($curl);
 
-        $response = $transport->send(
-            '//url/getMe',
-            [
-                'key' => 'value',
-                'array' => [1, 'test'],
-            ],
-            HttpMethod::GET,
-        );
+        $response = $transport->get('//url/getMe?key=value&array=%5B1%2C%22test%22%5D');
 
         assertSame(200, $response->statusCode);
         assertSame('{"ok":true,"result":[]}', $response->body);
@@ -60,45 +51,29 @@ final class CurlTransportTest extends TestCase
         );
         $transport = new CurlTransport($curl);
 
-        $response = $transport->send('//url/logOut');
+        $response = $transport->post(
+            '//url/logOut',
+            '',
+            [
+                'Content-Length' => '0',
+                'Content-Type' => 'application/json; charset=utf-8',
+            ],
+        );
 
         assertSame(200, $response->statusCode);
         assertSame('{"ok":true,"result":[]}', $response->body);
 
         $options = $curl->getOptions();
-        assertCount(5, $options);
+        assertCount(6, $options);
         assertTrue($options[CURLOPT_POST]);
         assertSame('//url/logOut', $options[CURLOPT_URL]);
-        assertSame([], $options[CURLOPT_POSTFIELDS]);
-        assertTrue($options[CURLOPT_RETURNTRANSFER]);
-        assertInstanceOf(CurlShareHandle::class, $options[CURLOPT_SHARE]);
-    }
-
-    public function testPostWithParams(): void
-    {
-        $curl = new CurlMock(
-            execResult: '{"ok":true,"result":[]}',
-            getinfoResult: [CURLINFO_HTTP_CODE => 200],
-        );
-        $transport = new CurlTransport($curl);
-
-        $transport->send('//url/setChatTitle', [
-            'chat_id' => 123,
-            'title' => 'test',
-            'object' => new stdClass(),
-        ]);
-
-        $options = $curl->getOptions();
-        assertCount(5, $options);
-        assertTrue($options[CURLOPT_POST]);
-        assertSame('//url/setChatTitle', $options[CURLOPT_URL]);
+        assertSame('', $options[CURLOPT_POSTFIELDS]);
         assertSame(
             [
-                'chat_id' => 123,
-                'title' => 'test',
-                'object' => '{}',
+                'Content-Length: 0',
+                'Content-Type: application/json; charset=utf-8',
             ],
-            $options[CURLOPT_POSTFIELDS],
+            $options[CURLOPT_HTTPHEADER],
         );
         assertTrue($options[CURLOPT_RETURNTRANSFER]);
         assertInstanceOf(CurlShareHandle::class, $options[CURLOPT_SHARE]);
@@ -112,7 +87,7 @@ final class CurlTransportTest extends TestCase
             ),
         );
 
-        $response = $transport->send('logOut');
+        $response = $transport->get('getMe');
 
         assertSame(0, $response->statusCode);
     }
@@ -125,10 +100,14 @@ final class CurlTransportTest extends TestCase
         );
         $transport = new CurlTransport($curl);
 
-        $response = $transport->send('//url/sendPhoto', [
-            'photo1' => InputFile::fromLocalFile(__DIR__ . '/photo.png'),
-            'photo2' => InputFile::fromLocalFile(__DIR__ . '/photo.png', 'photo.png'),
-        ]);
+        $response = $transport->postWithFiles(
+            '//url/sendPhoto',
+            [],
+            [
+                'photo1' => InputFile::fromLocalFile(__DIR__ . '/photo.png'),
+                'photo2' => InputFile::fromLocalFile(__DIR__ . '/photo.png', 'photo.png'),
+            ],
+        );
 
         assertSame(200, $response->statusCode);
         assertSame('{"ok":true,"result":[]}', $response->body);
@@ -162,15 +141,19 @@ final class CurlTransportTest extends TestCase
         );
         $transport = new CurlTransport($curl);
 
-        $transport->send('sendPhoto', [
-            'photo1' => new InputFile(
-                (new StreamFactory())->createStream('test1'),
-            ),
-            'photo2' => new InputFile(
-                (new StreamFactory())->createStream('test2'),
-                'test.jpg',
-            ),
-        ]);
+        $transport->postWithFiles(
+            'sendPhoto',
+            [],
+            [
+                'photo1' => new InputFile(
+                    (new StreamFactory())->createStream('test1'),
+                ),
+                'photo2' => new InputFile(
+                    (new StreamFactory())->createStream('test2'),
+                    'test.jpg',
+                ),
+            ],
+        );
 
         assertEquals(
             [
@@ -188,9 +171,13 @@ final class CurlTransportTest extends TestCase
 
         $stream = (new StreamFactory())->createStream('test1');
         $stream->getContents();
-        $transport->send('sendPhoto', [
-            'photo' => new InputFile($stream),
-        ]);
+        $transport->postWithFiles(
+            'sendPhoto',
+            [],
+            [
+                'photo' => new InputFile($stream),
+            ],
+        );
 
         assertEquals(
             [
@@ -207,9 +194,13 @@ final class CurlTransportTest extends TestCase
 
         $resource = fopen(__DIR__ . '/photo.png', 'r');
         stream_get_contents($resource);
-        $transport->send('sendPhoto', [
-            'photo' => new InputFile($resource),
-        ]);
+        $transport->postWithFiles(
+            'sendPhoto',
+            [],
+            [
+                'photo' => new InputFile($resource),
+            ],
+        );
 
         assertEquals(
             [
@@ -228,7 +219,7 @@ final class CurlTransportTest extends TestCase
         $transport = new CurlTransport($curl);
 
         try {
-            $transport->send('getMe');
+            $transport->get('getMe');
         } catch (Throwable) {
         }
 
@@ -242,7 +233,7 @@ final class CurlTransportTest extends TestCase
             getinfoResult: [CURLINFO_HTTP_CODE => 200],
         );
 
-        (new CurlTransport($curl))->send('getMe');
+        (new CurlTransport($curl))->get('getMe');
 
         assertSame(
             [

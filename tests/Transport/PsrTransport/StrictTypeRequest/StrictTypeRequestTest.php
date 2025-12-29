@@ -6,6 +6,7 @@ namespace Phptg\BotApi\Tests\Transport\PsrTransport\StrictTypeRequest;
 
 use HttpSoft\Message\Response;
 use HttpSoft\Message\StreamFactory;
+use Phptg\BotApi\Type\InputFile;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
 use Phptg\BotApi\Transport\PsrTransport;
@@ -29,7 +30,14 @@ final class StrictTypeRequestTest extends TestCase
             $streamFactory,
         );
 
-        $response = $transport->send('getMyName', ['language_code' => 'ru']);
+        $file = new InputFile(
+            $streamFactory->createStream('file content'),
+        );
+        $response = $transport->postWithFiles(
+            'https://api.example.com/test',
+            ['key1' => 'value1'],
+            ['file1' => $file],
+        );
 
         assertSame(201, $response->statusCode);
         assertSame('hello', $response->body);

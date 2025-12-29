@@ -7,9 +7,7 @@ namespace Phptg\BotApi\Tests\Transport\NativeTransport;
 use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use stdClass;
 use Phptg\BotApi\Tests\Transport\NativeTransport\StreamMock\StreamMock;
-use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Transport\MimeTypeResolver\MimeTypeResolverInterface;
 use Phptg\BotApi\Transport\NativeTransport;
 use Phptg\BotApi\Type\InputFile;
@@ -35,14 +33,7 @@ final class NativeTransportTest extends TestCase
             responseBody: '{"ok":true,"result":[]}',
         );
 
-        $response = $transport->send(
-            'http://url/getMe',
-            [
-                'key' => 'value',
-                'array' => [1, 'test'],
-            ],
-            HttpMethod::GET,
-        );
+        $response = $transport->get('http://url/getMe?key=value&array=%5B1%2C%22test%22%5D');
 
         $request = StreamMock::disable();
 
@@ -74,7 +65,14 @@ final class NativeTransportTest extends TestCase
             responseBody: '{"ok":true,"result":[]}',
         );
 
-        $response = $transport->send('http://url/logOut');
+        $response = $transport->post(
+            'http://url/logOut',
+            '',
+            [
+                'Content-Length' => '0',
+                'Content-Type' => 'application/json; charset=utf-8',
+            ],
+        );
 
         $request = StreamMock::disable();
 
@@ -86,46 +84,11 @@ final class NativeTransportTest extends TestCase
                 'options' => [
                     'http' => [
                         'method' => 'POST',
-                        'header' => 'Content-type: application/x-www-form-urlencoded',
+                        'header' => [
+                            'Content-Length: 0',
+                            'Content-Type: application/json; charset=utf-8',
+                        ],
                         'content' => '',
-                        'ignore_errors' => true,
-                    ],
-                ],
-            ],
-            $request,
-        );
-    }
-
-    public function testPostWithParams(): void
-    {
-        $transport = new NativeTransport();
-
-        StreamMock::enable(
-            responseHeaders: [
-                'HTTP/1.1 200 OK',
-                'Content-Type: text/json',
-            ],
-            responseBody: '{"ok":true,"result":[]}',
-        );
-
-        $response = $transport->send('http://url/setChatTitle', [
-            'chat_id' => 123,
-            'title' => 'test',
-            'object' => new stdClass(),
-        ]);
-
-        $request = StreamMock::disable();
-
-        assertSame(200, $response->statusCode);
-        assertSame('{"ok":true,"result":[]}', $response->body);
-        assertSame(
-            [
-                'path' => 'http://url/setChatTitle',
-                'options' => [
-                    'http' => [
-                        'method' => 'POST',
-                        'header' => 'Content-type: application/x-www-form-urlencoded',
-                        'content' => 'chat_id=123&title=test&object=%7B%7D',
                         'ignore_errors' => true,
                     ],
                 ],
@@ -146,11 +109,17 @@ final class NativeTransportTest extends TestCase
             responseBody: '{"ok":true,"result":[]}',
         );
 
-        $response = $transport->send('http://url/sendPhoto', [
-            'age' => 19,
-            'photo1' => InputFile::fromLocalFile(__DIR__ . '/photo.png'),
-            'photo2' => InputFile::fromLocalFile(__DIR__ . '/photo.png', 'face.png'),
-        ]);
+        $response = $transport->postWithFiles(
+            'http://url/sendPhoto',
+            [
+
+                'age' => 19,
+            ],
+            [
+                'photo1' => InputFile::fromLocalFile(__DIR__ . '/photo.png'),
+                'photo2' => InputFile::fromLocalFile(__DIR__ . '/photo.png', 'face.png'),
+            ],
+        );
 
         $request = StreamMock::disable();
 
@@ -188,15 +157,19 @@ final class NativeTransportTest extends TestCase
             responseBody: '{"ok":true,"result":[]}',
         );
 
-        $response = $transport->send('http://url/sendPhoto', [
-            'file1' => new InputFile(
-                (new StreamFactory())->createStream('test1'),
-            ),
-            'file2' => new InputFile(
-                (new StreamFactory())->createStream('test2'),
-                'test.txt',
-            ),
-        ]);
+        $response = $transport->postWithFiles(
+            'http://url/sendPhoto',
+            [],
+            [
+                'file1' => new InputFile(
+                    (new StreamFactory())->createStream('test1'),
+                ),
+                'file2' => new InputFile(
+                    (new StreamFactory())->createStream('test2'),
+                    'test.txt',
+                ),
+            ],
+        );
 
         $request = StreamMock::disable();
 
@@ -225,7 +198,7 @@ final class NativeTransportTest extends TestCase
         assertTrue($request['options']['http']['ignore_errors']);
     }
 
-    public function testPostWithFileAndArray(): void
+    public function testPostWithFiles(): void
     {
         $transport = new NativeTransport();
 
@@ -237,12 +210,17 @@ final class NativeTransportTest extends TestCase
             responseBody: '{"ok":true,"result":[]}',
         );
 
-        $transport->send('http://url/method', [
-            'file1' => new InputFile(
-                (new StreamFactory())->createStream('test1'),
-            ),
-            'ages' => [23, 45],
-        ]);
+        $transport->postWithFiles(
+            'http://url/method',
+            [
+                'ages' => [23, 45],
+            ],
+            [
+                'file1' => new InputFile(
+                    (new StreamFactory())->createStream('test1'),
+                ),
+            ],
+        );
 
         $request = StreamMock::disable();
 
@@ -280,11 +258,15 @@ final class NativeTransportTest extends TestCase
             responseBody: '{"ok":true,"result":[]}',
         );
 
-        $transport->send('http://url/method', [
-            'file1' => new InputFile(
-                (new StreamFactory())->createStream('test1'),
-            ),
-        ]);
+        $transport->postWithFiles(
+            'http://url/method',
+            [],
+            [
+                'file1' => new InputFile(
+                    (new StreamFactory())->createStream('test1'),
+                ),
+            ],
+        );
 
         $request = StreamMock::disable();
 
@@ -304,7 +286,7 @@ final class NativeTransportTest extends TestCase
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('file_get_contents(): Unable to find the wrapper "example"');
-        $transport->send('example://url/logOut');
+        $transport->get('example://url/getMe');
     }
 
     public function testWithoutCode(): void
@@ -318,7 +300,7 @@ final class NativeTransportTest extends TestCase
             responseBody: '{"ok":true,"result":[]}',
         );
 
-        $response = $transport->send('http://url/logOut');
+        $response = $transport->get('http://url/getMe');
 
         StreamMock::disable();
 
