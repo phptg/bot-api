@@ -19,9 +19,8 @@
             "homepage": "https://predvoditelev.ru"
         }
     ],
-    "minimum-stability": "stable",
     "require": {
-        "php-64bit": "^8.2",
+        "php-64bit": "8.2 - 8.5",
         "php-http/multipart-stream-builder": "^1.4.2",
         "psr/http-client": "^1.0",
         "psr/http-factory": "^1.1",
@@ -29,13 +28,13 @@
     },
     "require-dev": {
         "ext-curl": "*",
-        "bamarni/composer-bin-plugin": "^1.8.2",
+        "bamarni/composer-bin-plugin": "^1.8.3",
         "httpsoft/http-message": "^1.1.6",
-        "php-http/curl-client": "^2.3.3",
-        "phpunit/phpunit": "^11.5.43",
+        "php-http/curl-client": "^2.4.0",
+        "phpunit/phpunit": "^11.5.46",
         "psr/log": "^3.0.2",
-        "yiisoft/files": "^2.0",
-        "yiisoft/test-support": "^3.0.2"
+        "yiisoft/files": "^2.1",
+        "yiisoft/test-support": "^3.1.0"
     },
     "suggest": {
         "psr/log": "To log requests to Telegram Bot API and response handling errors.",
@@ -55,7 +54,7 @@
         "test-real": "phpunit --group=realApi",
         "cs-fix": "php-cs-fixer fix",
         "rector": "rector",
-        "infection": "infection --only-covered"
+        "infection": "infection --threads=max"
     },
     "extra": {
         "bamarni-bin": {

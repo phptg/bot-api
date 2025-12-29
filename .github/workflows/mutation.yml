@@ -16,7 +16,7 @@ jobs:
         os:
           - ubuntu-latest
         php:
-          - "8.4"
+          - "8.5"
 
     steps:
       - name: Checkout.
