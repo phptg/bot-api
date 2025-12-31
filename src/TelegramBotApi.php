@@ -45,6 +45,7 @@ use Phptg\BotApi\Method\GetBusinessAccountGifts;
 use Phptg\BotApi\Method\GetBusinessAccountStarBalance;
 use Phptg\BotApi\Method\GetBusinessConnection;
 use Phptg\BotApi\Method\GetChat;
+use Phptg\BotApi\Method\GetChatGifts;
 use Phptg\BotApi\Method\GetChatAdministrators;
 use Phptg\BotApi\Method\GetChatMember;
 use Phptg\BotApi\Method\GetChatMemberCount;
@@ -1205,6 +1206,39 @@ final class TelegramBotApi
     public function getChat(int|string $chatId): FailResult|ChatFullInfo
     {
         return $this->call(new GetChat($chatId));
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#getchatgifts
+     */
+    public function getChatGifts(
+        int|string $chatId,
+        ?bool $excludeUnsaved = null,
+        ?bool $excludeSaved = null,
+        ?bool $excludeUnlimited = null,
+        ?bool $excludeLimitedUpgradable = null,
+        ?bool $excludeLimitedNonUpgradable = null,
+        ?bool $excludeFromBlockchain = null,
+        ?bool $excludeUnique = null,
+        ?bool $sortByPrice = null,
+        ?string $offset = null,
+        ?int $limit = null,
+    ): FailResult|OwnedGifts {
+        return $this->call(
+            new GetChatGifts(
+                $chatId,
+                $excludeUnsaved,
+                $excludeSaved,
+                $excludeUnlimited,
+                $excludeLimitedUpgradable,
+                $excludeLimitedNonUpgradable,
+                $excludeFromBlockchain,
+                $excludeUnique,
+                $sortByPrice,
+                $offset,
+                $limit,
+            ),
+        );
     }
 
     /**

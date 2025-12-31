@@ -1100,6 +1100,18 @@ final class TelegramBotApiTest extends TestCase
         assertSame(23, $result->id);
     }
 
+    public function testGetChatGifts(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            'total_count' => 0,
+            'gifts' => [],
+        ]);
+
+        $result = $api->getChatGifts(12345);
+
+        assertInstanceOf(OwnedGifts::class, $result);
+    }
+
     public function testGetChatAdministrators(): void
     {
         $api = TestHelper::createSuccessStubApi([
