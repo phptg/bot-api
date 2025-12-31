@@ -1,8 +1,12 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.11.1 under development
+
+- New #177: Add `hasTopicsEnabled` field to `User` type.
+
 ## 0.11.0 December 29, 2025
 
-- Chg #171: Simplify `TransportInterface` implementations by replacing single `send()` method with specific methods: 
+- Chg #171: Simplify `TransportInterface` implementations by replacing single `send()` method with specific methods:
   `get()`, `post()`, and `postWithFiles()`.
 - Chg #175: Change PHP constraint in `composer.json` to `8.2 - 8.5`.
 
