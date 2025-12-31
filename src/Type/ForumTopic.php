@@ -16,5 +16,6 @@ final readonly class ForumTopic
         public string $name,
         public int $iconColor,
         public ?string $iconCustomEmojiId = null,
+        public ?true $isNameImplicit = null,
     ) {}
 }

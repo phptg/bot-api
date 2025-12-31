@@ -4,6 +4,7 @@
 
 - New #177: Add `hasTopicsEnabled` field to `User` type.
 - New #177: Add `SendMessageDraft` method.
+- New #177: Add `isNameImplicit` field to `ForumTopic` type.
 
 ## 0.11.0 December 29, 2025
 
