@@ -95,6 +95,7 @@ use Phptg\BotApi\Method\SendDocument;
 use Phptg\BotApi\Method\SendLocation;
 use Phptg\BotApi\Method\SendMediaGroup;
 use Phptg\BotApi\Method\SendMessage;
+use Phptg\BotApi\Method\SendMessageDraft;
 use Phptg\BotApi\Method\SendPaidMedia;
 use Phptg\BotApi\Method\SendPhoto;
 use Phptg\BotApi\Method\SendPoll;
@@ -2216,6 +2217,31 @@ final class TelegramBotApi
                 $allowPaidBroadcast,
                 $directMessagesTopicId,
                 $suggestedPostParameters,
+            ),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#sendmessagedraft
+     *
+     * @param MessageEntity[]|null $entities
+     */
+    public function sendMessageDraft(
+        int $chatId,
+        int $draftId,
+        string $text,
+        ?int $messageThreadId = null,
+        ?string $parseMode = null,
+        ?array $entities = null,
+    ): FailResult|true {
+        return $this->call(
+            new SendMessageDraft(
+                $chatId,
+                $draftId,
+                $text,
+                $messageThreadId,
+                $parseMode,
+                $entities,
             ),
         );
     }

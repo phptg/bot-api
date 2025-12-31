@@ -1994,6 +1994,15 @@ final class TelegramBotApiTest extends TestCase
         assertSame(7, $result->messageId);
     }
 
+    public function testSendMessageDraft(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->sendMessageDraft(12, 100, 'hello');
+
+        assertTrue($result);
+    }
+
     public function testSendPaidMedia(): void
     {
         $api = TestHelper::createSuccessStubApi([
