@@ -7,6 +7,9 @@
 - New #177: Add `SendMessageDraft`, `getUserGifts` and `getChatGifts` methods.
 - Chg #177: Replace `lastResaleStarCount` field with `lastResaleCurrency` and `lastResaleAmount` fields in
   `UniqueGiftInfo` type.
+- Chg #177: Replace `excludeLimited` parameter with `excludeLimitedUpgradable` and `excludeLimitedNonUpgradable`
+  parameters in `getBusinessAccountGifts` method.
+- New #177: Add `excludeFromBlockchain` parameter to `getBusinessAccountGifts` method.
 
 ## 0.11.0 December 29, 2025
 
