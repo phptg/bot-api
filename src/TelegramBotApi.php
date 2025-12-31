@@ -59,6 +59,7 @@ use Phptg\BotApi\Method\GetMyName;
 use Phptg\BotApi\Method\GetMyShortDescription;
 use Phptg\BotApi\Method\GetMyStarBalance;
 use Phptg\BotApi\Method\GetUserChatBoosts;
+use Phptg\BotApi\Method\GetUserGifts;
 use Phptg\BotApi\Method\GetUserProfilePhotos;
 use Phptg\BotApi\Method\GiftPremiumSubscription;
 use Phptg\BotApi\Method\HideGeneralForumTopic;
@@ -1383,6 +1384,35 @@ final class TelegramBotApi
     {
         return $this->call(
             new GetUserChatBoosts($chatId, $userId),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#getusergifts
+     */
+    public function getUserGifts(
+        int $userId,
+        ?bool $excludeUnlimited = null,
+        ?bool $excludeLimitedUpgradable = null,
+        ?bool $excludeLimitedNonUpgradable = null,
+        ?bool $excludeFromBlockchain = null,
+        ?bool $excludeUnique = null,
+        ?bool $sortByPrice = null,
+        ?string $offset = null,
+        ?int $limit = null,
+    ): FailResult|OwnedGifts {
+        return $this->call(
+            new GetUserGifts(
+                $userId,
+                $excludeUnlimited,
+                $excludeLimitedUpgradable,
+                $excludeLimitedNonUpgradable,
+                $excludeFromBlockchain,
+                $excludeUnique,
+                $sortByPrice,
+                $offset,
+                $limit,
+            ),
         );
     }
 

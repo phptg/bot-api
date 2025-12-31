@@ -1494,6 +1494,18 @@ final class TelegramBotApiTest extends TestCase
         assertInstanceOf(UserChatBoosts::class, $result);
     }
 
+    public function testGetUserGifts(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            'total_count' => 0,
+            'gifts' => [],
+        ]);
+
+        $result = $api->getUserGifts(12345);
+
+        assertInstanceOf(OwnedGifts::class, $result);
+    }
+
     public function testGetUserProfilePhotos(): void
     {
         $api = TestHelper::createSuccessStubApi([
