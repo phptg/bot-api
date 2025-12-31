@@ -5,6 +5,8 @@
 - New #177: Add `hasTopicsEnabled` field to `User` type.
 - New #177: Add `isNameImplicit` field to `ForumTopic` and `ForumTopicCreated` types.
 - New #177: Add `SendMessageDraft`, `getUserGifts` and `getChatGifts` methods.
+- Chg #177: Replace `lastResaleStarCount` field with `lastResaleCurrency` and `lastResaleAmount` fields in
+  `UniqueGiftInfo` type.
 
 ## 0.11.0 December 29, 2025
 

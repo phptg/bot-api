@@ -18,7 +18,8 @@ final readonly class UniqueGiftInfo
         public string $origin,
         public ?string $ownedGiftId = null,
         public ?int $transferStarCount = null,
-        public ?int $lastResaleStarCount = null,
+        public ?string $lastResaleCurrency = null,
+        public ?int $lastResaleAmount = null,
         public ?DateTimeImmutable $nextTransferDate = null,
     ) {}
 }

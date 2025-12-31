@@ -64,7 +64,8 @@ final class UniqueGiftInfoTest extends TestCase
         assertSame('upgrade', $uniqueGiftInfo->origin);
         assertNull($uniqueGiftInfo->ownedGiftId);
         assertNull($uniqueGiftInfo->transferStarCount);
-        assertNull($uniqueGiftInfo->lastResaleStarCount);
+        assertNull($uniqueGiftInfo->lastResaleCurrency);
+        assertNull($uniqueGiftInfo->lastResaleAmount);
         assertNull($uniqueGiftInfo->nextTransferDate);
     }
 
@@ -113,7 +114,8 @@ final class UniqueGiftInfoTest extends TestCase
                 ],
             ],
             'origin' => 'transfer',
-            'last_resale_star_count' => 99,
+            'last_resale_currency' => 'XTR',
+            'last_resale_amount' => 99,
             'owned_gift_id' => 'owned-id1',
             'transfer_star_count' => 15,
             'next_transfer_date' => 1700000000,
@@ -124,7 +126,8 @@ final class UniqueGiftInfoTest extends TestCase
         assertSame('transfer', $type->origin);
         assertSame('owned-id1', $type->ownedGiftId);
         assertSame(15, $type->transferStarCount);
-        assertSame(99, $type->lastResaleStarCount);
+        assertSame('XTR', $type->lastResaleCurrency);
+        assertSame(99, $type->lastResaleAmount);
         assertSame(1700000000, $type->nextTransferDate?->getTimestamp());
     }
 }
