@@ -9,6 +9,7 @@
 - New #177: Add `isPremium`, `hasColors`, `personalTotalCount`, `personalRemainingCount`, `background` and
   `uniqueGiftVariantCount` fields to `Gift` type.
 - New #177: Add `isUpgradeSeparate` and `uniqueGiftNumber` fields to `GiftInfo` and `OwnedGiftRegular` types.
+- New #177: Add `giftsFromChannels` field to `AcceptedGiftTypes` type.
 - New #177: Add `UniqueGiftColors` and `GiftBackground` types.
 - New #177: Add `SendMessageDraft`, `getUserGifts` and `getChatGifts` methods.
 - Chg #177: Replace `lastResaleStarCount` field with `lastResaleCurrency` and `lastResaleAmount` fields in

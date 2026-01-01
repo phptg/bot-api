@@ -16,6 +16,7 @@ final readonly class AcceptedGiftTypes
         public bool $limitedGifts,
         public bool $uniqueGifts,
         public bool $premiumSubscription,
+        public bool $giftsFromChannels,
     ) {}
 
     public function toRequestArray(): array
@@ -25,6 +26,7 @@ final readonly class AcceptedGiftTypes
             'limited_gifts' => $this->limitedGifts,
             'unique_gifts' => $this->uniqueGifts,
             'premium_subscription' => $this->premiumSubscription,
+            'gifts_from_channels' => $this->giftsFromChannels,
         ];
     }
 }

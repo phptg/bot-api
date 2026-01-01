@@ -163,6 +163,7 @@ final class ChatFullInfoTest extends TestCase
                 'limited_gifts' => false,
                 'unique_gifts' => true,
                 'premium_subscription' => false,
+                'gifts_from_channels' => true,
             ],
             'slow_mode_delay' => 5,
             'unrestrict_boost_count' => 10,

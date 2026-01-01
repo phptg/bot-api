@@ -1764,7 +1764,7 @@ final class TelegramBotApiTest extends TestCase
         $result = $api->setBusinessAccountGiftSettings(
             'connection1',
             true,
-            new AcceptedGiftTypes(true, true, true, false),
+            new AcceptedGiftTypes(true, true, true, false, true),
         );
 
         assertTrue($result);

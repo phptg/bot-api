@@ -19,7 +19,7 @@ final class SetBusinessAccountGiftSettingsTest extends TestCase
 {
     public function testBase(): void
     {
-        $acceptedGiftTypes = new AcceptedGiftTypes(true, false, false, false);
+        $acceptedGiftTypes = new AcceptedGiftTypes(true, false, false, false, true);
         $method = new SetBusinessAccountGiftSettings(
             'connection1',
             true,
@@ -44,7 +44,7 @@ final class SetBusinessAccountGiftSettingsTest extends TestCase
         $method = new SetBusinessAccountGiftSettings(
             'connection1',
             true,
-            new AcceptedGiftTypes(true, false, false, false),
+            new AcceptedGiftTypes(true, false, false, false, true),
         );
 
         $preparedResult = TestHelper::createSuccessStubApi(true)->call($method);
