@@ -10,6 +10,7 @@ use Phptg\BotApi\Type\Sticker\Sticker;
 use Phptg\BotApi\Type\UniqueGift;
 use Phptg\BotApi\Type\UniqueGiftBackdrop;
 use Phptg\BotApi\Type\UniqueGiftBackdropColors;
+use Phptg\BotApi\Type\UniqueGiftColors;
 use Phptg\BotApi\Type\UniqueGiftModel;
 use Phptg\BotApi\Type\UniqueGiftSymbol;
 
@@ -48,6 +49,7 @@ final class UniqueGiftTest extends TestCase
         assertSame($backdrop, $type->backdrop);
         assertNull($type->isPremium);
         assertNull($type->isFromBlockchain);
+        assertNull($type->colors);
         assertNull($type->publisherChat);
     }
 
@@ -96,6 +98,14 @@ final class UniqueGiftTest extends TestCase
             ],
             'is_premium' => true,
             'is_from_blockchain' => true,
+            'colors' => [
+                'model_custom_emoji_id' => 'model-emoji-123',
+                'symbol_custom_emoji_id' => 'symbol-emoji-456',
+                'light_theme_main_color' => 16733525,
+                'light_theme_other_colors' => [13041721, 9473087],
+                'dark_theme_main_color' => 5773381,
+                'dark_theme_other_colors' => [16761600, 14349222],
+            ],
             'publisher_chat' => [
                 'id' => 789,
                 'type' => 'channel',
@@ -121,6 +131,10 @@ final class UniqueGiftTest extends TestCase
         assertSame(200, $type->backdrop->rarityPerMille);
         assertSame(true, $type->isPremium);
         assertSame(true, $type->isFromBlockchain);
+        assertInstanceOf(UniqueGiftColors::class, $type->colors);
+        assertSame('model-emoji-123', $type->colors->modelCustomEmojiId);
+        assertSame('symbol-emoji-456', $type->colors->symbolCustomEmojiId);
+        assertSame(16733525, $type->colors->lightThemeMainColor);
         assertSame(789, $type->publisherChat?->id);
     }
 }

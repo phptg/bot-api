@@ -21,6 +21,7 @@ final readonly class UniqueGift
         public UniqueGiftBackdrop $backdrop,
         public ?true $isPremium = null,
         public ?true $isFromBlockchain = null,
+        public ?UniqueGiftColors $colors = null,
         public ?Chat $publisherChat = null,
     ) {}
 }

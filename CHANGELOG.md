@@ -5,7 +5,7 @@
 - New #177: Add `hasTopicsEnabled` field to `User` type.
 - New #177: Add `isNameImplicit` field to `ForumTopic` and `ForumTopicCreated` types.
 - New #177: Add `giftUpgradeSent` field to `Message` type.
-- New #177: Add `giftId`, `isPremium` and `isFromBlockchain` fields to `UniqueGift` type.
+- New #177: Add `giftId`, `isPremium`, `isFromBlockchain` and `colors` fields to `UniqueGift` type.
 - New #177: Add `isPremium`, `hasColors`, `personalTotalCount` and `personalRemainingCount` fields to `Gift` type.
 - New #177: Add `isUpgradeSeparate` and `uniqueGiftNumber` fields to `GiftInfo` and `OwnedGiftRegular` types.
 - New #177: Add `UniqueGiftColors` type.
