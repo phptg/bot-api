@@ -23,6 +23,7 @@ final readonly class ChecklistTask
         #[ArrayOfObjectsValue(MessageEntity::class)]
         public ?array $textEntities = null,
         public ?User $completedByUser = null,
+        public ?Chat $completedByChat = null,
         public ?DateTimeImmutable $completionDate = null,
     ) {}
 }

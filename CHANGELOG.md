@@ -19,6 +19,7 @@
   parameters in `getBusinessAccountGifts` method.
 - New #177: Add `excludeFromBlockchain` parameter to `getBusinessAccountGifts` method.
 - New #177: Add `messageEffectId` parameter to `forwardMessage` and `copyMessage` methods.
+- New #177: Add `completedByChat` field to `ChecklistTask` type.
 
 ## 0.11.0 December 29, 2025
 
