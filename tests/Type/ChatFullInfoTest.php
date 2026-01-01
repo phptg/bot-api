@@ -18,6 +18,8 @@ use Phptg\BotApi\Type\ChatPermissions;
 use Phptg\BotApi\Type\ChatPhoto;
 use Phptg\BotApi\Type\Message;
 use Phptg\BotApi\Type\ReactionTypeCustomEmoji;
+use Phptg\BotApi\Type\UniqueGiftColors;
+use Phptg\BotApi\Type\UserRating;
 
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertFalse;
@@ -80,6 +82,9 @@ final class ChatFullInfoTest extends TestCase
         assertNull($info->acceptedGiftTypes);
         assertNull($info->isDirectMessages);
         assertNull($info->parentChat);
+        assertNull($info->rating);
+        assertNull($info->uniqueGiftColors);
+        assertNull($info->paidMessageStarCount);
     }
 
     public function testFromTelegramResult(): void
@@ -184,6 +189,21 @@ final class ChatFullInfoTest extends TestCase
                 'address' => 'Moscow',
             ],
             'can_send_paid_media' => true,
+            'rating' => [
+                'level' => 5,
+                'rating' => 1000,
+                'current_level_rating' => 800,
+                'next_level_rating' => 1200,
+            ],
+            'unique_gift_colors' => [
+                'model_custom_emoji_id' => 'model_emoji_123',
+                'symbol_custom_emoji_id' => 'symbol_emoji_456',
+                'light_theme_main_color' => 0xFF5733,
+                'light_theme_other_colors' => [0x33FF57, 0x3357FF],
+                'dark_theme_main_color' => 0x1A1A1A,
+                'dark_theme_other_colors' => [0x2A2A2A, 0x3A3A3A],
+            ],
+            'paid_message_star_count' => 100,
         ], null, ChatFullInfo::class);
 
         assertSame(23, $info->id);
@@ -263,5 +283,21 @@ final class ChatFullInfoTest extends TestCase
         assertFalse($info->acceptedGiftTypes->premiumSubscription);
         assertTrue($info->isDirectMessages);
         assertSame(987, $info->parentChat?->id);
+
+        assertInstanceOf(UserRating::class, $info->rating);
+        assertSame(5, $info->rating->level);
+        assertSame(1000, $info->rating->rating);
+        assertSame(800, $info->rating->currentLevelRating);
+        assertSame(1200, $info->rating->nextLevelRating);
+
+        assertInstanceOf(UniqueGiftColors::class, $info->uniqueGiftColors);
+        assertSame('model_emoji_123', $info->uniqueGiftColors->modelCustomEmojiId);
+        assertSame('symbol_emoji_456', $info->uniqueGiftColors->symbolCustomEmojiId);
+        assertSame(0xFF5733, $info->uniqueGiftColors->lightThemeMainColor);
+        assertSame([0x33FF57, 0x3357FF], $info->uniqueGiftColors->lightThemeOtherColors);
+        assertSame(0x1A1A1A, $info->uniqueGiftColors->darkThemeMainColor);
+        assertSame([0x2A2A2A, 0x3A3A3A], $info->uniqueGiftColors->darkThemeOtherColors);
+
+        assertSame(100, $info->paidMessageStarCount);
     }
 }
