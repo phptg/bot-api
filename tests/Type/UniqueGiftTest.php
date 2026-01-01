@@ -46,6 +46,8 @@ final class UniqueGiftTest extends TestCase
         assertSame($model, $type->model);
         assertSame($symbol, $type->symbol);
         assertSame($backdrop, $type->backdrop);
+        assertNull($type->isPremium);
+        assertNull($type->isFromBlockchain);
         assertNull($type->publisherChat);
     }
 
@@ -92,6 +94,8 @@ final class UniqueGiftTest extends TestCase
                 ],
                 'rarity_per_mille' => 200,
             ],
+            'is_premium' => true,
+            'is_from_blockchain' => true,
             'publisher_chat' => [
                 'id' => 789,
                 'type' => 'channel',
@@ -115,6 +119,8 @@ final class UniqueGiftTest extends TestCase
         assertSame('backdropId', $type->backdrop->name);
         assertSame(1, $type->backdrop->colors->centerColor);
         assertSame(200, $type->backdrop->rarityPerMille);
+        assertSame(true, $type->isPremium);
+        assertSame(true, $type->isFromBlockchain);
         assertSame(789, $type->publisherChat?->id);
     }
 }

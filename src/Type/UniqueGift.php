@@ -19,6 +19,8 @@ final readonly class UniqueGift
         public UniqueGiftModel $model,
         public UniqueGiftSymbol $symbol,
         public UniqueGiftBackdrop $backdrop,
+        public ?true $isPremium = null,
+        public ?true $isFromBlockchain = null,
         public ?Chat $publisherChat = null,
     ) {}
 }
