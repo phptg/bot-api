@@ -19,6 +19,8 @@ final readonly class Gift
         public int $starCount,
         public ?int $totalCount = null,
         public ?int $remainingCount = null,
+        public ?int $personalTotalCount = null,
+        public ?int $personalRemainingCount = null,
         public ?int $upgradeStarCount = null,
         public ?Chat $publisherChat = null,
     ) {}

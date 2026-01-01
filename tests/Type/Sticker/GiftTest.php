@@ -36,6 +36,8 @@ final class GiftTest extends TestCase
         assertSame(12, $object->starCount);
         assertNull($object->totalCount);
         assertNull($object->remainingCount);
+        assertNull($object->personalTotalCount);
+        assertNull($object->personalRemainingCount);
         assertNull($object->publisherChat);
     }
 
@@ -56,6 +58,8 @@ final class GiftTest extends TestCase
             'upgrade_star_count' => 53,
             'total_count' => 200,
             'remaining_count' => 30,
+            'personal_total_count' => 150,
+            'personal_remaining_count' => 25,
             'publisher_chat' => [
                 'id' => 456,
                 'type' => 'channel',
@@ -68,6 +72,8 @@ final class GiftTest extends TestCase
         assertSame(53, $object->upgradeStarCount);
         assertSame(200, $object->totalCount);
         assertSame(30, $object->remainingCount);
+        assertSame(150, $object->personalTotalCount);
+        assertSame(25, $object->personalRemainingCount);
         assertSame(456, $object->publisherChat?->id);
     }
 }
