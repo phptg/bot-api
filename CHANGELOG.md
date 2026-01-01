@@ -1,6 +1,6 @@
 # Telegram Bot API for PHP Change Log
 
-## 0.11.1 under development
+## 0.12.0 January 1, 2026
 
 - New #177: Add `hasTopicsEnabled` field to `User` type.
 - New #177: Add `isNameImplicit` field to `ForumTopic` and `ForumTopicCreated` types.
@@ -13,13 +13,13 @@
 - New #177: Add `rating`, `uniqueGiftColors` and `paidMessageStarCount` fields to `ChatFullInfo` type.
 - New #177: Add `UniqueGiftColors`, `GiftBackground` and `UserRating` types.
 - New #177: Add `SendMessageDraft`, `getUserGifts`, `getChatGifts` and `repostStory` methods.
+- New #177: Add `excludeFromBlockchain` parameter to `getBusinessAccountGifts` method.
+- New #177: Add `messageEffectId` parameter to `forwardMessage` and `copyMessage` methods.
+- New #177: Add `completedByChat` field to `ChecklistTask` type.
 - Chg #177: Replace `lastResaleStarCount` field with `lastResaleCurrency` and `lastResaleAmount` fields in
   `UniqueGiftInfo` type.
 - Chg #177: Replace `excludeLimited` parameter with `excludeLimitedUpgradable` and `excludeLimitedNonUpgradable`
   parameters in `getBusinessAccountGifts` method.
-- New #177: Add `excludeFromBlockchain` parameter to `getBusinessAccountGifts` method.
-- New #177: Add `messageEffectId` parameter to `forwardMessage` and `copyMessage` methods.
-- New #177: Add `completedByChat` field to `ChecklistTask` type.
 
 ## 0.11.0 December 29, 2025
 
