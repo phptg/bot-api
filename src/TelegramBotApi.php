@@ -523,6 +523,7 @@ final class TelegramBotApi
         ?bool $allowPaidBroadcast = null,
         ?int $videoStartTimestamp = null,
         ?int $directMessagesTopicId = null,
+        ?string $messageEffectId = null,
         ?SuggestedPostParameters $suggestedPostParameters = null,
     ): FailResult|MessageId {
         return $this->call(
@@ -542,6 +543,7 @@ final class TelegramBotApi
                 $allowPaidBroadcast,
                 $videoStartTimestamp,
                 $directMessagesTopicId,
+                $messageEffectId,
                 $suggestedPostParameters,
             ),
         );
@@ -1083,6 +1085,7 @@ final class TelegramBotApi
         ?bool $protectContent = null,
         ?int $videoStartTimestamp = null,
         ?int $directMessagesTopicId = null,
+        ?string $messageEffectId = null,
         ?SuggestedPostParameters $suggestedPostParameters = null,
     ): FailResult|Message {
         return $this->call(
@@ -1095,6 +1098,7 @@ final class TelegramBotApi
                 $protectContent,
                 $videoStartTimestamp,
                 $directMessagesTopicId,
+                $messageEffectId,
                 $suggestedPostParameters,
             ),
         );

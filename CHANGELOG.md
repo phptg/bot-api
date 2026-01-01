@@ -18,6 +18,7 @@
 - Chg #177: Replace `excludeLimited` parameter with `excludeLimitedUpgradable` and `excludeLimitedNonUpgradable`
   parameters in `getBusinessAccountGifts` method.
 - New #177: Add `excludeFromBlockchain` parameter to `getBusinessAccountGifts` method.
+- New #177: Add `messageEffectId` parameter to `forwardMessage` and `copyMessage` methods.
 
 ## 0.11.0 December 29, 2025
 
