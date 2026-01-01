@@ -1620,6 +1620,26 @@ final class TelegramBotApiTest extends TestCase
         assertInstanceOf(Story::class, $result);
     }
 
+    public function testRepostStory(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            'chat' => [
+                'id' => 123,
+                'type' => 'private',
+            ],
+            'id' => 456,
+        ]);
+
+        $result = $api->repostStory(
+            'business_connection_id_123',
+            123456,
+            789,
+            86400,
+        );
+
+        assertInstanceOf(Story::class, $result);
+    }
+
     public function testPromoteChatMember(): void
     {
         $api = TestHelper::createSuccessStubApi(true);

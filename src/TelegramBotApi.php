@@ -80,6 +80,7 @@ use Phptg\BotApi\Method\Payment\SendInvoice;
 use Phptg\BotApi\Method\PinChatMessage;
 use Phptg\BotApi\Method\PostStory;
 use Phptg\BotApi\Method\PromoteChatMember;
+use Phptg\BotApi\Method\RepostStory;
 use Phptg\BotApi\Method\RemoveBusinessAccountProfilePhoto;
 use Phptg\BotApi\Method\RemoveChatVerification;
 use Phptg\BotApi\Method\RemoveUserVerification;
@@ -1567,6 +1568,29 @@ final class TelegramBotApi
                 $parseMode,
                 $captionEntities,
                 $areas,
+                $postToChatPage,
+                $protectContent,
+            ),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#repoststory
+     */
+    public function repostStory(
+        string $businessConnectionId,
+        int $fromChatId,
+        int $fromStoryId,
+        int $activePeriod,
+        ?bool $postToChatPage = null,
+        ?bool $protectContent = null,
+    ): FailResult|Story {
+        return $this->call(
+            new RepostStory(
+                $businessConnectionId,
+                $fromChatId,
+                $fromStoryId,
+                $activePeriod,
                 $postToChatPage,
                 $protectContent,
             ),
