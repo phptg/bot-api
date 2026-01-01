@@ -10,6 +10,7 @@ use Phptg\BotApi\Type\Sticker\Sticker;
 use Phptg\BotApi\Type\UniqueGift;
 use Phptg\BotApi\Type\UniqueGiftBackdrop;
 use Phptg\BotApi\Type\UniqueGiftBackdropColors;
+use Phptg\BotApi\Type\UniqueGiftColors;
 use Phptg\BotApi\Type\UniqueGiftModel;
 use Phptg\BotApi\Type\UniqueGiftSymbol;
 
@@ -37,20 +38,25 @@ final class UniqueGiftTest extends TestCase
             200,
         );
 
-        $type = new UniqueGift('baseName', 'uniqueName', 1, $model, $symbol, $backdrop);
+        $type = new UniqueGift('gift123', 'baseName', 'uniqueName', 1, $model, $symbol, $backdrop);
 
+        assertSame('gift123', $type->giftId);
         assertSame('baseName', $type->baseName);
         assertSame('uniqueName', $type->name);
         assertSame(1, $type->number);
         assertSame($model, $type->model);
         assertSame($symbol, $type->symbol);
         assertSame($backdrop, $type->backdrop);
+        assertNull($type->isPremium);
+        assertNull($type->isFromBlockchain);
+        assertNull($type->colors);
         assertNull($type->publisherChat);
     }
 
     public function testFromTelegramResult(): void
     {
         $type = (new ObjectFactory())->create([
+            'gift_id' => 'gift-abc-123',
             'base_name' => 'BaseName',
             'name' => 'uniqueName',
             'number' => 1,
@@ -90,6 +96,16 @@ final class UniqueGiftTest extends TestCase
                 ],
                 'rarity_per_mille' => 200,
             ],
+            'is_premium' => true,
+            'is_from_blockchain' => true,
+            'colors' => [
+                'model_custom_emoji_id' => 'model-emoji-123',
+                'symbol_custom_emoji_id' => 'symbol-emoji-456',
+                'light_theme_main_color' => 16733525,
+                'light_theme_other_colors' => [13041721, 9473087],
+                'dark_theme_main_color' => 5773381,
+                'dark_theme_other_colors' => [16761600, 14349222],
+            ],
             'publisher_chat' => [
                 'id' => 789,
                 'type' => 'channel',
@@ -97,6 +113,7 @@ final class UniqueGiftTest extends TestCase
         ], null, UniqueGift::class);
 
         assertInstanceOf(UniqueGift::class, $type);
+        assertSame('gift-abc-123', $type->giftId);
         assertSame('BaseName', $type->baseName);
         assertSame('uniqueName', $type->name);
         assertSame(1, $type->number);
@@ -112,6 +129,12 @@ final class UniqueGiftTest extends TestCase
         assertSame('backdropId', $type->backdrop->name);
         assertSame(1, $type->backdrop->colors->centerColor);
         assertSame(200, $type->backdrop->rarityPerMille);
+        assertSame(true, $type->isPremium);
+        assertSame(true, $type->isFromBlockchain);
+        assertInstanceOf(UniqueGiftColors::class, $type->colors);
+        assertSame('model-emoji-123', $type->colors->modelCustomEmojiId);
+        assertSame('symbol-emoji-456', $type->colors->symbolCustomEmojiId);
+        assertSame(16733525, $type->colors->lightThemeMainColor);
         assertSame(789, $type->publisherChat?->id);
     }
 }

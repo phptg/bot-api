@@ -20,6 +20,7 @@ final class ForumTopicCreatedTest extends TestCase
         assertSame('test', $forumTopicCreated->name);
         assertSame(0x123456, $forumTopicCreated->iconColor);
         assertNull($forumTopicCreated->iconCustomEmojiId);
+        assertNull($forumTopicCreated->isNameImplicit);
     }
 
     public function testFromTelegramResult(): void
@@ -28,10 +29,12 @@ final class ForumTopicCreatedTest extends TestCase
             'name' => 'test',
             'icon_color' => 0x123456,
             'icon_custom_emoji_id' => 'x1',
+            'is_name_implicit' => true,
         ], null, ForumTopicCreated::class);
 
         assertSame('test', $forumTopicCreated->name);
         assertSame(0x123456, $forumTopicCreated->iconColor);
         assertSame('x1', $forumTopicCreated->iconCustomEmojiId);
+        assertSame(true, $forumTopicCreated->isNameImplicit);
     }
 }

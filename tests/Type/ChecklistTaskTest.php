@@ -6,6 +6,7 @@ namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\Chat;
 use Phptg\BotApi\Type\ChecklistTask;
 use Phptg\BotApi\Type\MessageEntity;
 use Phptg\BotApi\Type\User;
@@ -26,6 +27,7 @@ final class ChecklistTaskTest extends TestCase
         assertSame('Test task', $checklistTask->text);
         assertNull($checklistTask->textEntities);
         assertNull($checklistTask->completedByUser);
+        assertNull($checklistTask->completedByChat);
         assertNull($checklistTask->completionDate);
     }
 
@@ -49,6 +51,10 @@ final class ChecklistTaskTest extends TestCase
                     'last_name' => 'Doe',
                     'username' => 'johndoe',
                 ],
+                'completed_by_chat' => [
+                    'id' => 54321,
+                    'type' => 'group',
+                ],
                 'completion_date' => 1633036800,
             ],
             null,
@@ -70,6 +76,10 @@ final class ChecklistTaskTest extends TestCase
         assertSame('John', $checklistTask->completedByUser->firstName);
         assertSame('Doe', $checklistTask->completedByUser->lastName);
         assertSame('johndoe', $checklistTask->completedByUser->username);
+
+        assertInstanceOf(Chat::class, $checklistTask->completedByChat);
+        assertSame(54321, $checklistTask->completedByChat->id);
+        assertSame('group', $checklistTask->completedByChat->type);
 
         assertSame(1633036800, $checklistTask->completionDate?->getTimestamp());
     }

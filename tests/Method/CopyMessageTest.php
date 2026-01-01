@@ -55,6 +55,7 @@ final class CopyMessageTest extends TestCase
             true,
             17,
             123,
+            'effect_456',
             new SuggestedPostParameters(
                 new SuggestedPostPrice('USD', 10),
             ),
@@ -75,6 +76,7 @@ final class CopyMessageTest extends TestCase
                 'disable_notification' => false,
                 'protect_content' => true,
                 'allow_paid_broadcast' => true,
+                'message_effect_id' => 'effect_456',
                 'suggested_post_parameters' => [
                     'price' => [
                         'currency' => 'USD',

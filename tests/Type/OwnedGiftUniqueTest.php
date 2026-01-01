@@ -27,6 +27,7 @@ final class OwnedGiftUniqueTest extends TestCase
     public function testBase(): void
     {
         $gift = new UniqueGift(
+            'gift-id-456',
             'baseName',
             'uniqueName',
             1,
@@ -79,6 +80,7 @@ final class OwnedGiftUniqueTest extends TestCase
     public function testFull(): void
     {
         $gift = new UniqueGift(
+            'gift-id-789',
             'baseName',
             'uniqueName',
             1,
@@ -143,6 +145,7 @@ final class OwnedGiftUniqueTest extends TestCase
     {
         $ownedGift = (new ObjectFactory())->create([
             'gift' => [
+                'gift_id' => 'gift-unique-xyz',
                 'base_name' => 'BaseName',
                 'name' => 'uniqueName',
                 'number' => 1,

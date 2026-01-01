@@ -42,6 +42,7 @@ final readonly class CopyMessage implements MethodInterface
         private ?bool $allowPaidBroadcast = null,
         private ?int $videoStartTimestamp = null,
         private ?int $directMessagesTopicId = null,
+        private ?string $messageEffectId = null,
         private ?SuggestedPostParameters $suggestedPostParameters = null,
     ) {}
 
@@ -76,6 +77,7 @@ final readonly class CopyMessage implements MethodInterface
                 'disable_notification' => $this->disableNotification,
                 'protect_content' => $this->protectContent,
                 'allow_paid_broadcast' => $this->allowPaidBroadcast,
+                'message_effect_id' => $this->messageEffectId,
                 'suggested_post_parameters' => $this->suggestedPostParameters?->toRequestArray(),
                 'reply_parameters' => $this->replyParameters?->toRequestArray(),
                 'reply_markup' => $this->replyMarkup?->toRequestArray(),

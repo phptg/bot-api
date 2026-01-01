@@ -45,6 +45,7 @@ use Phptg\BotApi\Method\GetBusinessAccountGifts;
 use Phptg\BotApi\Method\GetBusinessAccountStarBalance;
 use Phptg\BotApi\Method\GetBusinessConnection;
 use Phptg\BotApi\Method\GetChat;
+use Phptg\BotApi\Method\GetChatGifts;
 use Phptg\BotApi\Method\GetChatAdministrators;
 use Phptg\BotApi\Method\GetChatMember;
 use Phptg\BotApi\Method\GetChatMemberCount;
@@ -59,6 +60,7 @@ use Phptg\BotApi\Method\GetMyName;
 use Phptg\BotApi\Method\GetMyShortDescription;
 use Phptg\BotApi\Method\GetMyStarBalance;
 use Phptg\BotApi\Method\GetUserChatBoosts;
+use Phptg\BotApi\Method\GetUserGifts;
 use Phptg\BotApi\Method\GetUserProfilePhotos;
 use Phptg\BotApi\Method\GiftPremiumSubscription;
 use Phptg\BotApi\Method\HideGeneralForumTopic;
@@ -78,6 +80,7 @@ use Phptg\BotApi\Method\Payment\SendInvoice;
 use Phptg\BotApi\Method\PinChatMessage;
 use Phptg\BotApi\Method\PostStory;
 use Phptg\BotApi\Method\PromoteChatMember;
+use Phptg\BotApi\Method\RepostStory;
 use Phptg\BotApi\Method\RemoveBusinessAccountProfilePhoto;
 use Phptg\BotApi\Method\RemoveChatVerification;
 use Phptg\BotApi\Method\RemoveUserVerification;
@@ -95,6 +98,7 @@ use Phptg\BotApi\Method\SendDocument;
 use Phptg\BotApi\Method\SendLocation;
 use Phptg\BotApi\Method\SendMediaGroup;
 use Phptg\BotApi\Method\SendMessage;
+use Phptg\BotApi\Method\SendMessageDraft;
 use Phptg\BotApi\Method\SendPaidMedia;
 use Phptg\BotApi\Method\SendPhoto;
 use Phptg\BotApi\Method\SendPoll;
@@ -519,6 +523,7 @@ final class TelegramBotApi
         ?bool $allowPaidBroadcast = null,
         ?int $videoStartTimestamp = null,
         ?int $directMessagesTopicId = null,
+        ?string $messageEffectId = null,
         ?SuggestedPostParameters $suggestedPostParameters = null,
     ): FailResult|MessageId {
         return $this->call(
@@ -538,6 +543,7 @@ final class TelegramBotApi
                 $allowPaidBroadcast,
                 $videoStartTimestamp,
                 $directMessagesTopicId,
+                $messageEffectId,
                 $suggestedPostParameters,
             ),
         );
@@ -1079,6 +1085,7 @@ final class TelegramBotApi
         ?bool $protectContent = null,
         ?int $videoStartTimestamp = null,
         ?int $directMessagesTopicId = null,
+        ?string $messageEffectId = null,
         ?SuggestedPostParameters $suggestedPostParameters = null,
     ): FailResult|Message {
         return $this->call(
@@ -1091,6 +1098,7 @@ final class TelegramBotApi
                 $protectContent,
                 $videoStartTimestamp,
                 $directMessagesTopicId,
+                $messageEffectId,
                 $suggestedPostParameters,
             ),
         );
@@ -1158,8 +1166,10 @@ final class TelegramBotApi
         ?bool $excludeUnsaved = null,
         ?bool $excludeSaved = null,
         ?bool $excludeUnlimited = null,
-        ?bool $excludeLimited = null,
+        ?bool $excludeLimitedUpgradable = null,
+        ?bool $excludeLimitedNonUpgradable = null,
         ?bool $excludeUnique = null,
+        ?bool $excludeFromBlockchain = null,
         ?bool $sortByPrice = null,
         ?string $offset = null,
         ?int $limit = null,
@@ -1170,8 +1180,10 @@ final class TelegramBotApi
                 $excludeUnsaved,
                 $excludeSaved,
                 $excludeUnlimited,
-                $excludeLimited,
+                $excludeLimitedUpgradable,
+                $excludeLimitedNonUpgradable,
                 $excludeUnique,
+                $excludeFromBlockchain,
                 $sortByPrice,
                 $offset,
                 $limit,
@@ -1203,6 +1215,39 @@ final class TelegramBotApi
     public function getChat(int|string $chatId): FailResult|ChatFullInfo
     {
         return $this->call(new GetChat($chatId));
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#getchatgifts
+     */
+    public function getChatGifts(
+        int|string $chatId,
+        ?bool $excludeUnsaved = null,
+        ?bool $excludeSaved = null,
+        ?bool $excludeUnlimited = null,
+        ?bool $excludeLimitedUpgradable = null,
+        ?bool $excludeLimitedNonUpgradable = null,
+        ?bool $excludeFromBlockchain = null,
+        ?bool $excludeUnique = null,
+        ?bool $sortByPrice = null,
+        ?string $offset = null,
+        ?int $limit = null,
+    ): FailResult|OwnedGifts {
+        return $this->call(
+            new GetChatGifts(
+                $chatId,
+                $excludeUnsaved,
+                $excludeSaved,
+                $excludeUnlimited,
+                $excludeLimitedUpgradable,
+                $excludeLimitedNonUpgradable,
+                $excludeFromBlockchain,
+                $excludeUnique,
+                $sortByPrice,
+                $offset,
+                $limit,
+            ),
+        );
     }
 
     /**
@@ -1386,6 +1431,35 @@ final class TelegramBotApi
     }
 
     /**
+     * @see https://core.telegram.org/bots/api#getusergifts
+     */
+    public function getUserGifts(
+        int $userId,
+        ?bool $excludeUnlimited = null,
+        ?bool $excludeLimitedUpgradable = null,
+        ?bool $excludeLimitedNonUpgradable = null,
+        ?bool $excludeFromBlockchain = null,
+        ?bool $excludeUnique = null,
+        ?bool $sortByPrice = null,
+        ?string $offset = null,
+        ?int $limit = null,
+    ): FailResult|OwnedGifts {
+        return $this->call(
+            new GetUserGifts(
+                $userId,
+                $excludeUnlimited,
+                $excludeLimitedUpgradable,
+                $excludeLimitedNonUpgradable,
+                $excludeFromBlockchain,
+                $excludeUnique,
+                $sortByPrice,
+                $offset,
+                $limit,
+            ),
+        );
+    }
+
+    /**
      * @see https://core.telegram.org/bots/api#getuserprofilephotos
      */
     public function getUserProfilePhotos(
@@ -1498,6 +1572,29 @@ final class TelegramBotApi
                 $parseMode,
                 $captionEntities,
                 $areas,
+                $postToChatPage,
+                $protectContent,
+            ),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#repoststory
+     */
+    public function repostStory(
+        string $businessConnectionId,
+        int $fromChatId,
+        int $fromStoryId,
+        int $activePeriod,
+        ?bool $postToChatPage = null,
+        ?bool $protectContent = null,
+    ): FailResult|Story {
+        return $this->call(
+            new RepostStory(
+                $businessConnectionId,
+                $fromChatId,
+                $fromStoryId,
+                $activePeriod,
                 $postToChatPage,
                 $protectContent,
             ),
@@ -2216,6 +2313,31 @@ final class TelegramBotApi
                 $allowPaidBroadcast,
                 $directMessagesTopicId,
                 $suggestedPostParameters,
+            ),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#sendmessagedraft
+     *
+     * @param MessageEntity[]|null $entities
+     */
+    public function sendMessageDraft(
+        int $chatId,
+        int $draftId,
+        string $text,
+        ?int $messageThreadId = null,
+        ?string $parseMode = null,
+        ?array $entities = null,
+    ): FailResult|true {
+        return $this->call(
+            new SendMessageDraft(
+                $chatId,
+                $draftId,
+                $text,
+                $messageThreadId,
+                $parseMode,
+                $entities,
             ),
         );
     }

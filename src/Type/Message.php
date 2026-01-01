@@ -99,6 +99,7 @@ final readonly class Message
         public ?ChatShared $chatShared = null,
         public ?GiftInfo $gift = null,
         public ?UniqueGiftInfo $uniqueGift = null,
+        public ?GiftInfo $giftUpgradeSent = null,
         public ?string $connectedWebsite = null,
         public ?WriteAccessAllowed $writeAccessAllowed = null,
         public ?PassportData $passportData = null,

@@ -64,6 +64,7 @@ final class OwnedGiftValueTest extends TestCase
                 [
                     'type' => 'unique',
                     'gift' => [
+                        'gift_id' => 'gift-value-test',
                         'base_name' => 'BaseName',
                         'name' => 'uniqueName',
                         'number' => 1,

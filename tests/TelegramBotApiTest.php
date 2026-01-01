@@ -1100,6 +1100,18 @@ final class TelegramBotApiTest extends TestCase
         assertSame(23, $result->id);
     }
 
+    public function testGetChatGifts(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            'total_count' => 0,
+            'gifts' => [],
+        ]);
+
+        $result = $api->getChatGifts(12345);
+
+        assertInstanceOf(OwnedGifts::class, $result);
+    }
+
     public function testGetChatAdministrators(): void
     {
         $api = TestHelper::createSuccessStubApi([
@@ -1494,6 +1506,18 @@ final class TelegramBotApiTest extends TestCase
         assertInstanceOf(UserChatBoosts::class, $result);
     }
 
+    public function testGetUserGifts(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            'total_count' => 0,
+            'gifts' => [],
+        ]);
+
+        $result = $api->getUserGifts(12345);
+
+        assertInstanceOf(OwnedGifts::class, $result);
+    }
+
     public function testGetUserProfilePhotos(): void
     {
         $api = TestHelper::createSuccessStubApi([
@@ -1590,6 +1614,26 @@ final class TelegramBotApiTest extends TestCase
             new InputStoryContentPhoto(
                 new InputFile((new StreamFactory())->createStream()),
             ),
+            86400,
+        );
+
+        assertInstanceOf(Story::class, $result);
+    }
+
+    public function testRepostStory(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            'chat' => [
+                'id' => 123,
+                'type' => 'private',
+            ],
+            'id' => 456,
+        ]);
+
+        $result = $api->repostStory(
+            'business_connection_id_123',
+            123456,
+            789,
             86400,
         );
 
@@ -1740,7 +1784,7 @@ final class TelegramBotApiTest extends TestCase
         $result = $api->setBusinessAccountGiftSettings(
             'connection1',
             true,
-            new AcceptedGiftTypes(true, true, true, false),
+            new AcceptedGiftTypes(true, true, true, false, true),
         );
 
         assertTrue($result);
@@ -1992,6 +2036,15 @@ final class TelegramBotApiTest extends TestCase
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
+    }
+
+    public function testSendMessageDraft(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->sendMessageDraft(12, 100, 'hello');
+
+        assertTrue($result);
     }
 
     public function testSendPaidMedia(): void

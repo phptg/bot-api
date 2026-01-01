@@ -25,6 +25,7 @@ final readonly class User
         public ?bool $supportsInlineQueries = null,
         public ?bool $canConnectToBusiness = null,
         public ?bool $hasMainWebApp = null,
+        public ?bool $hasTopicsEnabled = null,
     ) {}
 
     public function toRequestArray(): array
@@ -44,6 +45,7 @@ final readonly class User
                 'supports_inline_queries' => $this->supportsInlineQueries,
                 'can_connect_to_business' => $this->canConnectToBusiness,
                 'has_main_web_app' => $this->hasMainWebApp,
+                'has_topics_enabled' => $this->hasTopicsEnabled,
             ],
             static fn(mixed $value): bool => $value !== null,
         );

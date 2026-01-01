@@ -10,23 +10,23 @@ use Phptg\BotApi\MethodInterface;
 use Phptg\BotApi\Type\OwnedGifts;
 
 /**
- * @see https://core.telegram.org/bots/api#getbusinessaccountgifts
+ * @see https://core.telegram.org/bots/api#getchatgifts
  *
  * @template-implements MethodInterface<OwnedGifts>
  *
  * @api
  */
-final readonly class GetBusinessAccountGifts implements MethodInterface
+final readonly class GetChatGifts implements MethodInterface
 {
     public function __construct(
-        private string $businessConnectionId,
+        private int|string $chatId,
         private ?bool $excludeUnsaved = null,
         private ?bool $excludeSaved = null,
         private ?bool $excludeUnlimited = null,
         private ?bool $excludeLimitedUpgradable = null,
         private ?bool $excludeLimitedNonUpgradable = null,
-        private ?bool $excludeUnique = null,
         private ?bool $excludeFromBlockchain = null,
+        private ?bool $excludeUnique = null,
         private ?bool $sortByPrice = null,
         private ?string $offset = null,
         private ?int $limit = null,
@@ -39,20 +39,20 @@ final readonly class GetBusinessAccountGifts implements MethodInterface
 
     public function getApiMethod(): string
     {
-        return 'getBusinessAccountGifts';
+        return 'getChatGifts';
     }
 
     public function getData(): array
     {
         return array_filter([
-            'business_connection_id' => $this->businessConnectionId,
+            'chat_id' => $this->chatId,
             'exclude_unsaved' => $this->excludeUnsaved,
             'exclude_saved' => $this->excludeSaved,
             'exclude_unlimited' => $this->excludeUnlimited,
             'exclude_limited_upgradable' => $this->excludeLimitedUpgradable,
             'exclude_limited_non_upgradable' => $this->excludeLimitedNonUpgradable,
-            'exclude_unique' => $this->excludeUnique,
             'exclude_from_blockchain' => $this->excludeFromBlockchain,
+            'exclude_unique' => $this->excludeUnique,
             'sort_by_price' => $this->sortByPrice,
             'offset' => $this->offset,
             'limit' => $this->limit,

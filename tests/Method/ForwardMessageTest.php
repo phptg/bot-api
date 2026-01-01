@@ -42,6 +42,7 @@ final class ForwardMessageTest extends TestCase
             false,
             17,
             123,
+            'effect_123',
             new SuggestedPostParameters(
                 new SuggestedPostPrice('USD', 10),
             ),
@@ -56,6 +57,7 @@ final class ForwardMessageTest extends TestCase
                 'video_start_timestamp' => 17,
                 'disable_notification' => true,
                 'protect_content' => false,
+                'message_effect_id' => 'effect_123',
                 'suggested_post_parameters' => [
                     'price' => [
                         'currency' => 'USD',

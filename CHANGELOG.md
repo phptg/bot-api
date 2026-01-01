@@ -1,8 +1,29 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.12.0 January 1, 2026
+
+- New #177: Add `hasTopicsEnabled` field to `User` type.
+- New #177: Add `isNameImplicit` field to `ForumTopic` and `ForumTopicCreated` types.
+- New #177: Add `giftUpgradeSent` field to `Message` type.
+- New #177: Add `giftId`, `isPremium`, `isFromBlockchain` and `colors` fields to `UniqueGift` type.
+- New #177: Add `isPremium`, `hasColors`, `personalTotalCount`, `personalRemainingCount`, `background` and
+  `uniqueGiftVariantCount` fields to `Gift` type.
+- New #177: Add `isUpgradeSeparate` and `uniqueGiftNumber` fields to `GiftInfo` and `OwnedGiftRegular` types.
+- New #177: Add `giftsFromChannels` field to `AcceptedGiftTypes` type.
+- New #177: Add `rating`, `uniqueGiftColors` and `paidMessageStarCount` fields to `ChatFullInfo` type.
+- New #177: Add `UniqueGiftColors`, `GiftBackground` and `UserRating` types.
+- New #177: Add `SendMessageDraft`, `getUserGifts`, `getChatGifts` and `repostStory` methods.
+- New #177: Add `excludeFromBlockchain` parameter to `getBusinessAccountGifts` method.
+- New #177: Add `messageEffectId` parameter to `forwardMessage` and `copyMessage` methods.
+- New #177: Add `completedByChat` field to `ChecklistTask` type.
+- Chg #177: Replace `lastResaleStarCount` field with `lastResaleCurrency` and `lastResaleAmount` fields in
+  `UniqueGiftInfo` type.
+- Chg #177: Replace `excludeLimited` parameter with `excludeLimitedUpgradable` and `excludeLimitedNonUpgradable`
+  parameters in `getBusinessAccountGifts` method.
+
 ## 0.11.0 December 29, 2025
 
-- Chg #171: Simplify `TransportInterface` implementations by replacing single `send()` method with specific methods: 
+- Chg #171: Simplify `TransportInterface` implementations by replacing single `send()` method with specific methods:
   `get()`, `post()`, and `postWithFiles()`.
 - Chg #175: Change PHP constraint in `composer.json` to `8.2 - 8.5`.
 

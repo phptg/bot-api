@@ -31,6 +31,7 @@ final class UserTest extends TestCase
         assertNull($user->supportsInlineQueries);
         assertNull($user->canConnectToBusiness);
         assertNull($user->hasMainWebApp);
+        assertNull($user->hasTopicsEnabled);
     }
 
     public function testToRequestArray(): void
@@ -49,6 +50,7 @@ final class UserTest extends TestCase
             true,
             true,
             false,
+            true,
         );
 
         assertSame(
@@ -66,6 +68,7 @@ final class UserTest extends TestCase
                 'supports_inline_queries' => true,
                 'can_connect_to_business' => true,
                 'has_main_web_app' => false,
+                'has_topics_enabled' => true,
             ],
             $user->toRequestArray(),
         );
@@ -87,6 +90,7 @@ final class UserTest extends TestCase
             'supports_inline_queries' => true,
             'can_connect_to_business' => true,
             'has_main_web_app' => false,
+            'has_topics_enabled' => true,
         ], null, User::class);
 
         assertInstanceOf(User::class, $user);
@@ -103,5 +107,6 @@ final class UserTest extends TestCase
         assertSame(true, $user->supportsInlineQueries);
         assertSame(true, $user->canConnectToBusiness);
         assertSame(false, $user->hasMainWebApp);
+        assertSame(true, $user->hasTopicsEnabled);
     }
 }

@@ -32,6 +32,8 @@ final readonly class OwnedGiftRegular implements OwnedGift
         public ?true $wasRefunded = null,
         public ?int $convertStarCount = null,
         public ?int $prepaidUpgradeStarCount = null,
+        public ?true $isUpgradeSeparate = null,
+        public ?int $uniqueGiftNumber = null,
     ) {}
 
     public function getType(): string

@@ -106,6 +106,7 @@ final class MessageTest extends TestCase
         assertNull($message->chatShared);
         assertNull($message->gift);
         assertNull($message->uniqueGift);
+        assertNull($message->giftUpgradeSent);
         assertNull($message->connectedWebsite);
         assertNull($message->writeAccessAllowed);
         assertNull($message->passportData);
@@ -419,6 +420,7 @@ final class MessageTest extends TestCase
             ],
             'unique_gift' => [
                 'gift' => [
+                    'gift_id' => 'gift-message-test',
                     'base_name' => 'BaseName',
                     'name' => 'uniqueName',
                     'number' => 1,
@@ -462,6 +464,23 @@ final class MessageTest extends TestCase
                 'origin' => 'transfer',
                 'owned_gift_id' => 'owned-id1',
                 'transfer_star_count' => 15,
+            ],
+            'gift_upgrade_sent' => [
+                'gift' => [
+                    'id' => 'test-upgrade-id',
+                    'sticker' => [
+                        'file_id' => 'x1',
+                        'file_unique_id' => 'fullX1',
+                        'type' => 'regular',
+                        'width' => 100,
+                        'height' => 120,
+                        'is_animated' => false,
+                        'is_video' => true,
+                    ],
+                    'star_count' => 50,
+                    'total_count' => 1000,
+                    'remaining_count' => 500,
+                ],
             ],
             'connected_website' => 'example.com',
             'write_access_allowed' => [
@@ -702,6 +721,7 @@ final class MessageTest extends TestCase
         assertSame(364, $message->chatShared?->requestId);
         assertSame('test-id1', $message->gift?->gift->id);
         assertSame('BaseName', $message->uniqueGift?->gift->baseName);
+        assertSame('test-upgrade-id', $message->giftUpgradeSent?->gift->id);
         assertSame('example.com', $message->connectedWebsite);
         assertSame('uqn', $message->writeAccessAllowed?->webAppName);
         assertSame('asdg23GWEH', $message->passportData?->credentials->hash);

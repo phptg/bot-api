@@ -26,6 +26,7 @@ final readonly class ForwardMessage implements MethodInterface
         private ?bool $protectContent = null,
         private ?int $videoStartTimestamp = null,
         private ?int $directMessagesTopicId = null,
+        private ?string $messageEffectId = null,
         private ?SuggestedPostParameters $suggestedPostParameters = null,
     ) {}
 
@@ -50,6 +51,7 @@ final readonly class ForwardMessage implements MethodInterface
                 'video_start_timestamp' => $this->videoStartTimestamp,
                 'disable_notification' => $this->disableNotification,
                 'protect_content' => $this->protectContent,
+                'message_effect_id' => $this->messageEffectId,
                 'suggested_post_parameters' => $this->suggestedPostParameters?->toRequestArray(),
                 'message_id' => $this->messageId,
             ],

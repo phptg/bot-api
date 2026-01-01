@@ -70,5 +70,8 @@ final readonly class ChatFullInfo
         public ?AcceptedGiftTypes $acceptedGiftTypes = null,
         public ?true $isDirectMessages = null,
         public ?Chat $parentChat = null,
+        public ?UserRating $rating = null,
+        public ?UniqueGiftColors $uniqueGiftColors = null,
+        public ?int $paidMessageStarCount = null,
     ) {}
 }
