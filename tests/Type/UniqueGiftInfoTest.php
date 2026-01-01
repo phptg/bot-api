@@ -23,6 +23,7 @@ final class UniqueGiftInfoTest extends TestCase
     public function testBase(): void
     {
         $gift = new UniqueGift(
+            'gift-id-123',
             'baseName',
             'uniqueName',
             1,
@@ -73,6 +74,7 @@ final class UniqueGiftInfoTest extends TestCase
     {
         $type = (new ObjectFactory())->create([
             'gift' =>  [
+                'gift_id' => 'gift-unique-789',
                 'base_name' => 'BaseName',
                 'name' => 'uniqueName',
                 'number' => 1,

@@ -37,8 +37,9 @@ final class UniqueGiftTest extends TestCase
             200,
         );
 
-        $type = new UniqueGift('baseName', 'uniqueName', 1, $model, $symbol, $backdrop);
+        $type = new UniqueGift('gift123', 'baseName', 'uniqueName', 1, $model, $symbol, $backdrop);
 
+        assertSame('gift123', $type->giftId);
         assertSame('baseName', $type->baseName);
         assertSame('uniqueName', $type->name);
         assertSame(1, $type->number);
@@ -51,6 +52,7 @@ final class UniqueGiftTest extends TestCase
     public function testFromTelegramResult(): void
     {
         $type = (new ObjectFactory())->create([
+            'gift_id' => 'gift-abc-123',
             'base_name' => 'BaseName',
             'name' => 'uniqueName',
             'number' => 1,
@@ -97,6 +99,7 @@ final class UniqueGiftTest extends TestCase
         ], null, UniqueGift::class);
 
         assertInstanceOf(UniqueGift::class, $type);
+        assertSame('gift-abc-123', $type->giftId);
         assertSame('BaseName', $type->baseName);
         assertSame('uniqueName', $type->name);
         assertSame(1, $type->number);

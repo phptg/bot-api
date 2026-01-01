@@ -420,6 +420,7 @@ final class MessageTest extends TestCase
             ],
             'unique_gift' => [
                 'gift' => [
+                    'gift_id' => 'gift-message-test',
                     'base_name' => 'BaseName',
                     'name' => 'uniqueName',
                     'number' => 1,

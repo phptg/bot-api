@@ -12,6 +12,7 @@ namespace Phptg\BotApi\Type;
 final readonly class UniqueGift
 {
     public function __construct(
+        public string $giftId,
         public string $baseName,
         public string $name,
         public int $number,
