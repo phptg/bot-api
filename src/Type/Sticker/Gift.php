@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phptg\BotApi\Type\Sticker;
 
 use Phptg\BotApi\Type\Chat;
+use Phptg\BotApi\Type\GiftBackground;
 
 /**
  * @see https://core.telegram.org/bots/api#gift
@@ -24,6 +25,8 @@ final readonly class Gift
         public ?int $remainingCount = null,
         public ?int $personalTotalCount = null,
         public ?int $personalRemainingCount = null,
+        public ?GiftBackground $background = null,
+        public ?int $uniqueGiftVariantCount = null,
         public ?Chat $publisherChat = null,
     ) {}
 }
