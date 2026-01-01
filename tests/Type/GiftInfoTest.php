@@ -39,10 +39,12 @@ final class GiftInfoTest extends TestCase
         assertNull($giftInfo->ownedGiftId);
         assertNull($giftInfo->convertStarCount);
         assertNull($giftInfo->prepaidUpgradeStarCount);
+        assertNull($giftInfo->isUpgradeSeparate);
         assertNull($giftInfo->canBeUpgraded);
         assertNull($giftInfo->text);
         assertNull($giftInfo->entities);
         assertNull($giftInfo->isPrivate);
+        assertNull($giftInfo->uniqueGiftNumber);
     }
 
     public function testFromTelegramResult(): void
@@ -64,6 +66,7 @@ final class GiftInfoTest extends TestCase
             'owned_gift_id' => 'ogid1',
             'convert_star_count' => 10,
             'prepaid_upgrade_star_count' => 5,
+            'is_upgrade_separate' => true,
             'can_be_upgraded' => true,
             'text' => 'Happy Birthday!',
             'entities' => [
@@ -74,6 +77,7 @@ final class GiftInfoTest extends TestCase
                 ],
             ],
             'is_private' => true,
+            'unique_gift_number' => 42,
         ], null, GiftInfo::class);
 
         assertInstanceOf(GiftInfo::class, $type);
@@ -81,6 +85,7 @@ final class GiftInfoTest extends TestCase
         assertSame('ogid1', $type->ownedGiftId);
         assertSame(10, $type->convertStarCount);
         assertSame(5, $type->prepaidUpgradeStarCount);
+        assertTrue($type->isUpgradeSeparate);
         assertTrue($type->canBeUpgraded);
         assertSame('Happy Birthday!', $type->text);
         assertInstanceOf(MessageEntity::class, $type->entities[0]);
@@ -88,5 +93,6 @@ final class GiftInfoTest extends TestCase
         assertSame(0, $type->entities[0]->offset);
         assertSame(5, $type->entities[0]->length);
         assertTrue($type->isPrivate);
+        assertSame(42, $type->uniqueGiftNumber);
     }
 }

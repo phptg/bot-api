@@ -22,10 +22,12 @@ final readonly class GiftInfo
         public ?string $ownedGiftId = null,
         public ?int $convertStarCount = null,
         public ?int $prepaidUpgradeStarCount = null,
+        public ?true $isUpgradeSeparate = null,
         public ?true $canBeUpgraded = null,
         public ?string $text = null,
         #[ArrayOfObjectsValue(MessageEntity::class)]
         public ?array $entities = null,
         public ?true $isPrivate = null,
+        public ?int $uniqueGiftNumber = null,
     ) {}
 }

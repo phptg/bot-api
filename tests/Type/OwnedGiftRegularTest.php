@@ -53,6 +53,8 @@ final class OwnedGiftRegularTest extends TestCase
         assertNull($type->wasRefunded);
         assertNull($type->convertStarCount);
         assertNull($type->prepaidUpgradeStarCount);
+        assertNull($type->isUpgradeSeparate);
+        assertNull($type->uniqueGiftNumber);
     }
 
     public function testFull(): void
@@ -86,6 +88,8 @@ final class OwnedGiftRegularTest extends TestCase
             true,
             10,
             5,
+            true,
+            42,
         );
 
         assertSame($gift, $ownedGift->gift);
@@ -100,6 +104,8 @@ final class OwnedGiftRegularTest extends TestCase
         assertTrue($ownedGift->wasRefunded);
         assertSame(10, $ownedGift->convertStarCount);
         assertSame(5, $ownedGift->prepaidUpgradeStarCount);
+        assertTrue($ownedGift->isUpgradeSeparate);
+        assertSame(42, $ownedGift->uniqueGiftNumber);
     }
 
     public function testFromTelegramResult(): void
@@ -139,6 +145,8 @@ final class OwnedGiftRegularTest extends TestCase
             'was_refunded' => true,
             'convert_star_count' => 10,
             'prepaid_upgrade_star_count' => 5,
+            'is_upgrade_separate' => true,
+            'unique_gift_number' => 42,
         ], null, OwnedGiftRegular::class);
 
         assertInstanceOf(OwnedGiftRegular::class, $ownedGift);
@@ -165,5 +173,7 @@ final class OwnedGiftRegularTest extends TestCase
         assertTrue($ownedGift->wasRefunded);
         assertSame(10, $ownedGift->convertStarCount);
         assertSame(5, $ownedGift->prepaidUpgradeStarCount);
+        assertTrue($ownedGift->isUpgradeSeparate);
+        assertSame(42, $ownedGift->uniqueGiftNumber);
     }
 }
