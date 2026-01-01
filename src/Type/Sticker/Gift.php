@@ -19,6 +19,7 @@ final readonly class Gift
         public int $starCount,
         public ?int $upgradeStarCount = null,
         public ?true $isPremium = null,
+        public ?true $hasColors = null,
         public ?int $totalCount = null,
         public ?int $remainingCount = null,
         public ?int $personalTotalCount = null,
