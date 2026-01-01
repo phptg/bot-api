@@ -34,6 +34,8 @@ final class GiftTest extends TestCase
         assertSame('test-id', $object->id);
         assertSame($sticker, $object->sticker);
         assertSame(12, $object->starCount);
+        assertNull($object->upgradeStarCount);
+        assertNull($object->isPremium);
         assertNull($object->totalCount);
         assertNull($object->remainingCount);
         assertNull($object->personalTotalCount);
@@ -56,6 +58,7 @@ final class GiftTest extends TestCase
             ],
             'star_count' => 11,
             'upgrade_star_count' => 53,
+            'is_premium' => true,
             'total_count' => 200,
             'remaining_count' => 30,
             'personal_total_count' => 150,
@@ -70,6 +73,7 @@ final class GiftTest extends TestCase
         assertSame('x1', $object->sticker->fileId);
         assertSame(11, $object->starCount);
         assertSame(53, $object->upgradeStarCount);
+        assertSame(true, $object->isPremium);
         assertSame(200, $object->totalCount);
         assertSame(30, $object->remainingCount);
         assertSame(150, $object->personalTotalCount);

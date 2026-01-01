@@ -17,11 +17,12 @@ final readonly class Gift
         public string $id,
         public Sticker $sticker,
         public int $starCount,
+        public ?int $upgradeStarCount = null,
+        public ?true $isPremium = null,
         public ?int $totalCount = null,
         public ?int $remainingCount = null,
         public ?int $personalTotalCount = null,
         public ?int $personalRemainingCount = null,
-        public ?int $upgradeStarCount = null,
         public ?Chat $publisherChat = null,
     ) {}
 }
