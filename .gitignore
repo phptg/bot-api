@@ -2,13 +2,8 @@
 .idea
 
 # Composer
-/vendor
+/vendor/
 /composer.lock
 
 # PHPUnit
-/phpunit.phar
 /phpunit.xml
-/.phpunit.cache
-
-# PHP CS Fixer
-/.php-cs-fixer.cache
