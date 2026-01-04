@@ -13,6 +13,7 @@ $finder = (new Finder())->in([
 
 return (new Config())
     ->setParallelConfig(ParallelConfigFactory::detect())
+    ->setCacheFile(__DIR__ . '/runtime/.php-cs-fixer.cache')
     ->setRules([
         '@PER-CS3.0' => true,
         'no_unused_imports' => true,

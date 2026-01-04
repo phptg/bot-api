@@ -1,4 +1,4 @@
-name: cs fixer
+name: Code Style
 
 on: [ pull_request_target ]
 
