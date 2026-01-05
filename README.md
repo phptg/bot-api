@@ -11,7 +11,7 @@
 [![Build status](https://github.com/phptg/bot-api/actions/workflows/build.yml/badge.svg)](https://github.com/phptg/bot-api/actions/workflows/build.yml)
 [![Coverage Status](https://coveralls.io/repos/github/phptg/bot-api/badge.svg)](https://coveralls.io/github/phptg/bot-api)
 [![Mutation score](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fphptg%2Fbot-api%2Fmaster)](https://dashboard.stryker-mutator.io/reports/github.com/phptg/bot-api/master)
-[![Static analysis](https://github.com/phptg/bot-api/actions/workflows/static.yml/badge.svg?branch=master)](https://github.com/phptg/bot-api/actions/workflows/static.yml?query=branch%3Amaster)
+[![Static analysis](https://github.com/phptg/bot-api/actions/workflows/psalm.yml/badge.svg?branch=master)](https://github.com/phptg/bot-api/actions/workflows/psalm.yml?query=branch%3Amaster)
 
 The package provides a simple and convenient way to interact with the Telegram Bot API.
 
