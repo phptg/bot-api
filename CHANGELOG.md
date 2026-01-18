@@ -1,5 +1,10 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.13.0 January 18, 2026
+
+- Bug #180: Make `rights` property optional in `BusinessConnection` type.
+- Chg #180: Change order of `BusinessConnection` constructor parameters.
+
 ## 0.12.0 January 1, 2026
 
 - New #177: Add `hasTopicsEnabled` field to `User` type.
