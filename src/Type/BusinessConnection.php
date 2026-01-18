@@ -18,7 +18,7 @@ final readonly class BusinessConnection
         public User $user,
         public int $userChatId,
         public DateTimeImmutable $date,
-        public ?BusinessBotRights $rights,
         public bool $isEnabled,
+        public ?BusinessBotRights $rights = null,
     ) {}
 }
