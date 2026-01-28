@@ -43,7 +43,6 @@
         "php-http/curl-client": "^2.4.0",
         "phpunit/phpunit": "^11.5.46",
         "psr/log": "^3.0.2",
-        "rector/rector": "^2.3.0",
         "yiisoft/files": "^2.1",
         "yiisoft/test-support": "^3.1.0"
     },
