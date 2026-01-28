@@ -19,6 +19,16 @@
         "chat": "https://t.me/predvoditelev_chat",
         "source": "https://github.com/phptg/bot-api"
     },
+    "funding": [
+        {
+            "type": "cloudtips",
+            "url": "https://pay.cloudtips.ru/p/192ce69b"
+        },
+        {
+            "type": "boosty",
+            "url": "https://boosty.to/vjik"
+        }
+    ],
     "require": {
         "php-64bit": "8.2 - 8.5",
         "php-http/multipart-stream-builder": "^1.4.2",
