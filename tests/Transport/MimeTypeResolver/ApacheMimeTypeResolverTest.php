@@ -20,6 +20,7 @@ final class ApacheMimeTypeResolverTest extends TestCase
         yield [null, InputFile::fromLocalFile(__DIR__ . '/files/test.unknown')];
         yield ['text/plain', InputFile::fromLocalFile(__DIR__ . '/files/test.txt')];
         yield ['text/css', InputFile::fromLocalFile(__DIR__ . '/files/test.txt', 'test.css')];
+        yield ['text/css', InputFile::fromLocalFile(__DIR__ . '/files/test.txt', 'test.CSS')];
     }
 
     #[DataProvider('dataBase')]
