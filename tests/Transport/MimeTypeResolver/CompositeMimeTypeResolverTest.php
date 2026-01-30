@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Transport\MimeTypeResolver;
 
 use Generator;
-use HttpSoft\Message\Stream;
+use Phptg\BotApi\Transport\ResourceReader\NativeResourceReader;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Transport\InputFileData;
@@ -20,17 +20,19 @@ final class CompositeMimeTypeResolverTest extends TestCase
 {
     public static function dataResolve(): Generator
     {
+        $readers = [new NativeResourceReader()];
+
         yield 'custom resolver takes priority' => [
             'text/my-plain',
-            new InputFileData(new InputFile(new Stream(), 'test.txt')),
+            new InputFileData(InputFile::fromLocalFile(__DIR__ . '/files/test.txt'), $readers),
         ];
         yield 'fallback to apache resolver' => [
-            'image/jpeg',
-            new InputFileData(new InputFile(new Stream(), 'image.jpg')),
+            'image/png',
+            new InputFileData(InputFile::fromLocalFile(__DIR__ . '/files/dot.png'), $readers),
         ];
         yield 'unknown extension returns null' => [
             null,
-            new InputFileData(new InputFile(new Stream(), 'test.non-exist')),
+            new InputFileData(InputFile::fromLocalFile(__DIR__ . '/files/test.unknown'), $readers),
         ];
     }
 
