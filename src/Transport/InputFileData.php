@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Phptg\BotApi\Transport;
 
 use LogicException;
+use Phptg\BotApi\Transport\ResourceReader\NativeResourceReader;
 use Phptg\BotApi\Transport\ResourceReader\ResourceReaderInterface;
+use Phptg\BotApi\Transport\ResourceReader\StreamResourceReader;
 use Phptg\BotApi\Type\InputFile;
 
 /**
@@ -20,7 +22,10 @@ final readonly class InputFileData
      */
     public function __construct(
         private InputFile $inputFile,
-        array $readers,
+        array $readers = [
+            new NativeResourceReader(),
+            new StreamResourceReader(),
+        ],
     ) {
         $this->reader = $this->resolveReader($readers);
     }

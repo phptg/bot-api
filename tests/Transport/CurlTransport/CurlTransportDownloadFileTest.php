@@ -23,7 +23,7 @@ final class CurlTransportDownloadFileTest extends TestCase
     public function testBase(): void
     {
         $curl = new CurlMock('hello-content');
-        $transport = new CurlTransport($curl);
+        $transport = new CurlTransport(curl: $curl);
 
         $result = $transport->downloadFile('https://example.test/hello.jpg');
 
@@ -41,7 +41,7 @@ final class CurlTransportDownloadFileTest extends TestCase
     {
         $initException = new CurlException('test');
         $curl = new CurlMock(initException: $initException);
-        $transport = new CurlTransport($curl);
+        $transport = new CurlTransport(curl: $curl);
 
         $exception = null;
         try {
@@ -58,7 +58,7 @@ final class CurlTransportDownloadFileTest extends TestCase
     {
         $execException = new CurlException('test');
         $curl = new CurlMock(execResult: $execException);
-        $transport = new CurlTransport($curl);
+        $transport = new CurlTransport(curl: $curl);
 
         $exception = null;
         try {
@@ -74,7 +74,7 @@ final class CurlTransportDownloadFileTest extends TestCase
     public function testCloseOnException(): void
     {
         $curl = new CurlMock(new RuntimeException());
-        $transport = new CurlTransport($curl);
+        $transport = new CurlTransport(curl: $curl);
 
         try {
             $transport->downloadFile('https://example.test/hello.jpg');

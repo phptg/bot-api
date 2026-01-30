@@ -36,7 +36,7 @@ final class CurlTransportDownloadFileToTest extends TestCase
     public function testBase(): void
     {
         $curl = new CurlMock('hello-content');
-        $transport = new CurlTransport($curl);
+        $transport = new CurlTransport(curl: $curl);
 
         $filePath = self::RUNTIME_PATH . '/file.txt';
 
@@ -60,7 +60,7 @@ final class CurlTransportDownloadFileToTest extends TestCase
         chmod($filePath, 0444);
         assertFileExists($filePath);
 
-        $transport = new CurlTransport(new CurlMock());
+        $transport = new CurlTransport(curl: new CurlMock());
 
         $this->expectException(SaveFileException::class);
         $this->expectExceptionMessage('Failed to open stream: Permission denied');
@@ -71,7 +71,7 @@ final class CurlTransportDownloadFileToTest extends TestCase
     {
         $initException = new CurlException('test');
         $curl = new CurlMock(initException: $initException);
-        $transport = new CurlTransport($curl);
+        $transport = new CurlTransport(curl: $curl);
 
         $exception = null;
         try {
@@ -91,7 +91,7 @@ final class CurlTransportDownloadFileToTest extends TestCase
     {
         $execException = new CurlException('test');
         $curl = new CurlMock(execResult: $execException);
-        $transport = new CurlTransport($curl);
+        $transport = new CurlTransport(curl: $curl);
 
         $exception = null;
         try {
@@ -110,7 +110,7 @@ final class CurlTransportDownloadFileToTest extends TestCase
     public function testCloseOnException(): void
     {
         $curl = new CurlMock(new RuntimeException());
-        $transport = new CurlTransport($curl);
+        $transport = new CurlTransport(curl: $curl);
 
         try {
             $transport->downloadFileTo(

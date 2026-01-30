@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phptg\BotApi\Tests\Transport\NativeTransport;
 
 use HttpSoft\Message\StreamFactory;
+use Phptg\BotApi\Transport\InputFileData;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Phptg\BotApi\Tests\Transport\NativeTransport\StreamMock\StreamMock;
@@ -243,7 +244,7 @@ final class NativeTransportTest extends TestCase
     {
         $transport = new NativeTransport(
             new class implements MimeTypeResolverInterface {
-                public function resolve(InputFile $file): ?string
+                public function resolve(InputFileData $fileData): ?string
                 {
                     return 'text/custom';
                 }

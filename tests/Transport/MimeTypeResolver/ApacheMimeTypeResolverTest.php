@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phptg\BotApi\Tests\Transport\MimeTypeResolver;
 
 use HttpSoft\Message\Stream;
+use Phptg\BotApi\Transport\InputFileData;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Transport\MimeTypeResolver\ApacheMimeTypeResolver;
@@ -29,7 +30,7 @@ final class ApacheMimeTypeResolverTest extends TestCase
     {
         $resolver = new ApacheMimeTypeResolver();
 
-        $result = $resolver->resolve($file);
+        $result = $resolver->resolve(new InputFileData($file));
 
         assertSame($expected, $result);
     }
