@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Transport\MimeTypeResolver;
 
-use Phptg\BotApi\Transport\FileHelper;
-use Phptg\BotApi\Type\InputFile;
+use Phptg\BotApi\Transport\InputFileData;
 
 /**
  * @see https://svn.apache.org/repos/asf/httpd/httpd/tags/2.4.9/docs/conf/mime.types
@@ -998,9 +997,9 @@ final readonly class ApacheMimeTypeResolver implements MimeTypeResolverInterface
         'ice' => 'x-conference/x-cooltalk',
     ];
 
-    public function resolve(InputFile $file): ?string
+    public function resolve(InputFileData $fileData): ?string
     {
-        $extension = FileHelper::extension($file);
+        $extension = $fileData->extension();
         if ($extension === null) {
             return null;
         }
