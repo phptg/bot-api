@@ -82,6 +82,7 @@
         "infection": "infection --threads=max",
         "psalm": "psalm",
         "rector": "rector",
+        "test": "phpunit",
         "test-real": "phpunit --group=realApi"
     }
 }

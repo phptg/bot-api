@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Type;
 
-use Psr\Http\Message\StreamInterface;
 use RuntimeException;
 
 /**
@@ -14,9 +13,6 @@ use RuntimeException;
  */
 final readonly class InputFile
 {
-    /**
-     * @param resource|StreamInterface $resource
-     */
     public function __construct(
         public mixed $resource,
         public ?string $filename = null,

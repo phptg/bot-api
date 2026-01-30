@@ -28,7 +28,7 @@ final class CurlTransportTest extends TestCase
             execResult: '{"ok":true,"result":[]}',
             getinfoResult: [CURLINFO_HTTP_CODE => 200],
         );
-        $transport = new CurlTransport($curl);
+        $transport = new CurlTransport(curl: $curl);
 
         $response = $transport->get('//url/getMe?key=value&array=%5B1%2C%22test%22%5D');
 
@@ -49,7 +49,7 @@ final class CurlTransportTest extends TestCase
             execResult: '{"ok":true,"result":[]}',
             getinfoResult: [CURLINFO_HTTP_CODE => 200],
         );
-        $transport = new CurlTransport($curl);
+        $transport = new CurlTransport(curl: $curl);
 
         $response = $transport->post(
             '//url/logOut',
@@ -82,7 +82,7 @@ final class CurlTransportTest extends TestCase
     public function testWithoutCode(): void
     {
         $transport = new CurlTransport(
-            new CurlMock(
+            curl: new CurlMock(
                 execResult: '{"ok":true,"result":[]}',
             ),
         );
@@ -98,7 +98,7 @@ final class CurlTransportTest extends TestCase
             execResult: '{"ok":true,"result":[]}',
             getinfoResult: [CURLINFO_HTTP_CODE => 200],
         );
-        $transport = new CurlTransport($curl);
+        $transport = new CurlTransport(curl: $curl);
 
         $response = $transport->postWithFiles(
             '//url/sendPhoto',
@@ -139,7 +139,7 @@ final class CurlTransportTest extends TestCase
             execResult: '{"ok":true,"result":[]}',
             getinfoResult: [CURLINFO_HTTP_CODE => 200],
         );
-        $transport = new CurlTransport($curl);
+        $transport = new CurlTransport(curl: $curl);
 
         $transport->postWithFiles(
             'sendPhoto',
@@ -167,7 +167,7 @@ final class CurlTransportTest extends TestCase
     public function testSeekableStream(): void
     {
         $curl = new CurlMock();
-        $transport = new CurlTransport($curl);
+        $transport = new CurlTransport(curl: $curl);
 
         $stream = (new StreamFactory())->createStream('test1');
         $stream->getContents();
@@ -190,7 +190,7 @@ final class CurlTransportTest extends TestCase
     public function testSeekableResource(): void
     {
         $curl = new CurlMock();
-        $transport = new CurlTransport($curl);
+        $transport = new CurlTransport(curl: $curl);
 
         $resource = fopen(__DIR__ . '/photo.png', 'r');
         stream_get_contents($resource);
@@ -216,7 +216,7 @@ final class CurlTransportTest extends TestCase
     public function testCloseOnException(): void
     {
         $curl = new CurlMock(new RuntimeException());
-        $transport = new CurlTransport($curl);
+        $transport = new CurlTransport(curl: $curl);
 
         try {
             $transport->get('getMe');
@@ -233,7 +233,7 @@ final class CurlTransportTest extends TestCase
             getinfoResult: [CURLINFO_HTTP_CODE => 200],
         );
 
-        (new CurlTransport($curl))->get('getMe');
+        (new CurlTransport(curl: $curl))->get('getMe');
 
         assertSame(
             [

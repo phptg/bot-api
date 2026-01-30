@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Transport\MimeTypeResolver;
 
-use Phptg\BotApi\Transport\FileHelper;
-use Phptg\BotApi\Type\InputFile;
+use Phptg\BotApi\Transport\InputFileData;
 
 /**
  * @api
@@ -19,9 +18,9 @@ final readonly class CustomMimeTypeResolver implements MimeTypeResolverInterface
         private array $map,
     ) {}
 
-    public function resolve(InputFile $file): ?string
+    public function resolve(InputFileData $fileData): ?string
     {
-        $extension = FileHelper::extension($file);
+        $extension = $fileData->extension();
         if ($extension === null) {
             return null;
         }
