@@ -23,8 +23,8 @@ final readonly class CurlTransport implements TransportInterface
     private CurlShareHandle $curlShareHandle;
 
     /**
-     * @param ResourceReaderInterface[] $resourceReaders
-     * @param CurlInterface $curl
+     * @param ResourceReaderInterface[] $resourceReaders List of resource readers to handle different resource types.
+     * @param CurlInterface $curl cURL interface implementation for making HTTP requests.
      */
     public function __construct(
         private array $resourceReaders = [

@@ -7,12 +7,22 @@ namespace Phptg\BotApi\Transport\ResourceReader;
 use function is_resource;
 
 /**
+ * Resource reader for native PHP resources.
+ *
+ * This reader handles native PHP stream resources created by functions like
+ * `fopen()`, `tmpfile()`, etc.
+ *
  * @implements ResourceReaderInterface<resource>
  *
  * @api
  */
 final class NativeResourceReader implements ResourceReaderInterface
 {
+    /**
+     * @param resource $resource The native PHP resource to read from.
+     *
+     * @return string The content of the resource.
+     */
     public function read(mixed $resource): string
     {
         $metadata = stream_get_meta_data($resource);
@@ -26,6 +36,11 @@ final class NativeResourceReader implements ResourceReaderInterface
         return stream_get_contents($resource);
     }
 
+    /**
+     * @param resource $resource The native PHP resource to get URI from.
+     *
+     * @return string The resource URI.
+     */
     public function getUri(mixed $resource): string
     {
         return stream_get_meta_data($resource)['uri'];

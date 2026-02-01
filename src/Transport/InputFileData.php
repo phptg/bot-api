@@ -16,7 +16,10 @@ final readonly class InputFileData
     private ResourceReaderInterface $reader;
 
     /**
-     * @param ResourceReaderInterface[] $readers
+     * @param InputFile $inputFile The input file to wrap.
+     * @param ResourceReaderInterface[] $readers List of resource readers to handle different resource types.
+     *
+     * @throws LogicException If no suitable reader is found for the input file resource.
      */
     public function __construct(
         private InputFile $inputFile,
@@ -38,7 +41,7 @@ final readonly class InputFileData
     /**
      * Returns the file extension.
      *
-     * @return string|null The file extension, or null if it cannot be determined.
+     * @return string|null The file extension, or `null` if it cannot be determined.
      */
     public function extension(): ?string
     {
@@ -51,7 +54,7 @@ final readonly class InputFileData
     /**
      * Returns the base name of the file.
      *
-     * @return string|null The file base name, or null if it cannot be determined.
+     * @return string|null The file base name, or `null` if it cannot be determined.
      */
     public function basename(): ?string
     {
@@ -64,7 +67,7 @@ final readonly class InputFileData
     /**
      * Returns the file path.
      *
-     * @return string|null The file path, or null if it cannot be determined.
+     * @return string|null The file path, or `null` if it cannot be determined.
      */
     private function filepath(): ?string
     {

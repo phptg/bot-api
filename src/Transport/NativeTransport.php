@@ -26,7 +26,9 @@ final readonly class NativeTransport implements TransportInterface
     private MimeTypeResolverInterface $mimeTypeResolver;
 
     /**
-     * @param ResourceReaderInterface[] $resourceReaders
+     * @param MimeTypeResolverInterface|null $mimeTypeResolver MIME type resolver for determining file types. Defaults
+     * to {@see ApacheMimeTypeResolver}.
+     * @param ResourceReaderInterface[] $resourceReaders List of resource readers to handle different resource types.
      */
     public function __construct(
         ?MimeTypeResolverInterface $mimeTypeResolver = null,

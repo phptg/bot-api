@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Phptg\BotApi\Transport\ResourceReader;
 
 /**
+ * Interface for reading content from various resource types stored in {@see InputFile} objects.
+ *
  * @template T
  *
  * @api
@@ -12,12 +14,20 @@ namespace Phptg\BotApi\Transport\ResourceReader;
 interface ResourceReaderInterface
 {
     /**
-     * @param T $resource
+     * Reads the content from the given resource.
+     *
+     * @param T $resource The resource to read from.
+     *
+     * @return string The content of the resource.
      */
     public function read(mixed $resource): string;
 
     /**
-     * @param T $resource
+     * Returns the URI of the given resource.
+     *
+     * @param T $resource The resource to get URI from.
+     *
+     * @return string The resource URI.
      */
     public function getUri(mixed $resource): string;
 
