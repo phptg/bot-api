@@ -144,6 +144,7 @@ $fileContent = $api->downloadFileTo('photos/file_2', '/local/path/to/file.jpg');
 ### Guides
 
 - [Transport](docs/transport.md)
+- [Resource readers](docs/resource-readers.md)
 - [Logging](docs/logging.md)
 - [Webhook handling](docs/webhook-handling.md)
 - [Custom requests](docs/custom-requests.md)

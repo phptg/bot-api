@@ -8,8 +8,8 @@ Out of the box, available three transport implementations: cURL, native and PSR.
 
 ## cURL
 
-The `CurlTransport` class is a transport implementation for making requests to the Telegram Bot API using 
-the [cURL](https://www.php.net/manual/book.curl.php) extension in PHP. This transport is often the easiest choice 
+The `CurlTransport` class is a transport implementation for making requests to the Telegram Bot API using
+the [cURL](https://www.php.net/manual/book.curl.php) extension in PHP. This transport is often the easiest choice
 since the cURL extension is included in most PHP installations.
 
 General usage:
@@ -26,9 +26,14 @@ $transport = new CurlTransport();
 $api = new TelegramBotApi($token, transport: $transport);
 ```
 
+Constructor parameters:
+
+- `$resourceReaders` — list of [resource readers](resource-readers.md) to handle different resource types. By default,
+  includes `NativeResourceReader` and `StreamResourceReader`.
+
 ## Native
 
-The `NativeTransport` uses native PHP functions `file_get_contents()` and `file_put_contents()` to make requests to 
+The `NativeTransport` uses native PHP functions `file_get_contents()` and `file_put_contents()` to make requests to
 the Telegram Bot API and not require any additional extensions.
 
 > Note: `NativeTransport` requires that
@@ -49,13 +54,16 @@ $transport = new NativeTransport();
 $api = new TelegramBotApi($token, transport: $transport);
 ```
 
-Native transport uses instance of `MimeTypeResolverInterface` passed through the constructor for resolving MIME types
-when build API request with files. 
+Constructor parameters:
 
-Available resolvers:
+- `$mimeTypeResolver` — MIME type resolver for determining file types. Defaults to `ApacheMimeTypeResolver`.
+- `$resourceReaders` — List of [resource readers](resource-readers.md) to handle different resource types. By default,
+  includes `NativeResourceReader` and `StreamResourceReader`.
 
-- `ApacheMimeTypeResolver` - based on file extension and 
-  [Apache's `mime.types` file](https://svn.apache.org/repos/asf/httpd/httpd/tags/2.4.9/docs/conf/mime.types) (uses 
+Available MIME type resolvers:
+
+- `ApacheMimeTypeResolver` - based on file extension and
+  [Apache's `mime.types` file](https://svn.apache.org/repos/asf/httpd/httpd/tags/2.4.9/docs/conf/mime.types) (uses
   by default);
 - `CustomMimeTypeResolver` - based on file extension and custom MIME types map;
 - `CompositeMimeTypeResolver` - allows to combine multiple resolvers into one.
