@@ -1,5 +1,13 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.14.0 under development
+
+- New #182: Introduce resource readers that handle reading content from different types of resources stored in
+  `InputFile`. Add `ResourceReaderInterface` and built-in implementations: `NativeResourceReader` for native PHP
+  resources and `StreamResourceReader` for PSR-7 streams.
+- New #182: Add `resourceReaders` constructor parameter to `CurlTransport` and `NativeTransport`.
+- Chg #182: Change `MimeTypeResolverInterface::resolve()` signature to accept `InputFileData` instead of `InputFile`.
+
 ## 0.13.0 January 18, 2026
 
 - Bug #180: Make `rights` property optional in `BusinessConnection` type.

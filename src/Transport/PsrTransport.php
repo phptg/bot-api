@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace Phptg\BotApi\Transport;
 
 use Http\Message\MultipartStream\MultipartStreamBuilder;
+use LogicException;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
+
+use function is_resource;
 
 /**
  * @api
@@ -51,6 +54,9 @@ final readonly class PsrTransport implements TransportInterface
             $streamBuilder->addResource($key, (string) $value);
         }
         foreach ($files as $key => $file) {
+            if (!is_resource($file->resource) && !$file->resource instanceof StreamInterface) {
+                throw new LogicException('File resource must be a valid resource or instance of StreamInterface.');
+            }
             $streamBuilder->addResource(
                 $key,
                 $file->resource,

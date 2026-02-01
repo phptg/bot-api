@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Transport;
 
+use Phptg\BotApi\Transport\ResourceReader\NativeResourceReader;
+use Phptg\BotApi\Transport\ResourceReader\ResourceReaderInterface;
+use Phptg\BotApi\Transport\ResourceReader\StreamResourceReader;
 use RuntimeException;
 use Phptg\BotApi\Transport\MimeTypeResolver\ApacheMimeTypeResolver;
 use Phptg\BotApi\Transport\MimeTypeResolver\MimeTypeResolverInterface;
@@ -22,8 +25,17 @@ final readonly class NativeTransport implements TransportInterface
 {
     private MimeTypeResolverInterface $mimeTypeResolver;
 
+    /**
+     * @param MimeTypeResolverInterface|null $mimeTypeResolver MIME type resolver for determining file types. Defaults
+     * to {@see ApacheMimeTypeResolver}.
+     * @param ResourceReaderInterface[] $resourceReaders List of resource readers to handle different resource types.
+     */
     public function __construct(
         ?MimeTypeResolverInterface $mimeTypeResolver = null,
+        private array $resourceReaders = [
+            new NativeResourceReader(),
+            new StreamResourceReader(),
+        ],
     ) {
         $this->mimeTypeResolver = $mimeTypeResolver ?? new ApacheMimeTypeResolver();
     }
@@ -151,8 +163,9 @@ final readonly class NativeTransport implements TransportInterface
         }
 
         foreach ($files as $key => $file) {
-            $mimeType = $this->mimeTypeResolver->resolve($file);
-            $filename = FileHelper::basename($file);
+            $fileData = new InputFileData($file, $this->resourceReaders);
+            $mimeType = $this->mimeTypeResolver->resolve($fileData);
+            $filename = $fileData->basename();
 
             $contentDisposition = "Content-Disposition: form-data; name=\"$key\"";
             if ($filename !== null) {
@@ -165,7 +178,7 @@ final readonly class NativeTransport implements TransportInterface
                 $result[] = "Content-Type: $mimeType";
             }
             $result[] = '';
-            $result[] = FileHelper::read($file);
+            $result[] = $fileData->read();
         }
 
         $result[] = "--$boundary--";

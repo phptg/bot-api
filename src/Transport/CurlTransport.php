@@ -9,6 +9,9 @@ use CURLStringFile;
 use Phptg\BotApi\Curl\Curl;
 use Phptg\BotApi\Curl\CurlException;
 use Phptg\BotApi\Curl\CurlInterface;
+use Phptg\BotApi\Transport\ResourceReader\NativeResourceReader;
+use Phptg\BotApi\Transport\ResourceReader\ResourceReaderInterface;
+use Phptg\BotApi\Transport\ResourceReader\StreamResourceReader;
 
 use function is_int;
 
@@ -19,7 +22,15 @@ final readonly class CurlTransport implements TransportInterface
 {
     private CurlShareHandle $curlShareHandle;
 
+    /**
+     * @param ResourceReaderInterface[] $resourceReaders List of resource readers to handle different resource types.
+     * @param CurlInterface $curl cURL interface implementation for making HTTP requests.
+     */
     public function __construct(
+        private array $resourceReaders = [
+            new NativeResourceReader(),
+            new StreamResourceReader(),
+        ],
         private CurlInterface $curl = new Curl(),
     ) {
         $this->curlShareHandle = $this->createCurlShareHandle();
@@ -54,7 +65,7 @@ final readonly class CurlTransport implements TransportInterface
     {
         foreach ($files as $key => $file) {
             $data[$key] = new CURLStringFile(
-                FileHelper::read($file),
+                (new InputFileData($file, $this->resourceReaders))->read(),
                 $file->filename ?? '',
             );
         }

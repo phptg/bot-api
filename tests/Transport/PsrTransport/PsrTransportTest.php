@@ -7,6 +7,7 @@ namespace Phptg\BotApi\Tests\Transport\PsrTransport;
 use HttpSoft\Message\Request;
 use HttpSoft\Message\Response;
 use HttpSoft\Message\StreamFactory;
+use LogicException;
 use PHPUnit\Framework\Constraint\Callback;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
@@ -247,5 +248,27 @@ final class PsrTransportTest extends TestCase
 
         assertSame(201, $response->statusCode);
         assertSame('hello', $response->body);
+    }
+
+    public function testPostWithFilesThrowsExceptionForInvalidResource(): void
+    {
+        $client = $this->createMock(ClientInterface::class);
+        $requestFactory = $this->createMock(RequestFactoryInterface::class);
+        $file = new InputFile('invalid-resource');
+
+        $transport = new PsrTransport(
+            $client,
+            $requestFactory,
+            new StreamFactory(),
+        );
+
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage('File resource must be a valid resource or instance of StreamInterface.');
+
+        $transport->postWithFiles(
+            '//url/sendPhoto',
+            ['chat_id' => 123],
+            ['photo' => $file],
+        );
     }
 }
