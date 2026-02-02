@@ -23,22 +23,18 @@ use function json_encode;
  */
 final readonly class NativeTransport implements TransportInterface
 {
-    private MimeTypeResolverInterface $mimeTypeResolver;
-
     /**
-     * @param MimeTypeResolverInterface|null $mimeTypeResolver MIME type resolver for determining file types. Defaults
+     * @param MimeTypeResolverInterface $mimeTypeResolver MIME type resolver for determining file types. Defaults
      * to {@see ApacheMimeTypeResolver}.
      * @param ResourceReaderInterface[] $resourceReaders List of resource readers to handle different resource types.
      */
     public function __construct(
-        ?MimeTypeResolverInterface $mimeTypeResolver = null,
+        private MimeTypeResolverInterface $mimeTypeResolver = new ApacheMimeTypeResolver(),
         private array $resourceReaders = [
             new NativeResourceReader(),
             new StreamResourceReader(),
         ],
-    ) {
-        $this->mimeTypeResolver = $mimeTypeResolver ?? new ApacheMimeTypeResolver();
-    }
+    ) {}
 
     public function get(string $url): ApiResponse
     {
