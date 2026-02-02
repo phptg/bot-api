@@ -7,6 +7,7 @@
   resources and `StreamResourceReader` for PSR-7 streams.
 - New #182: Add `resourceReaders` constructor parameter to `CurlTransport` and `NativeTransport`.
 - Chg #182: Change `MimeTypeResolverInterface::resolve()` signature to accept `InputFileData` instead of `InputFile`.
+- Chg #183: Change `$mimeTypeResolver` parameter in `NativeTransport` constructor from nullable to non-nullable.
 
 ## 0.13.0 January 18, 2026
 
