@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Method\Sticker;
 
-use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\Sticker\SendSticker;
 use Phptg\BotApi\Transport\HttpMethod;
@@ -36,7 +35,7 @@ final class SendStickerTest extends TestCase
 
     public function testFull(): void
     {
-        $sticker = new InputFile((new StreamFactory())->createStream());
+        $sticker = new InputFile(null);
         $replyParameters = new ReplyParameters(23);
         $replyMarkup = new ForceReply();
         $method = new SendSticker(

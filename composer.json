@@ -35,7 +35,6 @@
     "require-dev": {
         "ext-curl": "*",
         "bamarni/composer-bin-plugin": "^1.9.1",
-        "httpsoft/http-message": "^1.1.6",
         "php-http/curl-client": "^2.4.0",
         "phpunit/phpunit": "^11.5.51",
         "psr/log": "^3.0.2",

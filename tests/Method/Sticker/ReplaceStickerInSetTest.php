@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Method\Sticker;
 
-use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\Sticker\ReplaceStickerInSet;
 use Phptg\BotApi\Transport\HttpMethod;
@@ -19,7 +18,7 @@ final class ReplaceStickerInSetTest extends TestCase
 {
     public function testBase(): void
     {
-        $file = new InputFile((new StreamFactory())->createStream());
+        $file = new InputFile(null);
         $inputSticker = new InputSticker($file, 'static', ['😀']);
         $method = new ReplaceStickerInSet(1, 'test', 'oldid', $inputSticker);
 

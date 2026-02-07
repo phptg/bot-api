@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests;
 
-use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\FileCollector;
 use Phptg\BotApi\Type\InputFile;
@@ -15,8 +14,8 @@ final class InputFileCollectorTest extends TestCase
 {
     public function testBase(): void
     {
-        $file1 = new InputFile((new StreamFactory())->createStream());
-        $file2 = new InputFile((new StreamFactory())->createStream());
+        $file1 = new InputFile(null);
+        $file2 = new InputFile(null);
 
         $collector = new FileCollector();
         $collector->add($file1);
@@ -32,8 +31,8 @@ final class InputFileCollectorTest extends TestCase
     }
     public function testCustomParameters(): void
     {
-        $file1 = new InputFile((new StreamFactory())->createStream());
-        $file2 = new InputFile((new StreamFactory())->createStream());
+        $file1 = new InputFile(null);
+        $file2 = new InputFile(null);
 
         $collector = new FileCollector('test', 23);
         $collector->add($file1);

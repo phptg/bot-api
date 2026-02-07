@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Type\Sticker;
 
-use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Constant\Sticker\StickerFormat;
 use Phptg\BotApi\FileCollector;
@@ -48,7 +47,7 @@ final class InputStickerTest extends TestCase
 
     public function testFull(): void
     {
-        $file = new InputFile((new StreamFactory())->createStream());
+        $file = new InputFile(null);
         $maskPosition = new MaskPosition('forehead', 0.5, 0.6, 0.7);
         $inputSticker = new InputSticker(
             $file,

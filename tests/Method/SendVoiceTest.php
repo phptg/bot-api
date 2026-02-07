@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Method;
 
-use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\SendVoice;
 use Phptg\BotApi\Transport\HttpMethod;
@@ -37,7 +36,7 @@ final class SendVoiceTest extends TestCase
 
     public function testFull(): void
     {
-        $voice = new InputFile((new StreamFactory())->createStream('test'), 'test.mp3');
+        $voice = new InputFile(null, 'test.mp3');
         $entity = new MessageEntity('bold', 0, 5);
         $replyParameters = new ReplyParameters(23);
         $replyMarkup = new ForceReply();

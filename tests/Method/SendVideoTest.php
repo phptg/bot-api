@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Method;
 
-use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\SendVideo;
 use Phptg\BotApi\Transport\HttpMethod;
@@ -37,8 +36,8 @@ final class SendVideoTest extends TestCase
 
     public function testFull(): void
     {
-        $video = new InputFile((new StreamFactory())->createStream('test'), 'test.mp4');
-        $thumbnail = new InputFile((new StreamFactory())->createStream('test'), 'test.jpg');
+        $video = new InputFile(null, 'test.mp4');
+        $thumbnail = new InputFile(null, 'test.jpg');
         $entity = new MessageEntity('bold', 0, 5);
         $replyParameters = new ReplyParameters(23);
         $replyMarkup = new ForceReply();

@@ -6,7 +6,6 @@ namespace Phptg\BotApi\Tests\Transport\CurlTransport;
 
 use CurlShareHandle;
 use CURLStringFile;
-use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Throwable;

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\WebhookResponse;
 
-use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\SendMessage;
 use Phptg\BotApi\Method\SendPhoto;
@@ -40,7 +39,7 @@ final class WebhookResponseTest extends TestCase
     {
         $method = new SendPhoto(
             chatId: 'x1',
-            photo: new InputFile((new StreamFactory())->createStream()),
+            photo: new InputFile(null),
         );
 
         $webhookResponse = new WebhookResponse($method);

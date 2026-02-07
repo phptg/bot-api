@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests;
 
-use HttpSoft\Message\StreamFactory;
 use LogicException;
 use Phptg\BotApi\Type\MessageEntity;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -946,7 +945,7 @@ final class TelegramBotApiTest extends TestCase
             'business_connection_id',
             456,
             new InputStoryContentPhoto(
-                new InputFile((new StreamFactory())->createStream()),
+                new InputFile(null),
             ),
         );
 
@@ -1469,9 +1468,7 @@ final class TelegramBotApiTest extends TestCase
         ]);
         $api = new TelegramBotApi('stub-token', transport: $transport);
 
-        $file =  new InputFile(
-            (new StreamFactory())->createStream('test1'),
-        );
+        $file =  new InputFile(null);
         $api->sendDocument(
             'id1',
             $file,
@@ -1612,7 +1609,7 @@ final class TelegramBotApiTest extends TestCase
         $result = $api->postStory(
             'business_connection_id',
             new InputStoryContentPhoto(
-                new InputFile((new StreamFactory())->createStream()),
+                new InputFile(null),
             ),
             86400,
         );
@@ -1806,7 +1803,7 @@ final class TelegramBotApiTest extends TestCase
         $result = $api->setBusinessAccountProfilePhoto(
             'biz123',
             new InputProfilePhotoStatic(
-                new InputFile((new StreamFactory())->createStream()),
+                new InputFile(null),
             ),
         );
 
@@ -2224,7 +2221,7 @@ final class TelegramBotApiTest extends TestCase
     {
         $api = TestHelper::createSuccessStubApi(true);
 
-        $result = $api->setChatPhoto(12, new InputFile((new StreamFactory())->createStream()));
+        $result = $api->setChatPhoto(12, new InputFile(null));
 
         assertTrue($result);
     }
@@ -2534,7 +2531,7 @@ final class TelegramBotApiTest extends TestCase
             'file_path' => 'path/to/file',
         ]);
 
-        $result = $api->uploadStickerFile(1, new InputFile((new StreamFactory())->createStream()), 'static');
+        $result = $api->uploadStickerFile(1, new InputFile(null), 'static');
 
         assertInstanceOf(File::class, $result);
         assertSame('f1', $result->fileId);

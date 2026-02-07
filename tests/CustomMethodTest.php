@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests;
 
-use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\ParseResult\ValueProcessor\IntegerValue;
 use Phptg\BotApi\Transport\HttpMethod;
@@ -18,7 +17,7 @@ final class CustomMethodTest extends TestCase
 {
     public function testBase(): void
     {
-        $photo = new InputFile((new StreamFactory())->createStream('test'));
+        $photo = new InputFile(null);
         $method = new CustomMethod(
             'getMe',
             ['param1' => 'value1', 'photo' => $photo],

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Transport\NativeTransport;
 
-use HttpSoft\Message\StreamFactory;
 use Phptg\BotApi\Transport\InputFileData;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
@@ -16,8 +15,6 @@ use Phptg\BotApi\Type\InputFile;
 use function PHPUnit\Framework\assertMatchesRegularExpression;
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertStringContainsString;
-use function PHPUnit\Framework\assertStringEndsWith;
-use function PHPUnit\Framework\assertStringStartsWith;
 use function PHPUnit\Framework\assertTrue;
 
 final class NativeTransportTest extends TestCase

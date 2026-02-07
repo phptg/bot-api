@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Method;
 
-use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\SendAnimation;
 use Phptg\BotApi\Transport\HttpMethod;
@@ -37,8 +36,8 @@ final class SendAnimationTest extends TestCase
 
     public function testFull(): void
     {
-        $animation = new InputFile((new StreamFactory())->createStream('test'), 'test.gif');
-        $thumbnail = new InputFile((new StreamFactory())->createStream('test'), 'test.jpg');
+        $animation = new InputFile(null, 'test.gif');
+        $thumbnail = new InputFile(null, 'test.jpg');
         $entity = new MessageEntity('bold', 0, 5);
         $replyParameters = new ReplyParameters(23);
         $replyMarkup = new ForceReply();

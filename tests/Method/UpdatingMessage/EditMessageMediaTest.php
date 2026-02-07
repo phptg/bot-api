@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Method\UpdatingMessage;
 
-use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\UpdatingMessage\EditMessageMedia;
 use Phptg\BotApi\Transport\HttpMethod;
@@ -40,7 +39,7 @@ final class EditMessageMediaTest extends TestCase
 
     public function testFull(): void
     {
-        $file = new InputFile((new StreamFactory())->createStream());
+        $file = new InputFile(null);
         $media = new InputMediaPhoto($file);
         $replyMarkup = new InlineKeyboardMarkup([[new InlineKeyboardButton('hello')]]);
         $method = new EditMessageMedia(

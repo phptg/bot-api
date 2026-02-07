@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Type;
 
-use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\FileCollector;
 use Phptg\BotApi\Type\InputFile;
@@ -18,7 +17,7 @@ final class InputStoryContentPhotoTest extends TestCase
 {
     public function testBase(): void
     {
-        $photo = new InputFile((new StreamFactory())->createStream());
+        $photo = new InputFile(null);
         $type = new InputStoryContentPhoto($photo);
 
         assertInstanceOf(InputStoryContent::class, $type);

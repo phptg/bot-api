@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Method;
 
-use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\SendPaidMedia;
 use Phptg\BotApi\Transport\HttpMethod;
@@ -40,7 +39,7 @@ final class SendPaidMediaTest extends TestCase
 
     public function testFull(): void
     {
-        $file = new InputFile((new StreamFactory())->createStream());
+        $file = new InputFile(null);
         $inputMedia = new InputPaidMediaPhoto($file);
         $entity = new MessageEntity('bold', 0, 4);
         $replyParameters = new ReplyParameters(23);

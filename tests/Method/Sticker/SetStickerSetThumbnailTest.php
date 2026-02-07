@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Method\Sticker;
 
-use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\Sticker\SetStickerSetThumbnail;
 use Phptg\BotApi\Transport\HttpMethod;
@@ -34,7 +33,7 @@ final class SetStickerSetThumbnailTest extends TestCase
 
     public function testFull(): void
     {
-        $file = new InputFile((new StreamFactory())->createStream());
+        $file = new InputFile(null);
         $method = new SetStickerSetThumbnail('animals_by_my_bot', 123, 'static', $file);
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
