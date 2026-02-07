@@ -1,6 +1,6 @@
 # Telegram Bot API for PHP Change Log
 
-## 0.14.0 under development
+## 0.14 February 7, 2026
 
 - New #182: Introduce resource readers that handle reading content from different types of resources stored in
   `InputFile`. Add `ResourceReaderInterface` and built-in implementations: `NativeResourceReader` for native PHP
