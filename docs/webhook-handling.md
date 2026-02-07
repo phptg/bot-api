@@ -119,7 +119,13 @@ if ($webhookResponse->isSupported()) {
 }
 ```
 
-### JSON response factory
+### Response factories
+
+The package provides a built-in `JsonWebhookResponseFactory` that creates JSON strings for webhook responses.
+Additionally, the [phptg/transport-psr](https://github.com/phptg/transport-psr) package provides
+`PsrWebhookResponseFactory` that creates a PSR-7 `ResponseInterface`.
+
+#### JSON
 
 The `JsonWebhookResponseFactory` creates JSON strings for webhook responses:
 
@@ -142,9 +148,6 @@ $json = $factory->byMethod($method);
 header('Content-Type: application/json; charset=utf-8');
 echo $json;
 ```
-
-Additionally, the [phptg/transport-psr](https://github.com/phptg/transport-psr) package provides
-`PsrWebhookResponseFactory` that creates a PSR-7 `ResponseInterface` for webhook responses.
 
 ### Limitations
 
