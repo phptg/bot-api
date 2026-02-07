@@ -9,6 +9,9 @@ You can create an `Update` object by several ways:
 - [from JSON string](#from-json-string),
 - [via constructor](#via-constructor).
 
+Additionally, the [phptg/transport-psr](https://github.com/phptg/transport-psr) package provides `PsrUpdateFactory`
+that creates `Update` object from a PSR-7 `ServerRequestInterface`.
+
 If `Update` created by `fromJson()` method, you can get raw data via `getRaw()` method:
 
 ```php
@@ -139,6 +142,9 @@ $json = $factory->byMethod($method);
 header('Content-Type: application/json; charset=utf-8');
 echo $json;
 ```
+
+Additionally, the [phptg/transport-psr](https://github.com/phptg/transport-psr) package provides
+`PsrWebhookResponseFactory` that creates a PSR-7 `ResponseInterface` for webhook responses.
 
 ### Limitations
 

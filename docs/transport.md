@@ -6,6 +6,9 @@ the `Phptg\BotApi\Transport\TransportInterface` interface.
 
 Out of the box, available two transport implementations: cURL and native.
 
+Additionally, the [phptg/transport-psr](https://github.com/phptg/transport-psr) package provides `PsrTransport`
+based on PSR-18 HTTP client and PSR-17 HTTP factories.
+
 ## cURL
 
 The `CurlTransport` class is a transport implementation for making requests to the Telegram Bot API using
