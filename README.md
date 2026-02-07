@@ -17,6 +17,8 @@ The package provides a simple and convenient way to interact with the Telegram B
 
 ✔️ Telegram Bot API 9.3 (December 31, 2025) is **fully supported**.
 
+♻️ **Zero dependencies** — no third-party libraries, only native PHP.
+
 > [!IMPORTANT]
 > This project is developed and maintained by [Sergei Predvoditelev](https://github.com/vjik).
 > Community support helps keep the project actively developed and well maintained.
