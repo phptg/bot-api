@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Phptg\BotApi\Type\Update;
 
 use JsonException;
-use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 use Phptg\BotApi\LogContextFactory;
 use Phptg\BotApi\ParseResult\ResultFactory;
@@ -106,15 +105,5 @@ final class Update
         $update->raw = $json;
         $update->rawDecoded = $decodedJson;
         return $update;
-    }
-
-    /**
-     * Create a new `Update` object from PSR-7 server request.
-     *
-     * @throws TelegramParseResultException
-     */
-    public static function fromServerRequest(ServerRequestInterface $request, ?LoggerInterface $logger = null): Update
-    {
-        return self::fromJson((string) $request->getBody(), $logger);
     }
 }

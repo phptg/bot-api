@@ -11,7 +11,6 @@ use Phptg\BotApi\Curl\CurlException;
 use Phptg\BotApi\Curl\CurlInterface;
 use Phptg\BotApi\Transport\ResourceReader\NativeResourceReader;
 use Phptg\BotApi\Transport\ResourceReader\ResourceReaderInterface;
-use Phptg\BotApi\Transport\ResourceReader\StreamResourceReader;
 
 use function is_int;
 
@@ -29,7 +28,6 @@ final readonly class CurlTransport implements TransportInterface
     public function __construct(
         private array $resourceReaders = [
             new NativeResourceReader(),
-            new StreamResourceReader(),
         ],
         private CurlInterface $curl = new Curl(),
     ) {

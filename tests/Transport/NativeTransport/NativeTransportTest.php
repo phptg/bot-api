@@ -146,59 +146,6 @@ final class NativeTransportTest extends TestCase
         assertTrue($request['options']['http']['ignore_errors']);
     }
 
-    public function testPostWithStreamFile(): void
-    {
-        $transport = new NativeTransport();
-
-        StreamMock::enable(
-            responseHeaders: [
-                'HTTP/1.1 200 OK',
-                'Content-Type: text/json',
-            ],
-            responseBody: '{"ok":true,"result":[]}',
-        );
-
-        $response = $transport->postWithFiles(
-            'http://url/sendPhoto',
-            [],
-            [
-                'file1' => new InputFile(
-                    (new StreamFactory())->createStream('test1'),
-                ),
-                'file2' => new InputFile(
-                    (new StreamFactory())->createStream('test2'),
-                    'test.txt',
-                ),
-            ],
-        );
-
-        $request = StreamMock::disable();
-
-        assertSame(200, $response->statusCode);
-        assertSame('{"ok":true,"result":[]}', $response->body);
-        assertSame('http://url/sendPhoto', $request['path']);
-        assertSame(['http'], array_keys($request['options']));
-        assertSame(['method', 'header', 'content', 'ignore_errors'], array_keys($request['options']['http']));
-        assertSame('POST', $request['options']['http']['method']);
-        assertStringStartsWith('Content-type: multipart/form-data; boundary=', $request['options']['http']['header']);
-        assertStringEndsWith('; charset=utf-8', $request['options']['http']['header']);
-        assertStringContainsString('test2', $request['options']['http']['content']);
-        assertStringContainsString(
-            "Content-Disposition: form-data; name=\"file1\"\r\n"
-            . "\r\n"
-            . "test1\r\n",
-            $request['options']['http']['content'],
-        );
-        assertStringContainsString(
-            "Content-Disposition: form-data; name=\"file2\"; filename=\"test.txt\"\r\n"
-            . "Content-Type: text/plain\r\n"
-            . "\r\n"
-            . "test2\r\n",
-            $request['options']['http']['content'],
-        );
-        assertTrue($request['options']['http']['ignore_errors']);
-    }
-
     public function testPostWithFiles(): void
     {
         $transport = new NativeTransport();
@@ -217,9 +164,7 @@ final class NativeTransportTest extends TestCase
                 'ages' => [23, 45],
             ],
             [
-                'file1' => new InputFile(
-                    (new StreamFactory())->createStream('test1'),
-                ),
+                'file1' => InputFile::fromLocalFile(__DIR__ . '/test.txt'),
             ],
         );
 
@@ -233,9 +178,11 @@ final class NativeTransportTest extends TestCase
             $request['options']['http']['content'],
         );
         assertStringContainsString(
-            "Content-Disposition: form-data; name=\"file1\"\r\n"
+            "Content-Disposition: form-data; name=\"file1\"; filename=\"test.txt\"\r\n"
+            . "Content-Type: text/plain\r\n"
             . "\r\n"
-            . "test1\r\n",
+            . "hello\n"
+            . "\r\n",
             $request['options']['http']['content'],
         );
     }
@@ -263,9 +210,7 @@ final class NativeTransportTest extends TestCase
             'http://url/method',
             [],
             [
-                'file1' => new InputFile(
-                    (new StreamFactory())->createStream('test1'),
-                ),
+                'file1' => InputFile::fromLocalFile(__DIR__ . '/test.txt'),
             ],
         );
 
@@ -273,10 +218,11 @@ final class NativeTransportTest extends TestCase
 
         assertTrue(isset($request['options']['http']['content']));
         assertStringContainsString(
-            "Content-Disposition: form-data; name=\"file1\"\r\n"
+            "Content-Disposition: form-data; name=\"file1\"; filename=\"test.txt\"\r\n"
             . "Content-Type: text/custom\r\n"
             . "\r\n"
-            . "test1\r\n",
+            . "hello\n"
+            . "\r\n",
             $request['options']['http']['content'],
         );
     }

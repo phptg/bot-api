@@ -6,7 +6,6 @@ namespace Phptg\BotApi\Transport;
 
 use Phptg\BotApi\Transport\ResourceReader\NativeResourceReader;
 use Phptg\BotApi\Transport\ResourceReader\ResourceReaderInterface;
-use Phptg\BotApi\Transport\ResourceReader\StreamResourceReader;
 use RuntimeException;
 use Phptg\BotApi\Transport\MimeTypeResolver\ApacheMimeTypeResolver;
 use Phptg\BotApi\Transport\MimeTypeResolver\MimeTypeResolverInterface;
@@ -32,7 +31,6 @@ final readonly class NativeTransport implements TransportInterface
         private MimeTypeResolverInterface $mimeTypeResolver = new ApacheMimeTypeResolver(),
         private array $resourceReaders = [
             new NativeResourceReader(),
-            new StreamResourceReader(),
         ],
     ) {}
 
