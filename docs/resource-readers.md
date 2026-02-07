@@ -10,8 +10,9 @@ The package provides one built-in resource reader:
 
 - `NativeResourceReader` — handles native PHP stream resources created by functions like `fopen()`, `tmpfile()`, etc.
 
-Also, the [phptg/transport-psr](https://github.com/phptg/transport-psr) package provides `StreamResourceReader`,
-which adds support for PSR-7 `StreamInterface` resources.
+## Additional readers
+
+- `StreamResourceReader` — handles PSR-7 `StreamInterface` resources. Provided by the [phptg/transport-psr](https://github.com/phptg/transport-psr) package.
 
 ## Custom resource readers
 
