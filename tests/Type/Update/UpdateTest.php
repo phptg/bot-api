@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Type\Update;
 
-use HttpSoft\Message\StreamTrait;
 use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\StreamInterface;
 use Throwable;
 use Phptg\BotApi\ParseResult\TelegramParseResultException;
 use Phptg\BotApi\ParseResult\ObjectFactory;
