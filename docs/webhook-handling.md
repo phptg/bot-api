@@ -6,11 +6,10 @@ This guide explains how to handle incoming webhook updates from Telegram and how
 
 You can create an `Update` object by several ways:
 
-- [from PSR-7 request](#from-psr-7-request),
 - [from JSON string](#from-json-string),
 - [via constructor](#via-constructor).
 
-If `Update` created by `fromJson()` or `fromServerRequest()` method, you can get raw data via `getRaw()` method:
+If `Update` created by `fromJson()` method, you can get raw data via `getRaw()` method:
 
 ```php
 /**
@@ -53,26 +52,6 @@ $raw = $update->getRaw();
  * ]
  */
 $raw = $update->getRaw(decoded: true);
-```
-
-### From PSR-7 request
-
-Creating `Update` object from the incoming webhook PSR-7 request:
-
-```php
-use Psr\Http\Message\ServerRequestInterface;
-use Phptg\BotApi\ParseResult\TelegramParseResultException;
-use Phptg\BotApi\Type\Update\Update;
-
-/**
- * @var ServerRequestInterface $request
- */
-
-try {
-    $update = Update::fromServerRequest($request);
-} catch (TelegramParseResultException $e) {
-    // ... 
-}
 ```
 
 ### From JSON string
@@ -136,39 +115,6 @@ if ($webhookResponse->isSupported()) {
     // Returns: ['method' => 'sendMessage', 'chat_id' => 12345, 'text' => 'Hello!']
 }
 ```
-
-### PSR-7 response factory
-
-The `PsrWebhookResponseFactory` creates PSR-7 compliant HTTP responses for webhook handlers:
-
-```php
-use Psr\Http\Message\ResponseFactoryInterface;
-use Psr\Http\Message\StreamFactoryInterface;
-use Phptg\BotApi\Method\SendMessage;
-use Phptg\BotApi\WebhookResponse\PsrWebhookResponseFactory;
-use Phptg\BotApi\WebhookResponse\WebhookResponse;
-
-/**
- * @var ResponseFactoryInterface $responseFactory
- * @var StreamFactoryInterface $streamFactory
- */
-
-$factory = new PsrWebhookResponseFactory($responseFactory, $streamFactory);
-
-// Create response from WebhookResponse object
-$webhookResponse = new WebhookResponse(new SendMessage(chatId: 12345, text: 'Hello!'));
-$response = $factory->create($webhookResponse);
-
-// Or create response directly from method, if you are sure that InputFile is not used
-$method = new SendMessage(chatId: 12345, text: 'Hello!');
-$response = $factory->byMethod($method);
-```
-
-The factory automatically:
-
-- encodes the data as JSON;
-- sets the `Content-Type` header to `application/json; charset=utf-8`;
-- sets the `Content-Length` header.
 
 ### JSON response factory
 
