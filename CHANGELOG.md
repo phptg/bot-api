@@ -6,6 +6,7 @@
 - New #186: Add `iconCustomEmojiId` and `style` fields to `KeyboardButton` type.
 - New #186: Add `iconCustomEmojiId` and `style` fields to `InlineKeyboardButton` type.
 - New #186: Add `ChatOwnerLeft` and `ChatOwnerChanged` types.
+- New #186: Add `chatOwnerLeft` and `chatOwnerChanged` fields to `Message` type.
 
 ## 0.14 February 7, 2026
 

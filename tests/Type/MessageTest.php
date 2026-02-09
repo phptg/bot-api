@@ -11,6 +11,8 @@ use Phptg\BotApi\Type\Chat;
 use Phptg\BotApi\Type\Checklist;
 use Phptg\BotApi\Type\ChecklistTask;
 use Phptg\BotApi\Type\ChecklistTasksAdded;
+use Phptg\BotApi\Type\ChatOwnerChanged;
+use Phptg\BotApi\Type\ChatOwnerLeft;
 use Phptg\BotApi\Type\ChecklistTasksDone;
 use Phptg\BotApi\Type\DirectMessagePriceChanged;
 use Phptg\BotApi\Type\ExternalReplyInfo;
@@ -143,6 +145,8 @@ final class MessageTest extends TestCase
         assertNull($message->suggestedPostDeclined);
         assertNull($message->suggestedPostPaid);
         assertNull($message->suggestedPostRefunded);
+        assertNull($message->chatOwnerLeft);
+        assertNull($message->chatOwnerChanged);
     }
 
     public function testFromTelegramResult(): void
@@ -633,6 +637,20 @@ final class MessageTest extends TestCase
                     ['id' => 4, 'text' => 'Task 4'],
                 ],
             ],
+            'chat_owner_left' => [
+                'new_owner' => [
+                    'id' => 800,
+                    'is_bot' => false,
+                    'first_name' => 'Sergei',
+                ],
+            ],
+            'chat_owner_changed' => [
+                'new_owner' => [
+                    'id' => 801,
+                    'is_bot' => false,
+                    'first_name' => 'Ivan',
+                ],
+            ],
         ], null, Message::class);
 
         assertSame(7, $message->messageId);
@@ -771,5 +789,7 @@ final class MessageTest extends TestCase
         assertSame('insufficient_funds', $message->suggestedPostDeclined?->comment);
         assertSame('RUB', $message->suggestedPostPaid?->currency);
         assertSame('refund_reason', $message->suggestedPostRefunded?->reason);
+        assertSame(800, $message->chatOwnerLeft?->newOwner?->id);
+        assertSame(801, $message->chatOwnerChanged?->newOwner->id);
     }
 }

@@ -138,5 +138,7 @@ final readonly class Message
         public ?SuggestedPostDeclined $suggestedPostDeclined = null,
         public ?SuggestedPostPaid $suggestedPostPaid = null,
         public ?SuggestedPostRefunded $suggestedPostRefunded = null,
+        public ?ChatOwnerLeft $chatOwnerLeft = null,
+        public ?ChatOwnerChanged $chatOwnerChanged = null,
     ) {}
 }
