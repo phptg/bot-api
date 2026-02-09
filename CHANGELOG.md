@@ -13,6 +13,7 @@
 - New #186: Add `qualities` field to `Video` type.
 - New #186: Add `firstProfileAudio` field to `ChatFullInfo` type.
 - New #186: Add `UserProfileAudios` type.
+- New #186: Add `GetUserProfileAudios` method.
 
 ## 0.14 February 7, 2026
 

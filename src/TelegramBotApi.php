@@ -61,6 +61,7 @@ use Phptg\BotApi\Method\GetMyShortDescription;
 use Phptg\BotApi\Method\GetMyStarBalance;
 use Phptg\BotApi\Method\GetUserChatBoosts;
 use Phptg\BotApi\Method\GetUserGifts;
+use Phptg\BotApi\Method\GetUserProfileAudios;
 use Phptg\BotApi\Method\GetUserProfilePhotos;
 use Phptg\BotApi\Method\GiftPremiumSubscription;
 use Phptg\BotApi\Method\HideGeneralForumTopic;
@@ -238,6 +239,7 @@ use Phptg\BotApi\Type\Update\Update;
 use Phptg\BotApi\Type\Update\WebhookInfo;
 use Phptg\BotApi\Type\User;
 use Phptg\BotApi\Type\UserChatBoosts;
+use Phptg\BotApi\Type\UserProfileAudios;
 use Phptg\BotApi\Type\UserProfilePhotos;
 
 use function extension_loaded;
@@ -1458,6 +1460,19 @@ final class TelegramBotApi
                 $offset,
                 $limit,
             ),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#getuserprofileaudios
+     */
+    public function getUserProfileAudios(
+        int $userId,
+        ?int $offset = null,
+        ?int $limit = null,
+    ): FailResult|UserProfileAudios {
+        return $this->call(
+            new GetUserProfileAudios($userId, $offset, $limit),
         );
     }
 

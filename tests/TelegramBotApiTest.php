@@ -53,6 +53,7 @@ use Phptg\BotApi\Type\Sticker\Sticker;
 use Phptg\BotApi\Type\Story;
 use Phptg\BotApi\Type\User;
 use Phptg\BotApi\Type\UserChatBoosts;
+use Phptg\BotApi\Type\UserProfileAudios;
 use Phptg\BotApi\Type\UserProfilePhotos;
 use Phptg\BotApi\Type\Update\Update;
 use Phptg\BotApi\Type\Update\WebhookInfo;
@@ -1516,6 +1517,18 @@ final class TelegramBotApiTest extends TestCase
         $result = $api->getUserGifts(12345);
 
         assertInstanceOf(OwnedGifts::class, $result);
+    }
+
+    public function testGetUserProfileAudios(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            'total_count' => 0,
+            'audios' => [],
+        ]);
+
+        $result = $api->getUserProfileAudios(7);
+
+        assertInstanceOf(UserProfileAudios::class, $result);
     }
 
     public function testGetUserProfilePhotos(): void
