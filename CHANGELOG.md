@@ -5,7 +5,7 @@
 - New #186: Add `allowsUsersToCreateTopics` field to `User` type.
 - New #186: Add `iconCustomEmojiId` and `style` fields to `KeyboardButton` type.
 - New #186: Add `iconCustomEmojiId` and `style` fields to `InlineKeyboardButton` type.
-- New #186: Add `ChatOwnerLeft` type.
+- New #186: Add `ChatOwnerLeft` and `ChatOwnerChanged` types.
 
 ## 0.14 February 7, 2026
 
