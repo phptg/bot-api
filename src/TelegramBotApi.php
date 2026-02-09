@@ -82,6 +82,7 @@ use Phptg\BotApi\Method\PostStory;
 use Phptg\BotApi\Method\PromoteChatMember;
 use Phptg\BotApi\Method\RepostStory;
 use Phptg\BotApi\Method\RemoveBusinessAccountProfilePhoto;
+use Phptg\BotApi\Method\RemoveMyProfilePhoto;
 use Phptg\BotApi\Method\RemoveChatVerification;
 use Phptg\BotApi\Method\RemoveUserVerification;
 use Phptg\BotApi\Method\ReopenForumTopic;
@@ -1682,6 +1683,14 @@ final class TelegramBotApi
         return $this->call(
             new RemoveBusinessAccountProfilePhoto($businessConnectionId, $isPublic),
         );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#removemyprofilephoto
+     */
+    public function removeMyProfilePhoto(): FailResult|true
+    {
+        return $this->call(new RemoveMyProfilePhoto());
     }
 
     /**
