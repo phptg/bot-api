@@ -2,18 +2,14 @@
 
 ## 0.14.1 under development
 
+- New #186: Add `SetMyProfilePhoto`, `RemoveMyProfilePhoto` and `GetUserProfileAudios` methods.
+- New #186: Add `ChatOwnerLeft`, `ChatOwnerChanged`, `VideoQuality` and `UserProfileAudios` types.
 - New #186: Add `allowsUsersToCreateTopics` field to `User` type.
 - New #186: Add `iconCustomEmojiId` and `style` fields to `KeyboardButton` type.
 - New #186: Add `iconCustomEmojiId` and `style` fields to `InlineKeyboardButton` type.
-- New #186: Add `ChatOwnerLeft` and `ChatOwnerChanged` types.
 - New #186: Add `chatOwnerLeft` and `chatOwnerChanged` fields to `Message` type.
-- New #186: Add `SetMyProfilePhoto` method.
-- New #186: Add `RemoveMyProfilePhoto` method.
-- New #186: Add `VideoQuality` type.
 - New #186: Add `qualities` field to `Video` type.
 - New #186: Add `firstProfileAudio` field to `ChatFullInfo` type.
-- New #186: Add `UserProfileAudios` type.
-- New #186: Add `GetUserProfileAudios` method.
 - New #186: Add `rarity` field to `UniqueGiftModel` type.
 - New #186: Add `isBurned` field to `UniqueGift` type.
 
