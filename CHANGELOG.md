@@ -15,6 +15,7 @@
 - New #186: Add `UserProfileAudios` type.
 - New #186: Add `GetUserProfileAudios` method.
 - New #186: Add `rarity` field to `UniqueGiftModel` type.
+- New #186: Add `isBurned` field to `UniqueGift` type.
 
 ## 0.14 February 7, 2026
 

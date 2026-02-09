@@ -6,6 +6,7 @@ namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\Chat;
 use Phptg\BotApi\Type\Sticker\Sticker;
 use Phptg\BotApi\Type\UniqueGift;
 use Phptg\BotApi\Type\UniqueGiftBackdrop;
@@ -51,6 +52,63 @@ final class UniqueGiftTest extends TestCase
         assertNull($type->isFromBlockchain);
         assertNull($type->colors);
         assertNull($type->publisherChat);
+        assertNull($type->isBurned);
+    }
+
+    public function testFull(): void
+    {
+        $model = new UniqueGiftModel(
+            'modelId',
+            new Sticker('stickerId', 'uniqueStickerId', 'unique', 100, 120, false, true),
+            500,
+        );
+        $symbol = new UniqueGiftSymbol(
+            'symbolId',
+            new Sticker('stickerId', 'uniqueStickerId', 'unique', 100, 120, false, true),
+            300,
+        );
+        $backdrop = new UniqueGiftBackdrop(
+            'backdropId',
+            new UniqueGiftBackdropColors(1, 2, 3, 4),
+            200,
+        );
+        $colors = new UniqueGiftColors(
+            'model-emoji-123',
+            'symbol-emoji-456',
+            16733525,
+            [13041721, 9473087],
+            5773381,
+            [16761600, 14349222],
+        );
+        $publisherChat = new Chat(789, 'channel');
+
+        $type = new UniqueGift(
+            'gift123',
+            'baseName',
+            'uniqueName',
+            1,
+            $model,
+            $symbol,
+            $backdrop,
+            true,
+            true,
+            $colors,
+            $publisherChat,
+            true,
+        );
+
+        assertSame('gift123', $type->giftId);
+        assertSame('baseName', $type->baseName);
+        assertSame('uniqueName', $type->name);
+        assertSame(1, $type->number);
+        assertSame($model, $type->model);
+        assertSame($symbol, $type->symbol);
+        assertSame($backdrop, $type->backdrop);
+        assertSame(true, $type->isPremium);
+        assertSame(true, $type->isFromBlockchain);
+        assertSame($colors, $type->colors);
+        assertSame($publisherChat, $type->publisherChat);
+        assertSame(true, $type->isBurned);
     }
 
     public function testFromTelegramResult(): void
@@ -97,6 +155,7 @@ final class UniqueGiftTest extends TestCase
                 'rarity_per_mille' => 200,
             ],
             'is_premium' => true,
+            'is_burned' => true,
             'is_from_blockchain' => true,
             'colors' => [
                 'model_custom_emoji_id' => 'model-emoji-123',
@@ -136,5 +195,6 @@ final class UniqueGiftTest extends TestCase
         assertSame('symbol-emoji-456', $type->colors->symbolCustomEmojiId);
         assertSame(16733525, $type->colors->lightThemeMainColor);
         assertSame(789, $type->publisherChat?->id);
+        assertSame(true, $type->isBurned);
     }
 }
