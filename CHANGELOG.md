@@ -3,6 +3,8 @@
 ## 0.14.1 under development
 
 - New #186: Add `allowsUsersToCreateTopics` field to `User` type.
+- New #186: Add `iconCustomEmojiId` and `style` fields to `KeyboardButton` type.
+- New #186: Add `iconCustomEmojiId` and `style` fields to `InlineKeyboardButton` type.
 
 ## 0.14 February 7, 2026
 
