@@ -1,5 +1,18 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.14.1 February 9, 2026
+
+- New #186: Add `SetMyProfilePhoto`, `RemoveMyProfilePhoto` and `GetUserProfileAudios` methods.
+- New #186: Add `ChatOwnerLeft`, `ChatOwnerChanged`, `VideoQuality` and `UserProfileAudios` types.
+- New #186: Add `allowsUsersToCreateTopics` field to `User` type.
+- New #186: Add `iconCustomEmojiId` and `style` fields to `KeyboardButton` type.
+- New #186: Add `iconCustomEmojiId` and `style` fields to `InlineKeyboardButton` type.
+- New #186: Add `chatOwnerLeft` and `chatOwnerChanged` fields to `Message` type.
+- New #186: Add `qualities` field to `Video` type.
+- New #186: Add `firstProfileAudio` field to `ChatFullInfo` type.
+- New #186: Add `rarity` field to `UniqueGiftModel` type.
+- New #186: Add `isBurned` field to `UniqueGift` type.
+
 ## 0.14 February 7, 2026
 
 - New #182: Introduce resource readers that handle reading content from different types of resources stored in

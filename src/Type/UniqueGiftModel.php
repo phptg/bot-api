@@ -17,5 +17,6 @@ final readonly class UniqueGiftModel
         public string $name,
         public Sticker $sticker,
         public int $rarityPerMille,
+        public ?string $rarity = null,
     ) {}
 }

@@ -29,6 +29,7 @@ final class VideoTest extends TestCase
         assertNull($video->fileSize);
         assertNull($video->cover);
         assertNull($video->startTimestamp);
+        assertNull($video->qualities);
     }
 
     public function testFromTelegramResult(): void
@@ -60,6 +61,23 @@ final class VideoTest extends TestCase
                 ],
             ],
             'start_timestamp' => 17,
+            'qualities' => [
+                [
+                    'file_id' => 'fq1',
+                    'file_unique_id' => 'fuq1',
+                    'width' => 1920,
+                    'height' => 1080,
+                    'codec' => 'h264',
+                    'file_size' => 50000,
+                ],
+                [
+                    'file_id' => 'fq2',
+                    'file_unique_id' => 'fuq2',
+                    'width' => 1280,
+                    'height' => 720,
+                    'codec' => 'h265',
+                ],
+            ],
             'file_name' => 'face.png',
             'mime_type' => 'image/png',
             'file_size' => 123,
@@ -78,5 +96,8 @@ final class VideoTest extends TestCase
         assertSame('file_id-3', $video->cover[0]->fileId);
         assertSame('file_id-4', $video->cover[1]->fileId);
         assertSame(17, $video->startTimestamp);
+        assertCount(2, $video->qualities);
+        assertSame('fq1', $video->qualities[0]->fileId);
+        assertSame('fq2', $video->qualities[1]->fileId);
     }
 }

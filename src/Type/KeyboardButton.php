@@ -19,6 +19,8 @@ final readonly class KeyboardButton
         public ?bool $requestLocation = null,
         public ?KeyboardButtonPollType $requestPoll = null,
         public ?WebAppInfo $webApp = null,
+        public ?string $iconCustomEmojiId = null,
+        public ?string $style = null,
     ) {}
 
     public function toRequestArray(): array
@@ -26,6 +28,8 @@ final readonly class KeyboardButton
         return array_filter(
             [
                 'text' => $this->text,
+                'icon_custom_emoji_id' => $this->iconCustomEmojiId,
+                'style' => $this->style,
                 'request_users' => $this->requestUsers?->toRequestArray(),
                 'request_chat' => $this->requestChat?->toRequestArray(),
                 'request_contact' => $this->requestContact,

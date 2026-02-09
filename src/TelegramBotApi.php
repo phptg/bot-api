@@ -61,6 +61,7 @@ use Phptg\BotApi\Method\GetMyShortDescription;
 use Phptg\BotApi\Method\GetMyStarBalance;
 use Phptg\BotApi\Method\GetUserChatBoosts;
 use Phptg\BotApi\Method\GetUserGifts;
+use Phptg\BotApi\Method\GetUserProfileAudios;
 use Phptg\BotApi\Method\GetUserProfilePhotos;
 use Phptg\BotApi\Method\GiftPremiumSubscription;
 use Phptg\BotApi\Method\HideGeneralForumTopic;
@@ -82,6 +83,7 @@ use Phptg\BotApi\Method\PostStory;
 use Phptg\BotApi\Method\PromoteChatMember;
 use Phptg\BotApi\Method\RepostStory;
 use Phptg\BotApi\Method\RemoveBusinessAccountProfilePhoto;
+use Phptg\BotApi\Method\RemoveMyProfilePhoto;
 use Phptg\BotApi\Method\RemoveChatVerification;
 use Phptg\BotApi\Method\RemoveUserVerification;
 use Phptg\BotApi\Method\ReopenForumTopic;
@@ -123,6 +125,7 @@ use Phptg\BotApi\Method\SetMyCommands;
 use Phptg\BotApi\Method\SetMyDefaultAdministratorRights;
 use Phptg\BotApi\Method\SetMyDescription;
 use Phptg\BotApi\Method\SetMyName;
+use Phptg\BotApi\Method\SetMyProfilePhoto;
 use Phptg\BotApi\Method\SetMyShortDescription;
 use Phptg\BotApi\Method\SetUserEmojiStatus;
 use Phptg\BotApi\Method\Sticker\AddStickerToSet;
@@ -236,6 +239,7 @@ use Phptg\BotApi\Type\Update\Update;
 use Phptg\BotApi\Type\Update\WebhookInfo;
 use Phptg\BotApi\Type\User;
 use Phptg\BotApi\Type\UserChatBoosts;
+use Phptg\BotApi\Type\UserProfileAudios;
 use Phptg\BotApi\Type\UserProfilePhotos;
 
 use function extension_loaded;
@@ -1460,6 +1464,19 @@ final class TelegramBotApi
     }
 
     /**
+     * @see https://core.telegram.org/bots/api#getuserprofileaudios
+     */
+    public function getUserProfileAudios(
+        int $userId,
+        ?int $offset = null,
+        ?int $limit = null,
+    ): FailResult|UserProfileAudios {
+        return $this->call(
+            new GetUserProfileAudios($userId, $offset, $limit),
+        );
+    }
+
+    /**
      * @see https://core.telegram.org/bots/api#getuserprofilephotos
      */
     public function getUserProfilePhotos(
@@ -1681,6 +1698,14 @@ final class TelegramBotApi
         return $this->call(
             new RemoveBusinessAccountProfilePhoto($businessConnectionId, $isPublic),
         );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#removemyprofilephoto
+     */
+    public function removeMyProfilePhoto(): FailResult|true
+    {
+        return $this->call(new RemoveMyProfilePhoto());
     }
 
     /**
@@ -2954,6 +2979,14 @@ final class TelegramBotApi
     public function setMyName(?string $name = null, ?string $languageCode = null): FailResult|true
     {
         return $this->call(new SetMyName($name, $languageCode));
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#setmyprofilephoto
+     */
+    public function setMyProfilePhoto(InputProfilePhoto $photo): FailResult|true
+    {
+        return $this->call(new SetMyProfilePhoto($photo));
     }
 
     /**

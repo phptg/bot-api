@@ -18,6 +18,7 @@ use Phptg\BotApi\Type\ChatPermissions;
 use Phptg\BotApi\Type\ChatPhoto;
 use Phptg\BotApi\Type\Message;
 use Phptg\BotApi\Type\ReactionTypeCustomEmoji;
+use Phptg\BotApi\Type\Audio;
 use Phptg\BotApi\Type\UniqueGiftColors;
 use Phptg\BotApi\Type\UserRating;
 
@@ -85,6 +86,7 @@ final class ChatFullInfoTest extends TestCase
         assertNull($info->rating);
         assertNull($info->uniqueGiftColors);
         assertNull($info->paidMessageStarCount);
+        assertNull($info->firstProfileAudio);
     }
 
     public function testFromTelegramResult(): void
@@ -195,6 +197,13 @@ final class ChatFullInfoTest extends TestCase
                 'current_level_rating' => 800,
                 'next_level_rating' => 1200,
             ],
+            'first_profile_audio' => [
+                'file_id' => 'audio_f1',
+                'file_unique_id' => 'audio_fu1',
+                'duration' => 180,
+                'performer' => 'Artist',
+                'title' => 'Song',
+            ],
             'unique_gift_colors' => [
                 'model_custom_emoji_id' => 'model_emoji_123',
                 'symbol_custom_emoji_id' => 'symbol_emoji_456',
@@ -299,5 +308,11 @@ final class ChatFullInfoTest extends TestCase
         assertSame([0x2A2A2A, 0x3A3A3A], $info->uniqueGiftColors->darkThemeOtherColors);
 
         assertSame(100, $info->paidMessageStarCount);
+
+        assertInstanceOf(Audio::class, $info->firstProfileAudio);
+        assertSame('audio_f1', $info->firstProfileAudio->fileId);
+        assertSame(180, $info->firstProfileAudio->duration);
+        assertSame('Artist', $info->firstProfileAudio->performer);
+        assertSame('Song', $info->firstProfileAudio->title);
     }
 }
