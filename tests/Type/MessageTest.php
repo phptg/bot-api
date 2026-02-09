@@ -11,8 +11,6 @@ use Phptg\BotApi\Type\Chat;
 use Phptg\BotApi\Type\Checklist;
 use Phptg\BotApi\Type\ChecklistTask;
 use Phptg\BotApi\Type\ChecklistTasksAdded;
-use Phptg\BotApi\Type\ChatOwnerChanged;
-use Phptg\BotApi\Type\ChatOwnerLeft;
 use Phptg\BotApi\Type\ChecklistTasksDone;
 use Phptg\BotApi\Type\DirectMessagePriceChanged;
 use Phptg\BotApi\Type\ExternalReplyInfo;
