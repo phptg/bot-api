@@ -7,8 +7,6 @@ namespace Phptg\BotApi\Type;
 /**
  * @see https://core.telegram.org/bots/api#chatownerchanged
  *
- * Describes a service message about an ownership change in the chat.
- *
  * @api
  */
 final readonly class ChatOwnerChanged
