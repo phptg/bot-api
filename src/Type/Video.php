@@ -15,6 +15,7 @@ final readonly class Video
 {
     /**
      * @param PhotoSize[]|null $cover
+     * @param VideoQuality[]|null $qualities
      */
     public function __construct(
         public string $fileId,
@@ -29,5 +30,7 @@ final readonly class Video
         #[ArrayOfObjectsValue(PhotoSize::class)]
         public ?array $cover = null,
         public ?int $startTimestamp = null,
+        #[ArrayOfObjectsValue(VideoQuality::class)]
+        public ?array $qualities = null,
     ) {}
 }

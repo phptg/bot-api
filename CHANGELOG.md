@@ -10,6 +10,7 @@
 - New #186: Add `SetMyProfilePhoto` method.
 - New #186: Add `RemoveMyProfilePhoto` method.
 - New #186: Add `VideoQuality` type.
+- New #186: Add `qualities` field to `Video` type.
 
 ## 0.14 February 7, 2026
 
