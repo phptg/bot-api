@@ -14,6 +14,7 @@
 - New #186: Add `firstProfileAudio` field to `ChatFullInfo` type.
 - New #186: Add `UserProfileAudios` type.
 - New #186: Add `GetUserProfileAudios` method.
+- New #186: Add `rarity` field to `UniqueGiftModel` type.
 
 ## 0.14 February 7, 2026
 
