@@ -73,5 +73,6 @@ final readonly class ChatFullInfo
         public ?UserRating $rating = null,
         public ?UniqueGiftColors $uniqueGiftColors = null,
         public ?int $paidMessageStarCount = null,
+        public ?Audio $firstProfileAudio = null,
     ) {}
 }

@@ -11,6 +11,7 @@
 - New #186: Add `RemoveMyProfilePhoto` method.
 - New #186: Add `VideoQuality` type.
 - New #186: Add `qualities` field to `Video` type.
+- New #186: Add `firstProfileAudio` field to `ChatFullInfo` type.
 
 ## 0.14 February 7, 2026
 
