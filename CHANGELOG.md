@@ -1,6 +1,6 @@
 # Telegram Bot API for PHP Change Log
 
-## 0.14.1 under development
+## 0.14.1 February 9, 2026
 
 - New #186: Add `SetMyProfilePhoto`, `RemoveMyProfilePhoto` and `GetUserProfileAudios` methods.
 - New #186: Add `ChatOwnerLeft`, `ChatOwnerChanged`, `VideoQuality` and `UserProfileAudios` types.
