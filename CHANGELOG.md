@@ -9,6 +9,7 @@
 - New #186: Add `chatOwnerLeft` and `chatOwnerChanged` fields to `Message` type.
 - New #186: Add `SetMyProfilePhoto` method.
 - New #186: Add `RemoveMyProfilePhoto` method.
+- New #186: Add `VideoQuality` type.
 
 ## 0.14 February 7, 2026
 
