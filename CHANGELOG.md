@@ -1,5 +1,9 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.14.1 under development
+
+- New #186: Add `allowsUsersToCreateTopics` field to `User` type.
+
 ## 0.14 February 7, 2026
 
 - New #182: Introduce resource readers that handle reading content from different types of resources stored in
