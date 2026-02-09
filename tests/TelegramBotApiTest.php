@@ -2312,6 +2312,19 @@ final class TelegramBotApiTest extends TestCase
         assertTrue($result);
     }
 
+    public function testSetMyProfilePhoto(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->setMyProfilePhoto(
+            new InputProfilePhotoStatic(
+                new InputFile((new StreamFactory())->createStream()),
+            ),
+        );
+
+        assertTrue($result);
+    }
+
     public function testSetMyShortDescription(): void
     {
         $api = TestHelper::createSuccessStubApi(true);

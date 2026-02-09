@@ -123,6 +123,7 @@ use Phptg\BotApi\Method\SetMyCommands;
 use Phptg\BotApi\Method\SetMyDefaultAdministratorRights;
 use Phptg\BotApi\Method\SetMyDescription;
 use Phptg\BotApi\Method\SetMyName;
+use Phptg\BotApi\Method\SetMyProfilePhoto;
 use Phptg\BotApi\Method\SetMyShortDescription;
 use Phptg\BotApi\Method\SetUserEmojiStatus;
 use Phptg\BotApi\Method\Sticker\AddStickerToSet;
@@ -2954,6 +2955,14 @@ final class TelegramBotApi
     public function setMyName(?string $name = null, ?string $languageCode = null): FailResult|true
     {
         return $this->call(new SetMyName($name, $languageCode));
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#setmyprofilephoto
+     */
+    public function setMyProfilePhoto(InputProfilePhoto $photo): FailResult|true
+    {
+        return $this->call(new SetMyProfilePhoto($photo));
     }
 
     /**
