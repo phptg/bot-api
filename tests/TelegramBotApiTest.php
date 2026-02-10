@@ -2337,7 +2337,7 @@ final class TelegramBotApiTest extends TestCase
 
         $result = $api->setMyProfilePhoto(
             new InputProfilePhotoStatic(
-                new InputFile((new StreamFactory())->createStream()),
+                new InputFile(null),
             ),
         );
 
