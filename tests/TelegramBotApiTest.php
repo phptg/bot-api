@@ -52,6 +52,7 @@ use Phptg\BotApi\Type\Sticker\Sticker;
 use Phptg\BotApi\Type\Story;
 use Phptg\BotApi\Type\User;
 use Phptg\BotApi\Type\UserChatBoosts;
+use Phptg\BotApi\Type\UserProfileAudios;
 use Phptg\BotApi\Type\UserProfilePhotos;
 use Phptg\BotApi\Type\Update\Update;
 use Phptg\BotApi\Type\Update\WebhookInfo;
@@ -1515,6 +1516,18 @@ final class TelegramBotApiTest extends TestCase
         assertInstanceOf(OwnedGifts::class, $result);
     }
 
+    public function testGetUserProfileAudios(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            'total_count' => 0,
+            'audios' => [],
+        ]);
+
+        $result = $api->getUserProfileAudios(7);
+
+        assertInstanceOf(UserProfileAudios::class, $result);
+    }
+
     public function testGetUserProfilePhotos(): void
     {
         $api = TestHelper::createSuccessStubApi([
@@ -1669,6 +1682,15 @@ final class TelegramBotApiTest extends TestCase
         $api = TestHelper::createSuccessStubApi(true);
 
         $result = $api->removeBusinessAccountProfilePhoto('connection1');
+
+        assertTrue($result);
+    }
+
+    public function testRemoveMyProfilePhoto(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->removeMyProfilePhoto();
 
         assertTrue($result);
     }
@@ -2305,6 +2327,19 @@ final class TelegramBotApiTest extends TestCase
         $api = TestHelper::createSuccessStubApi(true);
 
         $result = $api->setMyName();
+
+        assertTrue($result);
+    }
+
+    public function testSetMyProfilePhoto(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->setMyProfilePhoto(
+            new InputProfilePhotoStatic(
+                new InputFile((new StreamFactory())->createStream()),
+            ),
+        );
 
         assertTrue($result);
     }

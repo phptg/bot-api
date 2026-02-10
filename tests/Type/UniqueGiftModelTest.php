@@ -10,6 +10,7 @@ use Phptg\BotApi\Type\Sticker\Sticker;
 use Phptg\BotApi\Type\UniqueGiftModel;
 
 use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 
 final class UniqueGiftModelTest extends TestCase
@@ -22,6 +23,18 @@ final class UniqueGiftModelTest extends TestCase
         assertSame('modelId', $model->name);
         assertSame($sticker, $model->sticker);
         assertSame(500, $model->rarityPerMille);
+        assertNull($model->rarity);
+    }
+
+    public function testFull(): void
+    {
+        $sticker = new Sticker('stickerId', 'uniqueStickerId', 'unique', 100, 120, false, true);
+        $model = new UniqueGiftModel('modelId', $sticker, 500, 'rare');
+
+        assertSame('modelId', $model->name);
+        assertSame($sticker, $model->sticker);
+        assertSame(500, $model->rarityPerMille);
+        assertSame('rare', $model->rarity);
     }
 
     public function testFromTelegramResult(): void
@@ -38,11 +51,13 @@ final class UniqueGiftModelTest extends TestCase
                 'is_video' => true,
             ],
             'rarity_per_mille' => 500,
+            'rarity' => 'epic',
         ], null, UniqueGiftModel::class);
 
         assertInstanceOf(UniqueGiftModel::class, $model);
         assertSame('modelId', $model->name);
         assertSame('stickerId', $model->sticker->fileId);
         assertSame(500, $model->rarityPerMille);
+        assertSame('epic', $model->rarity);
     }
 }

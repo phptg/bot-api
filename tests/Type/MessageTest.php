@@ -143,6 +143,8 @@ final class MessageTest extends TestCase
         assertNull($message->suggestedPostDeclined);
         assertNull($message->suggestedPostPaid);
         assertNull($message->suggestedPostRefunded);
+        assertNull($message->chatOwnerLeft);
+        assertNull($message->chatOwnerChanged);
     }
 
     public function testFromTelegramResult(): void
@@ -633,6 +635,20 @@ final class MessageTest extends TestCase
                     ['id' => 4, 'text' => 'Task 4'],
                 ],
             ],
+            'chat_owner_left' => [
+                'new_owner' => [
+                    'id' => 800,
+                    'is_bot' => false,
+                    'first_name' => 'Sergei',
+                ],
+            ],
+            'chat_owner_changed' => [
+                'new_owner' => [
+                    'id' => 801,
+                    'is_bot' => false,
+                    'first_name' => 'Ivan',
+                ],
+            ],
         ], null, Message::class);
 
         assertSame(7, $message->messageId);
@@ -771,5 +787,7 @@ final class MessageTest extends TestCase
         assertSame('insufficient_funds', $message->suggestedPostDeclined?->comment);
         assertSame('RUB', $message->suggestedPostPaid?->currency);
         assertSame('refund_reason', $message->suggestedPostRefunded?->reason);
+        assertSame(800, $message->chatOwnerLeft?->newOwner?->id);
+        assertSame(801, $message->chatOwnerChanged?->newOwner->id);
     }
 }

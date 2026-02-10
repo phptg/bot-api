@@ -25,6 +25,8 @@ final readonly class InlineKeyboardButton
         public ?CallbackGame $callbackGame = null,
         public ?bool $pay = null,
         public ?CopyTextButton $copyText = null,
+        public ?string $iconCustomEmojiId = null,
+        public ?string $style = null,
     ) {}
 
     public function toRequestArray(): array
@@ -32,6 +34,8 @@ final readonly class InlineKeyboardButton
         return array_filter(
             [
                 'text' => $this->text,
+                'icon_custom_emoji_id' => $this->iconCustomEmojiId,
+                'style' => $this->style,
                 'url' => $this->url,
                 'callback_data' => $this->callbackData,
                 'web_app' => $this->webApp?->toRequestArray(),

@@ -23,5 +23,6 @@ final readonly class UniqueGift
         public ?true $isFromBlockchain = null,
         public ?UniqueGiftColors $colors = null,
         public ?Chat $publisherChat = null,
+        public ?true $isBurned = null,
     ) {}
 }

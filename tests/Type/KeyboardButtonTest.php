@@ -23,6 +23,8 @@ final class KeyboardButtonTest extends TestCase
         $button = new KeyboardButton('test');
 
         assertSame('test', $button->text);
+        assertNull($button->iconCustomEmojiId);
+        assertNull($button->style);
         assertNull($button->requestUsers);
         assertNull($button->requestChat);
         assertNull($button->requestContact);
@@ -52,9 +54,13 @@ final class KeyboardButtonTest extends TestCase
             false,
             $requestPoll,
             $webApp,
+            '5368324170671202286',
+            'primary',
         );
 
         assertSame('test', $button->text);
+        assertSame('5368324170671202286', $button->iconCustomEmojiId);
+        assertSame('primary', $button->style);
         assertSame($requestUsers, $button->requestUsers);
         assertSame($requestChat, $button->requestChat);
         assertTrue($button->requestContact);
@@ -65,6 +71,8 @@ final class KeyboardButtonTest extends TestCase
         assertSame(
             [
                 'text' => 'test',
+                'icon_custom_emoji_id' => '5368324170671202286',
+                'style' => 'primary',
                 'request_users' => $requestUsers->toRequestArray(),
                 'request_chat' => $requestChat->toRequestArray(),
                 'request_contact' => true,

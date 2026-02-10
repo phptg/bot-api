@@ -25,6 +25,8 @@ final class InlineKeyboardButtonTest extends TestCase
         $button = new InlineKeyboardButton('test');
 
         assertSame('test', $button->text);
+        assertNull($button->iconCustomEmojiId);
+        assertNull($button->style);
         assertNull($button->url);
         assertNull($button->callbackData);
         assertNull($button->webApp);
@@ -63,9 +65,13 @@ final class InlineKeyboardButtonTest extends TestCase
             $callbackGame,
             true,
             $copyText,
+            '5368324170671202286',
+            'primary',
         );
 
         assertSame('test', $button->text);
+        assertSame('5368324170671202286', $button->iconCustomEmojiId);
+        assertSame('primary', $button->style);
         assertSame('https://example.com', $button->url);
         assertSame('callback-data', $button->callbackData);
         assertSame($webApp, $button->webApp);
@@ -80,6 +86,8 @@ final class InlineKeyboardButtonTest extends TestCase
         assertSame(
             [
                 'text' => 'test',
+                'icon_custom_emoji_id' => '5368324170671202286',
+                'style' => 'primary',
                 'url' => 'https://example.com',
                 'callback_data' => 'callback-data',
                 'web_app' => $webApp->toRequestArray(),
@@ -99,6 +107,8 @@ final class InlineKeyboardButtonTest extends TestCase
     {
         $button = (new ObjectFactory())->create([
             'text' => 'test',
+            'icon_custom_emoji_id' => '5368324170671202286',
+            'style' => 'primary',
             'url' => 'https://example.com',
             'callback_data' => 'callback-data',
             'web_app' => ['url' => 'https://example.com/test'],
@@ -112,6 +122,8 @@ final class InlineKeyboardButtonTest extends TestCase
         ], null, InlineKeyboardButton::class);
 
         assertSame('test', $button->text);
+        assertSame('5368324170671202286', $button->iconCustomEmojiId);
+        assertSame('primary', $button->style);
         assertSame('https://example.com', $button->url);
         assertSame('callback-data', $button->callbackData);
         assertSame('https://example.com/test', $button->webApp?->url);
