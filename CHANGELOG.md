@@ -5,6 +5,7 @@
 - Chg #186: Remove `PsrTransport`, `PsrWebhookResponseFactory` and `StreamResourceReader` classes.
 - Chg #186: Remove `Update::fromServerRequest()` method.
 - Chg #186: Remove PSR composer dependencies.
+
 ## 0.14.1 February 9, 2026
 
 - New #186: Add `SetMyProfilePhoto`, `RemoveMyProfilePhoto` and `GetUserProfileAudios` methods.
