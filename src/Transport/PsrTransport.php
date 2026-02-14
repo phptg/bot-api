@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Transport;
 
-use Closure;
 use Http\Message\MultipartStream\MultipartStreamBuilder;
 use LogicException;
 use Psr\Http\Client\ClientExceptionInterface;

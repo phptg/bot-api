@@ -15,7 +15,6 @@ use Psr\Http\Message\StreamInterface;
 use Throwable;
 use Phptg\BotApi\Transport\DownloadFileException;
 use Phptg\BotApi\Transport\PsrTransport;
-
 use Yiisoft\Test\Support\HttpMessage\StringStream;
 
 use function PHPUnit\Framework\assertInstanceOf;
