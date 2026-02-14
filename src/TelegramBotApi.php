@@ -177,7 +177,6 @@ use Phptg\BotApi\Method\EditMessageChecklist;
 use Phptg\BotApi\Transport\CurlTransport;
 use Phptg\BotApi\Transport\DownloadFileException;
 use Phptg\BotApi\Transport\NativeTransport;
-use Phptg\BotApi\Transport\SaveFileException;
 use Phptg\BotApi\Transport\TransportInterface;
 use Phptg\BotApi\Type\AcceptedGiftTypes;
 use Phptg\BotApi\Type\BotCommand;
@@ -310,38 +309,24 @@ final class TelegramBotApi
     }
 
     /**
-     * Downloads a file from the Telegram servers and returns its content.
+     * Downloads a file from the Telegram servers.
      *
      * @param string|File $file File path or {@see File} object.
      *
-     * @return string The file content.
-     *
      * @throws DownloadFileException If an error occurred while downloading the file.
-     * @throws LogicException If the file path is not specified in `File` object.
      */
-    public function downloadFile(string|File $file): string
+    public function downloadFile(string|File $file): DownloadedFile
     {
-        return $this->transport->downloadFile(
+        /**
+         * @var resource $stream `php://temp` always opens successfully.
+         */
+        $stream = fopen('php://temp', 'r+b');
+        $this->transport->downloadFile(
             $this->makeFileUrl($file),
+            $stream,
         );
-    }
-
-    /**
-     * Downloads a file from the Telegram servers and saves it to a file.
-     *
-     * @param string|File $file File path or {@see File} object.
-     * @param string $savePath The path to save the file.
-     *
-     * @throws DownloadFileException If an error occurred while downloading the file.
-     * @throws SaveFileException If an error occurred while saving the file.
-     * @throws LogicException If the file path is not specified in `File` object.
-     */
-    public function downloadFileTo(string|File $file, string $savePath): void
-    {
-        $this->transport->downloadFileTo(
-            $this->makeFileUrl($file),
-            $savePath,
-        );
+        rewind($stream);
+        return new DownloadedFile($stream);
     }
 
     /**

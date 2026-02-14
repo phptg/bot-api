@@ -78,53 +78,11 @@ final readonly class CurlTransport implements TransportInterface
         return $this->send($options);
     }
 
-    public function downloadFile(string $url): string
+    public function downloadFile(string $url, mixed $stream): void
     {
         $options = [
             CURLOPT_URL => $url,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_FAILONERROR => true,
-            CURLOPT_SHARE => $this->curlShareHandle,
-        ];
-
-        try {
-            $curl = $this->curl->init();
-        } catch (CurlException $exception) {
-            throw new DownloadFileException($exception->getMessage(), previous: $exception);
-        }
-
-        try {
-            $this->curl->setopt_array($curl, $options);
-
-            /**
-             * @var string $result `curl_exec` returns string because `CURLOPT_RETURNTRANSFER` is set to `true`.
-             */
-            $result = $this->curl->exec($curl);
-        } catch (CurlException $exception) {
-            throw new DownloadFileException($exception->getMessage(), previous: $exception);
-        } finally {
-            $this->curl->close($curl);
-        }
-
-        return $result;
-    }
-
-    public function downloadFileTo(string $url, string $savePath): void
-    {
-        set_error_handler(
-            static function (int $errorNumber, string $errorString): bool {
-                throw new SaveFileException($errorString);
-            },
-        );
-        try {
-            $fileHandler = fopen($savePath, 'wb');
-        } finally {
-            restore_error_handler();
-        }
-
-        $options = [
-            CURLOPT_URL => $url,
-            CURLOPT_FILE => $fileHandler,
+            CURLOPT_FILE => $stream,
             CURLOPT_FAILONERROR => true,
             CURLOPT_SHARE => $this->curlShareHandle,
         ];

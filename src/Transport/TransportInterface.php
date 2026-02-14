@@ -52,24 +52,12 @@ interface TransportInterface
     public function postWithFiles(string $url, array $data, array $files): ApiResponse;
 
     /**
-     * Downloads a file by URL.
+     * Downloads a file by URL and writes its content to the given stream.
      *
      * @param string $url The URL of the file to download.
-     *
-     * @return string The file content.
+     * @param resource $stream The stream to write the file content to.
      *
      * @throws DownloadFileException If an error occurred while downloading the file.
      */
-    public function downloadFile(string $url): string;
-
-    /**
-     * Downloads a file by URL and saves it to a file.
-     *
-     * @param string $url The URL of the file to download.
-     * @param string $savePath The path to save the file.
-     *
-     * @throws DownloadFileException If an error occurred while downloading the file.
-     * @throws SaveFileException If an error occurred while saving the file.
-     */
-    public function downloadFileTo(string $url, string $savePath): void;
+    public function downloadFile(string $url, mixed $stream): void;
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Transport;
 
+use Closure;
 use Http\Message\MultipartStream\MultipartStreamBuilder;
 use LogicException;
 use Psr\Http\Client\ClientExceptionInterface;
@@ -75,25 +76,41 @@ final readonly class PsrTransport implements TransportInterface
         return $this->send($request);
     }
 
-    public function downloadFile(string $url): string
+    public function downloadFile(string $url, mixed $stream): void
     {
-        return $this->internalDownload($url)->getContents();
-    }
+        $request = $this->requestFactory->createRequest('GET', $url);
 
-    public function downloadFileTo(string $url, string $savePath): void
-    {
-        $body = $this->internalDownload($url);
+        try {
+            $response = $this->client->sendRequest($request);
+        } catch (ClientExceptionInterface $exception) {
+            throw new DownloadFileException($exception->getMessage(), previous: $exception);
+        }
 
-        $content = $body->detach();
-        $content ??= $body->getContents();
+        $body = $response->getBody();
+        if ($body->isSeekable()) {
+            $body->rewind();
+        }
+
+        $resource = $body->detach();
 
         set_error_handler(
             static function (int $errorNumber, string $errorString): bool {
-                throw new SaveFileException($errorString);
+                throw new DownloadFileException($errorString);
             },
         );
         try {
-            file_put_contents($savePath, $content);
+            if ($resource === null) {
+                $result = fwrite($stream, (string) $body);
+                if ($result === false) {
+                    throw new DownloadFileException('Failed to write file content to stream.');
+                }
+                return;
+            }
+            try {
+                stream_copy_to_stream($resource, $stream);
+            } finally {
+                fclose($resource);
+            }
         } finally {
             restore_error_handler();
         }
@@ -112,26 +129,5 @@ final readonly class PsrTransport implements TransportInterface
             $response->getStatusCode(),
             $body->getContents(),
         );
-    }
-
-    /**
-     * @throws DownloadFileException
-     */
-    private function internalDownload(string $url): StreamInterface
-    {
-        $request = $this->requestFactory->createRequest('GET', $url);
-
-        try {
-            $response = $this->client->sendRequest($request);
-        } catch (ClientExceptionInterface $exception) {
-            throw new DownloadFileException($exception->getMessage(), previous: $exception);
-        }
-
-        $body = $response->getBody();
-        if ($body->isSeekable()) {
-            $body->rewind();
-        }
-
-        return $body;
     }
 }

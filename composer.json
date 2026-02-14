@@ -44,7 +44,7 @@
         "phpunit/phpunit": "^11.5.46",
         "psr/log": "^3.0.2",
         "yiisoft/files": "^2.1",
-        "yiisoft/test-support": "^3.1.0"
+        "yiisoft/test-support": "^3.2.0"
     },
     "suggest": {
         "ext-curl": "To use `CurlTransport`.",
