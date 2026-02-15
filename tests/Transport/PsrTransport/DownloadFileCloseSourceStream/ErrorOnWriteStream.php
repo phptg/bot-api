@@ -27,9 +27,7 @@ final class ErrorOnWriteStream
         return false;
     }
 
-    public function stream_close(): void
-    {
-    }
+    public function stream_close(): void {}
 
     public function stream_stat(): array|false
     {
