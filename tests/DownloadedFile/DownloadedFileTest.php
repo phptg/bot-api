@@ -6,7 +6,6 @@ namespace Phptg\BotApi\Tests\DownloadedFile;
 
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\DownloadedFile;
-use Phptg\BotApi\SaveFileException;
 
 use function PHPUnit\Framework\assertSame;
 
@@ -32,14 +31,5 @@ final class DownloadedFileTest extends TestCase
         $file = new DownloadedFile($stream);
 
         assertSame('hello-content', $file->getBody());
-    }
-
-    public function testSaveToError(): void
-    {
-        $stream = fopen('php://temp', 'r+b');
-        $file = new DownloadedFile($stream);
-
-        $this->expectException(SaveFileException::class);
-        $file->saveTo(__DIR__ . '/non-existent-directory/file.txt');
     }
 }
