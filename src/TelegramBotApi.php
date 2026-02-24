@@ -309,9 +309,12 @@ final class TelegramBotApi
     }
 
     /**
-     * Downloads a file from the Telegram servers.
+     * Downloads a file from the Telegram servers and returns a {@see DownloadedFile} instance
+     * that provides access to the file content as a stream, a string or allows saving it to a local path.
      *
-     * @param string|File $file File path or {@see File} object.
+     * @param string|File $file The file path (as returned by the Telegram API) or a {@see File} object.
+     *
+     * @return DownloadedFile The {@see DownloadedFile} instance with a seekable stream ready for reading.
      *
      * @throws DownloadFileException If an error occurred while downloading the file.
      */
