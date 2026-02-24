@@ -77,7 +77,7 @@ final readonly class NativeTransport implements TransportInterface
         );
     }
 
-    public function downloadFile(string $url, mixed $stream): void
+    public function downloadFile(string $url): mixed
     {
         set_error_handler(
             static function (int $errorNumber, string $errorString): bool {
@@ -86,17 +86,14 @@ final readonly class NativeTransport implements TransportInterface
         );
         try {
             /**
-             * @var resource $source We throw exception on error, so `fopen()` returns resource.
+             * @var resource $stream We throw exception on error, so `fopen()` returns resource.
              */
-            $source = fopen($url, 'rb');
-            try {
-                stream_copy_to_stream($source, $stream);
-            } finally {
-                fclose($source);
-            }
+            $stream = fopen($url, 'rb');
         } finally {
             restore_error_handler();
         }
+
+        return $stream;
     }
 
     private function send(string $url, array $options): ApiResponse

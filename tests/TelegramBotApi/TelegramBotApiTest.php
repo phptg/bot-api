@@ -2,23 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Phptg\BotApi\Tests;
+namespace Phptg\BotApi\Tests\TelegramBotApi;
 
 use HttpSoft\Message\StreamFactory;
 use LogicException;
-use Phptg\BotApi\Type\MessageEntity;
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\TestWith;
-use PHPUnit\Framework\TestCase;
-use Throwable;
 use Phptg\BotApi\CustomMethod;
-use Phptg\BotApi\Tests\Support\TestHelper;
-use Phptg\BotApi\Transport\ApiResponse;
 use Phptg\BotApi\FailResult;
 use Phptg\BotApi\Method\GetMe;
 use Phptg\BotApi\ParseResult\TelegramParseResultException;
 use Phptg\BotApi\TelegramBotApi;
+use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Tests\Support\TransportMock;
+use Phptg\BotApi\Transport\ApiResponse;
 use Phptg\BotApi\Type\AcceptedGiftTypes;
 use Phptg\BotApi\Type\BotCommand;
 use Phptg\BotApi\Type\BotDescription;
@@ -43,6 +38,7 @@ use Phptg\BotApi\Type\InputProfilePhotoStatic;
 use Phptg\BotApi\Type\InputStoryContentPhoto;
 use Phptg\BotApi\Type\MenuButtonDefault;
 use Phptg\BotApi\Type\Message;
+use Phptg\BotApi\Type\MessageEntity;
 use Phptg\BotApi\Type\MessageId;
 use Phptg\BotApi\Type\OwnedGifts;
 use Phptg\BotApi\Type\Payment\StarTransactions;
@@ -51,12 +47,16 @@ use Phptg\BotApi\Type\Sticker\Gifts;
 use Phptg\BotApi\Type\Sticker\InputSticker;
 use Phptg\BotApi\Type\Sticker\Sticker;
 use Phptg\BotApi\Type\Story;
+use Phptg\BotApi\Type\Update\Update;
+use Phptg\BotApi\Type\Update\WebhookInfo;
 use Phptg\BotApi\Type\User;
 use Phptg\BotApi\Type\UserChatBoosts;
 use Phptg\BotApi\Type\UserProfileAudios;
 use Phptg\BotApi\Type\UserProfilePhotos;
-use Phptg\BotApi\Type\Update\Update;
-use Phptg\BotApi\Type\Update\WebhookInfo;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\TestWith;
+use PHPUnit\Framework\TestCase;
+use Throwable;
 use Yiisoft\Test\Support\Log\SimpleLogger;
 
 use function count;
@@ -456,6 +456,21 @@ final class TelegramBotApiTest extends TestCase
         $result = $api->downloadFile('test.jpg');
 
         assertSame('https://api.telegram.org/file/botxyz/test.jpg', $result->getBody());
+    }
+
+    public function testDownloadFileReturnsSameStreamForPhpTemp(): void
+    {
+        /** @var resource $stream */
+        $stream = fopen('php://temp', 'r+b');
+        fwrite($stream, 'test-content');
+        rewind($stream);
+
+        $transport = new TransportMock(downloadFileResource: $stream);
+        $api = new TelegramBotApi('xyz', transport: $transport);
+
+        $result = $api->downloadFile('test.jpg');
+
+        assertSame($stream, $result->getStream());
     }
 
     public function testAddStickerToSet(): void

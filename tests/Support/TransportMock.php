@@ -17,8 +17,12 @@ final class TransportMock implements TransportInterface
     private ?array $sentData = null;
     private ?array $sentFiles = null;
 
+    /**
+     * @param resource|null $downloadFileResource
+     */
     public function __construct(
         private readonly ApiResponse $response = new ApiResponse(200, '{"ok":true,"result":true}'),
+        private readonly mixed $downloadFileResource = null,
     ) {}
 
     public static function successResult(mixed $result): self
@@ -53,9 +57,17 @@ final class TransportMock implements TransportInterface
         return $this->response;
     }
 
-    public function downloadFile(string $url, mixed $stream): void
+    public function downloadFile(string $url): mixed
     {
+        if ($this->downloadFileResource !== null) {
+            return $this->downloadFileResource;
+        }
+
+        /** @var resource $stream */
+        $stream = fopen('php://temp', 'r+b');
         fwrite($stream, $url);
+        rewind($stream);
+        return $stream;
     }
 
     public function url(): ?string

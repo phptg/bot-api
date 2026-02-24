@@ -317,16 +317,36 @@ final class TelegramBotApi
      */
     public function downloadFile(string|File $file): DownloadedFile
     {
-        /**
-         * @var resource $stream `php://temp` always opens successfully.
-         */
-        $stream = fopen('php://temp', 'r+b');
-        $this->transport->downloadFile(
+        $stream = $this->transport->downloadFile(
             $this->makeFileUrl($file),
-            $stream,
         );
-        rewind($stream);
-        return new DownloadedFile($stream);
+
+        $uri = stream_get_meta_data($stream)['uri'] ?? null;
+        if ($uri === 'php://temp' || $uri === 'php://memory') {
+            return new DownloadedFile($stream);
+        }
+
+        /**
+         * @var resource $temp `php://temp` always opens successfully.
+         */
+        $temp = fopen('php://temp', 'r+b');
+
+        set_error_handler(
+            static function (int $errorNumber, string $errorString) use ($temp): never {
+                fclose($temp);
+                throw new DownloadFileException($errorString);
+            },
+        );
+        try {
+            stream_copy_to_stream($stream, $temp);
+        } finally {
+            restore_error_handler();
+            fclose($stream);
+        }
+
+        rewind($temp);
+
+        return new DownloadedFile($temp);
     }
 
     /**

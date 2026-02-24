@@ -52,12 +52,14 @@ interface TransportInterface
     public function postWithFiles(string $url, array $data, array $files): ApiResponse;
 
     /**
-     * Downloads a file by URL and writes its content to the given stream.
+     * Downloads a file by URL and returns a readable stream with its content. The returned resource is intended for
+     * a single read — implementations are not required to return a seekable stream.
      *
      * @param string $url The URL of the file to download.
-     * @param resource $stream The stream to write the file content to.
+     *
+     * @return resource A readable stream.
      *
      * @throws DownloadFileException If an error occurred while downloading the file.
      */
-    public function downloadFile(string $url, mixed $stream): void;
+    public function downloadFile(string $url): mixed;
 }

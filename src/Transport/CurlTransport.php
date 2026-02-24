@@ -78,8 +78,13 @@ final readonly class CurlTransport implements TransportInterface
         return $this->send($options);
     }
 
-    public function downloadFile(string $url, mixed $stream): void
+    public function downloadFile(string $url): mixed
     {
+        /**
+         * @var resource $stream `php://temp` always opens successfully.
+         */
+        $stream = fopen('php://temp', 'r+b');
+
         $options = [
             CURLOPT_URL => $url,
             CURLOPT_FILE => $stream,
@@ -101,6 +106,10 @@ final readonly class CurlTransport implements TransportInterface
         } finally {
             $this->curl->close($curl);
         }
+
+        rewind($stream);
+
+        return $stream;
     }
 
     private function send(array $options): ApiResponse

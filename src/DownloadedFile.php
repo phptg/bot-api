@@ -12,7 +12,7 @@ namespace Phptg\BotApi;
 final readonly class DownloadedFile
 {
     /**
-     * @param resource $stream A `php://temp` stream with the file content, rewound to the beginning.
+     * @param resource $stream A `php://temp` or `php://memory` stream with the file content.
      */
     public function __construct(
         private mixed $stream,
@@ -21,7 +21,7 @@ final readonly class DownloadedFile
     /**
      * Returns the stream with the file content.
      *
-     * @return resource  the stream with the file content (`php://temp` resource).
+     * @return resource The stream with the file content (`php://temp` or `php://memory` resource).
      */
     public function getStream(): mixed
     {

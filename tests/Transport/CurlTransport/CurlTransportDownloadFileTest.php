@@ -15,6 +15,7 @@ use Phptg\BotApi\Transport\DownloadFileException;
 
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertIsResource;
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;
 
@@ -25,16 +26,14 @@ final class CurlTransportDownloadFileTest extends TestCase
         $curl = new CurlMock('hello-content');
         $transport = new CurlTransport(curl: $curl);
 
-        $stream = fopen('php://temp', 'r+b');
-        $transport->downloadFile('https://example.test/hello.jpg', $stream);
-        rewind($stream);
+        $result = $transport->downloadFile('https://example.test/hello.jpg');
 
-        assertSame('hello-content', stream_get_contents($stream));
+        assertSame('hello-content', stream_get_contents($result));
 
         $options = $curl->getOptions();
         assertCount(4, $options);
         assertSame('https://example.test/hello.jpg', $options[CURLOPT_URL]);
-        assertSame($stream, $options[CURLOPT_FILE]);
+        assertIsResource($options[CURLOPT_FILE]);
         assertTrue($options[CURLOPT_FAILONERROR]);
         assertInstanceOf(CurlShareHandle::class, $options[CURLOPT_SHARE]);
     }
@@ -44,11 +43,10 @@ final class CurlTransportDownloadFileTest extends TestCase
         $initException = new CurlException('test');
         $curl = new CurlMock(initException: $initException);
         $transport = new CurlTransport(curl: $curl);
-        $stream = fopen('php://temp', 'r+b');
 
         $exception = null;
         try {
-            $transport->downloadFile('https://example.test/hello.jpg', $stream);
+            $transport->downloadFile('https://example.test/hello.jpg');
         } catch (Throwable $exception) {
         }
 
@@ -62,11 +60,10 @@ final class CurlTransportDownloadFileTest extends TestCase
         $execException = new CurlException('test');
         $curl = new CurlMock(execResult: $execException);
         $transport = new CurlTransport(curl: $curl);
-        $stream = fopen('php://temp', 'r+b');
 
         $exception = null;
         try {
-            $transport->downloadFile('https://example.test/hello.jpg', $stream);
+            $transport->downloadFile('https://example.test/hello.jpg');
         } catch (Throwable $exception) {
         }
 
@@ -79,10 +76,9 @@ final class CurlTransportDownloadFileTest extends TestCase
     {
         $curl = new CurlMock(new RuntimeException());
         $transport = new CurlTransport(curl: $curl);
-        $stream = fopen('php://temp', 'r+b');
 
         try {
-            $transport->downloadFile('https://example.test/hello.jpg', $stream);
+            $transport->downloadFile('https://example.test/hello.jpg');
         } catch (Throwable) {
         }
 

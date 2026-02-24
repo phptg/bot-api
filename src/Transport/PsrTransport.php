@@ -75,7 +75,7 @@ final readonly class PsrTransport implements TransportInterface
         return $this->send($request);
     }
 
-    public function downloadFile(string $url, mixed $stream): void
+    public function downloadFile(string $url): mixed
     {
         $request = $this->requestFactory->createRequest('GET', $url);
 
@@ -91,6 +91,14 @@ final readonly class PsrTransport implements TransportInterface
         }
 
         $resource = $body->detach();
+        if ($resource !== null) {
+            return $resource;
+        }
+
+        /**
+         * @var resource $stream `php://temp` always opens successfully.
+         */
+        $stream = fopen('php://temp', 'r+b');
 
         set_error_handler(
             static function (int $errorNumber, string $errorString): bool {
@@ -98,21 +106,14 @@ final readonly class PsrTransport implements TransportInterface
             },
         );
         try {
-            if ($resource === null) {
-                $result = fwrite($stream, (string) $body);
-                if ($result === false) {
-                    throw new DownloadFileException('Failed to write file content to stream.');
-                }
-                return;
-            }
-            try {
-                stream_copy_to_stream($resource, $stream);
-            } finally {
-                fclose($resource);
-            }
+            fwrite($stream, (string) $body);
         } finally {
             restore_error_handler();
         }
+
+        rewind($stream);
+
+        return $stream;
     }
 
     private function send(RequestInterface $request): ApiResponse
