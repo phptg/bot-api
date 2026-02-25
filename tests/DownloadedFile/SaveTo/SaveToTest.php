@@ -33,6 +33,18 @@ final class SaveToTest extends TestCase
         assertSame('hello-content', file_get_contents(self::FILE));
     }
 
+    public function testFileAlreadyExists(): void
+    {
+        $stream = fopen('php://temp', 'r+b');
+        $file = new DownloadedFile($stream);
+
+        touch(self::FILE);
+
+        $this->expectException(SaveFileException::class);
+        $this->expectExceptionMessage('File already exists: ' . self::FILE);
+        $file->saveTo(self::FILE);
+    }
+
     public function testError(): void
     {
         $stream = fopen('php://temp', 'r+b');

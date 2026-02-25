@@ -35,6 +35,10 @@ final readonly class DownloadedFile
      */
     public function saveTo(string $path): void
     {
+        if (file_exists($path)) {
+            throw new SaveFileException("File already exists: $path");
+        }
+
         set_error_handler(
             static function (int $errorNumber, string $errorString): bool {
                 throw new SaveFileException($errorString);
