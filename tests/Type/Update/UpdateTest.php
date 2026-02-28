@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Type\Update;
 
-use HttpSoft\Message\StreamTrait;
 use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\StreamInterface;
 use Throwable;
 use Phptg\BotApi\ParseResult\TelegramParseResultException;
 use Phptg\BotApi\ParseResult\ObjectFactory;
@@ -372,30 +369,6 @@ final class UpdateTest extends TestCase
     public function testFromJsonString(): void
     {
         $update = Update::fromJson('{"update_id":33990940}');
-        assertSame(33990940, $update->updateId);
-        assertSame('{"update_id":33990940}', $update->getRaw());
-        assertSame(['update_id' => 33990940], $update->getRaw(true));
-
-        $this->expectException(TelegramParseResultException::class);
-        $this->expectExceptionMessage('Failed to decode JSON.');
-        Update::fromJson('asdf{');
-    }
-
-    public function testFromServerRequest(): void
-    {
-        $request = $this->createMock(ServerRequestInterface::class);
-        $request->method('getBody')->willReturn(
-            new class implements StreamInterface {
-                use StreamTrait;
-
-                public function __toString(): string
-                {
-                    return '{"update_id":33990940}';
-                }
-            },
-        );
-
-        $update = Update::fromServerRequest($request);
         assertSame(33990940, $update->updateId);
         assertSame('{"update_id":33990940}', $update->getRaw());
         assertSame(['update_id' => 33990940], $update->getRaw(true));

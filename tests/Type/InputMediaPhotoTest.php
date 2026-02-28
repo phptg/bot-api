@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Type;
 
-use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\FileCollector;
 use Phptg\BotApi\Type\InputFile;
@@ -42,7 +41,7 @@ final class InputMediaPhotoTest extends TestCase
 
     public function testFull(): void
     {
-        $media = new InputFile((new StreamFactory())->createStream());
+        $media = new InputFile(null);
         $entity = new MessageEntity('bold', 0, 4);
         $inputMedia = new InputMediaPhoto(
             $media,

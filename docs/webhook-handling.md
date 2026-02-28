@@ -6,11 +6,13 @@ This guide explains how to handle incoming webhook updates from Telegram and how
 
 You can create an `Update` object by several ways:
 
-- [from PSR-7 request](#from-psr-7-request),
 - [from JSON string](#from-json-string),
 - [via constructor](#via-constructor).
 
-If `Update` created by `fromJson()` or `fromServerRequest()` method, you can get raw data via `getRaw()` method:
+Additionally, the [phptg/transport-psr](https://github.com/phptg/transport-psr) package provides `PsrUpdateFactory`
+that creates `Update` object from a PSR-7 `ServerRequestInterface`.
+
+If `Update` created by `fromJson()` method, you can get raw data via `getRaw()` method:
 
 ```php
 /**
@@ -53,26 +55,6 @@ $raw = $update->getRaw();
  * ]
  */
 $raw = $update->getRaw(decoded: true);
-```
-
-### From PSR-7 request
-
-Creating `Update` object from the incoming webhook PSR-7 request:
-
-```php
-use Psr\Http\Message\ServerRequestInterface;
-use Phptg\BotApi\ParseResult\TelegramParseResultException;
-use Phptg\BotApi\Type\Update\Update;
-
-/**
- * @var ServerRequestInterface $request
- */
-
-try {
-    $update = Update::fromServerRequest($request);
-} catch (TelegramParseResultException $e) {
-    // ... 
-}
 ```
 
 ### From JSON string
@@ -137,40 +119,14 @@ if ($webhookResponse->isSupported()) {
 }
 ```
 
-### PSR-7 response factory
+### Response factories
 
-The `PsrWebhookResponseFactory` creates PSR-7 compliant HTTP responses for webhook handlers:
+The package provides a built-in `JsonWebhookResponseFactory` that creates JSON strings for webhook responses.
 
-```php
-use Psr\Http\Message\ResponseFactoryInterface;
-use Psr\Http\Message\StreamFactoryInterface;
-use Phptg\BotApi\Method\SendMessage;
-use Phptg\BotApi\WebhookResponse\PsrWebhookResponseFactory;
-use Phptg\BotApi\WebhookResponse\WebhookResponse;
+Additionally, the [phptg/transport-psr](https://github.com/phptg/transport-psr) package provides
+`PsrWebhookResponseFactory` that creates a PSR-7 `ResponseInterface`.
 
-/**
- * @var ResponseFactoryInterface $responseFactory
- * @var StreamFactoryInterface $streamFactory
- */
-
-$factory = new PsrWebhookResponseFactory($responseFactory, $streamFactory);
-
-// Create response from WebhookResponse object
-$webhookResponse = new WebhookResponse(new SendMessage(chatId: 12345, text: 'Hello!'));
-$response = $factory->create($webhookResponse);
-
-// Or create response directly from method, if you are sure that InputFile is not used
-$method = new SendMessage(chatId: 12345, text: 'Hello!');
-$response = $factory->byMethod($method);
-```
-
-The factory automatically:
-
-- encodes the data as JSON;
-- sets the `Content-Type` header to `application/json; charset=utf-8`;
-- sets the `Content-Length` header.
-
-### JSON response factory
+#### JSON response factory
 
 The `JsonWebhookResponseFactory` creates JSON strings for webhook responses:
 

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Method;
 
-use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\FileCollector;
 use Phptg\BotApi\Method\SetMyProfilePhoto;
@@ -20,7 +19,7 @@ final class SetMyProfilePhotoTest extends TestCase
 {
     public function testBase(): void
     {
-        $file = new InputFile((new StreamFactory())->createStream());
+        $file = new InputFile(null);
         $photo = new InputProfilePhotoStatic($file);
         $method = new SetMyProfilePhoto($photo);
 
@@ -37,7 +36,7 @@ final class SetMyProfilePhotoTest extends TestCase
 
     public function testPrepareResult(): void
     {
-        $file = new InputFile((new StreamFactory())->createStream());
+        $file = new InputFile(null);
         $photo = new InputProfilePhotoStatic($file);
         $method = new SetMyProfilePhoto($photo);
 

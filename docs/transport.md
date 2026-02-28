@@ -4,7 +4,10 @@ By default `TelegramBotApi` uses cURL to make requests to the Telegram Bot API a
 But you can use any other transport implementation that implements
 the `Phptg\BotApi\Transport\TransportInterface` interface.
 
-Out of the box, available three transport implementations: cURL, native and PSR.
+Out of the box, available two transport implementations: cURL and native.
+
+Additionally, the [phptg/transport-psr](https://github.com/phptg/transport-psr) package provides `PsrTransport`
+based on PSR-18 HTTP client and PSR-17 HTTP factories.
 
 ## cURL
 
@@ -29,7 +32,7 @@ $api = new TelegramBotApi($token, transport: $transport);
 Constructor parameters:
 
 - `$resourceReaders` — list of [resource readers](resource-readers.md) to handle different resource types. By default,
-  includes `NativeResourceReader` and `StreamResourceReader`.
+  includes `NativeResourceReader`.
 
 ## Native
 
@@ -58,7 +61,7 @@ Constructor parameters:
 
 - `$mimeTypeResolver` — MIME type resolver for determining file types. Defaults to `ApacheMimeTypeResolver`.
 - `$resourceReaders` — List of [resource readers](resource-readers.md) to handle different resource types. By default,
-  includes `NativeResourceReader` and `StreamResourceReader`.
+  includes `NativeResourceReader`.
 
 Available MIME type resolvers:
 
@@ -67,47 +70,3 @@ Available MIME type resolvers:
   by default);
 - `CustomMimeTypeResolver` - based on file extension and custom MIME types map;
 - `CompositeMimeTypeResolver` - allows to combine multiple resolvers into one.
-
-## PSR
-
-PSR transport requires the [PSR-18](https://www.php-fig.org/psr/psr-18/) HTTP client and [PSR-17](https://www.php-fig.org/psr/psr-17/) HTTP factories.
-
-For example, you can use the [php-http/curl-client](https://github.com/php-http/curl-client) and [httpsoft/http-message](https://github.com/httpsoft/http-message):
-
-```shell
-composer require php-http/curl-client httpsoft/http-message
-```
-
-General usage:
-
-```php
-use Http\Client\Curl\Client;
-use HttpSoft\Message\RequestFactory;
-use HttpSoft\Message\ResponseFactory;
-use HttpSoft\Message\StreamFactory;
-use Phptg\BotApi\TelegramBotApi;
-use Phptg\BotApi\Transport\PsrTransport;
-
-$streamFactory = new StreamFactory();
-$responseFactory = new ResponseFactory();
-$requestFactory = new RequestFactory();
-$client = new Client($responseFactory, $streamFactory);
-
-// Telegram bot authentication token
-$token = '110201543:AAHdqTcvCH1vGWJxfSeofSAs0K5PALDsaw';
-
-$transport = new PsrTransport(
-    $client,
-    $requestFactory,
-    $streamFactory,
-);
-
-$api = new TelegramBotApi($token, transport: $transport);
-```
-
-Constructor parameters:
-
-- `$client` — PSR-18 HTTP client;
-- `$requestFactory` — PSR-17 HTTP request factory;
-- `$streamFactory` — PSR-17 HTTP stream factory;
-

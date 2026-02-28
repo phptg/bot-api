@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Type;
 
-use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\FileCollector;
 use Phptg\BotApi\Type\InputFile;
@@ -19,7 +18,7 @@ final class InputStoryContentVideoTest extends TestCase
 {
     public function testBase(): void
     {
-        $video = new InputFile((new StreamFactory())->createStream());
+        $video = new InputFile(null);
         $type = new InputStoryContentVideo($video);
 
         assertInstanceOf(InputStoryContent::class, $type);
@@ -44,7 +43,7 @@ final class InputStoryContentVideoTest extends TestCase
 
     public function testFull(): void
     {
-        $video = new InputFile((new StreamFactory())->createStream());
+        $video = new InputFile(null);
         $type = new InputStoryContentVideo($video, 10.5, 2.5, true);
 
         assertInstanceOf(InputStoryContent::class, $type);

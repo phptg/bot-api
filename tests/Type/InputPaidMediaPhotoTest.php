@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Type;
 
-use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\FileCollector;
 use Phptg\BotApi\Type\InputFile;
@@ -41,7 +40,7 @@ final class InputPaidMediaPhotoTest extends TestCase
 
     public function testFull(): void
     {
-        $media = new InputFile((new StreamFactory())->createStream());
+        $media = new InputFile(null);
         $inputMedia = new InputPaidMediaPhoto($media);
 
         assertSame('photo', $inputMedia->getType());

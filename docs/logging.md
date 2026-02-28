@@ -24,17 +24,14 @@ $api = new TelegramBotApi($token, logger: $logger);
 You can use logger on create `Update` object also:
 
 ```php
-use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 use Phptg\BotApi\Type\Update\Update;
 
 /**
- * @var ServerRequestInterface $request
  * @var string $jsonString
  * @var LoggerInterface $logger
  */
 
-$update = Update::fromServerRequest($request, $logger);
 $update = Update::fromJson($jsonString, $logger);
 ```
 

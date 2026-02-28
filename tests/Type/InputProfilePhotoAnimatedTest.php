@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Type;
 
-use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\FileCollector;
 use Phptg\BotApi\Type\InputFile;
@@ -18,7 +17,7 @@ final class InputProfilePhotoAnimatedTest extends TestCase
 {
     public function testBase(): void
     {
-        $animation = new InputFile((new StreamFactory())->createStream());
+        $animation = new InputFile(null);
         $type = new InputProfilePhotoAnimated($animation);
 
         assertInstanceOf(InputProfilePhoto::class, $type);
@@ -43,7 +42,7 @@ final class InputProfilePhotoAnimatedTest extends TestCase
 
     public function testFull(): void
     {
-        $animation = new InputFile((new StreamFactory())->createStream());
+        $animation = new InputFile(null);
         $type = new InputProfilePhotoAnimated($animation, 2.5);
 
         assertInstanceOf(InputProfilePhoto::class, $type);

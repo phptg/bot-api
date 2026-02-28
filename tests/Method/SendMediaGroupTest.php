@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Method;
 
-use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\SendMediaGroup;
 use Phptg\BotApi\Transport\HttpMethod;
@@ -39,7 +38,7 @@ final class SendMediaGroupTest extends TestCase
 
     public function testFull(): void
     {
-        $file = new InputFile((new StreamFactory())->createStream());
+        $file = new InputFile(null);
         $inputMedia = new InputMediaPhoto($file);
         $replyParameters = new ReplyParameters(23);
         $method = new SendMediaGroup(

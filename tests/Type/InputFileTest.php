@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Type;
 
-use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Throwable;
@@ -19,19 +18,17 @@ final class InputFileTest extends TestCase
 {
     public function testBase(): void
     {
-        $stream = (new StreamFactory())->createStream('test');
-        $file = new InputFile($stream);
+        $file = new InputFile('test');
 
-        assertSame($stream, $file->resource);
+        assertSame('test', $file->resource);
         assertNull($file->filename);
     }
 
     public function testFilled(): void
     {
-        $stream = (new StreamFactory())->createStream('test');
-        $file = new InputFile($stream, 'file.txt');
+        $file = new InputFile('test', 'file.txt');
 
-        assertSame($stream, $file->resource);
+        assertSame('test', $file->resource);
         assertSame('file.txt', $file->filename);
     }
 

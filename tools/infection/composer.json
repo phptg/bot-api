@@ -1,6 +1,6 @@
 {
     "require-dev": {
-        "infection/infection": "^0.32"
+        "infection/infection": "^0.32.3"
     },
     "config": {
         "allow-plugins": {

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Method\Sticker;
 
-use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\Sticker\UploadStickerFile;
 use Phptg\BotApi\Transport\HttpMethod;
@@ -17,7 +16,7 @@ final class UploadStickerFileTest extends TestCase
 {
     public function testBase(): void
     {
-        $file = new InputFile((new StreamFactory())->createStream());
+        $file = new InputFile(null);
         $method = new UploadStickerFile(1, $file, 'static');
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
@@ -34,7 +33,7 @@ final class UploadStickerFileTest extends TestCase
 
     public function testPrepareResult(): void
     {
-        $method = new UploadStickerFile(1, new InputFile((new StreamFactory())->createStream()), 'static');
+        $method = new UploadStickerFile(1, new InputFile(null), 'static');
 
         $preparedResult = TestHelper::createSuccessStubApi([
             'file_id' => 'f1',

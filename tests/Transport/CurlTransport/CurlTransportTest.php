@@ -6,7 +6,6 @@ namespace Phptg\BotApi\Tests\Transport\CurlTransport;
 
 use CurlShareHandle;
 use CURLStringFile;
-use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Throwable;
@@ -131,60 +130,6 @@ final class CurlTransportTest extends TestCase
         );
         assertTrue($options[CURLOPT_RETURNTRANSFER]);
         assertInstanceOf(CurlShareHandle::class, $options[CURLOPT_SHARE]);
-    }
-
-    public function testPostWithStreamFile(): void
-    {
-        $curl = new CurlMock(
-            execResult: '{"ok":true,"result":[]}',
-            getinfoResult: [CURLINFO_HTTP_CODE => 200],
-        );
-        $transport = new CurlTransport(curl: $curl);
-
-        $transport->postWithFiles(
-            'sendPhoto',
-            [],
-            [
-                'photo1' => new InputFile(
-                    (new StreamFactory())->createStream('test1'),
-                ),
-                'photo2' => new InputFile(
-                    (new StreamFactory())->createStream('test2'),
-                    'test.jpg',
-                ),
-            ],
-        );
-
-        assertEquals(
-            [
-                'photo1' => new CURLStringFile('test1', ''),
-                'photo2' => new CURLStringFile('test2', 'test.jpg'),
-            ],
-            $curl->getOptions()[CURLOPT_POSTFIELDS] ?? null,
-        );
-    }
-
-    public function testSeekableStream(): void
-    {
-        $curl = new CurlMock();
-        $transport = new CurlTransport(curl: $curl);
-
-        $stream = (new StreamFactory())->createStream('test1');
-        $stream->getContents();
-        $transport->postWithFiles(
-            'sendPhoto',
-            [],
-            [
-                'photo' => new InputFile($stream),
-            ],
-        );
-
-        assertEquals(
-            [
-                'photo' => new CURLStringFile('test1', ''),
-            ],
-            $curl->getOptions()[CURLOPT_POSTFIELDS] ?? null,
-        );
     }
 
     public function testSeekableResource(): void

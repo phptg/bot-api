@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Method;
 
-use HttpSoft\Message\StreamFactory;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\FileCollector;
 use Phptg\BotApi\Method\PostStory;
@@ -25,7 +24,7 @@ final class PostStoryTest extends TestCase
 {
     public function testBase(): void
     {
-        $file = new InputFile((new StreamFactory())->createStream());
+        $file = new InputFile(null);
         $content = new InputStoryContentPhoto($file);
         $method = new PostStory('bcid1', $content, 86400);
 
@@ -44,7 +43,7 @@ final class PostStoryTest extends TestCase
 
     public function testFull(): void
     {
-        $file = new InputFile((new StreamFactory())->createStream());
+        $file = new InputFile(null);
         $content = new InputStoryContentPhoto($file);
         $captionEntities = [new MessageEntity('bold', 0, 4)];
         $storyArea = new StoryArea(
@@ -91,7 +90,7 @@ final class PostStoryTest extends TestCase
     {
         $method = new PostStory(
             'bcid1',
-            new InputStoryContentPhoto(new InputFile((new StreamFactory())->createStream())),
+            new InputStoryContentPhoto(new InputFile(null)),
             86400,
         );
 
