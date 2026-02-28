@@ -75,28 +75,45 @@ final readonly class PsrTransport implements TransportInterface
         return $this->send($request);
     }
 
-    public function downloadFile(string $url): string
+    public function downloadFile(string $url): mixed
     {
-        return $this->internalDownload($url)->getContents();
-    }
+        $request = $this->requestFactory->createRequest('GET', $url);
 
-    public function downloadFileTo(string $url, string $savePath): void
-    {
-        $body = $this->internalDownload($url);
+        try {
+            $response = $this->client->sendRequest($request);
+        } catch (ClientExceptionInterface $exception) {
+            throw new DownloadFileException($exception->getMessage(), previous: $exception);
+        }
 
-        $content = $body->detach();
-        $content ??= $body->getContents();
+        $body = $response->getBody();
+        if ($body->isSeekable()) {
+            $body->rewind();
+        }
+
+        $resource = $body->detach();
+        if ($resource !== null) {
+            return $resource;
+        }
+
+        /**
+         * @var resource $stream `php://temp` always opens successfully.
+         */
+        $stream = fopen('php://temp', 'r+b');
 
         set_error_handler(
             static function (int $errorNumber, string $errorString): bool {
-                throw new SaveFileException($errorString);
+                throw new DownloadFileException($errorString);
             },
         );
         try {
-            file_put_contents($savePath, $content);
+            fwrite($stream, (string) $body);
         } finally {
             restore_error_handler();
         }
+
+        rewind($stream);
+
+        return $stream;
     }
 
     private function send(RequestInterface $request): ApiResponse
@@ -112,26 +129,5 @@ final readonly class PsrTransport implements TransportInterface
             $response->getStatusCode(),
             $body->getContents(),
         );
-    }
-
-    /**
-     * @throws DownloadFileException
-     */
-    private function internalDownload(string $url): StreamInterface
-    {
-        $request = $this->requestFactory->createRequest('GET', $url);
-
-        try {
-            $response = $this->client->sendRequest($request);
-        } catch (ClientExceptionInterface $exception) {
-            throw new DownloadFileException($exception->getMessage(), previous: $exception);
-        }
-
-        $body = $response->getBody();
-        if ($body->isSeekable()) {
-            $body->rewind();
-        }
-
-        return $body;
     }
 }

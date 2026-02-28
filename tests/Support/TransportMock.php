@@ -10,7 +10,6 @@ use Phptg\BotApi\Transport\ApiResponse;
 final class TransportMock implements TransportInterface
 {
     private ?string $url = null;
-    private array $savedFiles = [];
 
     private ?string $sentBody = null;
     private ?array $sentHeaders = null;
@@ -18,8 +17,12 @@ final class TransportMock implements TransportInterface
     private ?array $sentData = null;
     private ?array $sentFiles = null;
 
+    /**
+     * @param resource|null $downloadFileResource
+     */
     public function __construct(
         private readonly ApiResponse $response = new ApiResponse(200, '{"ok":true,"result":true}'),
+        private readonly mixed $downloadFileResource = null,
     ) {}
 
     public static function successResult(mixed $result): self
@@ -54,19 +57,17 @@ final class TransportMock implements TransportInterface
         return $this->response;
     }
 
-    public function downloadFile(string $url): string
+    public function downloadFile(string $url): mixed
     {
-        return $url;
-    }
+        if ($this->downloadFileResource !== null) {
+            return $this->downloadFileResource;
+        }
 
-    public function downloadFileTo(string $url, string $savePath): void
-    {
-        $this->savedFiles[] = [$url, $savePath];
-    }
-
-    public function savedFiles(): array
-    {
-        return $this->savedFiles;
+        /** @var resource $stream */
+        $stream = fopen('php://temp', 'r+b');
+        fwrite($stream, $url);
+        rewind($stream);
+        return $stream;
     }
 
     public function url(): ?string

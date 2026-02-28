@@ -5,11 +5,12 @@
         ]
     },
     "logs": {
-        "text": "php:\/\/stderr",
+        "text": "runtime/infection/run.log",
         "stryker": {
             "report": "master"
         }
     },
+    "tmpDir": "runtime/infection",
     "mutators": {
         "@default": true
     },

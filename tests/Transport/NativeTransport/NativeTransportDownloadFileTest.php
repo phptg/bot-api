@@ -18,7 +18,7 @@ final class NativeTransportDownloadFileTest extends TestCase
         $transport = new NativeTransport();
 
         StreamMock::enable(responseBody: 'hello-content');
-        $result = $transport->downloadFile('http://example.test/test.txt');
+        $stream = $transport->downloadFile('http://example.test/test.txt');
         $request = StreamMock::disable();
 
         assertSame(
@@ -28,7 +28,7 @@ final class NativeTransportDownloadFileTest extends TestCase
             ],
             $request,
         );
-        assertSame('hello-content', $result);
+        assertSame('hello-content', stream_get_contents($stream));
     }
 
     public function testError(): void
@@ -36,7 +36,7 @@ final class NativeTransportDownloadFileTest extends TestCase
         $transport = new NativeTransport();
 
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('file_get_contents(): Unable to find the wrapper "example"');
+        $this->expectExceptionMessage('fopen(): Unable to find the wrapper "example"');
         $transport->downloadFile('example://example.test/test.txt');
     }
 }
