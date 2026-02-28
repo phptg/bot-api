@@ -1,6 +1,6 @@
 # Telegram Bot API for PHP Change Log
 
-## 0.16 under development
+## 0.16 February 28, 2026
 
 - Chg #186: Remove `PsrTransport`, `PsrWebhookResponseFactory` and `StreamResourceReader` classes.
 - Chg #186: Remove `Update::fromServerRequest()` method.
