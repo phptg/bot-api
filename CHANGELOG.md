@@ -1,6 +1,6 @@
 # Telegram Bot API for PHP Change Log
 
-## 0.15 under development
+## 0.15 February 28, 2026
 
 - Chg #187: Change `TransportInterface::downloadFile()` signature — remove `$stream` parameter, method now returns
   `resource` (readable stream) instead of `string`.
