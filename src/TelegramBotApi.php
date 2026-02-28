@@ -177,7 +177,6 @@ use Phptg\BotApi\Method\EditMessageChecklist;
 use Phptg\BotApi\Transport\CurlTransport;
 use Phptg\BotApi\Transport\DownloadFileException;
 use Phptg\BotApi\Transport\NativeTransport;
-use Phptg\BotApi\Transport\SaveFileException;
 use Phptg\BotApi\Transport\TransportInterface;
 use Phptg\BotApi\Type\AcceptedGiftTypes;
 use Phptg\BotApi\Type\BotCommand;
@@ -310,38 +309,47 @@ final class TelegramBotApi
     }
 
     /**
-     * Downloads a file from the Telegram servers and returns its content.
+     * Downloads a file from the Telegram servers and returns a {@see DownloadedFile} instance
+     * that provides access to the file content as a stream, a string or allows saving it to a local path.
      *
-     * @param string|File $file File path or {@see File} object.
+     * @param string|File $file The file path (as returned by the Telegram API) or a {@see File} object.
      *
-     * @return string The file content.
+     * @return DownloadedFile The {@see DownloadedFile} instance with a seekable stream ready for reading.
      *
      * @throws DownloadFileException If an error occurred while downloading the file.
-     * @throws LogicException If the file path is not specified in `File` object.
      */
-    public function downloadFile(string|File $file): string
+    public function downloadFile(string|File $file): DownloadedFile
     {
-        return $this->transport->downloadFile(
+        $stream = $this->transport->downloadFile(
             $this->makeFileUrl($file),
         );
-    }
 
-    /**
-     * Downloads a file from the Telegram servers and saves it to a file.
-     *
-     * @param string|File $file File path or {@see File} object.
-     * @param string $savePath The path to save the file.
-     *
-     * @throws DownloadFileException If an error occurred while downloading the file.
-     * @throws SaveFileException If an error occurred while saving the file.
-     * @throws LogicException If the file path is not specified in `File` object.
-     */
-    public function downloadFileTo(string|File $file, string $savePath): void
-    {
-        $this->transport->downloadFileTo(
-            $this->makeFileUrl($file),
-            $savePath,
+        $uri = stream_get_meta_data($stream)['uri'] ?? null;
+        if ($uri === 'php://temp' || $uri === 'php://memory') {
+            return new DownloadedFile($stream);
+        }
+
+        /**
+         * @var resource $temp `php://temp` always opens successfully.
+         */
+        $temp = fopen('php://temp', 'r+b');
+
+        set_error_handler(
+            static function (int $errorNumber, string $errorString) use ($temp): never {
+                fclose($temp);
+                throw new DownloadFileException($errorString);
+            },
         );
+        try {
+            stream_copy_to_stream($stream, $temp);
+        } finally {
+            restore_error_handler();
+            fclose($stream);
+        }
+
+        rewind($temp);
+
+        return new DownloadedFile($temp);
     }
 
     /**

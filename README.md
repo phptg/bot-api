@@ -121,26 +121,23 @@ $url = $api->makeFileUrl('photos/file_2');
 
 #### File downloading
 
-Use `TelegramBotApi::downloadFile()` and `TelegramBotApi::downloadFileTo()` methods to download a file from the Telegram
-server. For example:
+Use `TelegramBotApi::downloadFile()` method to download a file from the Telegram server. The method returns
+a `DownloadedFile` instance with `getStream()`, `getBody()` and `saveTo()` methods. For example:
 
 ```php
 /**
  * @var \Phptg\BotApi\TelegramBotApi $api
  * @var \Phptg\BotApi\Type\File $file
  */
- 
-// Get file content by `File` instance
-$fileContent = $api->downloadFile($file);
 
-// Get file content by file path
-$fileContent = $api->downloadFile('photos/file_2');
+// Get file content as string
+$content = $api->downloadFile($file)->getBody();
 
-// Download and save file by `File` instance
-$fileContent = $api->downloadFileTo($file, '/local/path/to/file.jpg');
+// Get file content as stream
+$stream = $api->downloadFile('photos/file_2')->getStream();
 
-// Download and save file by file path
-$fileContent = $api->downloadFileTo('photos/file_2', '/local/path/to/file.jpg');
+// Download and save file
+$api->downloadFile($file)->saveTo('/local/path/to/file.jpg');
 ```
 
 ### Guides

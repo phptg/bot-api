@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phptg\BotApi\Transport;
+namespace Phptg\BotApi;
 
 use RuntimeException;
 

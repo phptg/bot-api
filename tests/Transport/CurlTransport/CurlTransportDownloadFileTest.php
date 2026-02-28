@@ -15,6 +15,7 @@ use Phptg\BotApi\Transport\DownloadFileException;
 
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertIsResource;
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;
 
@@ -27,12 +28,12 @@ final class CurlTransportDownloadFileTest extends TestCase
 
         $result = $transport->downloadFile('https://example.test/hello.jpg');
 
-        assertSame('hello-content', $result);
+        assertSame('hello-content', stream_get_contents($result));
 
         $options = $curl->getOptions();
         assertCount(4, $options);
         assertSame('https://example.test/hello.jpg', $options[CURLOPT_URL]);
-        assertTrue($options[CURLOPT_RETURNTRANSFER]);
+        assertIsResource($options[CURLOPT_FILE]);
         assertTrue($options[CURLOPT_FAILONERROR]);
         assertInstanceOf(CurlShareHandle::class, $options[CURLOPT_SHARE]);
     }

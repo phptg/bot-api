@@ -5,6 +5,14 @@
 - Chg #186: Remove `PsrTransport`, `PsrWebhookResponseFactory` and `StreamResourceReader` classes.
 - Chg #186: Remove `Update::fromServerRequest()` method.
 - Chg #186: Remove PSR composer dependencies.
+## 0.15 February 28, 2026
+
+- Chg #187: Change `TransportInterface::downloadFile()` signature — remove `$stream` parameter, method now returns
+  `resource` (readable stream) instead of `string`.
+- Chg #187: `TelegramBotApi::downloadFile()` now returns `DownloadedFile` instead of `string`.
+- Chg #187: Remove `TelegramBotApi::downloadFileTo()` method.
+- Chg #187: Remove `TransportInterface::downloadFileTo()` method.
+- Chg #187: Move `SaveFileException` from `Phptg\BotApi\Transport` to `Phptg\BotApi` namespace.
 
 ## 0.14.1 February 9, 2026
 
