@@ -2212,6 +2212,15 @@ final class TelegramBotApiTest extends TestCase
         assertTrue($result);
     }
 
+    public function testSetChatMemberTag(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->setChatMemberTag(1, 2, 'test');
+
+        assertTrue($result);
+    }
+
     public function testSetChatPermissions(): void
     {
         $api = TestHelper::createSuccessStubApi(true);

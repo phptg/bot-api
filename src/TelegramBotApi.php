@@ -115,6 +115,7 @@ use Phptg\BotApi\Method\SetBusinessAccountProfilePhoto;
 use Phptg\BotApi\Method\SetBusinessAccountUsername;
 use Phptg\BotApi\Method\SetChatAdministratorCustomTitle;
 use Phptg\BotApi\Method\SetChatDescription;
+use Phptg\BotApi\Method\SetChatMemberTag;
 use Phptg\BotApi\Method\SetChatMenuButton;
 use Phptg\BotApi\Method\SetChatPermissions;
 use Phptg\BotApi\Method\SetChatPhoto;
@@ -2837,6 +2838,19 @@ final class TelegramBotApi
     ): FailResult|true {
         return $this->call(
             new SetChatAdministratorCustomTitle($chatId, $userId, $customTitle),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#setchatmembertag
+     */
+    public function setChatMemberTag(
+        int|string $chatId,
+        int $userId,
+        ?string $tag = null,
+    ): FailResult|true {
+        return $this->call(
+            new SetChatMemberTag($chatId, $userId, $tag),
         );
     }
 
