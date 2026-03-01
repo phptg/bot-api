@@ -37,6 +37,7 @@ final readonly class Message
         public ?Chat $senderChat = null,
         public ?int $senderBoostCount = null,
         public ?User $senderBusinessBot = null,
+        public ?string $senderTag = null,
         public ?string $businessConnectionId = null,
         public ?MessageOrigin $forwardOrigin = null,
         public ?true $isTopicMessage = null,

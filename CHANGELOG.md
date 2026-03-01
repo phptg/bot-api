@@ -9,6 +9,7 @@
 - New #188: Add `SetChatMemberTag` method.
 - New #188: Add `canManageTags` field to `ChatMemberAdministrator` and `ChatAdministratorRights` types.
 - New #188: Add `canManageTags` parameter to `PromoteChatMember` method.
+- New #188: Add `senderTag` field to `Message` type.
 
 ## 0.16 February 28, 2026
 
