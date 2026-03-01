@@ -1,5 +1,16 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.17 March 1, 2026
+
+- New #188: Add `unixTime` and `dateTimeFormat` fields to `MessageEntity` type.
+- New #188: Add `DATE_TIME` constant to `MessageEntityType`.
+- New #188: Add `tag` field to `ChatMemberMember` and `ChatMemberRestricted` types.
+- New #188: Add `canEditTag` field to `ChatMemberRestricted` and `ChatPermissions` types.
+- New #188: Add `SetChatMemberTag` method.
+- New #188: Add `canManageTags` field to `ChatMemberAdministrator` and `ChatAdministratorRights` types.
+- New #188: Add `canManageTags` parameter to `PromoteChatMember` method.
+- New #188: Add `senderTag` field to `Message` type.
+
 ## 0.16 February 28, 2026
 
 - Chg #186: Remove `PsrTransport`, `PsrWebhookResponseFactory` and `StreamResourceReader` classes.

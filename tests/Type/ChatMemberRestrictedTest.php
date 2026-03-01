@@ -12,6 +12,7 @@ use Phptg\BotApi\Type\User;
 
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertFalse;
+use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;
 
@@ -27,6 +28,7 @@ final class ChatMemberRestrictedTest extends TestCase
             true,
             false,
             false,
+            true,
             true,
             true,
             true,
@@ -54,11 +56,13 @@ final class ChatMemberRestrictedTest extends TestCase
         assertTrue($member->canSendPolls);
         assertTrue($member->canSendOtherMessages);
         assertTrue($member->canAddWebPagePreviews);
+        assertTrue($member->canEditTag);
         assertTrue($member->canChangeInfo);
         assertTrue($member->canInviteUsers);
         assertTrue($member->canPinMessages);
         assertTrue($member->canManageTopics);
         assertFalse($member->untilDate);
+        assertNull($member->tag);
     }
 
     public function testFromTelegramResult(): void
@@ -80,11 +84,13 @@ final class ChatMemberRestrictedTest extends TestCase
             'can_send_polls' => true,
             'can_send_other_messages' => true,
             'can_add_web_page_previews' => true,
+            'can_edit_tag' => true,
             'can_change_info' => true,
             'can_invite_users' => true,
             'can_pin_messages' => true,
             'can_manage_topics' => true,
             'until_date' => 123456779,
+            'tag' => 'test-tag',
         ], null, ChatMemberRestricted::class);
 
         assertSame(123, $member->user->id);
@@ -99,11 +105,13 @@ final class ChatMemberRestrictedTest extends TestCase
         assertTrue($member->canSendPolls);
         assertTrue($member->canSendOtherMessages);
         assertTrue($member->canAddWebPagePreviews);
+        assertTrue($member->canEditTag);
         assertTrue($member->canChangeInfo);
         assertTrue($member->canInviteUsers);
         assertTrue($member->canPinMessages);
         assertTrue($member->canManageTopics);
         assertEquals(new DateTimeImmutable('@123456779'), $member->untilDate);
+        assertSame('test-tag', $member->tag);
     }
 
     public function testFromTelegramResultWithZeroUntilDate(): void
@@ -125,6 +133,7 @@ final class ChatMemberRestrictedTest extends TestCase
             'can_send_polls' => true,
             'can_send_other_messages' => true,
             'can_add_web_page_previews' => true,
+            'can_edit_tag' => true,
             'can_change_info' => true,
             'can_invite_users' => true,
             'can_pin_messages' => true,
@@ -144,6 +153,7 @@ final class ChatMemberRestrictedTest extends TestCase
         assertTrue($member->canSendPolls);
         assertTrue($member->canSendOtherMessages);
         assertTrue($member->canAddWebPagePreviews);
+        assertTrue($member->canEditTag);
         assertTrue($member->canChangeInfo);
         assertTrue($member->canInviteUsers);
         assertTrue($member->canPinMessages);

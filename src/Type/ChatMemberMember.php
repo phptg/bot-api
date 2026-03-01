@@ -16,6 +16,7 @@ final readonly class ChatMemberMember implements ChatMember
     public function __construct(
         public User $user,
         public ?DateTimeImmutable $untilDate = null,
+        public ?string $tag = null,
     ) {}
 
     public function getStatus(): string

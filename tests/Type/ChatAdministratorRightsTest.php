@@ -35,6 +35,7 @@ final class ChatAdministratorRightsTest extends TestCase
         assertNull($rights->canPinMessages);
         assertNull($rights->canManageTopics);
         assertNull($rights->canManageDirectMessages);
+        assertNull($rights->canManageTags);
 
         assertSame(
             [
@@ -73,6 +74,7 @@ final class ChatAdministratorRightsTest extends TestCase
             'can_pin_messages' => false,
             'can_manage_topics' => true,
             'can_manage_direct_messages' => false,
+            'can_manage_tags' => true,
         ], null, ChatAdministratorRights::class);
 
         assertTrue($type->isAnonymous);
@@ -91,6 +93,7 @@ final class ChatAdministratorRightsTest extends TestCase
         assertFalse($type->canPinMessages);
         assertTrue($type->canManageTopics);
         assertFalse($type->canManageDirectMessages);
+        assertTrue($type->canManageTags);
         assertSame(
             [
                 'is_anonymous' => true,
@@ -109,6 +112,7 @@ final class ChatAdministratorRightsTest extends TestCase
                 'can_pin_messages' => false,
                 'can_manage_topics' => true,
                 'can_manage_direct_messages' => false,
+                'can_manage_tags' => true,
             ],
             $type->toRequestArray(),
         );

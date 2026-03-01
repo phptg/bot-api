@@ -49,6 +49,7 @@ final class MessageTest extends TestCase
         assertNull($message->senderChat);
         assertNull($message->senderBoostCount);
         assertNull($message->senderBusinessBot);
+        assertNull($message->senderTag);
         assertNull($message->businessConnectionId);
         assertNull($message->forwardOrigin);
         assertNull($message->isTopicMessage);
@@ -175,6 +176,7 @@ final class MessageTest extends TestCase
                 'is_bot' => true,
                 'first_name' => 'JohnBot',
             ],
+            'sender_tag' => 'admin-tag',
             'business_connection_id' => 'btest',
             'forward_origin' => [
                 'type' => 'hidden_user',
@@ -659,6 +661,7 @@ final class MessageTest extends TestCase
         assertSame(9, $message->senderChat?->id);
         assertSame(11, $message->senderBoostCount);
         assertSame(15, $message->senderBusinessBot?->id);
+        assertSame('admin-tag', $message->senderTag);
         assertSame('btest', $message->businessConnectionId);
 
         assertInstanceOf(MessageOriginHiddenUser::class, $message->forwardOrigin);

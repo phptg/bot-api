@@ -27,12 +27,14 @@ final readonly class ChatMemberRestricted implements ChatMember
         public bool $canSendPolls,
         public bool $canSendOtherMessages,
         public bool $canAddWebPagePreviews,
+        public bool $canEditTag,
         public bool $canChangeInfo,
         public bool $canInviteUsers,
         public bool $canPinMessages,
         public bool $canManageTopics,
         #[ChatMemberUntilDateValue]
         public DateTimeImmutable|false $untilDate,
+        public ?string $tag = null,
     ) {}
 
     public function getStatus(): string

@@ -9,6 +9,7 @@ use Phptg\BotApi\ParseResult\ObjectFactory;
 use Phptg\BotApi\Type\ChatMemberMember;
 use Phptg\BotApi\Type\User;
 
+use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 
 final class ChatMemberMemberTest extends TestCase
@@ -21,6 +22,7 @@ final class ChatMemberMemberTest extends TestCase
         assertSame('member', $member->getStatus());
         assertSame($user, $member->getUser());
         assertSame($user, $member->user);
+        assertNull($member->tag);
     }
 
     public function testFromTelegramResult(): void
@@ -46,6 +48,7 @@ final class ChatMemberMemberTest extends TestCase
                     'first_name' => 'John',
                 ],
                 'until_date' => 1724317996,
+                'tag' => 'test-tag',
             ],
             null,
             ChatMemberMember::class,
@@ -53,5 +56,6 @@ final class ChatMemberMemberTest extends TestCase
 
         assertSame(123, $member->user->id);
         assertSame(1724317996, $member->untilDate?->getTimestamp());
+        assertSame('test-tag', $member->tag);
     }
 }

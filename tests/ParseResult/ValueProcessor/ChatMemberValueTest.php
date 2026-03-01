@@ -89,6 +89,7 @@ final class ChatMemberValueTest extends TestCase
                     'can_send_polls' => false,
                     'can_send_other_messages' => false,
                     'can_add_web_page_previews' => false,
+                    'can_edit_tag' => false,
                     'can_change_info' => false,
                     'can_invite_users' => false,
                     'can_pin_messages' => false,

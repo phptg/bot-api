@@ -31,4 +31,5 @@ final class MessageEntityType
     public const TEXT_LINK = 'text_link';
     public const TEXT_MENTION = 'text_mention';
     public const CUSTOM_EMOJI = 'custom_emoji';
+    public const DATE_TIME = 'date_time';
 }
