@@ -27,6 +27,8 @@ final class MessageEntityTest extends TestCase
         assertNull($messageEntity->user);
         assertNull($messageEntity->language);
         assertNull($messageEntity->customEmojiId);
+        assertNull($messageEntity->unixTime);
+        assertNull($messageEntity->dateTimeFormat);
 
         assertSame(
             [
@@ -48,6 +50,8 @@ final class MessageEntityTest extends TestCase
             new User(1, false, 'Sergei'),
             'ru',
             'x6',
+            1740000000,
+            'd MMMM yyyy',
         );
 
         assertSame(
@@ -63,6 +67,8 @@ final class MessageEntityTest extends TestCase
                 ],
                 'language' => 'ru',
                 'custom_emoji_id' => 'x6',
+                'unix_time' => 1740000000,
+                'date_time_format' => 'd MMMM yyyy',
             ],
             $messageEntity->toRequestArray(),
         );
@@ -82,6 +88,8 @@ final class MessageEntityTest extends TestCase
             ],
             'language' => 'ru',
             'custom_emoji_id' => 'x6',
+            'unix_time' => 1740000000,
+            'date_time_format' => 'd MMMM yyyy',
         ], null, MessageEntity::class);
 
         assertSame('bold', $messageEntity->type);
@@ -96,5 +104,7 @@ final class MessageEntityTest extends TestCase
 
         assertSame('ru', $messageEntity->language);
         assertSame('x6', $messageEntity->customEmojiId);
+        assertSame(1740000000, $messageEntity->unixTime);
+        assertSame('d MMMM yyyy', $messageEntity->dateTimeFormat);
     }
 }

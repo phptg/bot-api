@@ -1,5 +1,10 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.16.1 under development
+
+- New #188: Add `unixTime` and `dateTimeFormat` fields to `MessageEntity` type.
+- New #188: Add `DATE_TIME` constant to `MessageEntityType`.
+
 ## 0.16 February 28, 2026
 
 - Chg #186: Remove `PsrTransport`, `PsrWebhookResponseFactory` and `StreamResourceReader` classes.
