@@ -28,6 +28,7 @@ final readonly class ChatAdministratorRights
         public ?bool $canPinMessages = null,
         public ?bool $canManageTopics = null,
         public ?bool $canManageDirectMessages = null,
+        public ?bool $canManageTags = null,
     ) {}
 
     public function toRequestArray(): array
@@ -50,6 +51,7 @@ final readonly class ChatAdministratorRights
                 'can_pin_messages' => $this->canPinMessages,
                 'can_manage_topics' => $this->canManageTopics,
                 'can_manage_direct_messages' => $this->canManageDirectMessages,
+                'can_manage_tags' => $this->canManageTags,
             ],
             static fn(mixed $value): bool => $value !== null,
         );

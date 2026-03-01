@@ -7,6 +7,7 @@
 - New #188: Add `tag` field to `ChatMemberMember` and `ChatMemberRestricted` types.
 - New #188: Add `canEditTag` field to `ChatMemberRestricted` and `ChatPermissions` types.
 - New #188: Add `SetChatMemberTag` method.
+- New #188: Add `canManageTags` field to `ChatMemberAdministrator` and `ChatAdministratorRights` types.
 
 ## 0.16 February 28, 2026
 
