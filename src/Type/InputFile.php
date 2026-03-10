@@ -34,7 +34,7 @@ final readonly class InputFile
      */
     public static function fromLocalFile(string $path, ?string $filename = null): self
     {
-        $resource = fopen($path, 'r');
+        $resource = fopen($path, 'rb');
         if ($resource === false) {
             throw new RuntimeException('Unable to open file "' . $path . '".');
         }
