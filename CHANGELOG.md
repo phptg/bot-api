@@ -1,5 +1,9 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.17.1 under development
+
+- Enh #190: Open file in binary mode in `InputFile::fromLocalFile()` method.
+
 ## 0.17 March 1, 2026
 
 - New #188: Add `unixTime` and `dateTimeFormat` fields to `MessageEntity` type.
