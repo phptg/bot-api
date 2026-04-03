@@ -29,6 +29,7 @@ final class PollTest extends TestCase
             false,
             'regular',
             true,
+            false,
         );
 
         assertSame('12', $poll->id);
@@ -39,11 +40,14 @@ final class PollTest extends TestCase
         assertFalse($poll->isAnonymous);
         assertSame('regular', $poll->type);
         assertTrue($poll->allowsMultipleAnswers);
+        assertFalse($poll->allowsRevoting);
         assertNull($poll->correctOptionIds);
         assertNull($poll->explanation);
         assertNull($poll->explanationEntities);
         assertNull($poll->openPeriod);
         assertNull($poll->closeDate);
+        assertNull($poll->description);
+        assertNull($poll->descriptionEntities);
     }
 
     public function testFromTelegramResult(): void
@@ -59,6 +63,7 @@ final class PollTest extends TestCase
             'is_anonymous' => false,
             'type' => 'regular',
             'allows_multiple_answers' => true,
+            'allows_revoting' => true,
             'question_entities' => [
                 [
                     'offset' => 0,
@@ -77,6 +82,14 @@ final class PollTest extends TestCase
             ],
             'open_period' => 123,
             'close_date' => 456,
+            'description' => 'Poll description',
+            'description_entities' => [
+                [
+                    'offset' => 0,
+                    'length' => 4,
+                    'type' => 'bold',
+                ],
+            ],
         ], null, Poll::class);
 
         assertSame('12', $poll->id);
@@ -90,6 +103,7 @@ final class PollTest extends TestCase
         assertFalse($poll->isAnonymous);
         assertSame('regular', $poll->type);
         assertTrue($poll->allowsMultipleAnswers);
+        assertTrue($poll->allowsRevoting);
 
         assertCount(1, $poll->questionEntities);
         assertSame(35, $poll->questionEntities[0]->length);
@@ -102,5 +116,8 @@ final class PollTest extends TestCase
 
         assertSame(123, $poll->openPeriod);
         assertSame(456, $poll->closeDate);
+        assertSame('Poll description', $poll->description);
+        assertCount(1, $poll->descriptionEntities);
+        assertSame(4, $poll->descriptionEntities[0]->length);
     }
 }

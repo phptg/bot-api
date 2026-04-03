@@ -15,6 +15,7 @@
 - New #191: Add `PreparedKeyboardButton` type.
 - New #191: Add `SavePreparedKeyboardButton` method.
 - Chg #191: Replace `correctOptionId` field with `correctOptionIds` in `Poll` type.
+- New #191: Add `allowsRevoting`, `description` and `descriptionEntities` fields to `Poll` type.
 
 ## 0.17 March 1, 2026
 

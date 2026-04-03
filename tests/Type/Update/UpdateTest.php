@@ -227,6 +227,7 @@ final class UpdateTest extends TestCase
                 'is_anonymous' => false,
                 'type' => 'regular',
                 'allows_multiple_answers' => false,
+                'allows_revoting' => true,
             ],
             'poll_answer' => [
                 'poll_id' => 'poll2',

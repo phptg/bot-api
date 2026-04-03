@@ -20,6 +20,7 @@ final readonly class Poll
      * @param PollOption[] $options
      * @param int[]|null $correctOptionIds
      * @param MessageEntity[]|null $explanationEntities
+     * @param MessageEntity[]|null $descriptionEntities
      */
     public function __construct(
         public string $id,
@@ -31,6 +32,7 @@ final readonly class Poll
         public bool $isAnonymous,
         public string $type,
         public bool $allowsMultipleAnswers,
+        public bool $allowsRevoting,
         #[ArrayOfObjectsValue(MessageEntity::class)]
         public ?array $questionEntities = null,
         #[ArrayMap(IntegerValue::class)]
@@ -40,5 +42,8 @@ final readonly class Poll
         public ?array $explanationEntities = null,
         public ?int $openPeriod = null,
         public ?int $closeDate = null,
+        public ?string $description = null,
+        #[ArrayOfObjectsValue(MessageEntity::class)]
+        public ?array $descriptionEntities = null,
     ) {}
 }
