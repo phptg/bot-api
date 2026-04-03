@@ -52,6 +52,7 @@ use Phptg\BotApi\Method\GetChatMemberCount;
 use Phptg\BotApi\Method\GetChatMenuButton;
 use Phptg\BotApi\Method\GetFile;
 use Phptg\BotApi\Method\GetForumTopicIconStickers;
+use Phptg\BotApi\Method\GetManagedBotToken;
 use Phptg\BotApi\Method\GetMe;
 use Phptg\BotApi\Method\GetMyCommands;
 use Phptg\BotApi\Method\GetMyDefaultAdministratorRights;
@@ -1348,6 +1349,14 @@ final class TelegramBotApi
     public function getMe(): FailResult|User
     {
         return $this->call(new GetMe());
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#getmanagedbottoken
+     */
+    public function getManagedBotToken(int $userId): FailResult|string
+    {
+        return $this->call(new GetManagedBotToken($userId));
     }
 
     /**

@@ -10,6 +10,7 @@
 - New #191: Add `managedBotCreated` field to `Message` type.
 - New #191: Add `ManagedBotUpdated` type.
 - New #191: Add `managedBot` field to `Update` type.
+- New #191: Add `GetManagedBotToken` method.
 
 ## 0.17 March 1, 2026
 
