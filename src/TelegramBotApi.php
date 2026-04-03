@@ -82,8 +82,9 @@ use Phptg\BotApi\Method\Payment\SendInvoice;
 use Phptg\BotApi\Method\PinChatMessage;
 use Phptg\BotApi\Method\PostStory;
 use Phptg\BotApi\Method\PromoteChatMember;
-use Phptg\BotApi\Method\RepostStory;
 use Phptg\BotApi\Method\RemoveBusinessAccountProfilePhoto;
+use Phptg\BotApi\Method\ReplaceManagedBotToken;
+use Phptg\BotApi\Method\RepostStory;
 use Phptg\BotApi\Method\RemoveMyProfilePhoto;
 use Phptg\BotApi\Method\RemoveChatVerification;
 use Phptg\BotApi\Method\RemoveUserVerification;
@@ -1766,6 +1767,14 @@ final class TelegramBotApi
         return $this->call(
             new ReopenGeneralForumTopic($chatId),
         );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#replacemanagedbottoken
+     */
+    public function replaceManagedBotToken(int $userId): FailResult|string
+    {
+        return $this->call(new ReplaceManagedBotToken($userId));
     }
 
     /**

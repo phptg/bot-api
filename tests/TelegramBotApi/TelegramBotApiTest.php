@@ -1740,6 +1740,15 @@ final class TelegramBotApiTest extends TestCase
         assertTrue($result);
     }
 
+    public function testReplaceManagedBotToken(): void
+    {
+        $api = TestHelper::createSuccessStubApi('789012:XYZ-abc3456defGhi-lmn78O9p2q456rs22');
+
+        $result = $api->replaceManagedBotToken(789);
+
+        assertSame('789012:XYZ-abc3456defGhi-lmn78O9p2q456rs22', $result);
+    }
+
     public function testReplaceStickerInSet(): void
     {
         $api = TestHelper::createSuccessStubApi(true);

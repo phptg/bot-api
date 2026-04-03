@@ -11,6 +11,7 @@
 - New #191: Add `ManagedBotUpdated` type.
 - New #191: Add `managedBot` field to `Update` type.
 - New #191: Add `GetManagedBotToken` method.
+- New #191: Add `ReplaceManagedBotToken` method.
 
 ## 0.17 March 1, 2026
 
