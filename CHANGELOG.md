@@ -5,7 +5,9 @@
 - Enh #190: Open file in binary mode in `InputFile::fromLocalFile()` method.
 - New #191: Add `canManageBots` field to `User` type.
 - New #191: Add `KeyboardButtonRequestManagedBot` type.
-- New #191: Add `request_managed_bot` field to `KeyboardButton` type.
+- New #191: Add `requestManagedBot` field to `KeyboardButton` type.
+- New #191: Add `ManagedBotCreated` type.
+- New #191: Add `managedBotCreated` field to `Message` type.
 
 ## 0.17 March 1, 2026
 

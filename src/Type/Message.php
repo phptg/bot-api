@@ -141,5 +141,6 @@ final readonly class Message
         public ?SuggestedPostRefunded $suggestedPostRefunded = null,
         public ?ChatOwnerLeft $chatOwnerLeft = null,
         public ?ChatOwnerChanged $chatOwnerChanged = null,
+        public ?ManagedBotCreated $managedBotCreated = null,
     ) {}
 }

@@ -146,6 +146,7 @@ final class MessageTest extends TestCase
         assertNull($message->suggestedPostRefunded);
         assertNull($message->chatOwnerLeft);
         assertNull($message->chatOwnerChanged);
+        assertNull($message->managedBotCreated);
     }
 
     public function testFromTelegramResult(): void
@@ -651,6 +652,13 @@ final class MessageTest extends TestCase
                     'first_name' => 'Ivan',
                 ],
             ],
+            'managed_bot_created' => [
+                'bot' => [
+                    'id' => 802,
+                    'is_bot' => true,
+                    'first_name' => 'ManagedBot',
+                ],
+            ],
         ], null, Message::class);
 
         assertSame(7, $message->messageId);
@@ -792,5 +800,7 @@ final class MessageTest extends TestCase
         assertSame('refund_reason', $message->suggestedPostRefunded?->reason);
         assertSame(800, $message->chatOwnerLeft?->newOwner?->id);
         assertSame(801, $message->chatOwnerChanged?->newOwner->id);
+        assertSame(802, $message->managedBotCreated?->bot->id);
+        assertSame('ManagedBot', $message->managedBotCreated?->bot->firstName);
     }
 }
