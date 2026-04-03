@@ -13,6 +13,7 @@
 - New #191: Add `GetManagedBotToken` method.
 - New #191: Add `ReplaceManagedBotToken` method.
 - New #191: Add `PreparedKeyboardButton` type.
+- New #191: Add `SavePreparedKeyboardButton` method.
 
 ## 0.17 March 1, 2026
 

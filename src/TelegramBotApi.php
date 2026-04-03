@@ -92,6 +92,7 @@ use Phptg\BotApi\Method\ReopenForumTopic;
 use Phptg\BotApi\Method\ReopenGeneralForumTopic;
 use Phptg\BotApi\Method\RestrictChatMember;
 use Phptg\BotApi\Method\RevokeChatInviteLink;
+use Phptg\BotApi\Method\SavePreparedKeyboardButton;
 use Phptg\BotApi\Method\SendAnimation;
 use Phptg\BotApi\Method\SendAudio;
 use Phptg\BotApi\Method\SendChatAction;
@@ -202,6 +203,8 @@ use Phptg\BotApi\Type\Inline\InlineQueryResultsButton;
 use Phptg\BotApi\Type\Inline\PreparedInlineMessage;
 use Phptg\BotApi\Type\Inline\SentWebAppMessage;
 use Phptg\BotApi\Type\InlineKeyboardMarkup;
+use Phptg\BotApi\Type\KeyboardButton;
+use Phptg\BotApi\Type\PreparedKeyboardButton;
 use Phptg\BotApi\Type\InputChecklist;
 use Phptg\BotApi\Type\InputFile;
 use Phptg\BotApi\Type\InputMedia;
@@ -1814,6 +1817,14 @@ final class TelegramBotApi
         return $this->call(
             new RevokeChatInviteLink($chatId, $inviteLink),
         );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#savepreparedkeyboardbutton
+     */
+    public function savePreparedKeyboardButton(int $userId, KeyboardButton $button): FailResult|PreparedKeyboardButton
+    {
+        return $this->call(new SavePreparedKeyboardButton($userId, $button));
     }
 
     /**
