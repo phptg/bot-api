@@ -46,6 +46,7 @@ final class UpdateTest extends TestCase
         assertNull($update->chatBoost);
         assertNull($update->removedChatBoost);
         assertNull($update->purchasedPaidMedia);
+        assertNull($update->managedBot);
         assertNull($update->getRaw());
         assertNull($update->getRaw(true));
     }
@@ -335,6 +336,18 @@ final class UpdateTest extends TestCase
                     ],
                 ],
             ],
+            'managed_bot' => [
+                'user' => [
+                    'id' => 123,
+                    'is_bot' => false,
+                    'first_name' => 'Creator',
+                ],
+                'bot' => [
+                    'id' => 456,
+                    'is_bot' => true,
+                    'first_name' => 'ManagedBot',
+                ],
+            ],
         ];
         $update = (new ObjectFactory())->create($data, null, Update::class);
 
@@ -362,6 +375,8 @@ final class UpdateTest extends TestCase
         assertSame(23682, $update->chatBoost?->chat->id);
         assertSame(1735, $update->removedChatBoost?->chat->id);
         assertSame(1235, $update->purchasedPaidMedia->from->id);
+        assertSame(123, $update->managedBot?->user->id);
+        assertSame(456, $update->managedBot?->bot->id);
         assertNull($update->getRaw());
         assertNull($update->getRaw(true));
     }

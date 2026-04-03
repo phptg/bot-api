@@ -19,6 +19,7 @@ use Phptg\BotApi\Type\ChatJoinRequest;
 use Phptg\BotApi\Type\ChatMemberUpdated;
 use Phptg\BotApi\Type\Inline\ChosenInlineResult;
 use Phptg\BotApi\Type\Inline\InlineQuery;
+use Phptg\BotApi\Type\ManagedBotUpdated;
 use Phptg\BotApi\Type\Message;
 use Phptg\BotApi\Type\MessageReactionCountUpdated;
 use Phptg\BotApi\Type\MessageReactionUpdated;
@@ -63,6 +64,7 @@ final class Update
         public readonly ?ChatBoostUpdated $chatBoost = null,
         public readonly ?ChatBoostRemoved $removedChatBoost = null,
         public readonly ?PaidMediaPurchased $purchasedPaidMedia = null,
+        public readonly ?ManagedBotUpdated $managedBot = null,
     ) {}
 
     /**

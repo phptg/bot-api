@@ -8,6 +8,8 @@
 - New #191: Add `requestManagedBot` field to `KeyboardButton` type.
 - New #191: Add `ManagedBotCreated` type.
 - New #191: Add `managedBotCreated` field to `Message` type.
+- New #191: Add `ManagedBotUpdated` type.
+- New #191: Add `managedBot` field to `Update` type.
 
 ## 0.17 March 1, 2026
 
