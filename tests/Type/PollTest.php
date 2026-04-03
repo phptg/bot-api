@@ -39,7 +39,7 @@ final class PollTest extends TestCase
         assertFalse($poll->isAnonymous);
         assertSame('regular', $poll->type);
         assertTrue($poll->allowsMultipleAnswers);
-        assertNull($poll->correctOptionId);
+        assertNull($poll->correctOptionIds);
         assertNull($poll->explanation);
         assertNull($poll->explanationEntities);
         assertNull($poll->openPeriod);
@@ -66,7 +66,7 @@ final class PollTest extends TestCase
                     'type' => 'bold',
                 ],
             ],
-            'correct_option_id' => 23,
+            'correct_option_ids' => [0, 2],
             'explanation' => 'Because',
             'explanation_entities' => [
                 [
@@ -94,7 +94,7 @@ final class PollTest extends TestCase
         assertCount(1, $poll->questionEntities);
         assertSame(35, $poll->questionEntities[0]->length);
 
-        assertSame(23, $poll->correctOptionId);
+        assertSame([0, 2], $poll->correctOptionIds);
         assertSame('Because', $poll->explanation);
 
         assertCount(1, $poll->explanationEntities);

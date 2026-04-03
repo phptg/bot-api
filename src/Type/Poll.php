@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Type;
 
+use Phptg\BotApi\ParseResult\ValueProcessor\ArrayMap;
 use Phptg\BotApi\ParseResult\ValueProcessor\ArrayOfObjectsValue;
+use Phptg\BotApi\ParseResult\ValueProcessor\IntegerValue;
 
 /**
  * @see https://core.telegram.org/bots/api#poll
@@ -16,6 +18,7 @@ final readonly class Poll
     /**
      * @param MessageEntity[]|null $questionEntities
      * @param PollOption[] $options
+     * @param int[]|null $correctOptionIds
      * @param MessageEntity[]|null $explanationEntities
      */
     public function __construct(
@@ -30,7 +33,8 @@ final readonly class Poll
         public bool $allowsMultipleAnswers,
         #[ArrayOfObjectsValue(MessageEntity::class)]
         public ?array $questionEntities = null,
-        public ?int $correctOptionId = null,
+        #[ArrayMap(IntegerValue::class)]
+        public ?array $correctOptionIds = null,
         public ?string $explanation = null,
         #[ArrayOfObjectsValue(MessageEntity::class)]
         public ?array $explanationEntities = null,
