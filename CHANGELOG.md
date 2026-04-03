@@ -12,6 +12,7 @@
 - New #191: Add `managedBot` field to `Update` type.
 - New #191: Add `GetManagedBotToken` method.
 - New #191: Add `ReplaceManagedBotToken` method.
+- New #191: Add `PreparedKeyboardButton` type.
 
 ## 0.17 March 1, 2026
 
