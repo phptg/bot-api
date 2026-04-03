@@ -33,6 +33,7 @@ final class UserTest extends TestCase
         assertNull($user->hasMainWebApp);
         assertNull($user->hasTopicsEnabled);
         assertNull($user->allowsUsersToCreateTopics);
+        assertNull($user->canManageBots);
     }
 
     public function testToRequestArray(): void
@@ -51,6 +52,7 @@ final class UserTest extends TestCase
             true,
             true,
             false,
+            true,
             true,
             true,
         );
@@ -72,6 +74,7 @@ final class UserTest extends TestCase
                 'has_main_web_app' => false,
                 'has_topics_enabled' => true,
                 'allows_users_to_create_topics' => true,
+                'can_manage_bots' => true,
             ],
             $user->toRequestArray(),
         );
@@ -95,6 +98,7 @@ final class UserTest extends TestCase
             'has_main_web_app' => false,
             'has_topics_enabled' => true,
             'allows_users_to_create_topics' => true,
+            'can_manage_bots' => true,
         ], null, User::class);
 
         assertInstanceOf(User::class, $user);
@@ -113,5 +117,6 @@ final class UserTest extends TestCase
         assertSame(false, $user->hasMainWebApp);
         assertSame(true, $user->hasTopicsEnabled);
         assertSame(true, $user->allowsUsersToCreateTopics);
+        assertSame(true, $user->canManageBots);
     }
 }
