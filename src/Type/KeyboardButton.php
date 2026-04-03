@@ -21,6 +21,7 @@ final readonly class KeyboardButton
         public ?WebAppInfo $webApp = null,
         public ?string $iconCustomEmojiId = null,
         public ?string $style = null,
+        public ?KeyboardButtonRequestManagedBot $requestManagedBot = null,
     ) {}
 
     public function toRequestArray(): array
@@ -32,6 +33,7 @@ final readonly class KeyboardButton
                 'style' => $this->style,
                 'request_users' => $this->requestUsers?->toRequestArray(),
                 'request_chat' => $this->requestChat?->toRequestArray(),
+                'request_managed_bot' => $this->requestManagedBot?->toRequestArray(),
                 'request_contact' => $this->requestContact,
                 'request_location' => $this->requestLocation,
                 'request_poll' => $this->requestPoll?->toRequestArray(),

@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Type\KeyboardButton;
 use Phptg\BotApi\Type\KeyboardButtonPollType;
 use Phptg\BotApi\Type\KeyboardButtonRequestChat;
+use Phptg\BotApi\Type\KeyboardButtonRequestManagedBot;
 use Phptg\BotApi\Type\KeyboardButtonRequestUsers;
 use Phptg\BotApi\Type\WebAppInfo;
 
@@ -27,6 +28,7 @@ final class KeyboardButtonTest extends TestCase
         assertNull($button->style);
         assertNull($button->requestUsers);
         assertNull($button->requestChat);
+        assertNull($button->requestManagedBot);
         assertNull($button->requestContact);
         assertNull($button->requestLocation);
         assertNull($button->requestPoll);
@@ -44,6 +46,7 @@ final class KeyboardButtonTest extends TestCase
     {
         $requestUsers = new KeyboardButtonRequestUsers(1);
         $requestChat = new KeyboardButtonRequestChat(2, true);
+        $requestManagedBot = new KeyboardButtonRequestManagedBot(3);
         $requestPoll = new KeyboardButtonPollType('test');
         $webApp = new WebAppInfo('https://example.com/test');
         $button = new KeyboardButton(
@@ -56,6 +59,7 @@ final class KeyboardButtonTest extends TestCase
             $webApp,
             '5368324170671202286',
             'primary',
+            $requestManagedBot,
         );
 
         assertSame('test', $button->text);
@@ -63,6 +67,7 @@ final class KeyboardButtonTest extends TestCase
         assertSame('primary', $button->style);
         assertSame($requestUsers, $button->requestUsers);
         assertSame($requestChat, $button->requestChat);
+        assertSame($requestManagedBot, $button->requestManagedBot);
         assertTrue($button->requestContact);
         assertFalse($button->requestLocation);
         assertSame($requestPoll, $button->requestPoll);
@@ -75,6 +80,7 @@ final class KeyboardButtonTest extends TestCase
                 'style' => 'primary',
                 'request_users' => $requestUsers->toRequestArray(),
                 'request_chat' => $requestChat->toRequestArray(),
+                'request_managed_bot' => $requestManagedBot->toRequestArray(),
                 'request_contact' => true,
                 'request_location' => false,
                 'request_poll' => $requestPoll->toRequestArray(),
