@@ -2491,7 +2491,7 @@ final class TelegramBotApiTest extends TestCase
             'id' => '12',
             'question' => 'Why?',
             'options' => [
-                ['text' => 'One', 'voter_count' => 12],
+                ['persistent_id' => 'pid1', 'text' => 'One', 'voter_count' => 12],
             ],
             'total_voter_count' => 42,
             'is_closed' => true,

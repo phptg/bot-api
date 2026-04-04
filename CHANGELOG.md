@@ -19,6 +19,7 @@
 - Chg #191: Replace `correctOptionId` parameter with `correctOptionIds` in `SendPoll` method.
 - New #191: Add `allowsRevoting`, `shuffleOptions`, `allowAddingOptions`, `hideResultsUntilCloses`, `description`, 
   `descriptionParseMode` and `descriptionEntities` parameters to `SendPoll` method.
+- New #191: Add `persistentId`, `addedByUser`, `addedByChat` and `additionDate` fields to `PollOption` type.
 
 ## 0.17 March 1, 2026
 

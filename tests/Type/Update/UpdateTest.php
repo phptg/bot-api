@@ -219,8 +219,8 @@ final class UpdateTest extends TestCase
                 'id' => 'poll1',
                 'question' => 'Question',
                 'options' => [
-                    ['text' => 'Option 1', 'voter_count' => 7],
-                    ['text' => 'Option 2', 'voter_count' => 5],
+                    ['persistent_id' => 'pid1', 'text' => 'Option 1', 'voter_count' => 7],
+                    ['persistent_id' => 'pid2', 'text' => 'Option 2', 'voter_count' => 5],
                 ],
                 'total_voter_count' => 12,
                 'is_closed' => true,

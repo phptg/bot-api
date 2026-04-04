@@ -19,7 +19,7 @@ final class PollTest extends TestCase
 {
     public function testBase(): void
     {
-        $option = new PollOption('One', 12);
+        $option = new PollOption('pid1', 'One', 12);
         $poll = new Poll(
             '12',
             'Why?',
@@ -56,7 +56,7 @@ final class PollTest extends TestCase
             'id' => '12',
             'question' => 'Why?',
             'options' => [
-                ['text' => 'One', 'voter_count' => 12],
+                ['persistent_id' => 'pid1', 'text' => 'One', 'voter_count' => 12],
             ],
             'total_voter_count' => 42,
             'is_closed' => true,
