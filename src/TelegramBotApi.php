@@ -2505,7 +2505,9 @@ final class TelegramBotApi
     /**
      * @param InputPollOption[] $options
      * @param MessageEntity[]|null $questionEntities
+     * @param int[]|null $correctOptionIds
      * @param MessageEntity[]|null $explanationEntities
+     * @param MessageEntity[]|null $descriptionEntities
      *
      * @see https://core.telegram.org/bots/api#sendpoll
      */
@@ -2520,7 +2522,7 @@ final class TelegramBotApi
         ?bool $isAnonymous = null,
         ?string $type = null,
         ?bool $allowsMultipleAnswers = null,
-        ?int $correctOptionId = null,
+        ?array $correctOptionIds = null,
         ?string $explanation = null,
         ?string $explanationParseMode = null,
         ?array $explanationEntities = null,
@@ -2533,6 +2535,13 @@ final class TelegramBotApi
         ?ReplyParameters $replyParameters = null,
         InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup = null,
         ?bool $allowPaidBroadcast = null,
+        ?bool $allowsRevoting = null,
+        ?bool $shuffleOptions = null,
+        ?bool $allowAddingOptions = null,
+        ?bool $hideResultsUntilCloses = null,
+        ?string $description = null,
+        ?string $descriptionParseMode = null,
+        ?array $descriptionEntities = null,
     ): FailResult|Message {
         return $this->call(
             new SendPoll(
@@ -2546,7 +2555,7 @@ final class TelegramBotApi
                 $isAnonymous,
                 $type,
                 $allowsMultipleAnswers,
-                $correctOptionId,
+                $correctOptionIds,
                 $explanation,
                 $explanationParseMode,
                 $explanationEntities,
@@ -2559,6 +2568,13 @@ final class TelegramBotApi
                 $replyParameters,
                 $replyMarkup,
                 $allowPaidBroadcast,
+                $allowsRevoting,
+                $shuffleOptions,
+                $allowAddingOptions,
+                $hideResultsUntilCloses,
+                $description,
+                $descriptionParseMode,
+                $descriptionEntities,
             ),
         );
     }

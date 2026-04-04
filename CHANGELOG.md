@@ -16,6 +16,9 @@
 - New #191: Add `SavePreparedKeyboardButton` method.
 - Chg #191: Replace `correctOptionId` field with `correctOptionIds` in `Poll` type.
 - New #191: Add `allowsRevoting`, `description` and `descriptionEntities` fields to `Poll` type.
+- Chg #191: Replace `correctOptionId` parameter with `correctOptionIds` in `SendPoll` method.
+- New #191: Add `allowsRevoting`, `shuffleOptions`, `allowAddingOptions`, `hideResultsUntilCloses`, `description`, 
+  `descriptionParseMode` and `descriptionEntities` parameters to `SendPoll` method.
 
 ## 0.17 March 1, 2026
 

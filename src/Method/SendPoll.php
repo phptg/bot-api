@@ -27,7 +27,9 @@ final readonly class SendPoll implements MethodInterface
     /**
      * @param InputPollOption[] $options
      * @param MessageEntity[]|null $questionEntities
+     * @param int[]|null $correctOptionIds
      * @param MessageEntity[]|null $explanationEntities
+     * @param MessageEntity[]|null $descriptionEntities
      */
     public function __construct(
         private int|string $chatId,
@@ -40,7 +42,7 @@ final readonly class SendPoll implements MethodInterface
         private ?bool $isAnonymous = null,
         private ?string $type = null,
         private ?bool $allowsMultipleAnswers = null,
-        private ?int $correctOptionId = null,
+        private ?array $correctOptionIds = null,
         private ?string $explanation = null,
         private ?string $explanationParseMode = null,
         private ?array $explanationEntities = null,
@@ -53,6 +55,13 @@ final readonly class SendPoll implements MethodInterface
         private ?ReplyParameters $replyParameters = null,
         private InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup = null,
         private ?bool $allowPaidBroadcast = null,
+        private ?bool $allowsRevoting = null,
+        private ?bool $shuffleOptions = null,
+        private ?bool $allowAddingOptions = null,
+        private ?bool $hideResultsUntilCloses = null,
+        private ?string $description = null,
+        private ?string $descriptionParseMode = null,
+        private ?array $descriptionEntities = null,
     ) {}
 
     public function getHttpMethod(): HttpMethod
@@ -87,7 +96,11 @@ final readonly class SendPoll implements MethodInterface
                 'is_anonymous' => $this->isAnonymous,
                 'type' => $this->type,
                 'allows_multiple_answers' => $this->allowsMultipleAnswers,
-                'correct_option_id' => $this->correctOptionId,
+                'allows_revoting' => $this->allowsRevoting,
+                'shuffle_options' => $this->shuffleOptions,
+                'allow_adding_options' => $this->allowAddingOptions,
+                'hide_results_until_closes' => $this->hideResultsUntilCloses,
+                'correct_option_ids' => $this->correctOptionIds,
                 'explanation' => $this->explanation,
                 'explanation_parse_mode' => $this->explanationParseMode,
                 'explanation_entities' => $this->explanationEntities === null
@@ -99,6 +112,14 @@ final readonly class SendPoll implements MethodInterface
                 'open_period' => $this->openPeriod,
                 'close_date' => $this->closeDate?->getTimestamp(),
                 'is_closed' => $this->isClosed,
+                'description' => $this->description,
+                'description_parse_mode' => $this->descriptionParseMode,
+                'description_entities' => $this->descriptionEntities === null
+                    ? null
+                    : array_map(
+                        static fn(MessageEntity $entity) => $entity->toRequestArray(),
+                        $this->descriptionEntities,
+                    ),
                 'disable_notification' => $this->disableNotification,
                 'protect_content' => $this->protectContent,
                 'allow_paid_broadcast' => $this->allowPaidBroadcast,
