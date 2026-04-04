@@ -147,6 +147,8 @@ final class MessageTest extends TestCase
         assertNull($message->chatOwnerLeft);
         assertNull($message->chatOwnerChanged);
         assertNull($message->managedBotCreated);
+        assertNull($message->pollOptionAdded);
+        assertNull($message->pollOptionDeleted);
     }
 
     public function testFromTelegramResult(): void
@@ -660,6 +662,14 @@ final class MessageTest extends TestCase
                     'first_name' => 'ManagedBot',
                 ],
             ],
+            'poll_option_added' => [
+                'option_persistent_id' => 'pid1',
+                'option_text' => 'New option',
+            ],
+            'poll_option_deleted' => [
+                'option_persistent_id' => 'pid2',
+                'option_text' => 'Deleted option',
+            ],
         ], null, Message::class);
 
         assertSame(7, $message->messageId);
@@ -803,5 +813,9 @@ final class MessageTest extends TestCase
         assertSame(801, $message->chatOwnerChanged?->newOwner->id);
         assertSame(802, $message->managedBotCreated?->bot->id);
         assertSame('ManagedBot', $message->managedBotCreated?->bot->firstName);
+        assertSame('pid1', $message->pollOptionAdded?->optionPersistentId);
+        assertSame('New option', $message->pollOptionAdded?->optionText);
+        assertSame('pid2', $message->pollOptionDeleted?->optionPersistentId);
+        assertSame('Deleted option', $message->pollOptionDeleted?->optionText);
     }
 }

@@ -142,5 +142,7 @@ final readonly class Message
         public ?ChatOwnerLeft $chatOwnerLeft = null,
         public ?ChatOwnerChanged $chatOwnerChanged = null,
         public ?ManagedBotCreated $managedBotCreated = null,
+        public ?PollOptionAdded $pollOptionAdded = null,
+        public ?PollOptionDeleted $pollOptionDeleted = null,
     ) {}
 }

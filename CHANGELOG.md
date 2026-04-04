@@ -21,6 +21,8 @@
   `descriptionParseMode` and `descriptionEntities` parameters to `SendPoll` method.
 - New #191: Add `persistentId`, `addedByUser`, `addedByChat` and `additionDate` fields to `PollOption` type.
 - New #191: Add `optionPersistentIds` field to `PollAnswer` type.
+- New #191: Add `PollOptionAdded` and `PollOptionDeleted` type.
+- New #191: Add `pollOptionAdded` and `pollOptionDeleted` fields to `Message` type.
 
 ## 0.17 March 1, 2026
 
