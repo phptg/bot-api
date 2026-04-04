@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Method\Update;
 
+use Phptg\BotApi\Type\InputFile;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Method\Update\SetWebhook;
@@ -30,6 +31,7 @@ final class SetWebhookTest extends TestCase
 
     public function testFull(): void
     {
+        $file = new InputFile(null);
         $method = new SetWebhook(
             'https://example.com/hook',
             '127.0.0.1',
@@ -37,6 +39,7 @@ final class SetWebhookTest extends TestCase
             ['update1', 'update2'],
             true,
             'asdg23y',
+            $file,
         );
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
@@ -49,6 +52,7 @@ final class SetWebhookTest extends TestCase
                 'allowed_updates' => ['update1', 'update2'],
                 'drop_pending_updates' => true,
                 'secret_token' => 'asdg23y',
+                'certificate' => $file,
             ],
             $method->getData(),
         );

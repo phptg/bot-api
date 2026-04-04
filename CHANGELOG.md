@@ -1,5 +1,9 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.19 April 4, 2026
+
+- New #192: Add `certificate` constructor parameter to `SetWebhook` class and add `certificate` field to `TelegramBotApi::setWebhook()` method.
+
 ## 0.18 April 4, 2026
 
 - Enh #190: Open file in binary mode in `InputFile::fromLocalFile()` method.
