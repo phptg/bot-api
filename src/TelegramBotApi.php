@@ -52,6 +52,7 @@ use Phptg\BotApi\Method\GetChatMemberCount;
 use Phptg\BotApi\Method\GetChatMenuButton;
 use Phptg\BotApi\Method\GetFile;
 use Phptg\BotApi\Method\GetForumTopicIconStickers;
+use Phptg\BotApi\Method\GetManagedBotToken;
 use Phptg\BotApi\Method\GetMe;
 use Phptg\BotApi\Method\GetMyCommands;
 use Phptg\BotApi\Method\GetMyDefaultAdministratorRights;
@@ -81,8 +82,9 @@ use Phptg\BotApi\Method\Payment\SendInvoice;
 use Phptg\BotApi\Method\PinChatMessage;
 use Phptg\BotApi\Method\PostStory;
 use Phptg\BotApi\Method\PromoteChatMember;
-use Phptg\BotApi\Method\RepostStory;
 use Phptg\BotApi\Method\RemoveBusinessAccountProfilePhoto;
+use Phptg\BotApi\Method\ReplaceManagedBotToken;
+use Phptg\BotApi\Method\RepostStory;
 use Phptg\BotApi\Method\RemoveMyProfilePhoto;
 use Phptg\BotApi\Method\RemoveChatVerification;
 use Phptg\BotApi\Method\RemoveUserVerification;
@@ -90,6 +92,7 @@ use Phptg\BotApi\Method\ReopenForumTopic;
 use Phptg\BotApi\Method\ReopenGeneralForumTopic;
 use Phptg\BotApi\Method\RestrictChatMember;
 use Phptg\BotApi\Method\RevokeChatInviteLink;
+use Phptg\BotApi\Method\SavePreparedKeyboardButton;
 use Phptg\BotApi\Method\SendAnimation;
 use Phptg\BotApi\Method\SendAudio;
 use Phptg\BotApi\Method\SendChatAction;
@@ -200,6 +203,8 @@ use Phptg\BotApi\Type\Inline\InlineQueryResultsButton;
 use Phptg\BotApi\Type\Inline\PreparedInlineMessage;
 use Phptg\BotApi\Type\Inline\SentWebAppMessage;
 use Phptg\BotApi\Type\InlineKeyboardMarkup;
+use Phptg\BotApi\Type\KeyboardButton;
+use Phptg\BotApi\Type\PreparedKeyboardButton;
 use Phptg\BotApi\Type\InputChecklist;
 use Phptg\BotApi\Type\InputFile;
 use Phptg\BotApi\Type\InputMedia;
@@ -1351,6 +1356,14 @@ final class TelegramBotApi
     }
 
     /**
+     * @see https://core.telegram.org/bots/api#getmanagedbottoken
+     */
+    public function getManagedBotToken(int $userId): FailResult|string
+    {
+        return $this->call(new GetManagedBotToken($userId));
+    }
+
+    /**
      * @see https://core.telegram.org/bots/api#getmycommands
      */
     public function getMyCommands(?BotCommandScope $scope = null, ?string $languageCode = null): FailResult|array
@@ -1760,6 +1773,14 @@ final class TelegramBotApi
     }
 
     /**
+     * @see https://core.telegram.org/bots/api#replacemanagedbottoken
+     */
+    public function replaceManagedBotToken(int $userId): FailResult|string
+    {
+        return $this->call(new ReplaceManagedBotToken($userId));
+    }
+
+    /**
      * @see https://core.telegram.org/bots/api#replacestickerinset
      */
     public function replaceStickerInSet(
@@ -1796,6 +1817,14 @@ final class TelegramBotApi
         return $this->call(
             new RevokeChatInviteLink($chatId, $inviteLink),
         );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#savepreparedkeyboardbutton
+     */
+    public function savePreparedKeyboardButton(int $userId, KeyboardButton $button): FailResult|PreparedKeyboardButton
+    {
+        return $this->call(new SavePreparedKeyboardButton($userId, $button));
     }
 
     /**
@@ -2476,7 +2505,9 @@ final class TelegramBotApi
     /**
      * @param InputPollOption[] $options
      * @param MessageEntity[]|null $questionEntities
+     * @param int[]|null $correctOptionIds
      * @param MessageEntity[]|null $explanationEntities
+     * @param MessageEntity[]|null $descriptionEntities
      *
      * @see https://core.telegram.org/bots/api#sendpoll
      */
@@ -2491,7 +2522,7 @@ final class TelegramBotApi
         ?bool $isAnonymous = null,
         ?string $type = null,
         ?bool $allowsMultipleAnswers = null,
-        ?int $correctOptionId = null,
+        ?array $correctOptionIds = null,
         ?string $explanation = null,
         ?string $explanationParseMode = null,
         ?array $explanationEntities = null,
@@ -2504,6 +2535,13 @@ final class TelegramBotApi
         ?ReplyParameters $replyParameters = null,
         InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup = null,
         ?bool $allowPaidBroadcast = null,
+        ?bool $allowsRevoting = null,
+        ?bool $shuffleOptions = null,
+        ?bool $allowAddingOptions = null,
+        ?bool $hideResultsUntilCloses = null,
+        ?string $description = null,
+        ?string $descriptionParseMode = null,
+        ?array $descriptionEntities = null,
     ): FailResult|Message {
         return $this->call(
             new SendPoll(
@@ -2517,7 +2555,7 @@ final class TelegramBotApi
                 $isAnonymous,
                 $type,
                 $allowsMultipleAnswers,
-                $correctOptionId,
+                $correctOptionIds,
                 $explanation,
                 $explanationParseMode,
                 $explanationEntities,
@@ -2530,6 +2568,13 @@ final class TelegramBotApi
                 $replyParameters,
                 $replyMarkup,
                 $allowPaidBroadcast,
+                $allowsRevoting,
+                $shuffleOptions,
+                $allowAddingOptions,
+                $hideResultsUntilCloses,
+                $description,
+                $descriptionParseMode,
+                $descriptionEntities,
             ),
         );
     }

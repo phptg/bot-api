@@ -45,6 +45,7 @@ final class SendPollTest extends TestCase
         $option2 = new InputPollOption('Bad');
         $messageEntity1 = new MessageEntity('bold', 0, 5);
         $messageEntity2 = new MessageEntity('bold', 1, 3);
+        $messageEntity3 = new MessageEntity('italic', 2, 4);
         $date = new DateTimeImmutable();
         $replyParameters = new ReplyParameters(23);
         $replyMarkup = new ForceReply();
@@ -59,7 +60,7 @@ final class SendPollTest extends TestCase
             true,
             'quiz',
             false,
-            23,
+            [0, 1],
             'Good explanation',
             'Markdown',
             [$messageEntity2],
@@ -72,6 +73,13 @@ final class SendPollTest extends TestCase
             $replyParameters,
             $replyMarkup,
             true,
+            true,
+            true,
+            true,
+            true,
+            'Poll description',
+            'HTML',
+            [$messageEntity3],
         );
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
@@ -91,13 +99,20 @@ final class SendPollTest extends TestCase
                 'is_anonymous' => true,
                 'type' => 'quiz',
                 'allows_multiple_answers' => false,
-                'correct_option_id' => 23,
+                'allows_revoting' => true,
+                'shuffle_options' => true,
+                'allow_adding_options' => true,
+                'hide_results_until_closes' => true,
+                'correct_option_ids' => [0, 1],
                 'explanation' => 'Good explanation',
                 'explanation_parse_mode' => 'Markdown',
                 'explanation_entities' => [$messageEntity2->toRequestArray()],
                 'open_period' => 300,
                 'close_date' => $date->getTimestamp(),
                 'is_closed' => true,
+                'description' => 'Poll description',
+                'description_parse_mode' => 'HTML',
+                'description_entities' => [$messageEntity3->toRequestArray()],
                 'disable_notification' => false,
                 'protect_content' => false,
                 'allow_paid_broadcast' => true,

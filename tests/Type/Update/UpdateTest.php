@@ -46,6 +46,7 @@ final class UpdateTest extends TestCase
         assertNull($update->chatBoost);
         assertNull($update->removedChatBoost);
         assertNull($update->purchasedPaidMedia);
+        assertNull($update->managedBot);
         assertNull($update->getRaw());
         assertNull($update->getRaw(true));
     }
@@ -218,18 +219,20 @@ final class UpdateTest extends TestCase
                 'id' => 'poll1',
                 'question' => 'Question',
                 'options' => [
-                    ['text' => 'Option 1', 'voter_count' => 7],
-                    ['text' => 'Option 2', 'voter_count' => 5],
+                    ['persistent_id' => 'pid1', 'text' => 'Option 1', 'voter_count' => 7],
+                    ['persistent_id' => 'pid2', 'text' => 'Option 2', 'voter_count' => 5],
                 ],
                 'total_voter_count' => 12,
                 'is_closed' => true,
                 'is_anonymous' => false,
                 'type' => 'regular',
                 'allows_multiple_answers' => false,
+                'allows_revoting' => true,
             ],
             'poll_answer' => [
                 'poll_id' => 'poll2',
                 'option_ids' => [0],
+                'option_persistent_ids' => ['pid1'],
             ],
             'my_chat_member' => [
                 'chat' => [
@@ -335,6 +338,18 @@ final class UpdateTest extends TestCase
                     ],
                 ],
             ],
+            'managed_bot' => [
+                'user' => [
+                    'id' => 123,
+                    'is_bot' => false,
+                    'first_name' => 'Creator',
+                ],
+                'bot' => [
+                    'id' => 456,
+                    'is_bot' => true,
+                    'first_name' => 'ManagedBot',
+                ],
+            ],
         ];
         $update = (new ObjectFactory())->create($data, null, Update::class);
 
@@ -362,6 +377,8 @@ final class UpdateTest extends TestCase
         assertSame(23682, $update->chatBoost?->chat->id);
         assertSame(1735, $update->removedChatBoost?->chat->id);
         assertSame(1235, $update->purchasedPaidMedia->from->id);
+        assertSame(123, $update->managedBot?->user->id);
+        assertSame(456, $update->managedBot?->bot->id);
         assertNull($update->getRaw());
         assertNull($update->getRaw(true));
     }

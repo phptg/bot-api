@@ -137,6 +137,7 @@ final class MessageTest extends TestCase
         assertNull($message->checklistTasksDone);
         assertNull($message->checklistTasksAdded);
         assertNull($message->replyToChecklistTaskId);
+        assertNull($message->replyToPollOptionId);
         assertNull($message->directMessagesTopic);
         assertNull($message->suggestedPostInfo);
         assertNull($message->suggestedPostApproved);
@@ -146,6 +147,9 @@ final class MessageTest extends TestCase
         assertNull($message->suggestedPostRefunded);
         assertNull($message->chatOwnerLeft);
         assertNull($message->chatOwnerChanged);
+        assertNull($message->managedBotCreated);
+        assertNull($message->pollOptionAdded);
+        assertNull($message->pollOptionDeleted);
     }
 
     public function testFromTelegramResult(): void
@@ -212,6 +216,7 @@ final class MessageTest extends TestCase
                 'id' => 8863,
             ],
             'reply_to_checklist_task_id' => 789,
+            'reply_to_poll_option_id' => 'pid1',
             'via_bot' => [
                 'id' => 127,
                 'is_bot' => false,
@@ -334,6 +339,7 @@ final class MessageTest extends TestCase
                 'is_anonymous' => false,
                 'type' => 'regular',
                 'allows_multiple_answers' => true,
+                'allows_revoting' => false,
             ],
             'venue' => [
                 'location' => [
@@ -651,6 +657,21 @@ final class MessageTest extends TestCase
                     'first_name' => 'Ivan',
                 ],
             ],
+            'managed_bot_created' => [
+                'bot' => [
+                    'id' => 802,
+                    'is_bot' => true,
+                    'first_name' => 'ManagedBot',
+                ],
+            ],
+            'poll_option_added' => [
+                'option_persistent_id' => 'pid1',
+                'option_text' => 'New option',
+            ],
+            'poll_option_deleted' => [
+                'option_persistent_id' => 'pid2',
+                'option_text' => 'Deleted option',
+            ],
         ], null, Message::class);
 
         assertSame(7, $message->messageId);
@@ -780,6 +801,7 @@ final class MessageTest extends TestCase
         assertInstanceOf(ChecklistTasksAdded::class, $message->checklistTasksAdded);
         assertCount(2, $message->checklistTasksAdded->tasks);
         assertSame(789, $message->replyToChecklistTaskId);
+        assertSame('pid1', $message->replyToPollOptionId);
         assertSame(12345, $message->directMessagesTopic?->topicId);
         assertSame('pending', $message->suggestedPostInfo?->state);
         assertSame('XTR', $message->suggestedPostInfo?->price?->currency);
@@ -792,5 +814,11 @@ final class MessageTest extends TestCase
         assertSame('refund_reason', $message->suggestedPostRefunded?->reason);
         assertSame(800, $message->chatOwnerLeft?->newOwner?->id);
         assertSame(801, $message->chatOwnerChanged?->newOwner->id);
+        assertSame(802, $message->managedBotCreated?->bot->id);
+        assertSame('ManagedBot', $message->managedBotCreated?->bot->firstName);
+        assertSame('pid1', $message->pollOptionAdded?->optionPersistentId);
+        assertSame('New option', $message->pollOptionAdded?->optionText);
+        assertSame('pid2', $message->pollOptionDeleted?->optionPersistentId);
+        assertSame('Deleted option', $message->pollOptionDeleted?->optionText);
     }
 }

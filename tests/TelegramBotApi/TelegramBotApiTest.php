@@ -25,6 +25,7 @@ use Phptg\BotApi\Type\ChatMemberMember;
 use Phptg\BotApi\Type\ChatPermissions;
 use Phptg\BotApi\Type\File;
 use Phptg\BotApi\Type\ForumTopic;
+use Phptg\BotApi\Type\KeyboardButton;
 use Phptg\BotApi\Type\Game\GameHighScore;
 use Phptg\BotApi\Type\Inline\InlineQueryResultContact;
 use Phptg\BotApi\Type\Inline\InlineQueryResultGame;
@@ -41,6 +42,7 @@ use Phptg\BotApi\Type\MessageEntity;
 use Phptg\BotApi\Type\MessageId;
 use Phptg\BotApi\Type\OwnedGifts;
 use Phptg\BotApi\Type\Payment\StarTransactions;
+use Phptg\BotApi\Type\PreparedKeyboardButton;
 use Phptg\BotApi\Type\StarAmount;
 use Phptg\BotApi\Type\Sticker\Gifts;
 use Phptg\BotApi\Type\Sticker\InputSticker;
@@ -1257,6 +1259,15 @@ final class TelegramBotApiTest extends TestCase
         assertSame(1, $result->id);
     }
 
+    public function testGetManagedBotToken(): void
+    {
+        $api = TestHelper::createSuccessStubApi('123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11');
+
+        $result = $api->getManagedBotToken(789);
+
+        assertSame('123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11', $result);
+    }
+
     public function testGetMyCommands(): void
     {
         $api = TestHelper::createSuccessStubApi([
@@ -1731,6 +1742,15 @@ final class TelegramBotApiTest extends TestCase
         assertTrue($result);
     }
 
+    public function testReplaceManagedBotToken(): void
+    {
+        $api = TestHelper::createSuccessStubApi('789012:XYZ-abc3456defGhi-lmn78O9p2q456rs22');
+
+        $result = $api->replaceManagedBotToken(789);
+
+        assertSame('789012:XYZ-abc3456defGhi-lmn78O9p2q456rs22', $result);
+    }
+
     public function testReplaceStickerInSet(): void
     {
         $api = TestHelper::createSuccessStubApi(true);
@@ -1772,6 +1792,19 @@ final class TelegramBotApiTest extends TestCase
 
         assertInstanceOf(ChatInviteLink::class, $result);
         assertSame(23, $result->creator->id);
+    }
+
+    public function testSavePreparedKeyboardButton(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            'id' => 'prepared_btn_123',
+        ]);
+
+        $button = new KeyboardButton('Test Button');
+        $result = $api->savePreparedKeyboardButton(456, $button);
+
+        assertInstanceOf(PreparedKeyboardButton::class, $result);
+        assertSame('prepared_btn_123', $result->id);
     }
 
     public function testSavePreparedInlineMessage(): void
@@ -2458,13 +2491,14 @@ final class TelegramBotApiTest extends TestCase
             'id' => '12',
             'question' => 'Why?',
             'options' => [
-                ['text' => 'One', 'voter_count' => 12],
+                ['persistent_id' => 'pid1', 'text' => 'One', 'voter_count' => 12],
             ],
             'total_voter_count' => 42,
             'is_closed' => true,
             'is_anonymous' => false,
             'type' => 'regular',
             'allows_multiple_answers' => true,
+            'allows_revoting' => false,
         ]);
 
         $result = $api->stopPoll(1, 2);

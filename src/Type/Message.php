@@ -131,6 +131,7 @@ final readonly class Message
         public ?ChecklistTasksDone $checklistTasksDone = null,
         public ?ChecklistTasksAdded $checklistTasksAdded = null,
         public ?int $replyToChecklistTaskId = null,
+        public ?string $replyToPollOptionId = null,
         public ?DirectMessagesTopic $directMessagesTopic = null,
         public ?true $isPaidPost = null,
         public ?SuggestedPostInfo $suggestedPostInfo = null,
@@ -141,5 +142,8 @@ final readonly class Message
         public ?SuggestedPostRefunded $suggestedPostRefunded = null,
         public ?ChatOwnerLeft $chatOwnerLeft = null,
         public ?ChatOwnerChanged $chatOwnerChanged = null,
+        public ?ManagedBotCreated $managedBotCreated = null,
+        public ?PollOptionAdded $pollOptionAdded = null,
+        public ?PollOptionDeleted $pollOptionDeleted = null,
     ) {}
 }

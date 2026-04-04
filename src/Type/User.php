@@ -27,6 +27,7 @@ final readonly class User
         public ?bool $hasMainWebApp = null,
         public ?bool $hasTopicsEnabled = null,
         public ?bool $allowsUsersToCreateTopics = null,
+        public ?bool $canManageBots = null,
     ) {}
 
     public function toRequestArray(): array
@@ -48,6 +49,7 @@ final readonly class User
                 'has_main_web_app' => $this->hasMainWebApp,
                 'has_topics_enabled' => $this->hasTopicsEnabled,
                 'allows_users_to_create_topics' => $this->allowsUsersToCreateTopics,
+                'can_manage_bots' => $this->canManageBots,
             ],
             static fn(mixed $value): bool => $value !== null,
         );

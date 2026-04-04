@@ -1,8 +1,24 @@
 # Telegram Bot API for PHP Change Log
 
-## 0.17.1 under development
+## 0.18 April 4, 2026
 
 - Enh #190: Open file in binary mode in `InputFile::fromLocalFile()` method.
+- New #191: Add `GetManagedBotToken`, `ReplaceManagedBotToken` and `SavePreparedKeyboardButton` methods.
+- New #191: Add `KeyboardButtonRequestManagedBot`, `ManagedBotCreated`, `ManagedBotUpdated`, `PreparedKeyboardButton`,
+  `PollOptionAdded` and `PollOptionDeleted` types.
+- New #191: Add `requestManagedBot` field to `KeyboardButton` type.
+- New #191: Add `canManageBots` field to `User` type.
+- New #191: Add `managedBotCreated`, `pollOptionAdded`, `pollOptionDeleted` and `replyToPollOptionId` field to `Message`
+  type.
+- New #191: Add `managedBot` field to `Update` type.
+- Chg #191: Replace `correctOptionId` field with `correctOptionIds` in `Poll` type.
+- New #191: Add `allowsRevoting`, `description` and `descriptionEntities` fields to `Poll` type.
+- Chg #191: Replace `correctOptionId` parameter with `correctOptionIds` in `SendPoll` method.
+- New #191: Add `allowsRevoting`, `shuffleOptions`, `allowAddingOptions`, `hideResultsUntilCloses`, `description`, 
+  `descriptionParseMode` and `descriptionEntities` parameters to `SendPoll` method.
+- New #191: Add `persistentId`, `addedByUser`, `addedByChat` and `additionDate` fields to `PollOption` type.
+- New #191: Add `optionPersistentIds` field to `PollAnswer` type.
+- New #191: Add `pollOptionId` field to `ReplyParameters` type.
 
 ## 0.17 March 1, 2026
 
