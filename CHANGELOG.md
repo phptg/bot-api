@@ -24,6 +24,7 @@
 - New #191: Add `PollOptionAdded` and `PollOptionDeleted` type.
 - New #191: Add `pollOptionAdded` and `pollOptionDeleted` fields to `Message` type.
 - New #191: Add `pollOptionId` field to `ReplyParameters` type.
+- New #191: Add `replyToPollOptionId` field to `Message` type.
 
 ## 0.17 March 1, 2026
 

@@ -137,6 +137,7 @@ final class MessageTest extends TestCase
         assertNull($message->checklistTasksDone);
         assertNull($message->checklistTasksAdded);
         assertNull($message->replyToChecklistTaskId);
+        assertNull($message->replyToPollOptionId);
         assertNull($message->directMessagesTopic);
         assertNull($message->suggestedPostInfo);
         assertNull($message->suggestedPostApproved);
@@ -215,6 +216,7 @@ final class MessageTest extends TestCase
                 'id' => 8863,
             ],
             'reply_to_checklist_task_id' => 789,
+            'reply_to_poll_option_id' => 'pid1',
             'via_bot' => [
                 'id' => 127,
                 'is_bot' => false,
@@ -799,6 +801,7 @@ final class MessageTest extends TestCase
         assertInstanceOf(ChecklistTasksAdded::class, $message->checklistTasksAdded);
         assertCount(2, $message->checklistTasksAdded->tasks);
         assertSame(789, $message->replyToChecklistTaskId);
+        assertSame('pid1', $message->replyToPollOptionId);
         assertSame(12345, $message->directMessagesTopic?->topicId);
         assertSame('pending', $message->suggestedPostInfo?->state);
         assertSame('XTR', $message->suggestedPostInfo?->price?->currency);
