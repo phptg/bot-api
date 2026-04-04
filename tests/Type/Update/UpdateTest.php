@@ -232,6 +232,7 @@ final class UpdateTest extends TestCase
             'poll_answer' => [
                 'poll_id' => 'poll2',
                 'option_ids' => [0],
+                'option_persistent_ids' => ['pid1'],
             ],
             'my_chat_member' => [
                 'chat' => [
