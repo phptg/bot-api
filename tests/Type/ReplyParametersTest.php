@@ -26,6 +26,7 @@ final class ReplyParametersTest extends TestCase
         assertNull($replyParameters->quoteEntities);
         assertNull($replyParameters->quotePosition);
         assertNull($replyParameters->checklistTaskId);
+        assertNull($replyParameters->pollOptionId);
 
         assertSame(
             [
@@ -47,6 +48,7 @@ final class ReplyParametersTest extends TestCase
             [$quoteEntity],
             23,
             456,
+            'pid1',
         );
 
         assertSame(99, $replyParameters->messageId);
@@ -57,6 +59,7 @@ final class ReplyParametersTest extends TestCase
         assertSame([$quoteEntity], $replyParameters->quoteEntities);
         assertSame(23, $replyParameters->quotePosition);
         assertSame(456, $replyParameters->checklistTaskId);
+        assertSame('pid1', $replyParameters->pollOptionId);
 
         assertSame(
             [
@@ -68,6 +71,7 @@ final class ReplyParametersTest extends TestCase
                 'quote_entities' => [$quoteEntity->toRequestArray()],
                 'quote_position' => 23,
                 'checklist_task_id' => 456,
+                'poll_option_id' => 'pid1',
             ],
             $replyParameters->toRequestArray(),
         );

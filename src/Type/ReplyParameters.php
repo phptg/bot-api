@@ -23,6 +23,7 @@ final readonly class ReplyParameters
         public ?array $quoteEntities = null,
         public ?int $quotePosition = null,
         public ?int $checklistTaskId = null,
+        public ?string $pollOptionId = null,
     ) {}
 
     public function toRequestArray(): array
@@ -40,6 +41,7 @@ final readonly class ReplyParameters
                 ),
                 'quote_position' => $this->quotePosition,
                 'checklist_task_id' => $this->checklistTaskId,
+                'poll_option_id' => $this->pollOptionId,
             ],
             static fn(mixed $value): bool => $value !== null,
         );
