@@ -1,6 +1,6 @@
 # Telegram Bot API for PHP Change Log
 
-## 0.17.1 under development
+## 0.18 April 4, 2026
 
 - Enh #190: Open file in binary mode in `InputFile::fromLocalFile()` method.
 - New #191: Add `GetManagedBotToken`, `ReplaceManagedBotToken` and `SavePreparedKeyboardButton` methods.
