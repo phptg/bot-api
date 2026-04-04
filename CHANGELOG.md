@@ -3,17 +3,14 @@
 ## 0.17.1 under development
 
 - Enh #190: Open file in binary mode in `InputFile::fromLocalFile()` method.
-- New #191: Add `canManageBots` field to `User` type.
-- New #191: Add `KeyboardButtonRequestManagedBot` type.
+- New #191: Add `GetManagedBotToken`, `ReplaceManagedBotToken` and `SavePreparedKeyboardButton` methods.
+- New #191: Add `KeyboardButtonRequestManagedBot`, `ManagedBotCreated`, `ManagedBotUpdated`, `PreparedKeyboardButton`,
+  `PollOptionAdded` and `PollOptionDeleted` types.
 - New #191: Add `requestManagedBot` field to `KeyboardButton` type.
-- New #191: Add `ManagedBotCreated` type.
-- New #191: Add `managedBotCreated` field to `Message` type.
-- New #191: Add `ManagedBotUpdated` type.
+- New #191: Add `canManageBots` field to `User` type.
+- New #191: Add `managedBotCreated`, `pollOptionAdded`, `pollOptionDeleted` and `replyToPollOptionId` field to `Message`
+  type.
 - New #191: Add `managedBot` field to `Update` type.
-- New #191: Add `GetManagedBotToken` method.
-- New #191: Add `ReplaceManagedBotToken` method.
-- New #191: Add `PreparedKeyboardButton` type.
-- New #191: Add `SavePreparedKeyboardButton` method.
 - Chg #191: Replace `correctOptionId` field with `correctOptionIds` in `Poll` type.
 - New #191: Add `allowsRevoting`, `description` and `descriptionEntities` fields to `Poll` type.
 - Chg #191: Replace `correctOptionId` parameter with `correctOptionIds` in `SendPoll` method.
@@ -21,10 +18,7 @@
   `descriptionParseMode` and `descriptionEntities` parameters to `SendPoll` method.
 - New #191: Add `persistentId`, `addedByUser`, `addedByChat` and `additionDate` fields to `PollOption` type.
 - New #191: Add `optionPersistentIds` field to `PollAnswer` type.
-- New #191: Add `PollOptionAdded` and `PollOptionDeleted` type.
-- New #191: Add `pollOptionAdded` and `pollOptionDeleted` fields to `Message` type.
 - New #191: Add `pollOptionId` field to `ReplyParameters` type.
-- New #191: Add `replyToPollOptionId` field to `Message` type.
 
 ## 0.17 March 1, 2026
 
