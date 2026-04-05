@@ -1,6 +1,6 @@
 # Telegram Bot API for PHP Change Log
 
-## 0.19 April 4, 2026
+## 0.18.1 April 5, 2026
 
 - Bug #192: Add missed `certificate` parameter to `SetWebhook` method.
 
