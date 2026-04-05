@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Method\Update;
 
+use Phptg\BotApi\Type\InputFile;
 use SensitiveParameter;
 use Phptg\BotApi\ParseResult\ValueProcessor\TrueValue;
 use Phptg\BotApi\Transport\HttpMethod;
@@ -24,6 +25,7 @@ final readonly class SetWebhook implements MethodInterface
         private ?bool $dropPendingUpdates = null,
         #[SensitiveParameter]
         private ?string $secretToken = null,
+        private ?InputFile $certificate = null,
     ) {}
 
     public function getHttpMethod(): HttpMethod
@@ -46,6 +48,7 @@ final readonly class SetWebhook implements MethodInterface
                 'allowed_updates' => $this->allowUpdates,
                 'drop_pending_updates' => $this->dropPendingUpdates,
                 'secret_token' => $this->secretToken,
+                'certificate' => $this->certificate,
             ],
             static fn(mixed $value): bool => $value !== null,
         );

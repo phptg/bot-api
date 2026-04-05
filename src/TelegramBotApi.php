@@ -3169,9 +3169,10 @@ final class TelegramBotApi
         ?bool $dropPendingUpdates = null,
         #[SensitiveParameter]
         ?string $secretToken = null,
+        ?InputFile $certificate = null,
     ): FailResult|true {
         return $this->call(
-            new SetWebhook($url, $ipAddress, $maxConnections, $allowUpdates, $dropPendingUpdates, $secretToken),
+            new SetWebhook($url, $ipAddress, $maxConnections, $allowUpdates, $dropPendingUpdates, $secretToken, $certificate),
         );
     }
 
