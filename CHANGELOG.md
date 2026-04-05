@@ -2,7 +2,7 @@
 
 ## 0.19 April 4, 2026
 
-- New #192: Add `certificate` constructor parameter to `SetWebhook` class and add `certificate` field to `TelegramBotApi::setWebhook()` method.
+- Bug #192: Add missed `certificate` parameter to `SetWebhook` method.
 
 ## 0.18 April 4, 2026
 
