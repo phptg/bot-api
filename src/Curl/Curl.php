@@ -23,7 +23,9 @@ final class Curl implements CurlInterface
 {
     public function close(CurlHandle $handle): void
     {
-        curl_close($handle);
+        if (\PHP_VERSION_ID < 80000) {
+            curl_close($handle);
+         }
     }
 
     public function exec(CurlHandle $handle): ?string
