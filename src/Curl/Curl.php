@@ -7,7 +7,6 @@ namespace Phptg\BotApi\Curl;
 use CurlHandle;
 use CurlShareHandle;
 
-use function curl_close;
 use function curl_errno;
 use function curl_error;
 use function curl_exec;
@@ -21,9 +20,7 @@ use function curl_setopt_array;
  */
 final class Curl implements CurlInterface
 {
-    public function close(CurlHandle $handle): void
-    {
-    }
+    public function close(CurlHandle $handle): void {}
 
     public function exec(CurlHandle $handle): ?string
     {
