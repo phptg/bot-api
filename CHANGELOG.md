@@ -1,5 +1,9 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.18.2 under construction
+
+- Enh #194: Remove deprecated `curl_close()` call in `CurlTransport`.
+
 ## 0.18.1 April 5, 2026
 
 - Bug #192: Add missed `certificate` parameter to `SetWebhook` method.

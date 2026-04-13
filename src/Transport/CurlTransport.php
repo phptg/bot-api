@@ -101,8 +101,6 @@ final readonly class CurlTransport implements TransportInterface
             $this->curl->exec($curl);
         } catch (CurlException $exception) {
             throw new DownloadFileException($exception->getMessage(), previous: $exception);
-        } finally {
-            $this->curl->close($curl);
         }
 
         rewind($stream);
@@ -117,20 +115,16 @@ final readonly class CurlTransport implements TransportInterface
 
         $curl = $this->curl->init();
 
-        try {
-            $this->curl->setopt_array($curl, $options);
+        $this->curl->setopt_array($curl, $options);
 
-            /**
-             * @var string $body `curl_exec` returns string because `CURLOPT_RETURNTRANSFER` is set to `true`.
-             */
-            $body = $this->curl->exec($curl);
+        /**
+         * @var string $body `curl_exec` returns string because `CURLOPT_RETURNTRANSFER` is set to `true`.
+         */
+        $body = $this->curl->exec($curl);
 
-            $statusCode = $this->curl->getinfo($curl, CURLINFO_HTTP_CODE);
-            if (!is_int($statusCode)) {
-                $statusCode = 0;
-            }
-        } finally {
-            $this->curl->close($curl);
+        $statusCode = $this->curl->getinfo($curl, CURLINFO_HTTP_CODE);
+        if (!is_int($statusCode)) {
+            $statusCode = 0;
         }
 
         return new ApiResponse($statusCode, $body);

@@ -7,8 +7,6 @@ namespace Phptg\BotApi\Tests\Transport\CurlTransport;
 use CurlShareHandle;
 use CURLStringFile;
 use PHPUnit\Framework\TestCase;
-use RuntimeException;
-use Throwable;
 use Phptg\BotApi\Tests\Curl\CurlMock;
 use Phptg\BotApi\Transport\CurlTransport;
 use Phptg\BotApi\Type\InputFile;
@@ -156,19 +154,6 @@ final class CurlTransportTest extends TestCase
             ],
             $curl->getOptions()[CURLOPT_POSTFIELDS] ?? null,
         );
-    }
-
-    public function testCloseOnException(): void
-    {
-        $curl = new CurlMock(new RuntimeException());
-        $transport = new CurlTransport(curl: $curl);
-
-        try {
-            $transport->get('getMe');
-        } catch (Throwable) {
-        }
-
-        assertSame(1, $curl->getCountCallOfClose());
     }
 
     public function testShareOptions(): void

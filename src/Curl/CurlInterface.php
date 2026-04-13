@@ -12,8 +12,6 @@ use CurlShareHandle;
  */
 interface CurlInterface
 {
-    public function close(CurlHandle $handle): void;
-
     /**
      * @throws CurlException
      */

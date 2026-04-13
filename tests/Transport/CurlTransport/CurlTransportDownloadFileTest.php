@@ -6,7 +6,6 @@ namespace Phptg\BotApi\Tests\Transport\CurlTransport;
 
 use CurlShareHandle;
 use PHPUnit\Framework\TestCase;
-use RuntimeException;
 use Throwable;
 use Phptg\BotApi\Curl\CurlException;
 use Phptg\BotApi\Tests\Curl\CurlMock;
@@ -70,18 +69,5 @@ final class CurlTransportDownloadFileTest extends TestCase
         assertInstanceOf(DownloadFileException::class, $exception);
         assertSame('test', $exception->getMessage());
         assertSame($execException, $exception->getPrevious());
-    }
-
-    public function testCloseOnException(): void
-    {
-        $curl = new CurlMock(new RuntimeException());
-        $transport = new CurlTransport(curl: $curl);
-
-        try {
-            $transport->downloadFile('https://example.test/hello.jpg');
-        } catch (Throwable) {
-        }
-
-        assertSame(1, $curl->getCountCallOfClose());
     }
 }
