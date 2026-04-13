@@ -16,18 +16,12 @@ final class CurlMock implements CurlInterface
 {
     private ?array $options = null;
     private array $shareOptions = [];
-    private int $countCallOfClose = 0;
 
     public function __construct(
         private readonly string|Throwable $execResult = '',
         private readonly array $getinfoResult = [],
         private readonly ?Throwable $initException = null,
     ) {}
-
-    public function close(CurlHandle $handle): void
-    {
-        $this->countCallOfClose++;
-    }
 
     public function exec(CurlHandle $handle): string
     {
@@ -73,10 +67,5 @@ final class CurlMock implements CurlInterface
     public function getShareOptions(): array
     {
         return $this->shareOptions;
-    }
-
-    public function getCountCallOfClose(): int
-    {
-        return $this->countCallOfClose;
     }
 }

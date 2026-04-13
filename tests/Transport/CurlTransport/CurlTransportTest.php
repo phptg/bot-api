@@ -158,19 +158,6 @@ final class CurlTransportTest extends TestCase
         );
     }
 
-    public function testCloseOnException(): void
-    {
-        $curl = new CurlMock(new RuntimeException());
-        $transport = new CurlTransport(curl: $curl);
-
-        try {
-            $transport->get('getMe');
-        } catch (Throwable) {
-        }
-
-        assertSame(1, $curl->getCountCallOfClose());
-    }
-
     public function testShareOptions(): void
     {
         $curl = new CurlMock(

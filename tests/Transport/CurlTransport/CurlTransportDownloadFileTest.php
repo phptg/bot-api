@@ -71,17 +71,4 @@ final class CurlTransportDownloadFileTest extends TestCase
         assertSame('test', $exception->getMessage());
         assertSame($execException, $exception->getPrevious());
     }
-
-    public function testCloseOnException(): void
-    {
-        $curl = new CurlMock(new RuntimeException());
-        $transport = new CurlTransport(curl: $curl);
-
-        try {
-            $transport->downloadFile('https://example.test/hello.jpg');
-        } catch (Throwable) {
-        }
-
-        assertSame(1, $curl->getCountCallOfClose());
-    }
 }

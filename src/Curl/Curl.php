@@ -20,8 +20,6 @@ use function curl_setopt_array;
  */
 final class Curl implements CurlInterface
 {
-    public function close(CurlHandle $handle): void {}
-
     public function exec(CurlHandle $handle): ?string
     {
         $result = curl_exec($handle);
