@@ -7,8 +7,6 @@ namespace Phptg\BotApi\Tests\Transport\CurlTransport;
 use CurlShareHandle;
 use CURLStringFile;
 use PHPUnit\Framework\TestCase;
-use RuntimeException;
-use Throwable;
 use Phptg\BotApi\Tests\Curl\CurlMock;
 use Phptg\BotApi\Transport\CurlTransport;
 use Phptg\BotApi\Type\InputFile;
