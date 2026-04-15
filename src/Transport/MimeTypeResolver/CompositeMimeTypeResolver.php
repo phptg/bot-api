@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Transport\MimeTypeResolver;
 
-use Phptg\BotApi\Transport\InputFileData;
+use Phptg\BotApi\Type\InputFile;
 
 /**
  * @api
@@ -24,10 +24,10 @@ final readonly class CompositeMimeTypeResolver implements MimeTypeResolverInterf
         $this->resolvers = $resolvers;
     }
 
-    public function resolve(InputFileData $fileData): ?string
+    public function resolve(InputFile $inputFile): ?string
     {
         foreach ($this->resolvers as $resolver) {
-            $result = $resolver->resolve($fileData);
+            $result = $resolver->resolve($inputFile);
             if ($result !== null) {
                 return $result;
             }

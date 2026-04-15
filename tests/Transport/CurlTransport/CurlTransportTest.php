@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Phptg\BotApi\Tests\Transport\CurlTransport;
 
 use CurlShareHandle;
-use CURLStringFile;
+use CURLFile;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Tests\Curl\CurlMock;
 use Phptg\BotApi\Transport\CurlTransport;
@@ -101,8 +101,8 @@ final class CurlTransportTest extends TestCase
             '//url/sendPhoto',
             [],
             [
-                'photo1' => InputFile::fromLocalFile(__DIR__ . '/photo.png'),
-                'photo2' => InputFile::fromLocalFile(__DIR__ . '/photo.png', 'photo.png'),
+                'photo1' => new InputFile(__DIR__ . '/photo.png'),
+                'photo2' => new InputFile(__DIR__ . '/photo.png', 'photo.png'),
             ],
         );
 
@@ -115,14 +115,8 @@ final class CurlTransportTest extends TestCase
         assertSame('//url/sendPhoto', $options[CURLOPT_URL]);
         assertEquals(
             [
-                'photo1' => new CURLStringFile(
-                    file_get_contents(__DIR__ . '/photo.png'),
-                    '',
-                ),
-                'photo2' => new CURLStringFile(
-                    file_get_contents(__DIR__ . '/photo.png'),
-                    'photo.png',
-                ),
+                'photo1' => new CURLFile(__DIR__ . '/photo.png', 'image/png', 'photo.png'),
+                'photo2' => new CURLFile(__DIR__ . '/photo.png', 'image/png', 'photo.png'),
             ],
             $options[CURLOPT_POSTFIELDS],
         );
@@ -147,10 +141,7 @@ final class CurlTransportTest extends TestCase
 
         assertEquals(
             [
-                'photo' => new CURLStringFile(
-                    file_get_contents(__DIR__ . '/photo.png'),
-                    '',
-                ),
+                'photo' => new CURLFile(__DIR__ . '/photo.png', 'image/png', 'photo.png'),
             ],
             $curl->getOptions()[CURLOPT_POSTFIELDS] ?? null,
         );
