@@ -7,6 +7,7 @@ namespace Phptg\BotApi\Tests\Transport\CurlTransport;
 use CurlShareHandle;
 use CURLFile;
 use CURLStringFile;
+use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Tests\Curl\CurlMock;
 use Phptg\BotApi\Transport\CurlTransport;
@@ -125,6 +126,35 @@ final class CurlTransportTest extends TestCase
         assertInstanceOf(CurlShareHandle::class, $options[CURLOPT_SHARE]);
     }
 
+    #[TestWith(['text/plain', 'test.txt'])]
+    #[TestWith(['application/octet-stream', 'data.bin'])]
+    #[TestWith(['application/octet-stream', null])]
+    public function testPostWithResource(string $mimeType, ?string $filename): void
+    {
+        $curl = new CurlMock(
+            execResult: '{"ok":true,"result":[]}',
+            getinfoResult: [CURLINFO_HTTP_CODE => 200],
+        );
+        $transport = new CurlTransport(curl: $curl);
+
+        $resource = fopen('php://memory', 'r+');
+        fwrite($resource, 'stream content');
+
+        $transport->postWithFiles(
+            '//url/method',
+            [],
+            ['file' => new InputFile($resource, $filename)],
+        );
+
+        fclose($resource);
+
+        $postFields = $curl->getOptions()[CURLOPT_POSTFIELDS];
+        assertInstanceOf(CURLStringFile::class, $postFields['file']);
+        assertSame('stream content', $postFields['file']->data);
+        assertSame($filename ?? '', $postFields['file']->postname);
+        assertSame($mimeType, $postFields['file']->mime);
+    }
+
     public function testPostWithSeekableVirtualStreamResource(): void
     {
         $curl = new CurlMock(
@@ -147,6 +177,8 @@ final class CurlTransportTest extends TestCase
         $postFields = $curl->getOptions()[CURLOPT_POSTFIELDS];
         assertInstanceOf(CURLStringFile::class, $postFields['file']);
         assertSame('stream content', $postFields['file']->data);
+        assertSame('data.bin', $postFields['file']->postname);
+        assertSame('application/octet-stream', $postFields['file']->mime);
     }
 
     public function testSeekableResource(): void
