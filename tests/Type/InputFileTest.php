@@ -17,17 +17,15 @@ final class InputFileTest extends TestCase
         $file = new InputFile(__FILE__);
 
         assertSame(__FILE__, $file->pathOrResource);
-        assertNull($file->sendName);
         assertSame(basename(__FILE__), $file->filename());
         assertSame('php', $file->extension());
     }
 
-    public function testFromPathWithSendName(): void
+    public function testFromPathWithFilename(): void
     {
         $file = new InputFile(__FILE__, 'test.txt');
 
         assertSame(__FILE__, $file->pathOrResource);
-        assertSame('test.txt', $file->sendName);
         assertSame('test.txt', $file->filename());
         assertSame('txt', $file->extension());
     }
@@ -38,7 +36,6 @@ final class InputFileTest extends TestCase
         $file = new InputFile($resource);
 
         assertSame($resource, $file->pathOrResource);
-        assertNull($file->sendName);
         assertSame(basename(__FILE__), $file->filename());
         assertSame('php', $file->extension());
 
@@ -50,19 +47,17 @@ final class InputFileTest extends TestCase
         $resource = fopen('php://temp', 'r+b');
         $file = new InputFile($resource);
 
-        assertNull($file->sendName);
         assertNull($file->filename());
         assertNull($file->extension());
 
         fclose($resource);
     }
 
-    public function testFromResourceWithSendName(): void
+    public function testFromResourceWithFilename(): void
     {
         $resource = fopen('php://temp', 'r+b');
         $file = new InputFile($resource, 'document.pdf');
 
-        assertSame('document.pdf', $file->sendName);
         assertSame('document.pdf', $file->filename());
         assertSame('pdf', $file->extension());
 

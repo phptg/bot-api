@@ -24,6 +24,8 @@ final class ApacheMimeTypeResolverTest extends TestCase
     #[DataProvider('dataBase')]
     public function testBase(?string $expected, InputFile $file): void
     {
-        assertSame($expected, (new ApacheMimeTypeResolver())->resolve($file));
+        $resolver = new ApacheMimeTypeResolver();
+
+        assertSame($expected, $resolver->resolve($file));
     }
 }

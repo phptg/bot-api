@@ -81,12 +81,12 @@ final readonly class CurlTransport implements TransportInterface
         $mimeType = $this->mimeTypeResolver->resolve($file);
 
         if (is_string($file->pathOrResource)) {
-            return new CURLFile($file->pathOrResource, $mimeType ?? '', $file->filename() ?? '');
+            return new CURLFile($file->pathOrResource, $mimeType, $file->filename());
         }
 
         $metadata = stream_get_meta_data($file->pathOrResource);
         if (!str_contains($metadata['uri'], '://')) {
-            return new CURLFile($metadata['uri'], $mimeType ?? '', $file->filename() ?? '');
+            return new CURLFile($metadata['uri'], $mimeType, $file->filename());
         }
 
         if ($metadata['seekable']) {

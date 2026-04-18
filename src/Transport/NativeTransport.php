@@ -9,6 +9,7 @@ use Phptg\BotApi\Transport\MimeTypeResolver\ApacheMimeTypeResolver;
 use Phptg\BotApi\Transport\MimeTypeResolver\MimeTypeResolverInterface;
 use Phptg\BotApi\Type\InputFile;
 
+use function file_get_contents;
 use function is_string;
 use function json_encode;
 
@@ -176,12 +177,10 @@ final readonly class NativeTransport implements TransportInterface
     private function readFile(mixed $pathOrResource): string
     {
         if (is_string($pathOrResource)) {
-            $contents = \file_get_contents($pathOrResource);
-
+            $contents = file_get_contents($pathOrResource);
             if ($contents === false) {
-                throw new RuntimeException("Failed to read the file {$pathOrResource}");
+                throw new RuntimeException("Failed to read the file $pathOrResource.");
             }
-
             return $contents;
         }
 
@@ -190,9 +189,8 @@ final readonly class NativeTransport implements TransportInterface
         }
 
         $contents = stream_get_contents($pathOrResource);
-
         if ($contents === false) {
-            throw new RuntimeException("Failed to read the stream");
+            throw new RuntimeException("Failed to read the stream.");
         }
 
         return $contents;
