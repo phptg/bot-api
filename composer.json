@@ -36,7 +36,7 @@
         "ext-curl": "*",
         "bamarni/composer-bin-plugin": "^1.9.1",
         "php-http/curl-client": "^2.4.0",
-        "phpunit/phpunit": "^11.5.51",
+        "phpunit/phpunit": "^11.5.55",
         "psr/log": "^3.0.2",
         "yiisoft/files": "^2.1",
         "yiisoft/test-support": "^3.2.0"
