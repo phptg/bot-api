@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Phptg\BotApi\Tests\Transport\CurlTransport;
 
 use CurlShareHandle;
+use CURLFile;
 use CURLStringFile;
+use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Tests\Curl\CurlMock;
 use Phptg\BotApi\Transport\CurlTransport;
@@ -101,8 +103,8 @@ final class CurlTransportTest extends TestCase
             '//url/sendPhoto',
             [],
             [
-                'photo1' => InputFile::fromLocalFile(__DIR__ . '/photo.png'),
-                'photo2' => InputFile::fromLocalFile(__DIR__ . '/photo.png', 'photo.png'),
+                'photo1' => new InputFile(__DIR__ . '/photo.png'),
+                'photo2' => new InputFile(__DIR__ . '/photo.png', 'photo.png'),
             ],
         );
 
@@ -115,19 +117,42 @@ final class CurlTransportTest extends TestCase
         assertSame('//url/sendPhoto', $options[CURLOPT_URL]);
         assertEquals(
             [
-                'photo1' => new CURLStringFile(
-                    file_get_contents(__DIR__ . '/photo.png'),
-                    '',
-                ),
-                'photo2' => new CURLStringFile(
-                    file_get_contents(__DIR__ . '/photo.png'),
-                    'photo.png',
-                ),
+                'photo1' => new CURLFile(__DIR__ . '/photo.png', 'image/png', 'photo.png'),
+                'photo2' => new CURLFile(__DIR__ . '/photo.png', 'image/png', 'photo.png'),
             ],
             $options[CURLOPT_POSTFIELDS],
         );
         assertTrue($options[CURLOPT_RETURNTRANSFER]);
         assertInstanceOf(CurlShareHandle::class, $options[CURLOPT_SHARE]);
+    }
+
+    #[TestWith(['text/plain', 'test.txt'])]
+    #[TestWith(['application/octet-stream', 'data.bin'])]
+    #[TestWith(['application/octet-stream', null])]
+    public function testPostWithResource(string $mimeType, ?string $filename): void
+    {
+        $curl = new CurlMock(
+            execResult: '{"ok":true,"result":[]}',
+            getinfoResult: [CURLINFO_HTTP_CODE => 200],
+        );
+        $transport = new CurlTransport(curl: $curl);
+
+        $resource = fopen('php://memory', 'r+');
+        fwrite($resource, 'stream content');
+
+        $transport->postWithFiles(
+            '//url/method',
+            [],
+            ['file' => new InputFile($resource, $filename)],
+        );
+
+        fclose($resource);
+
+        $postFields = $curl->getOptions()[CURLOPT_POSTFIELDS];
+        assertInstanceOf(CURLStringFile::class, $postFields['file']);
+        assertSame('stream content', $postFields['file']->data);
+        assertSame($filename ?? '', $postFields['file']->postname);
+        assertSame($mimeType, $postFields['file']->mime);
     }
 
     public function testSeekableResource(): void
@@ -147,10 +172,7 @@ final class CurlTransportTest extends TestCase
 
         assertEquals(
             [
-                'photo' => new CURLStringFile(
-                    file_get_contents(__DIR__ . '/photo.png'),
-                    '',
-                ),
+                'photo' => new CURLFile(__DIR__ . '/photo.png', 'image/png', 'photo.png'),
             ],
             $curl->getOptions()[CURLOPT_POSTFIELDS] ?? null,
         );

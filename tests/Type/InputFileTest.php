@@ -5,69 +5,62 @@ declare(strict_types=1);
 namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use RuntimeException;
-use Throwable;
 use Phptg\BotApi\Type\InputFile;
 
-use function PHPUnit\Framework\assertInstanceOf;
-use function PHPUnit\Framework\assertIsResource;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 
 final class InputFileTest extends TestCase
 {
-    public function testBase(): void
+    public function testFromPath(): void
     {
-        $file = new InputFile('test');
+        $file = new InputFile(__FILE__);
 
-        assertSame('test', $file->resource);
-        assertNull($file->filename);
+        assertSame(__FILE__, $file->pathOrResource);
+        assertSame(basename(__FILE__), $file->filename());
+        assertSame('php', $file->extension());
     }
 
-    public function testFilled(): void
+    public function testFromPathWithFilename(): void
     {
-        $file = new InputFile('test', 'file.txt');
+        $file = new InputFile(__FILE__, 'test.txt');
 
-        assertSame('test', $file->resource);
-        assertSame('file.txt', $file->filename);
+        assertSame(__FILE__, $file->pathOrResource);
+        assertSame('test.txt', $file->filename());
+        assertSame('txt', $file->extension());
     }
 
-    public function testFromLocalFile(): void
+    public function testFromResource(): void
     {
-        $file = InputFile::fromLocalFile(__FILE__);
+        $resource = fopen(__FILE__, 'rb');
+        $file = new InputFile($resource);
 
-        assertIsResource($file->resource);
-        assertNull($file->filename);
+        assertSame($resource, $file->pathOrResource);
+        assertSame(basename(__FILE__), $file->filename());
+        assertSame('php', $file->extension());
+
+        fclose($resource);
     }
 
-    public function testFromLocalFileWithName(): void
+    public function testFromVirtualResource(): void
     {
-        $file = InputFile::fromLocalFile(__FILE__, 'test.php');
+        $resource = fopen('php://temp', 'r+b');
+        $file = new InputFile($resource);
 
-        assertIsResource($file->resource);
-        assertSame('test.php', $file->filename);
+        assertNull($file->filename());
+        assertNull($file->extension());
+
+        fclose($resource);
     }
 
-    public function testFromLocalNotExistsFile(): void
+    public function testFromResourceWithFilename(): void
     {
-        $errorMessage = null;
-        set_error_handler(
-            static function (int $code, string $message) use (&$errorMessage): bool {
-                $errorMessage = $message;
-                return true;
-            },
-        );
+        $resource = fopen('php://temp', 'r+b');
+        $file = new InputFile($resource, 'document.pdf');
 
-        $exception = null;
-        try {
-            InputFile::fromLocalFile('not-exists');
-        } catch (Throwable $exception) {
-        }
+        assertSame('document.pdf', $file->filename());
+        assertSame('pdf', $file->extension());
 
-        restore_error_handler();
-
-        assertSame('fopen(not-exists): Failed to open stream: No such file or directory', $errorMessage);
-        assertInstanceOf(RuntimeException::class, $exception);
-        assertSame('Unable to open file "not-exists".', $exception->getMessage());
+        fclose($resource);
     }
 }

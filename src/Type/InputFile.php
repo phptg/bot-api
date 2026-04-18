@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Type;
 
-use RuntimeException;
+use function is_string;
 
 /**
  * @see https://core.telegram.org/bots/api#sending-files
@@ -14,30 +14,37 @@ use RuntimeException;
 final readonly class InputFile
 {
     /**
-     * @param mixed $resource The file resource.
-     * @param string|null $filename Optional filename to use when sending the file.
+     * @param string|resource $pathOrResource File path or open resource.
+     * @param string|null $filename The filename sent to Telegram.
      */
     public function __construct(
-        public mixed $resource,
-        public ?string $filename = null,
+        public mixed $pathOrResource,
+        private ?string $filename = null,
     ) {}
 
     /**
-     * Creates an instance from a local file path.
-     *
-     * @param string $path Path to the local file.
-     * @param string|null $filename Optional filename to use when sending the file.
-     *
-     * @return self The created instance.
-     *
-     * @throws RuntimeException If the file cannot be opened.
+     * Returns the filename to use when sending the file, or `null` if it cannot be determined.
      */
-    public static function fromLocalFile(string $path, ?string $filename = null): self
+    public function filename(): ?string
     {
-        $resource = fopen($path, 'rb');
-        if ($resource === false) {
-            throw new RuntimeException('Unable to open file "' . $path . '".');
+        if ($this->filename !== null) {
+            return $this->filename;
         }
-        return new self($resource, $filename);
+
+        if (is_string($this->pathOrResource)) {
+            return basename($this->pathOrResource);
+        }
+
+        $uri = stream_get_meta_data($this->pathOrResource)['uri'];
+        return str_contains($uri, '://') ? null : basename($uri);
+    }
+
+    /**
+     * Returns the file extension derived from the filename, or `null` if it cannot be determined.
+     */
+    public function extension(): ?string
+    {
+        $filename = $this->filename();
+        return $filename === null ? null : pathinfo($filename, PATHINFO_EXTENSION);
     }
 }

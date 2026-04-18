@@ -5,14 +5,18 @@ declare(strict_types=1);
 namespace Phptg\BotApi\Transport;
 
 use CurlShareHandle;
+use CURLFile;
 use CURLStringFile;
+use RuntimeException;
 use Phptg\BotApi\Curl\Curl;
 use Phptg\BotApi\Curl\CurlException;
 use Phptg\BotApi\Curl\CurlInterface;
-use Phptg\BotApi\Transport\ResourceReader\NativeResourceReader;
-use Phptg\BotApi\Transport\ResourceReader\ResourceReaderInterface;
+use Phptg\BotApi\Transport\MimeTypeResolver\ApacheMimeTypeResolver;
+use Phptg\BotApi\Transport\MimeTypeResolver\MimeTypeResolverInterface;
+use Phptg\BotApi\Type\InputFile;
 
 use function is_int;
+use function is_string;
 
 /**
  * @api
@@ -22,13 +26,12 @@ final readonly class CurlTransport implements TransportInterface
     private CurlShareHandle $curlShareHandle;
 
     /**
-     * @param ResourceReaderInterface[] $resourceReaders List of resource readers to handle different resource types.
+     * @param MimeTypeResolverInterface $mimeTypeResolver MIME type resolver for determining file types. Defaults
+     * to {@see ApacheMimeTypeResolver}.
      * @param CurlInterface $curl cURL interface implementation for making HTTP requests.
      */
     public function __construct(
-        private array $resourceReaders = [
-            new NativeResourceReader(),
-        ],
+        private MimeTypeResolverInterface $mimeTypeResolver = new ApacheMimeTypeResolver(),
         private CurlInterface $curl = new Curl(),
     ) {
         $this->curlShareHandle = $this->createCurlShareHandle();
@@ -62,10 +65,7 @@ final readonly class CurlTransport implements TransportInterface
     public function postWithFiles(string $url, array $data, array $files): ApiResponse
     {
         foreach ($files as $key => $file) {
-            $data[$key] = new CURLStringFile(
-                (new InputFileData($file, $this->resourceReaders))->read(),
-                $file->filename ?? '',
-            );
+            $data[$key] = $this->toCurlFile($file);
         }
 
         $options = [
@@ -74,6 +74,32 @@ final readonly class CurlTransport implements TransportInterface
             CURLOPT_POSTFIELDS => $data,
         ];
         return $this->send($options);
+    }
+
+    private function toCurlFile(InputFile $file): CURLFile|CURLStringFile
+    {
+        $mimeType = $this->mimeTypeResolver->resolve($file);
+
+        if (is_string($file->pathOrResource)) {
+            return new CURLFile($file->pathOrResource, $mimeType, $file->filename());
+        }
+
+        $metadata = stream_get_meta_data($file->pathOrResource);
+        if (!str_contains($metadata['uri'], '://')) {
+            return new CURLFile($metadata['uri'], $mimeType, $file->filename());
+        }
+
+        if ($metadata['seekable']) {
+            rewind($file->pathOrResource);
+        }
+
+        $contents = stream_get_contents($file->pathOrResource);
+        if ($contents === false) {
+            // `stream_get_contents()` can return false only on error, but we can't trigger it in tests.
+            throw new RuntimeException('Failed to read the stream.'); // @codeCoverageIgnore
+        }
+
+        return new CURLStringFile($contents, $file->filename() ?? '', $mimeType ?? 'application/octet-stream');
     }
 
     public function downloadFile(string $url): mixed

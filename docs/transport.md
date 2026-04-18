@@ -31,8 +31,7 @@ $api = new TelegramBotApi($token, transport: $transport);
 
 Constructor parameters:
 
-- `$resourceReaders` — list of [resource readers](resource-readers.md) to handle different resource types. By default,
-  includes `NativeResourceReader`.
+- `$mimeTypeResolver` — [MIME type resolver](mime-type-resolvers.md) for determining file types. Defaults to `ApacheMimeTypeResolver`.
 
 ## Native
 
@@ -59,9 +58,7 @@ $api = new TelegramBotApi($token, transport: $transport);
 
 Constructor parameters:
 
-- `$mimeTypeResolver` — MIME type resolver for determining file types. Defaults to `ApacheMimeTypeResolver`.
-- `$resourceReaders` — List of [resource readers](resource-readers.md) to handle different resource types. By default,
-  includes `NativeResourceReader`.
+- `$mimeTypeResolver` — [MIME type resolver](mime-type-resolvers.md) for determining file types. Defaults to `ApacheMimeTypeResolver`.
 
 Available MIME type resolvers:
 

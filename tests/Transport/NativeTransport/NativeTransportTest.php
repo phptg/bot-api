@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Transport\NativeTransport;
 
-use Phptg\BotApi\Transport\InputFileData;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Phptg\BotApi\Tests\Transport\NativeTransport\StreamMock\StreamMock;
@@ -114,8 +113,8 @@ final class NativeTransportTest extends TestCase
                 'age' => 19,
             ],
             [
-                'photo1' => InputFile::fromLocalFile(__DIR__ . '/photo.png'),
-                'photo2' => InputFile::fromLocalFile(__DIR__ . '/photo.png', 'face.png'),
+                'photo1' => new InputFile(__DIR__ . '/photo.png'),
+                'photo2' => new InputFile(__DIR__ . '/photo.png', 'face.png'),
             ],
         );
 
@@ -161,7 +160,7 @@ final class NativeTransportTest extends TestCase
                 'ages' => [23, 45],
             ],
             [
-                'file1' => InputFile::fromLocalFile(__DIR__ . '/test.txt'),
+                'file1' => new InputFile(__DIR__ . '/test.txt'),
             ],
         );
 
@@ -188,7 +187,7 @@ final class NativeTransportTest extends TestCase
     {
         $transport = new NativeTransport(
             new class implements MimeTypeResolverInterface {
-                public function resolve(InputFileData $fileData): ?string
+                public function resolve(InputFile $inputFile): ?string
                 {
                     return 'text/custom';
                 }
@@ -207,7 +206,7 @@ final class NativeTransportTest extends TestCase
             'http://url/method',
             [],
             [
-                'file1' => InputFile::fromLocalFile(__DIR__ . '/test.txt'),
+                'file1' => new InputFile(__DIR__ . '/test.txt'),
             ],
         );
 
@@ -222,6 +221,56 @@ final class NativeTransportTest extends TestCase
             . "\r\n",
             $request['options']['http']['content'],
         );
+    }
+
+    public function testReadNonExistentFileThrowsException(): void
+    {
+        $transport = new NativeTransport();
+
+        $nonExistentPath = __DIR__ . '/non-existent-file.txt';
+        $inputFile = new InputFile($nonExistentPath);
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage("Failed to read the file $nonExistentPath.");
+
+        set_error_handler(static fn() => true, E_WARNING);
+        try {
+            $transport->postWithFiles(
+                'http://url/method',
+                [],
+                ['file' => $inputFile],
+            );
+        } finally {
+            restore_error_handler();
+        }
+    }
+
+    public function testPostWithSeekableStreamResource(): void
+    {
+        $transport = new NativeTransport();
+
+        StreamMock::enable(
+            responseHeaders: [
+                'HTTP/1.1 200 OK',
+                'Content-Type: text/json',
+            ],
+            responseBody: '{"ok":true,"result":[]}',
+        );
+
+        $resource = fopen('php://temp', 'r+');
+        fwrite($resource, 'stream content');
+
+        $transport->postWithFiles(
+            'http://url/method',
+            [],
+            ['file' => new InputFile($resource, 'data.bin')],
+        );
+
+        fclose($resource);
+
+        $request = StreamMock::disable();
+
+        assertStringContainsString('stream content', $request['options']['http']['content']);
     }
 
     public function testErrorOnSend(): void

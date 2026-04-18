@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Transport;
 
-use Phptg\BotApi\Transport\ResourceReader\NativeResourceReader;
-use Phptg\BotApi\Transport\ResourceReader\ResourceReaderInterface;
 use RuntimeException;
 use Phptg\BotApi\Transport\MimeTypeResolver\ApacheMimeTypeResolver;
 use Phptg\BotApi\Transport\MimeTypeResolver\MimeTypeResolverInterface;
 use Phptg\BotApi\Type\InputFile;
 
+use function file_get_contents;
 use function is_string;
 use function json_encode;
 
@@ -25,13 +24,9 @@ final readonly class NativeTransport implements TransportInterface
     /**
      * @param MimeTypeResolverInterface $mimeTypeResolver MIME type resolver for determining file types. Defaults
      * to {@see ApacheMimeTypeResolver}.
-     * @param ResourceReaderInterface[] $resourceReaders List of resource readers to handle different resource types.
      */
     public function __construct(
         private MimeTypeResolverInterface $mimeTypeResolver = new ApacheMimeTypeResolver(),
-        private array $resourceReaders = [
-            new NativeResourceReader(),
-        ],
     ) {}
 
     public function get(string $url): ApiResponse
@@ -143,9 +138,8 @@ final readonly class NativeTransport implements TransportInterface
         }
 
         foreach ($files as $key => $file) {
-            $fileData = new InputFileData($file, $this->resourceReaders);
-            $mimeType = $this->mimeTypeResolver->resolve($fileData);
-            $filename = $fileData->basename();
+            $mimeType = $this->mimeTypeResolver->resolve($file);
+            $filename = $file->filename();
 
             $contentDisposition = "Content-Disposition: form-data; name=\"$key\"";
             if ($filename !== null) {
@@ -158,7 +152,7 @@ final readonly class NativeTransport implements TransportInterface
                 $result[] = "Content-Type: $mimeType";
             }
             $result[] = '';
-            $result[] = $fileData->read();
+            $result[] = $this->readFile($file->pathOrResource);
         }
 
         $result[] = "--$boundary--";
@@ -175,5 +169,31 @@ final readonly class NativeTransport implements TransportInterface
         return preg_match('/HTTP\/\d+\.\d+ (\d+)/', $headers[0], $matches)
             ? (int) $matches[1]
             : 0;
+    }
+
+    /**
+     * @param string|resource $pathOrResource
+     */
+    private function readFile(mixed $pathOrResource): string
+    {
+        if (is_string($pathOrResource)) {
+            $contents = file_get_contents($pathOrResource);
+            if ($contents === false) {
+                throw new RuntimeException("Failed to read the file $pathOrResource.");
+            }
+            return $contents;
+        }
+
+        if (stream_get_meta_data($pathOrResource)['seekable']) {
+            rewind($pathOrResource);
+        }
+
+        $contents = stream_get_contents($pathOrResource);
+        if ($contents === false) {
+            // `stream_get_contents()` can return false only on error, but we can't trigger it in tests.
+            throw new RuntimeException('Failed to read the stream.'); // @codeCoverageIgnore
+        }
+
+        return $contents;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Transport\MimeTypeResolver;
 
-use Phptg\BotApi\Transport\InputFileData;
+use Phptg\BotApi\Type\InputFile;
 
 /**
  * @api
@@ -12,11 +12,11 @@ use Phptg\BotApi\Transport\InputFileData;
 interface MimeTypeResolverInterface
 {
     /**
-     * Resolves the MIME type for the given input file data.
+     * Resolves the MIME type for the given file.
      *
-     * @param InputFileData $fileData The input file data to resolve MIME type for.
+     * @param InputFile $inputFile The file to resolve MIME type for.
      *
      * @return string|null The resolved MIME type, or `null` if it cannot be determined.
      */
-    public function resolve(InputFileData $fileData): ?string;
+    public function resolve(InputFile $inputFile): ?string;
 }

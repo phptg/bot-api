@@ -73,7 +73,7 @@ $api->sendMessage(
 // Send local photo
 $api->sendPhoto(
     chatId: 22351, 
-    photo: InputFile::fromLocalFile('/path/to/photo.jpg'),
+    photo: new InputFile('/path/to/photo.jpg'),
 );
 ```
 
@@ -143,7 +143,6 @@ $api->downloadFile($file)->saveTo('/local/path/to/file.jpg');
 ### Guides
 
 - [Transport](docs/transport.md)
-- [Resource readers](docs/resource-readers.md)
 - [Logging](docs/logging.md)
 - [Webhook handling](docs/webhook-handling.md)
 - [Custom requests](docs/custom-requests.md)

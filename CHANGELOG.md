@@ -1,8 +1,15 @@
 # Telegram Bot API for PHP Change Log
 
-## 0.18.2 under construction
+## 0.19 April 18, 2026
 
+- New #195: Add `InputFile::filename()` and `InputFile::extension()` methods.
+- Chg #195: Remove `InputFile::fromLocalFile()` method, pass a file path directly to `InputFile` constructor.
+- Chg #195: Remove `ResourceReaderInterface` and `NativeResourceReader`.
+- Chg #195: Remove `InputFileData`.
+- Chg #195: `MimeTypeResolverInterface::resolve()` now accepts `InputFile` instead of `InputFileData`.
+- Chg #195: Remove `$resourceReaders` constructor parameter from `CurlTransport` and `NativeTransport`.
 - Enh #194: Remove deprecated `curl_close()` call in `CurlTransport`.
+- Enh #195: `CurlTransport` now uses `CURLFile` for file-path resources, avoiding loading file content into memory.
 
 ## 0.18.1 April 5, 2026
 
