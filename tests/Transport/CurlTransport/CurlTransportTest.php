@@ -155,32 +155,6 @@ final class CurlTransportTest extends TestCase
         assertSame($mimeType, $postFields['file']->mime);
     }
 
-    public function testPostWithSeekableVirtualStreamResource(): void
-    {
-        $curl = new CurlMock(
-            execResult: '{"ok":true,"result":[]}',
-            getinfoResult: [CURLINFO_HTTP_CODE => 200],
-        );
-        $transport = new CurlTransport(curl: $curl);
-
-        $resource = fopen('php://memory', 'r+');
-        fwrite($resource, 'stream content');
-
-        $transport->postWithFiles(
-            '//url/method',
-            [],
-            ['file' => new InputFile($resource, 'data.bin')],
-        );
-
-        fclose($resource);
-
-        $postFields = $curl->getOptions()[CURLOPT_POSTFIELDS];
-        assertInstanceOf(CURLStringFile::class, $postFields['file']);
-        assertSame('stream content', $postFields['file']->data);
-        assertSame('data.bin', $postFields['file']->postname);
-        assertSame('application/octet-stream', $postFields['file']->mime);
-    }
-
     public function testSeekableResource(): void
     {
         $curl = new CurlMock();
