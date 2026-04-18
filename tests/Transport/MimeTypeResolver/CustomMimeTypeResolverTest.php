@@ -15,6 +15,7 @@ final class CustomMimeTypeResolverTest extends TestCase
 {
     public static function dataBase(): iterable
     {
+        yield [null, new InputFile(fopen('php://memory', 'rb'))];
         yield [null, new InputFile(__DIR__ . '/files/test.unknown')];
         yield ['text/plain', new InputFile(__DIR__ . '/files/test.txt')];
         yield ['text/css', new InputFile(__DIR__ . '/files/test.txt', 'test.css')];

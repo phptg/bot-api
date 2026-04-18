@@ -6,6 +6,7 @@ namespace Phptg\BotApi\Tests\Transport\CurlTransport;
 
 use CurlShareHandle;
 use CURLFile;
+use CURLStringFile;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Tests\Curl\CurlMock;
 use Phptg\BotApi\Transport\CurlTransport;
@@ -122,6 +123,30 @@ final class CurlTransportTest extends TestCase
         );
         assertTrue($options[CURLOPT_RETURNTRANSFER]);
         assertInstanceOf(CurlShareHandle::class, $options[CURLOPT_SHARE]);
+    }
+
+    public function testPostWithSeekableVirtualStreamResource(): void
+    {
+        $curl = new CurlMock(
+            execResult: '{"ok":true,"result":[]}',
+            getinfoResult: [CURLINFO_HTTP_CODE => 200],
+        );
+        $transport = new CurlTransport(curl: $curl);
+
+        $resource = fopen('php://memory', 'r+');
+        fwrite($resource, 'stream content');
+
+        $transport->postWithFiles(
+            '//url/method',
+            [],
+            ['file' => new InputFile($resource, 'data.bin')],
+        );
+
+        fclose($resource);
+
+        $postFields = $curl->getOptions()[CURLOPT_POSTFIELDS];
+        assertInstanceOf(CURLStringFile::class, $postFields['file']);
+        assertSame('stream content', $postFields['file']->data);
     }
 
     public function testSeekableResource(): void

@@ -190,7 +190,8 @@ final readonly class NativeTransport implements TransportInterface
 
         $contents = stream_get_contents($pathOrResource);
         if ($contents === false) {
-            throw new RuntimeException("Failed to read the stream.");
+            // `stream_get_contents()` can return false only on error, but we can't trigger it in tests.
+            throw new RuntimeException('Failed to read the stream.'); // @codeCoverageIgnore
         }
 
         return $contents;
