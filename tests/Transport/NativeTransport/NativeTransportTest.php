@@ -157,7 +157,7 @@ final class NativeTransportTest extends TestCase
         $transport->postWithFiles(
             'http://url/method',
             [
-                'ages' => [23, 45],
+                'ages' => '[23,45]',
             ],
             [
                 'file1' => new InputFile(__DIR__ . '/test.txt'),
