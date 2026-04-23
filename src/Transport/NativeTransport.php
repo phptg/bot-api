@@ -11,7 +11,6 @@ use Phptg\BotApi\Type\InputFile;
 
 use function file_get_contents;
 use function is_string;
-use function json_encode;
 
 /**
  * @see https://www.php.net/manual/function.file-get-contents.php
