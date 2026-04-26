@@ -11,7 +11,6 @@ use Phptg\BotApi\Type\InputFile;
 
 use function file_get_contents;
 use function is_string;
-use function json_encode;
 
 /**
  * @see https://www.php.net/manual/function.file-get-contents.php
@@ -123,7 +122,7 @@ final readonly class NativeTransport implements TransportInterface
     }
 
     /**
-     * @psalm-param array<string, mixed> $data
+     * @psalm-param array<string, string> $data
      * @psalm-param array<string, InputFile> $files
      */
     private function buildMultipartFormData(array $data, array $files, string $boundary): string
@@ -134,7 +133,7 @@ final readonly class NativeTransport implements TransportInterface
             $result[] = "--$boundary";
             $result[] = "Content-Disposition: form-data; name=\"$key\"";
             $result[] = '';
-            $result[] = is_string($value) ? $value : json_encode($value, JSON_THROW_ON_ERROR);
+            $result[] = $value;
         }
 
         foreach ($files as $key => $file) {

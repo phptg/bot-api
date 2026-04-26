@@ -153,7 +153,7 @@ final readonly class Api
         }
 
         $data = array_map(
-            static fn(mixed $value) => is_scalar($value) ? $value : json_encode($value, JSON_THROW_ON_ERROR),
+            static fn(mixed $value) => is_string($value) ? $value : json_encode($value, JSON_THROW_ON_ERROR),
             $data,
         );
 

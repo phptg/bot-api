@@ -41,12 +41,13 @@ interface TransportInterface
      * Performs a POST request with file uploads.
      *
      * @param string $url The URL to request.
-     * @param (bool|string|int|float)[] $data The form data fields as an associative array (field name => field value).
+     * @param string[] $data The form data fields as an associative array (field name => field value). All values are
+     * strings: plain strings are passed as-is, non-string values (integers, booleans, arrays) are JSON-encoded.
      * @param InputFile[] $files The files to upload as an associative array (field name => `InputFile`).
      *
      * @return ApiResponse The API response.
      *
-     * @psalm-param array<string, scalar> $data
+     * @psalm-param array<string, string> $data
      * @psalm-param array<string, InputFile> $files
      */
     public function postWithFiles(string $url, array $data, array $files): ApiResponse;
