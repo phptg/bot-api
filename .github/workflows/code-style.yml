@@ -1,6 +1,6 @@
 name: Code Style
 
-on: [ pull_request_target ]
+on: [ pull_request ]
 
 jobs:
   php-cs-fixer:
@@ -22,7 +22,7 @@ jobs:
           coverage: none
 
       - name: Install Composer dependencies
-        uses: "ramsey/composer-install@v3"
+        uses: "ramsey/composer-install@v4"
 
       - name: Run PHP CS Fixer
         run: composer cs-fix
@@ -31,7 +31,7 @@ jobs:
         run: ./vendor/bin/rector --output-format=github
 
       - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "Apply PHP CS Fixer and Rector changes (CI)"
           file_pattern: '*.php'
