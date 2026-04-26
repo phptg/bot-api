@@ -1,6 +1,6 @@
 # Telegram Bot API for PHP Change Log
 
-## 0.20 April 23, 2026
+## 0.20 April 26, 2026
 
 - Chg #197: `$data` parameter type in `TransportInterface::postWithFiles()` changed from `array<string, scalar>`
   to `array<string, string>`: non-string values are passed already JSON-encoded.
