@@ -3,6 +3,7 @@
 ## 0.21 May 9, 2026
 
 - New #199: Add `supportsGuestQueries` field to `User` type.
+- New #199: Add `guestQueryId`, `guestBotCallerUser` and `guestBotCallerChat` fields to `Message` type.
 
 ## 0.20 April 26, 2026
 

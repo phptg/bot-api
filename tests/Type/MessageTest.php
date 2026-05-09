@@ -51,6 +51,7 @@ final class MessageTest extends TestCase
         assertNull($message->senderBusinessBot);
         assertNull($message->senderTag);
         assertNull($message->businessConnectionId);
+        assertNull($message->guestQueryId);
         assertNull($message->forwardOrigin);
         assertNull($message->isTopicMessage);
         assertNull($message->isAutomaticForward);
@@ -59,6 +60,8 @@ final class MessageTest extends TestCase
         assertNull($message->quote);
         assertNull($message->replyToStory);
         assertNull($message->viaBot);
+        assertNull($message->guestBotCallerUser);
+        assertNull($message->guestBotCallerChat);
         assertNull($message->editDate);
         assertNull($message->hasProtectedContent);
         assertNull($message->isFromOffline);
@@ -182,6 +185,7 @@ final class MessageTest extends TestCase
             ],
             'sender_tag' => 'admin-tag',
             'business_connection_id' => 'btest',
+            'guest_query_id' => 'guest_query_123',
             'forward_origin' => [
                 'type' => 'hidden_user',
                 'date' => 1234156479,
@@ -221,6 +225,15 @@ final class MessageTest extends TestCase
                 'id' => 127,
                 'is_bot' => false,
                 'first_name' => 'John6Bot',
+            ],
+            'guest_bot_caller_user' => [
+                'id' => 128,
+                'is_bot' => false,
+                'first_name' => 'GuestCaller',
+            ],
+            'guest_bot_caller_chat' => [
+                'id' => 129,
+                'type' => 'private',
             ],
             'edit_date' => 65416841123,
             'has_protected_content' => true,
@@ -684,6 +697,7 @@ final class MessageTest extends TestCase
         assertSame(15, $message->senderBusinessBot?->id);
         assertSame('admin-tag', $message->senderTag);
         assertSame('btest', $message->businessConnectionId);
+        assertSame('guest_query_123', $message->guestQueryId);
 
         assertInstanceOf(MessageOriginHiddenUser::class, $message->forwardOrigin);
         assertSame('bat', $message->forwardOrigin?->senderUserName);
@@ -698,6 +712,8 @@ final class MessageTest extends TestCase
         assertSame('test93', $message->quote?->text);
         assertSame(8863, $message->replyToStory?->id);
         assertSame(127, $message->viaBot?->id);
+        assertSame(128, $message->guestBotCallerUser?->id);
+        assertSame(129, $message->guestBotCallerChat?->id);
         assertSame(65416841123, $message->editDate?->getTimestamp());
         assertTrue($message->hasProtectedContent);
         assertTrue($message->isFromOffline);
