@@ -57,7 +57,7 @@ final class LivePhotoTest extends TestCase
                 ],
             ],
             'mime_type' => 'video/mp4',
-            'file_size' => '2097152',
+            'file_size' => 2097152,
         ], null, LivePhoto::class);
 
         assertSame('file_id_abc', $livePhoto->fileId);
@@ -69,6 +69,6 @@ final class LivePhotoTest extends TestCase
         assertSame('photo_file_id_1', $livePhoto->photo[0]->fileId);
         assertSame('photo_file_id_2', $livePhoto->photo[1]->fileId);
         assertSame('video/mp4', $livePhoto->mimeType);
-        assertSame('2097152', $livePhoto->fileSize);
+        assertSame(2097152, $livePhoto->fileSize);
     }
 }

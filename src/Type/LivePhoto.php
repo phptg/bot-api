@@ -25,6 +25,6 @@ final readonly class LivePhoto
         #[ArrayOfObjectsValue(PhotoSize::class)]
         public ?array $photo = null,
         public ?string $mimeType = null,
-        public ?string $fileSize = null,
+        public ?int $fileSize = null,
     ) {}
 }
