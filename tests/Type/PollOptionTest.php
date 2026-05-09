@@ -22,6 +22,7 @@ final class PollOptionTest extends TestCase
         assertSame('A', $option->text);
         assertSame(25, $option->voterCount);
         assertNull($option->textEntities);
+        assertNull($option->media);
         assertNull($option->addedByUser);
         assertNull($option->addedByChat);
         assertNull($option->additionDate);
@@ -38,6 +39,15 @@ final class PollOptionTest extends TestCase
                     'offset' => 23,
                     'length' => 1,
                     'type' => 'bold',
+                ],
+            ],
+            'media' => [
+                'video' => [
+                    'file_id' => 'video_file_id',
+                    'file_unique_id' => 'video_unique_id',
+                    'width' => 1920,
+                    'height' => 1080,
+                    'duration' => 30,
                 ],
             ],
             'added_by_user' => [
@@ -58,6 +68,8 @@ final class PollOptionTest extends TestCase
 
         assertCount(1, $option->textEntities);
         assertSame(23, $option->textEntities[0]->offset);
+
+        assertSame('video_file_id', $option->media?->video?->fileId);
 
         assertSame(42, $option->addedByUser->id);
         assertSame(100, $option->addedByChat->id);
