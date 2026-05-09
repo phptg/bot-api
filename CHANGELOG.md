@@ -11,6 +11,7 @@
 - New #199: Add `returnBots` parameter to `GetChatAdministrators` method.
 - New #199: Add `DeleteAllMessageReactions` method.
 - New #199: Add `DeleteMessageReaction` method.
+- New #199: Add `InputMediaSticker`, `InputMediaVenue` and `InputMediaLocation` types.
 
 ## 0.20 April 26, 2026
 
