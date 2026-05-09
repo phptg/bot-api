@@ -22,7 +22,7 @@ final readonly class GetManagedBotAccessSettings implements MethodInterface
 
     public function getHttpMethod(): HttpMethod
     {
-        return HttpMethod::POST;
+        return HttpMethod::GET;
     }
 
     public function getApiMethod(): string

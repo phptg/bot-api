@@ -23,7 +23,7 @@ final readonly class GetUserPersonalChatMessages implements MethodInterface
 
     public function getHttpMethod(): HttpMethod
     {
-        return HttpMethod::POST;
+        return HttpMethod::GET;
     }
 
     public function getApiMethod(): string

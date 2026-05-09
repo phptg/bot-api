@@ -21,7 +21,7 @@ final class GetUserPersonalChatMessagesTest extends TestCase
     {
         $method = new GetUserPersonalChatMessages(123, 10);
 
-        assertSame(HttpMethod::POST, $method->getHttpMethod());
+        assertSame(HttpMethod::GET, $method->getHttpMethod());
         assertSame('getUserPersonalChatMessages', $method->getApiMethod());
         assertSame(
             [

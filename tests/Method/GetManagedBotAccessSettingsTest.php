@@ -19,7 +19,7 @@ final class GetManagedBotAccessSettingsTest extends TestCase
     {
         $method = new GetManagedBotAccessSettings(123);
 
-        assertSame(HttpMethod::POST, $method->getHttpMethod());
+        assertSame(HttpMethod::GET, $method->getHttpMethod());
         assertSame('getManagedBotAccessSettings', $method->getApiMethod());
         assertSame(
             [
