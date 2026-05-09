@@ -27,6 +27,7 @@ final readonly class ChatMemberRestricted implements ChatMember
         public bool $canSendPolls,
         public bool $canSendOtherMessages,
         public bool $canAddWebPagePreviews,
+        public bool $canReactToMessages,
         public bool $canEditTag,
         public bool $canChangeInfo,
         public bool $canInviteUsers,

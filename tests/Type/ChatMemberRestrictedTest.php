@@ -39,6 +39,7 @@ final class ChatMemberRestrictedTest extends TestCase
             true,
             true,
             true,
+            true,
             false,
         );
 
@@ -56,6 +57,7 @@ final class ChatMemberRestrictedTest extends TestCase
         assertTrue($member->canSendPolls);
         assertTrue($member->canSendOtherMessages);
         assertTrue($member->canAddWebPagePreviews);
+        assertTrue($member->canReactToMessages);
         assertTrue($member->canEditTag);
         assertTrue($member->canChangeInfo);
         assertTrue($member->canInviteUsers);
@@ -84,6 +86,7 @@ final class ChatMemberRestrictedTest extends TestCase
             'can_send_polls' => true,
             'can_send_other_messages' => true,
             'can_add_web_page_previews' => true,
+            'can_react_to_messages' => true,
             'can_edit_tag' => true,
             'can_change_info' => true,
             'can_invite_users' => true,
@@ -105,6 +108,7 @@ final class ChatMemberRestrictedTest extends TestCase
         assertTrue($member->canSendPolls);
         assertTrue($member->canSendOtherMessages);
         assertTrue($member->canAddWebPagePreviews);
+        assertTrue($member->canReactToMessages);
         assertTrue($member->canEditTag);
         assertTrue($member->canChangeInfo);
         assertTrue($member->canInviteUsers);
@@ -133,6 +137,7 @@ final class ChatMemberRestrictedTest extends TestCase
             'can_send_polls' => true,
             'can_send_other_messages' => true,
             'can_add_web_page_previews' => true,
+            'can_react_to_messages' => true,
             'can_edit_tag' => true,
             'can_change_info' => true,
             'can_invite_users' => true,
@@ -153,6 +158,7 @@ final class ChatMemberRestrictedTest extends TestCase
         assertTrue($member->canSendPolls);
         assertTrue($member->canSendOtherMessages);
         assertTrue($member->canAddWebPagePreviews);
+        assertTrue($member->canReactToMessages);
         assertTrue($member->canEditTag);
         assertTrue($member->canChangeInfo);
         assertTrue($member->canInviteUsers);
