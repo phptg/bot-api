@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phptg\BotApi\Method;
 
 use DateTimeImmutable;
+use Phptg\BotApi\FileCollector;
 use Phptg\BotApi\ParseResult\ValueProcessor\ObjectValue;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\MethodInterface;
@@ -82,6 +83,14 @@ final readonly class SendPoll implements MethodInterface
 
     public function getData(): array
     {
+        $fileCollector = new FileCollector();
+        $options = array_map(
+            static fn(InputPollOption $option) => $option->toRequestArray($fileCollector),
+            $this->options,
+        );
+        $explanationMedia = $this->explanationMedia?->toRequestArray($fileCollector);
+        $media = $this->media?->toRequestArray($fileCollector);
+
         return array_filter(
             [
                 'business_connection_id' => $this->businessConnectionId,
@@ -95,10 +104,7 @@ final readonly class SendPoll implements MethodInterface
                         static fn(MessageEntity $entity) => $entity->toRequestArray(),
                         $this->questionEntities,
                     ),
-                'options' => array_map(
-                    static fn(InputPollOption $option) => $option->toRequestArray(),
-                    $this->options,
-                ),
+                'options' => $options,
                 'is_anonymous' => $this->isAnonymous,
                 'type' => $this->type,
                 'allows_multiple_answers' => $this->allowsMultipleAnswers,
@@ -117,7 +123,7 @@ final readonly class SendPoll implements MethodInterface
                         static fn(MessageEntity $entity) => $entity->toRequestArray(),
                         $this->explanationEntities,
                     ),
-                'explanation_media' => $this->explanationMedia?->toRequestArray(),
+                'explanation_media' => $explanationMedia,
                 'open_period' => $this->openPeriod,
                 'close_date' => $this->closeDate?->getTimestamp(),
                 'is_closed' => $this->isClosed,
@@ -129,13 +135,14 @@ final readonly class SendPoll implements MethodInterface
                         static fn(MessageEntity $entity) => $entity->toRequestArray(),
                         $this->descriptionEntities,
                     ),
-                'media' => $this->media?->toRequestArray(),
+                'media' => $media,
                 'disable_notification' => $this->disableNotification,
                 'protect_content' => $this->protectContent,
                 'allow_paid_broadcast' => $this->allowPaidBroadcast,
                 'message_effect_id' => $this->messageEffectId,
                 'reply_parameters' => $this->replyParameters?->toRequestArray(),
                 'reply_markup' => $this->replyMarkup?->toRequestArray(),
+                ...$fileCollector->get(),
             ],
             static fn(mixed $value): bool => $value !== null,
         );

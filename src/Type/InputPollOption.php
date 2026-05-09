@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Type;
 
+use Phptg\BotApi\FileCollector;
+
 /**
  * @see https://core.telegram.org/bots/api#inputpolloption
  *
@@ -18,9 +20,10 @@ final readonly class InputPollOption
         public ?string $text = null,
         public ?string $textParseMode = null,
         public ?array $textEntities = null,
+        public ?InputPollOptionMedia $media = null,
     ) {}
 
-    public function toRequestArray(): array
+    public function toRequestArray(?FileCollector $fileCollector = null): array
     {
         return array_filter(
             [
@@ -32,6 +35,7 @@ final readonly class InputPollOption
                         static fn(MessageEntity $entity) => $entity->toRequestArray(),
                         $this->textEntities,
                     ),
+                'media' => $this->media?->toRequestArray($fileCollector),
             ],
             static fn(mixed $value): bool => $value !== null,
         );
