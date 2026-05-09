@@ -27,6 +27,7 @@
 - New #199: Add `GetManagedBotAccessSettings` method.
 - New #199: Add `SetManagedBotAccessSettings` method.
 - New #199: Add `GetUserPersonalChatMessages` method.
+- Chg #199: `text` parameter in `SendMessageDraft` method is now optional.
 
 ## 0.20 April 26, 2026
 

@@ -2505,7 +2505,7 @@ final class TelegramBotApi
     public function sendMessageDraft(
         int $chatId,
         int $draftId,
-        string $text,
+        ?string $text = null,
         ?int $messageThreadId = null,
         ?string $parseMode = null,
         ?array $entities = null,

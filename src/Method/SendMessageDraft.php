@@ -22,7 +22,7 @@ final readonly class SendMessageDraft implements MethodInterface
     public function __construct(
         private int $chatId,
         private int $draftId,
-        private string $text,
+        private ?string $text = null,
         private ?int $messageThreadId = null,
         private ?string $parseMode = null,
         private ?array $entities = null,

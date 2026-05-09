@@ -2180,7 +2180,7 @@ final class TelegramBotApiTest extends TestCase
     {
         $api = TestHelper::createSuccessStubApi(true);
 
-        $result = $api->sendMessageDraft(12, 100, 'hello');
+        $result = $api->sendMessageDraft(12, 100);
 
         assertTrue($result);
     }
