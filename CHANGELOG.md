@@ -1,5 +1,9 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.21 May 9, 2026
+
+- New #199: Add `supportsGuestQueries` field to `User` type.
+
 ## 0.20 April 26, 2026
 
 - Chg #197: `$data` parameter type in `TransportInterface::postWithFiles()` changed from `array<string, scalar>`
