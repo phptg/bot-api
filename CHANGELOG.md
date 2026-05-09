@@ -12,6 +12,7 @@
 - New #199: Add `DeleteAllMessageReactions` method.
 - New #199: Add `DeleteMessageReaction` method.
 - New #199: Add `InputMediaSticker`, `InputMediaVenue` and `InputMediaLocation` types.
+- New #199: Add `PollMedia` and `LivePhoto` type.
 
 ## 0.20 April 26, 2026
 
