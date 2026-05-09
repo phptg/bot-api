@@ -29,6 +29,7 @@ use Phptg\BotApi\Method\DeleteAllMessageReactions;
 use Phptg\BotApi\Method\DeleteChatPhoto;
 use Phptg\BotApi\Method\DeleteChatStickerSet;
 use Phptg\BotApi\Method\DeleteForumTopic;
+use Phptg\BotApi\Method\DeleteMessageReaction;
 use Phptg\BotApi\Method\DeleteMyCommands;
 use Phptg\BotApi\Method\DeleteStory;
 use Phptg\BotApi\Method\EditChatInviteLink;
@@ -803,6 +804,20 @@ final class TelegramBotApi
     public function deleteForumTopic(int|string $chatId, int $messageThreadId): FailResult|true
     {
         return $this->call(new DeleteForumTopic($chatId, $messageThreadId));
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#deletemessagereaction
+     */
+    public function deleteMessageReaction(
+        int|string $chatId,
+        int $messageId,
+        ?int $userId = null,
+        ?int $actorChatId = null,
+    ): FailResult|true {
+        return $this->call(
+            new DeleteMessageReaction($chatId, $messageId, $userId, $actorChatId),
+        );
     }
 
     /**
