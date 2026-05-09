@@ -11,7 +11,7 @@
 - New #199: Add `returnBots` parameter to `GetChatAdministrators` method.
 - New #199: Add `DeleteAllMessageReactions` method.
 - New #199: Add `DeleteMessageReaction` method.
-- New #199: Add `InputMediaSticker`, `InputMediaVenue` and `InputMediaLocation` types.
+- New #199: Add `InputMediaSticker`, `InputMediaVenue`, `InputMediaLocation` and `InputMediaLivePhoto` types.
 - New #199: Add `PollMedia` and `LivePhoto` type.
 - New #199: Add `explanationMedia`, `media`, `membersOnly` and `countryCodes` fields to `Poll` type.
 - New #199: Add `media` field to `PollOption` type.
