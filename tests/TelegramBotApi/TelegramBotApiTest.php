@@ -1576,6 +1576,26 @@ final class TelegramBotApiTest extends TestCase
         assertInstanceOf(OwnedGifts::class, $result);
     }
 
+    public function testGetUserPersonalChatMessages(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            [
+                'message_id' => 1,
+                'date' => 1620000000,
+                'chat' => [
+                    'id' => 1,
+                    'type' => 'private',
+                ],
+            ],
+        ]);
+
+        $result = $api->getUserPersonalChatMessages(123, 10);
+
+        assertIsArray($result);
+        assertCount(1, $result);
+        assertInstanceOf(Message::class, $result[0]);
+    }
+
     public function testGetUserProfileAudios(): void
     {
         $api = TestHelper::createSuccessStubApi([

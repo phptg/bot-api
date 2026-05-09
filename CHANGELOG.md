@@ -26,6 +26,7 @@
 - New #199: Add `BotAccessSettings` type.
 - New #199: Add `GetManagedBotAccessSettings` method.
 - New #199: Add `SetManagedBotAccessSettings` method.
+- New #199: Add `GetUserPersonalChatMessages` method.
 
 ## 0.20 April 26, 2026
 

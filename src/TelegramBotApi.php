@@ -65,6 +65,7 @@ use Phptg\BotApi\Method\GetMyShortDescription;
 use Phptg\BotApi\Method\GetMyStarBalance;
 use Phptg\BotApi\Method\GetUserChatBoosts;
 use Phptg\BotApi\Method\GetUserGifts;
+use Phptg\BotApi\Method\GetUserPersonalChatMessages;
 use Phptg\BotApi\Method\GetUserProfileAudios;
 use Phptg\BotApi\Method\GetUserProfilePhotos;
 use Phptg\BotApi\Method\GiftPremiumSubscription;
@@ -1537,6 +1538,16 @@ final class TelegramBotApi
                 $offset,
                 $limit,
             ),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#getuserpersonalchatmessages
+     */
+    public function getUserPersonalChatMessages(int $userId, int $limit): FailResult|array
+    {
+        return $this->call(
+            new GetUserPersonalChatMessages($userId, $limit),
         );
     }
 
