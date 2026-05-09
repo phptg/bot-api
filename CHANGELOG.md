@@ -6,6 +6,7 @@
 - New #199: Add `guestQueryId`, `guestBotCallerUser` and `guestBotCallerChat` fields to `Message` type.
 - New #199: Add `guestMessage` field to `Update` type.
 - New #199: Add `SentGuestMessage` type.
+- New #199: Add `AnswerGuestQuery` method.
 
 ## 0.20 April 26, 2026
 

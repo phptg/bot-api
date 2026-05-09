@@ -31,6 +31,7 @@ use Phptg\BotApi\Type\Inline\InlineQueryResultContact;
 use Phptg\BotApi\Type\Inline\InlineQueryResultGame;
 use Phptg\BotApi\Type\Inline\PreparedInlineMessage;
 use Phptg\BotApi\Type\Inline\SentWebAppMessage;
+use Phptg\BotApi\Type\SentGuestMessage;
 use Phptg\BotApi\Type\InputChecklist;
 use Phptg\BotApi\Type\InputFile;
 use Phptg\BotApi\Type\InputMediaPhoto;
@@ -494,6 +495,18 @@ final class TelegramBotApiTest extends TestCase
         $result = $api->answerCallbackQuery('id');
 
         assertTrue($result);
+    }
+
+    public function testAnswerGuestQuery(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            'inline_message_id' => 'guest_msg_123',
+        ]);
+
+        $result = $api->answerGuestQuery('guest_id', new InlineQueryResultContact('1', '+79001234567', 'Vjik'));
+
+        assertInstanceOf(SentGuestMessage::class, $result);
+        assertSame('guest_msg_123', $result->inlineMessageId);
     }
 
     public function testAnswerInlineQuery(): void

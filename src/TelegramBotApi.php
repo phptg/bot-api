@@ -66,6 +66,7 @@ use Phptg\BotApi\Method\GetUserProfileAudios;
 use Phptg\BotApi\Method\GetUserProfilePhotos;
 use Phptg\BotApi\Method\GiftPremiumSubscription;
 use Phptg\BotApi\Method\HideGeneralForumTopic;
+use Phptg\BotApi\Method\Inline\AnswerGuestQuery;
 use Phptg\BotApi\Method\Inline\AnswerInlineQuery;
 use Phptg\BotApi\Method\Inline\AnswerWebAppQuery;
 use Phptg\BotApi\Method\Inline\SavePreparedInlineMessage;
@@ -238,6 +239,7 @@ use Phptg\BotApi\Type\Sticker\MaskPosition;
 use Phptg\BotApi\Type\Sticker\Sticker;
 use Phptg\BotApi\Type\Sticker\StickerSet;
 use Phptg\BotApi\Type\Story;
+use Phptg\BotApi\Type\SentGuestMessage;
 use Phptg\BotApi\Type\SuggestedPostParameters;
 use Phptg\BotApi\Type\StoryArea;
 use Phptg\BotApi\Type\Update\Update;
@@ -427,6 +429,16 @@ final class TelegramBotApi
     ): FailResult|true {
         return $this->call(
             new AnswerShippingQuery($shippingQueryId, $ok, $shippingOptions, $errorMessage),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#answerguestquery
+     */
+    public function answerGuestQuery(string $guestQueryId, InlineQueryResult $result): FailResult|SentGuestMessage
+    {
+        return $this->call(
+            new AnswerGuestQuery($guestQueryId, $result),
         );
     }
 
