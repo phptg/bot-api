@@ -29,6 +29,7 @@ final class ChatPermissionsTest extends TestCase
         assertNull($chatPermissions->canSendPolls);
         assertNull($chatPermissions->canSendOtherMessages);
         assertNull($chatPermissions->canAddWebPagePreviews);
+        assertNull($chatPermissions->canReactToMessages);
         assertNull($chatPermissions->canEditTag);
         assertNull($chatPermissions->canChangeInfo);
         assertNull($chatPermissions->canInviteUsers);
@@ -51,6 +52,7 @@ final class ChatPermissionsTest extends TestCase
             true,
             true,
             true,
+            true,
             false,
             false,
             true,
@@ -69,6 +71,7 @@ final class ChatPermissionsTest extends TestCase
                 'can_send_polls' => false,
                 'can_send_other_messages' => true,
                 'can_add_web_page_previews' => true,
+                'can_react_to_messages' => true,
                 'can_edit_tag' => true,
                 'can_change_info' => false,
                 'can_invite_users' => false,
@@ -92,6 +95,7 @@ final class ChatPermissionsTest extends TestCase
             'can_send_polls' => true,
             'can_send_other_messages' => true,
             'can_add_web_page_previews' => true,
+            'can_react_to_messages' => true,
             'can_edit_tag' => true,
             'can_change_info' => true,
             'can_invite_users' => true,
@@ -109,6 +113,7 @@ final class ChatPermissionsTest extends TestCase
         assertTrue($chatPermissions->canSendPolls);
         assertTrue($chatPermissions->canSendOtherMessages);
         assertTrue($chatPermissions->canAddWebPagePreviews);
+        assertTrue($chatPermissions->canReactToMessages);
         assertTrue($chatPermissions->canEditTag);
         assertTrue($chatPermissions->canChangeInfo);
         assertTrue($chatPermissions->canInviteUsers);

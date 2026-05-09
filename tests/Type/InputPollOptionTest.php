@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
+use Phptg\BotApi\Type\InputMediaPhoto;
 use Phptg\BotApi\Type\InputPollOption;
 use Phptg\BotApi\Type\MessageEntity;
 
@@ -20,6 +21,7 @@ final class InputPollOptionTest extends TestCase
         assertNull($option->text);
         assertNull($option->textParseMode);
         assertNull($option->textEntities);
+        assertNull($option->media);
 
         assertSame([], $option->toRequestArray());
     }
@@ -27,17 +29,20 @@ final class InputPollOptionTest extends TestCase
     public function testFilled(): void
     {
         $messageEntity = new MessageEntity('bold', 0, 4);
-        $option = new InputPollOption('test', 'MarkdownV2', [$messageEntity]);
+        $media = new InputMediaPhoto('file_id1');
+        $option = new InputPollOption('test', 'MarkdownV2', [$messageEntity], $media);
 
         assertSame('test', $option->text);
         assertSame('MarkdownV2', $option->textParseMode);
         assertSame([$messageEntity], $option->textEntities);
+        assertSame($media, $option->media);
 
         assertSame(
             [
                 'text' => 'test',
                 'text_parse_mode' => 'MarkdownV2',
                 'text_entities' => [$messageEntity->toRequestArray()],
+                'media' => $media->toRequestArray(),
             ],
             $option->toRequestArray(),
         );

@@ -10,6 +10,8 @@ use Phptg\BotApi\Method\SendPoll;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Type\ForceReply;
+use Phptg\BotApi\Type\InputFile;
+use Phptg\BotApi\Type\InputMediaPhoto;
 use Phptg\BotApi\Type\InputPollOption;
 use Phptg\BotApi\Type\MessageEntity;
 use Phptg\BotApi\Type\ReplyParameters;
@@ -41,7 +43,10 @@ final class SendPollTest extends TestCase
 
     public function testFull(): void
     {
-        $option1 = new InputPollOption('OK');
+        $optionFile = new InputFile(null);
+        $explanationFile = new InputFile(null);
+        $pollFile = new InputFile(null);
+        $option1 = new InputPollOption('OK', media: new InputMediaPhoto($optionFile));
         $option2 = new InputPollOption('Bad');
         $messageEntity1 = new MessageEntity('bold', 0, 5);
         $messageEntity2 = new MessageEntity('bold', 1, 3);
@@ -49,6 +54,8 @@ final class SendPollTest extends TestCase
         $date = new DateTimeImmutable();
         $replyParameters = new ReplyParameters(23);
         $replyMarkup = new ForceReply();
+        $explanationMedia = new InputMediaPhoto($explanationFile);
+        $pollMedia = new InputMediaPhoto($pollFile);
         $method = new SendPoll(
             12,
             'How are you?',
@@ -64,9 +71,11 @@ final class SendPollTest extends TestCase
             'Good explanation',
             'Markdown',
             [$messageEntity2],
+            $explanationMedia,
             300,
             $date,
             true,
+            $pollMedia,
             false,
             false,
             'meid2',
@@ -77,6 +86,8 @@ final class SendPollTest extends TestCase
             true,
             true,
             true,
+            false,
+            ['US', 'GB'],
             'Poll description',
             'HTML',
             [$messageEntity3],
@@ -93,7 +104,7 @@ final class SendPollTest extends TestCase
                 'question_parse_mode' => 'HTML',
                 'question_entities' => [$messageEntity1->toRequestArray()],
                 'options' => [
-                    ['text' => 'OK'],
+                    ['text' => 'OK', 'media' => ['type' => 'photo', 'media' => 'attach://file0']],
                     ['text' => 'Bad'],
                 ],
                 'is_anonymous' => true,
@@ -103,22 +114,29 @@ final class SendPollTest extends TestCase
                 'shuffle_options' => true,
                 'allow_adding_options' => true,
                 'hide_results_until_closes' => true,
+                'members_only' => false,
+                'country_codes' => ['US', 'GB'],
                 'correct_option_ids' => [0, 1],
                 'explanation' => 'Good explanation',
                 'explanation_parse_mode' => 'Markdown',
                 'explanation_entities' => [$messageEntity2->toRequestArray()],
+                'explanation_media' => ['type' => 'photo', 'media' => 'attach://file1'],
                 'open_period' => 300,
                 'close_date' => $date->getTimestamp(),
                 'is_closed' => true,
                 'description' => 'Poll description',
                 'description_parse_mode' => 'HTML',
                 'description_entities' => [$messageEntity3->toRequestArray()],
+                'media' => ['type' => 'photo', 'media' => 'attach://file2'],
                 'disable_notification' => false,
                 'protect_content' => false,
                 'allow_paid_broadcast' => true,
                 'message_effect_id' => 'meid2',
                 'reply_parameters' => $replyParameters->toRequestArray(),
                 'reply_markup' => $replyMarkup->toRequestArray(),
+                'file0' => $optionFile,
+                'file1' => $explanationFile,
+                'file2' => $pollFile,
             ],
             $method->getData(),
         );

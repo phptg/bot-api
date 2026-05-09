@@ -62,6 +62,7 @@ final class StopPollTest extends TestCase
             'type' => 'regular',
             'allows_multiple_answers' => true,
             'allows_revoting' => false,
+            'members_only' => true,
         ])->call($method);
 
         assertSame('12', $preparedResult->id);

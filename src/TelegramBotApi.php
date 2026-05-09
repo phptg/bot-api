@@ -25,9 +25,11 @@ use Phptg\BotApi\Method\CreateChatSubscriptionInviteLink;
 use Phptg\BotApi\Method\CreateForumTopic;
 use Phptg\BotApi\Method\DeclineChatJoinRequest;
 use Phptg\BotApi\Method\DeclineSuggestedPost;
+use Phptg\BotApi\Method\DeleteAllMessageReactions;
 use Phptg\BotApi\Method\DeleteChatPhoto;
 use Phptg\BotApi\Method\DeleteChatStickerSet;
 use Phptg\BotApi\Method\DeleteForumTopic;
+use Phptg\BotApi\Method\DeleteMessageReaction;
 use Phptg\BotApi\Method\DeleteMyCommands;
 use Phptg\BotApi\Method\DeleteStory;
 use Phptg\BotApi\Method\EditChatInviteLink;
@@ -52,6 +54,7 @@ use Phptg\BotApi\Method\GetChatMemberCount;
 use Phptg\BotApi\Method\GetChatMenuButton;
 use Phptg\BotApi\Method\GetFile;
 use Phptg\BotApi\Method\GetForumTopicIconStickers;
+use Phptg\BotApi\Method\GetManagedBotAccessSettings;
 use Phptg\BotApi\Method\GetManagedBotToken;
 use Phptg\BotApi\Method\GetMe;
 use Phptg\BotApi\Method\GetMyCommands;
@@ -62,10 +65,12 @@ use Phptg\BotApi\Method\GetMyShortDescription;
 use Phptg\BotApi\Method\GetMyStarBalance;
 use Phptg\BotApi\Method\GetUserChatBoosts;
 use Phptg\BotApi\Method\GetUserGifts;
+use Phptg\BotApi\Method\GetUserPersonalChatMessages;
 use Phptg\BotApi\Method\GetUserProfileAudios;
 use Phptg\BotApi\Method\GetUserProfilePhotos;
 use Phptg\BotApi\Method\GiftPremiumSubscription;
 use Phptg\BotApi\Method\HideGeneralForumTopic;
+use Phptg\BotApi\Method\Inline\AnswerGuestQuery;
 use Phptg\BotApi\Method\Inline\AnswerInlineQuery;
 use Phptg\BotApi\Method\Inline\AnswerWebAppQuery;
 use Phptg\BotApi\Method\Inline\SavePreparedInlineMessage;
@@ -101,6 +106,7 @@ use Phptg\BotApi\Method\SendContact;
 use Phptg\BotApi\Method\SendDice;
 use Phptg\BotApi\Method\SendDocument;
 use Phptg\BotApi\Method\SendLocation;
+use Phptg\BotApi\Method\SendLivePhoto;
 use Phptg\BotApi\Method\SendMediaGroup;
 use Phptg\BotApi\Method\SendMessage;
 use Phptg\BotApi\Method\SendMessageDraft;
@@ -124,6 +130,7 @@ use Phptg\BotApi\Method\SetChatPermissions;
 use Phptg\BotApi\Method\SetChatPhoto;
 use Phptg\BotApi\Method\SetChatStickerSet;
 use Phptg\BotApi\Method\SetChatTitle;
+use Phptg\BotApi\Method\SetManagedBotAccessSettings;
 use Phptg\BotApi\Method\SetMessageReaction;
 use Phptg\BotApi\Method\SetMyCommands;
 use Phptg\BotApi\Method\SetMyDefaultAdministratorRights;
@@ -183,6 +190,7 @@ use Phptg\BotApi\Transport\DownloadFileException;
 use Phptg\BotApi\Transport\NativeTransport;
 use Phptg\BotApi\Transport\TransportInterface;
 use Phptg\BotApi\Type\AcceptedGiftTypes;
+use Phptg\BotApi\Type\BotAccessSettings;
 use Phptg\BotApi\Type\BotCommand;
 use Phptg\BotApi\Type\BotCommandScope;
 use Phptg\BotApi\Type\BotDescription;
@@ -210,9 +218,11 @@ use Phptg\BotApi\Type\InputFile;
 use Phptg\BotApi\Type\InputMedia;
 use Phptg\BotApi\Type\InputMediaAudio;
 use Phptg\BotApi\Type\InputMediaDocument;
+use Phptg\BotApi\Type\InputMediaLivePhoto;
 use Phptg\BotApi\Type\InputMediaPhoto;
 use Phptg\BotApi\Type\InputMediaVideo;
 use Phptg\BotApi\Type\InputPaidMedia;
+use Phptg\BotApi\Type\InputPollMedia;
 use Phptg\BotApi\Type\InputPollOption;
 use Phptg\BotApi\Type\InputProfilePhoto;
 use Phptg\BotApi\Type\InputStoryContent;
@@ -238,6 +248,7 @@ use Phptg\BotApi\Type\Sticker\MaskPosition;
 use Phptg\BotApi\Type\Sticker\Sticker;
 use Phptg\BotApi\Type\Sticker\StickerSet;
 use Phptg\BotApi\Type\Story;
+use Phptg\BotApi\Type\SentGuestMessage;
 use Phptg\BotApi\Type\SuggestedPostParameters;
 use Phptg\BotApi\Type\StoryArea;
 use Phptg\BotApi\Type\Update\Update;
@@ -427,6 +438,16 @@ final class TelegramBotApi
     ): FailResult|true {
         return $this->call(
             new AnswerShippingQuery($shippingQueryId, $ok, $shippingOptions, $errorMessage),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#answerguestquery
+     */
+    public function answerGuestQuery(string $guestQueryId, InlineQueryResult $result): FailResult|SentGuestMessage
+    {
+        return $this->call(
+            new AnswerGuestQuery($guestQueryId, $result),
         );
     }
 
@@ -738,6 +759,19 @@ final class TelegramBotApi
     }
 
     /**
+     * @see https://core.telegram.org/bots/api#deleteallmessagereactions
+     */
+    public function deleteAllMessageReactions(
+        int|string $chatId,
+        ?int $userId = null,
+        ?int $actorChatId = null,
+    ): FailResult|true {
+        return $this->call(
+            new DeleteAllMessageReactions($chatId, $userId, $actorChatId),
+        );
+    }
+
+    /**
      * @see https://core.telegram.org/bots/api#deletebusinessmessages
      *
      * @param int[] $messageIds
@@ -777,6 +811,20 @@ final class TelegramBotApi
     public function deleteForumTopic(int|string $chatId, int $messageThreadId): FailResult|true
     {
         return $this->call(new DeleteForumTopic($chatId, $messageThreadId));
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#deletemessagereaction
+     */
+    public function deleteMessageReaction(
+        int|string $chatId,
+        int $messageId,
+        ?int $userId = null,
+        ?int $actorChatId = null,
+    ): FailResult|true {
+        return $this->call(
+            new DeleteMessageReaction($chatId, $messageId, $userId, $actorChatId),
+        );
     }
 
     /**
@@ -1273,9 +1321,9 @@ final class TelegramBotApi
      *
      * @return FailResult|ChatMember[]
      */
-    public function getChatAdministrators(int|string $chatId): FailResult|array
+    public function getChatAdministrators(int|string $chatId, ?bool $returnBots = null): FailResult|array
     {
-        return $this->call(new GetChatAdministrators($chatId));
+        return $this->call(new GetChatAdministrators($chatId, $returnBots));
     }
 
     /**
@@ -1361,6 +1409,14 @@ final class TelegramBotApi
     public function getManagedBotToken(int $userId): FailResult|string
     {
         return $this->call(new GetManagedBotToken($userId));
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#getmanagedbotaccesssettings
+     */
+    public function getManagedBotAccessSettings(int $userId): FailResult|BotAccessSettings
+    {
+        return $this->call(new GetManagedBotAccessSettings($userId));
     }
 
     /**
@@ -1482,6 +1538,16 @@ final class TelegramBotApi
                 $offset,
                 $limit,
             ),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#getuserpersonalchatmessages
+     */
+    public function getUserPersonalChatMessages(int $userId, int $limit): FailResult|array
+    {
+        return $this->call(
+            new GetUserPersonalChatMessages($userId, $limit),
         );
     }
 
@@ -2308,7 +2374,7 @@ final class TelegramBotApi
     /**
      * @see https://core.telegram.org/bots/api#sendmediagroup
      *
-     * @param InputMediaAudio[]|InputMediaDocument[]|InputMediaPhoto[]|InputMediaVideo[] $media
+     * @param InputMediaAudio[]|InputMediaDocument[]|InputMediaLivePhoto[]|InputMediaPhoto[]|InputMediaVideo[] $media
      * @return FailResult|Message[]
      */
     public function sendMediaGroup(
@@ -2335,6 +2401,55 @@ final class TelegramBotApi
                 $replyParameters,
                 $allowPaidBroadcast,
                 $directMessagesTopicId,
+            ),
+        );
+    }
+
+    /**
+     * @param MessageEntity[]|null $captionEntities
+     *
+     * @see https://core.telegram.org/bots/api#sendlivephoto
+     */
+    public function sendLivePhoto(
+        int|string $chatId,
+        string|InputFile $livePhoto,
+        string|InputFile $photo,
+        ?string $businessConnectionId = null,
+        ?int $messageThreadId = null,
+        ?int $directMessagesTopicId = null,
+        ?string $caption = null,
+        ?string $parseMode = null,
+        ?array $captionEntities = null,
+        ?bool $showCaptionAboveMedia = null,
+        ?bool $hasSpoiler = null,
+        ?bool $disableNotification = null,
+        ?bool $protectContent = null,
+        ?bool $allowPaidBroadcast = null,
+        ?string $messageEffectId = null,
+        ?SuggestedPostParameters $suggestedPostParameters = null,
+        ?ReplyParameters $replyParameters = null,
+        InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup = null,
+    ): FailResult|Message {
+        return $this->call(
+            new SendLivePhoto(
+                $chatId,
+                $livePhoto,
+                $photo,
+                $businessConnectionId,
+                $messageThreadId,
+                $directMessagesTopicId,
+                $caption,
+                $parseMode,
+                $captionEntities,
+                $showCaptionAboveMedia,
+                $hasSpoiler,
+                $disableNotification,
+                $protectContent,
+                $allowPaidBroadcast,
+                $messageEffectId,
+                $suggestedPostParameters,
+                $replyParameters,
+                $replyMarkup,
             ),
         );
     }
@@ -2390,7 +2505,7 @@ final class TelegramBotApi
     public function sendMessageDraft(
         int $chatId,
         int $draftId,
-        string $text,
+        ?string $text = null,
         ?int $messageThreadId = null,
         ?string $parseMode = null,
         ?array $entities = null,
@@ -2508,6 +2623,7 @@ final class TelegramBotApi
      * @param int[]|null $correctOptionIds
      * @param MessageEntity[]|null $explanationEntities
      * @param MessageEntity[]|null $descriptionEntities
+     * @param string[]|null $countryCodes
      *
      * @see https://core.telegram.org/bots/api#sendpoll
      */
@@ -2526,9 +2642,11 @@ final class TelegramBotApi
         ?string $explanation = null,
         ?string $explanationParseMode = null,
         ?array $explanationEntities = null,
+        ?InputPollMedia $explanationMedia = null,
         ?int $openPeriod = null,
         ?DateTimeImmutable $closeDate = null,
         ?bool $isClosed = null,
+        ?InputPollMedia $media = null,
         ?bool $disableNotification = null,
         ?bool $protectContent = null,
         ?string $messageEffectId = null,
@@ -2539,6 +2657,8 @@ final class TelegramBotApi
         ?bool $shuffleOptions = null,
         ?bool $allowAddingOptions = null,
         ?bool $hideResultsUntilCloses = null,
+        ?bool $membersOnly = null,
+        ?array $countryCodes = null,
         ?string $description = null,
         ?string $descriptionParseMode = null,
         ?array $descriptionEntities = null,
@@ -2559,9 +2679,11 @@ final class TelegramBotApi
                 $explanation,
                 $explanationParseMode,
                 $explanationEntities,
+                $explanationMedia,
                 $openPeriod,
                 $closeDate,
                 $isClosed,
+                $media,
                 $disableNotification,
                 $protectContent,
                 $messageEffectId,
@@ -2572,6 +2694,8 @@ final class TelegramBotApi
                 $shuffleOptions,
                 $allowAddingOptions,
                 $hideResultsUntilCloses,
+                $membersOnly,
+                $countryCodes,
                 $description,
                 $descriptionParseMode,
                 $descriptionEntities,
@@ -2959,6 +3083,18 @@ final class TelegramBotApi
     {
         return $this->call(
             new SetChatTitle($chatId, $title),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#setmanagedbotaccesssettings
+     *
+     * @param int[]|null $addedUserIds
+     */
+    public function setManagedBotAccessSettings(int $userId, bool $isAccessRestricted, ?array $addedUserIds = null): FailResult|true
+    {
+        return $this->call(
+            new SetManagedBotAccessSettings($userId, $isAccessRestricted, $addedUserIds),
         );
     }
 

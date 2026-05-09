@@ -35,6 +35,7 @@ final class ExternalReplyInfoTest extends TestCase
         assertNull($externalReplyInfo->animation);
         assertNull($externalReplyInfo->audio);
         assertNull($externalReplyInfo->document);
+        assertNull($externalReplyInfo->livePhoto);
         assertNull($externalReplyInfo->photo);
         assertNull($externalReplyInfo->sticker);
         assertNull($externalReplyInfo->story);
@@ -90,6 +91,13 @@ final class ExternalReplyInfoTest extends TestCase
             'document' => [
                 'file_id' => 'f3',
                 'file_unique_id' => 'fu3',
+            ],
+            'live_photo' => [
+                'file_id' => 'f3lp',
+                'file_unique_id' => 'fu3lp',
+                'width' => 640,
+                'height' => 480,
+                'duration' => 3,
             ],
             'photo' => [
                 [
@@ -183,6 +191,7 @@ final class ExternalReplyInfoTest extends TestCase
                 'type' => 'regular',
                 'allows_multiple_answers' => true,
                 'allows_revoting' => false,
+                'members_only' => true,
             ],
             'venue' => [
                 'location' => [
@@ -219,6 +228,10 @@ final class ExternalReplyInfoTest extends TestCase
         assertSame('f1', $externalReplyInfo->animation?->fileId);
         assertSame('f2', $externalReplyInfo->audio?->fileId);
         assertSame('f3', $externalReplyInfo->document?->fileId);
+        assertSame('f3lp', $externalReplyInfo->livePhoto?->fileId);
+        assertSame(640, $externalReplyInfo->livePhoto?->width);
+        assertSame(480, $externalReplyInfo->livePhoto?->height);
+        assertSame(3, $externalReplyInfo->livePhoto?->duration);
 
         assertCount(1, $externalReplyInfo->photo);
         assertSame('f4', $externalReplyInfo->photo[0]->fileId);

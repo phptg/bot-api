@@ -14,6 +14,7 @@ use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Tests\Support\TransportMock;
 use Phptg\BotApi\Transport\ApiResponse;
 use Phptg\BotApi\Type\AcceptedGiftTypes;
+use Phptg\BotApi\Type\BotAccessSettings;
 use Phptg\BotApi\Type\BotCommand;
 use Phptg\BotApi\Type\BotDescription;
 use Phptg\BotApi\Type\BotName;
@@ -31,6 +32,7 @@ use Phptg\BotApi\Type\Inline\InlineQueryResultContact;
 use Phptg\BotApi\Type\Inline\InlineQueryResultGame;
 use Phptg\BotApi\Type\Inline\PreparedInlineMessage;
 use Phptg\BotApi\Type\Inline\SentWebAppMessage;
+use Phptg\BotApi\Type\SentGuestMessage;
 use Phptg\BotApi\Type\InputChecklist;
 use Phptg\BotApi\Type\InputFile;
 use Phptg\BotApi\Type\InputMediaPhoto;
@@ -496,6 +498,18 @@ final class TelegramBotApiTest extends TestCase
         assertTrue($result);
     }
 
+    public function testAnswerGuestQuery(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            'inline_message_id' => 'guest_msg_123',
+        ]);
+
+        $result = $api->answerGuestQuery('guest_id', new InlineQueryResultContact('1', '+79001234567', 'Vjik'));
+
+        assertInstanceOf(SentGuestMessage::class, $result);
+        assertSame('guest_msg_123', $result->inlineMessageId);
+    }
+
     public function testAnswerInlineQuery(): void
     {
         $api = TestHelper::createSuccessStubApi(true);
@@ -731,6 +745,15 @@ final class TelegramBotApiTest extends TestCase
         assertTrue($result);
     }
 
+    public function testDeleteAllMessageReactions(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->deleteAllMessageReactions(1);
+
+        assertTrue($result);
+    }
+
     public function testDeleteBusinessMessages(): void
     {
         $api = TestHelper::createSuccessStubApi(true);
@@ -763,6 +786,15 @@ final class TelegramBotApiTest extends TestCase
         $api = TestHelper::createSuccessStubApi(true);
 
         $result = $api->deleteForumTopic(1, 2);
+
+        assertTrue($result);
+    }
+
+    public function testDeleteMessageReaction(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->deleteMessageReaction(1, 100);
 
         assertTrue($result);
     }
@@ -1268,6 +1300,23 @@ final class TelegramBotApiTest extends TestCase
         assertSame('123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11', $result);
     }
 
+    public function testGetManagedBotAccessSettings(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            'is_access_restricted' => true,
+            'added_users' => [
+                ['id' => 1, 'is_bot' => false, 'first_name' => 'Alice'],
+            ],
+        ]);
+
+        $result = $api->getManagedBotAccessSettings(789);
+
+        assertInstanceOf(BotAccessSettings::class, $result);
+        assertSame(true, $result->isAccessRestricted);
+        assertSame(1, $result->addedUsers[0]->id);
+        assertSame('Alice', $result->addedUsers[0]->firstName);
+    }
+
     public function testGetMyCommands(): void
     {
         $api = TestHelper::createSuccessStubApi([
@@ -1525,6 +1574,26 @@ final class TelegramBotApiTest extends TestCase
         $result = $api->getUserGifts(12345);
 
         assertInstanceOf(OwnedGifts::class, $result);
+    }
+
+    public function testGetUserPersonalChatMessages(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            [
+                'message_id' => 1,
+                'date' => 1620000000,
+                'chat' => [
+                    'id' => 1,
+                    'type' => 'private',
+                ],
+            ],
+        ]);
+
+        $result = $api->getUserPersonalChatMessages(123, 10);
+
+        assertIsArray($result);
+        assertCount(1, $result);
+        assertInstanceOf(Message::class, $result[0]);
     }
 
     public function testGetUserProfileAudios(): void
@@ -2052,6 +2121,23 @@ final class TelegramBotApiTest extends TestCase
         assertSame(7, $result->messageId);
     }
 
+    public function testSendLivePhoto(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            'message_id' => 7,
+            'date' => 1620000000,
+            'chat' => [
+                'id' => 1,
+                'type' => 'private',
+            ],
+        ]);
+
+        $result = $api->sendLivePhoto(12, 'fid1', 'fid2');
+
+        assertInstanceOf(Message::class, $result);
+        assertSame(7, $result->messageId);
+    }
+
     public function testSendMediaGroup(): void
     {
         $api = TestHelper::createSuccessStubApi([
@@ -2094,7 +2180,7 @@ final class TelegramBotApiTest extends TestCase
     {
         $api = TestHelper::createSuccessStubApi(true);
 
-        $result = $api->sendMessageDraft(12, 100, 'hello');
+        $result = $api->sendMessageDraft(12, 100);
 
         assertTrue($result);
     }
@@ -2308,6 +2394,15 @@ final class TelegramBotApiTest extends TestCase
         assertTrue($result);
     }
 
+    public function testSetManagedBotAccessSettings(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->setManagedBotAccessSettings(789, true, [1, 2]);
+
+        assertTrue($result);
+    }
+
     public function testSetCustomEmojiStickerSetThumbnail(): void
     {
         $api = TestHelper::createSuccessStubApi(true);
@@ -2499,6 +2594,7 @@ final class TelegramBotApiTest extends TestCase
             'type' => 'regular',
             'allows_multiple_answers' => true,
             'allows_revoting' => false,
+            'members_only' => true,
         ]);
 
         $result = $api->stopPoll(1, 2);

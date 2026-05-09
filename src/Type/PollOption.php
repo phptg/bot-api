@@ -22,6 +22,7 @@ final readonly class PollOption
         public int $voterCount,
         #[ArrayOfObjectsValue(MessageEntity::class)]
         public ?array $textEntities = null,
+        public ?PollMedia $media = null,
         public ?User $addedByUser = null,
         public ?Chat $addedByChat = null,
         public ?int $additionDate = null,

@@ -11,7 +11,7 @@ use Phptg\BotApi\FileCollector;
  *
  * @api
  */
-final readonly class InputMediaDocument implements InputMedia
+final readonly class InputMediaDocument implements InputMedia, InputPollMedia
 {
     /**
      * @param MessageEntity[]|null $captionEntities
@@ -30,6 +30,9 @@ final readonly class InputMediaDocument implements InputMedia
         return 'document';
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(?FileCollector $fileCollector = null): array
     {
         if ($fileCollector !== null) {

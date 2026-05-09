@@ -30,6 +30,7 @@ final class PollTest extends TestCase
             'regular',
             true,
             false,
+            true,
         );
 
         assertSame('12', $poll->id);
@@ -41,13 +42,18 @@ final class PollTest extends TestCase
         assertSame('regular', $poll->type);
         assertTrue($poll->allowsMultipleAnswers);
         assertFalse($poll->allowsRevoting);
+        assertTrue($poll->membersOnly);
+        assertNull($poll->countryCodes);
+        assertNull($poll->questionEntities);
         assertNull($poll->correctOptionIds);
         assertNull($poll->explanation);
         assertNull($poll->explanationEntities);
+        assertNull($poll->explanationMedia);
         assertNull($poll->openPeriod);
         assertNull($poll->closeDate);
         assertNull($poll->description);
         assertNull($poll->descriptionEntities);
+        assertNull($poll->media);
     }
 
     public function testFromTelegramResult(): void
@@ -64,6 +70,7 @@ final class PollTest extends TestCase
             'type' => 'regular',
             'allows_multiple_answers' => true,
             'allows_revoting' => true,
+            'members_only' => true,
             'question_entities' => [
                 [
                     'offset' => 0,
@@ -90,6 +97,24 @@ final class PollTest extends TestCase
                     'type' => 'bold',
                 ],
             ],
+            'explanation_media' => [
+                'location' => [
+                    'latitude' => 55.7558,
+                    'longitude' => 37.6173,
+                ],
+            ],
+            'media' => [
+                'sticker' => [
+                    'file_id' => 'sticker_file_id',
+                    'file_unique_id' => 'sticker_unique_id',
+                    'type' => 'regular',
+                    'width' => 512,
+                    'height' => 512,
+                    'is_animated' => false,
+                    'is_video' => false,
+                ],
+            ],
+            'country_codes' => ['US', 'GB', 'DE'],
         ], null, Poll::class);
 
         assertSame('12', $poll->id);
@@ -105,6 +130,9 @@ final class PollTest extends TestCase
         assertTrue($poll->allowsMultipleAnswers);
         assertTrue($poll->allowsRevoting);
 
+        assertTrue($poll->membersOnly);
+        assertSame(['US', 'GB', 'DE'], $poll->countryCodes);
+
         assertCount(1, $poll->questionEntities);
         assertSame(35, $poll->questionEntities[0]->length);
 
@@ -114,10 +142,14 @@ final class PollTest extends TestCase
         assertCount(1, $poll->explanationEntities);
         assertSame(31, $poll->explanationEntities[0]->length);
 
+        assertSame(55.7558, $poll->explanationMedia?->location?->latitude);
+
         assertSame(123, $poll->openPeriod);
         assertSame(456, $poll->closeDate);
         assertSame('Poll description', $poll->description);
         assertCount(1, $poll->descriptionEntities);
         assertSame(4, $poll->descriptionEntities[0]->length);
+
+        assertSame('sticker_file_id', $poll->media?->sticker?->fileId);
     }
 }

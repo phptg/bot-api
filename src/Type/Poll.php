@@ -7,6 +7,7 @@ namespace Phptg\BotApi\Type;
 use Phptg\BotApi\ParseResult\ValueProcessor\ArrayMap;
 use Phptg\BotApi\ParseResult\ValueProcessor\ArrayOfObjectsValue;
 use Phptg\BotApi\ParseResult\ValueProcessor\IntegerValue;
+use Phptg\BotApi\ParseResult\ValueProcessor\StringValue;
 
 /**
  * @see https://core.telegram.org/bots/api#poll
@@ -21,6 +22,7 @@ final readonly class Poll
      * @param int[]|null $correctOptionIds
      * @param MessageEntity[]|null $explanationEntities
      * @param MessageEntity[]|null $descriptionEntities
+     * @param string[]|null $countryCodes
      */
     public function __construct(
         public string $id,
@@ -33,6 +35,9 @@ final readonly class Poll
         public string $type,
         public bool $allowsMultipleAnswers,
         public bool $allowsRevoting,
+        public bool $membersOnly,
+        #[ArrayMap(StringValue::class)]
+        public ?array $countryCodes = null,
         #[ArrayOfObjectsValue(MessageEntity::class)]
         public ?array $questionEntities = null,
         #[ArrayMap(IntegerValue::class)]
@@ -40,10 +45,12 @@ final readonly class Poll
         public ?string $explanation = null,
         #[ArrayOfObjectsValue(MessageEntity::class)]
         public ?array $explanationEntities = null,
+        public ?PollMedia $explanationMedia = null,
         public ?int $openPeriod = null,
         public ?int $closeDate = null,
         public ?string $description = null,
         #[ArrayOfObjectsValue(MessageEntity::class)]
         public ?array $descriptionEntities = null,
+        public ?PollMedia $media = null,
     ) {}
 }

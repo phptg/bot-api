@@ -1,5 +1,34 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.21 May 9, 2026
+
+- New #199: Add `supportsGuestQueries` field to `User` type.
+- New #199: Add `guestQueryId`, `guestBotCallerUser` and `guestBotCallerChat` fields to `Message` type.
+- New #199: Add `guestMessage` field to `Update` type.
+- New #199: Add `SentGuestMessage` type.
+- New #199: Add `AnswerGuestQuery` method.
+- New #199: Add `canReactToMessages` field to `ChatMemberRestricted` and `ChatPermissions` types.
+- New #199: Add `returnBots` parameter to `GetChatAdministrators` method.
+- New #199: Add `DeleteAllMessageReactions` method.
+- New #199: Add `DeleteMessageReaction` method.
+- New #199: Add `InputMediaSticker`, `InputMediaVenue`, `InputMediaLocation` and `InputMediaLivePhoto` types.
+- New #199: Add `PollMedia` and `LivePhoto` type.
+- New #199: Add `explanationMedia`, `media`, `membersOnly` and `countryCodes` fields to `Poll` type.
+- New #199: Add `media` field to `PollOption` type.
+- New #199: Add `InputPollMedia` and `InputPollOptionMedia` types.
+- New #199: Add `live_photo` field to `Message` and `ExternalReplyInfo` types.
+- New #199: Add `SendLivePhoto` method.
+- New #199: Add `PaidMediaLivePhoto` type.
+- New #199: Add `InputPaidMediaLivePhoto` type.
+- New #199: Add `explanationMedia`, `media`, `membersOnly` and `countryCodes` parameters to `SendPoll` method.
+- New #199: Add `media` field to `InputPollOption` type.
+- Enh #199: `SendMediaGroup` method now supports `InputMediaLivePhoto` type.
+- New #199: Add `BotAccessSettings` type.
+- New #199: Add `GetManagedBotAccessSettings` method.
+- New #199: Add `SetManagedBotAccessSettings` method.
+- New #199: Add `GetUserPersonalChatMessages` method.
+- Chg #199: `text` parameter in `SendMessageDraft` method is now optional.
+
 ## 0.20 April 26, 2026
 
 - Chg #197: `$data` parameter type in `TransportInterface::postWithFiles()` changed from `array<string, scalar>`

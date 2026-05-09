@@ -49,6 +49,7 @@ final class Update
         public readonly ?Message $businessMessage = null,
         public readonly ?Message $editedBusinessMessage = null,
         public readonly ?BusinessMessagesDeleted $deletedBusinessMessages = null,
+        public readonly ?Message $guestMessage = null,
         public readonly ?MessageReactionUpdated $messageReaction = null,
         public readonly ?MessageReactionCountUpdated $messageReactionCount = null,
         public readonly ?InlineQuery $inlineQuery = null,

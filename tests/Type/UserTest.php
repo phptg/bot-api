@@ -28,6 +28,7 @@ final class UserTest extends TestCase
         assertNull($user->addedToAttachmentMenu);
         assertNull($user->canJoinGroups);
         assertNull($user->canReadAllGroupMessages);
+        assertNull($user->supportsGuestQueries);
         assertNull($user->supportsInlineQueries);
         assertNull($user->canConnectToBusiness);
         assertNull($user->hasMainWebApp);
@@ -45,6 +46,7 @@ final class UserTest extends TestCase
             'Ivanov',
             'sergei_ivanov',
             'ru-RU',
+            true,
             true,
             true,
             true,
@@ -69,6 +71,7 @@ final class UserTest extends TestCase
                 'added_to_attachment_menu' => true,
                 'can_join_groups' => true,
                 'can_read_all_group_messages' => true,
+                'supports_guest_queries' => true,
                 'supports_inline_queries' => true,
                 'can_connect_to_business' => true,
                 'has_main_web_app' => false,
@@ -93,6 +96,7 @@ final class UserTest extends TestCase
             'added_to_attachment_menu' => true,
             'can_join_groups' => true,
             'can_read_all_group_messages' => true,
+            'supports_guest_queries' => true,
             'supports_inline_queries' => true,
             'can_connect_to_business' => true,
             'has_main_web_app' => false,
@@ -112,6 +116,7 @@ final class UserTest extends TestCase
         assertSame(true, $user->addedToAttachmentMenu);
         assertSame(true, $user->canJoinGroups);
         assertSame(true, $user->canReadAllGroupMessages);
+        assertSame(true, $user->supportsGuestQueries);
         assertSame(true, $user->supportsInlineQueries);
         assertSame(true, $user->canConnectToBusiness);
         assertSame(false, $user->hasMainWebApp);

@@ -17,7 +17,7 @@ final class SendMessageDraftTest extends TestCase
 {
     public function testBase(): void
     {
-        $method = new SendMessageDraft(12, 100, 'hello');
+        $method = new SendMessageDraft(12, 100);
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('sendMessageDraft', $method->getApiMethod());
@@ -25,7 +25,6 @@ final class SendMessageDraftTest extends TestCase
             [
                 'chat_id' => 12,
                 'draft_id' => 100,
-                'text' => 'hello',
             ],
             $method->getData(),
         );
