@@ -64,6 +64,7 @@ final readonly class Message
         public ?Animation $animation = null,
         public ?Audio $audio = null,
         public ?Document $document = null,
+        public ?LivePhoto $livePhoto = null,
         #[ArrayOfObjectsValue(PhotoSize::class)]
         public ?array $photo = null,
         public ?Sticker $sticker = null,

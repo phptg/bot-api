@@ -16,6 +16,7 @@
 - New #199: Add `explanationMedia`, `media`, `membersOnly` and `countryCodes` fields to `Poll` type.
 - New #199: Add `media` field to `PollOption` type.
 - New #199: Add `InputPollMedia` and `InputPollOptionMedia` types.
+- New #199: Add `live_photo` field to `Message` and `ExternalReplyInfo` types.
 - New #199: Add `explanationMedia`, `media`, `membersOnly` and `countryCodes` parameters to `SendPoll` method.
 - New #199: Add `media` field to `InputPollOption` type.
 

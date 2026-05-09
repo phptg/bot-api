@@ -76,6 +76,7 @@ final class MessageTest extends TestCase
         assertNull($message->animation);
         assertNull($message->audio);
         assertNull($message->document);
+        assertNull($message->livePhoto);
         assertNull($message->photo);
         assertNull($message->sticker);
         assertNull($message->story);
@@ -277,6 +278,13 @@ final class MessageTest extends TestCase
             'document' => [
                 'file_id' => 'f3',
                 'file_unique_id' => 'fu3',
+            ],
+            'live_photo' => [
+                'file_id' => 'f3lp',
+                'file_unique_id' => 'fu3lp',
+                'width' => 640,
+                'height' => 480,
+                'duration' => 3,
             ],
             'photo' => [
                 [
@@ -732,6 +740,10 @@ final class MessageTest extends TestCase
         assertSame('an1', $message->animation?->fileId);
         assertSame('f2', $message->audio?->fileId);
         assertSame('f3', $message->document?->fileId);
+        assertSame('f3lp', $message->livePhoto?->fileId);
+        assertSame(640, $message->livePhoto?->width);
+        assertSame(480, $message->livePhoto?->height);
+        assertSame(3, $message->livePhoto?->duration);
 
         assertCount(1, $message->photo);
         assertSame('f4', $message->photo[0]->fileId);
