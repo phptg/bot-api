@@ -24,6 +24,7 @@
 - New #199: Add `media` field to `InputPollOption` type.
 - Enh #199: `SendMediaGroup` method now supports `InputMediaLivePhoto` type.
 - New #199: Add `BotAccessSettings` type.
+- New #199: Add `GetManagedBotAccessSettings` method.
 
 ## 0.20 April 26, 2026
 

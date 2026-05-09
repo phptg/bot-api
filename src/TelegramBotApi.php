@@ -54,6 +54,7 @@ use Phptg\BotApi\Method\GetChatMemberCount;
 use Phptg\BotApi\Method\GetChatMenuButton;
 use Phptg\BotApi\Method\GetFile;
 use Phptg\BotApi\Method\GetForumTopicIconStickers;
+use Phptg\BotApi\Method\GetManagedBotAccessSettings;
 use Phptg\BotApi\Method\GetManagedBotToken;
 use Phptg\BotApi\Method\GetMe;
 use Phptg\BotApi\Method\GetMyCommands;
@@ -187,6 +188,7 @@ use Phptg\BotApi\Transport\DownloadFileException;
 use Phptg\BotApi\Transport\NativeTransport;
 use Phptg\BotApi\Transport\TransportInterface;
 use Phptg\BotApi\Type\AcceptedGiftTypes;
+use Phptg\BotApi\Type\BotAccessSettings;
 use Phptg\BotApi\Type\BotCommand;
 use Phptg\BotApi\Type\BotCommandScope;
 use Phptg\BotApi\Type\BotDescription;
@@ -1405,6 +1407,14 @@ final class TelegramBotApi
     public function getManagedBotToken(int $userId): FailResult|string
     {
         return $this->call(new GetManagedBotToken($userId));
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#getmanagedbotaccesssettings
+     */
+    public function getManagedBotAccessSettings(int $userId): FailResult|BotAccessSettings
+    {
+        return $this->call(new GetManagedBotAccessSettings($userId));
     }
 
     /**

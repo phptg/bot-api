@@ -14,6 +14,7 @@ use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Tests\Support\TransportMock;
 use Phptg\BotApi\Transport\ApiResponse;
 use Phptg\BotApi\Type\AcceptedGiftTypes;
+use Phptg\BotApi\Type\BotAccessSettings;
 use Phptg\BotApi\Type\BotCommand;
 use Phptg\BotApi\Type\BotDescription;
 use Phptg\BotApi\Type\BotName;
@@ -1297,6 +1298,23 @@ final class TelegramBotApiTest extends TestCase
         $result = $api->getManagedBotToken(789);
 
         assertSame('123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11', $result);
+    }
+
+    public function testGetManagedBotAccessSettings(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            'is_access_restricted' => true,
+            'added_users' => [
+                ['id' => 1, 'is_bot' => false, 'first_name' => 'Alice'],
+            ],
+        ]);
+
+        $result = $api->getManagedBotAccessSettings(789);
+
+        assertInstanceOf(BotAccessSettings::class, $result);
+        assertSame(true, $result->isAccessRestricted);
+        assertSame(1, $result->addedUsers[0]->id);
+        assertSame('Alice', $result->addedUsers[0]->firstName);
     }
 
     public function testGetMyCommands(): void
