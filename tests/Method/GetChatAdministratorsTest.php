@@ -30,6 +30,21 @@ final class GetChatAdministratorsTest extends TestCase
         );
     }
 
+    public function testWithReturnBots(): void
+    {
+        $method = new GetChatAdministrators(1, true);
+
+        assertSame(HttpMethod::GET, $method->getHttpMethod());
+        assertSame('getChatAdministrators', $method->getApiMethod());
+        assertSame(
+            [
+                'chat_id' => 1,
+                'return_bots' => true,
+            ],
+            $method->getData(),
+        );
+    }
+
     public function testPrepareResult(): void
     {
         $method = new GetChatAdministrators(1);

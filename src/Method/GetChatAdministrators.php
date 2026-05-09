@@ -19,6 +19,7 @@ final readonly class GetChatAdministrators implements MethodInterface
 {
     public function __construct(
         private int|string $chatId,
+        private ?bool $returnBots = null,
     ) {}
 
     public function getHttpMethod(): HttpMethod
@@ -33,7 +34,13 @@ final readonly class GetChatAdministrators implements MethodInterface
 
     public function getData(): array
     {
-        return ['chat_id' => $this->chatId];
+        return array_filter(
+            [
+                'chat_id' => $this->chatId,
+                'return_bots' => $this->returnBots,
+            ],
+            static fn(mixed $value): bool => $value !== null,
+        );
     }
 
     public function getResultType(): ArrayMap

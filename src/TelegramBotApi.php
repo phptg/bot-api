@@ -1285,9 +1285,9 @@ final class TelegramBotApi
      *
      * @return FailResult|ChatMember[]
      */
-    public function getChatAdministrators(int|string $chatId): FailResult|array
+    public function getChatAdministrators(int|string $chatId, ?bool $returnBots = null): FailResult|array
     {
-        return $this->call(new GetChatAdministrators($chatId));
+        return $this->call(new GetChatAdministrators($chatId, $returnBots));
     }
 
     /**
