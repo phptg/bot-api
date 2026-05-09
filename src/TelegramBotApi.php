@@ -216,6 +216,7 @@ use Phptg\BotApi\Type\InputMediaDocument;
 use Phptg\BotApi\Type\InputMediaPhoto;
 use Phptg\BotApi\Type\InputMediaVideo;
 use Phptg\BotApi\Type\InputPaidMedia;
+use Phptg\BotApi\Type\InputPollMedia;
 use Phptg\BotApi\Type\InputPollOption;
 use Phptg\BotApi\Type\InputProfilePhoto;
 use Phptg\BotApi\Type\InputStoryContent;
@@ -2549,6 +2550,7 @@ final class TelegramBotApi
      * @param int[]|null $correctOptionIds
      * @param MessageEntity[]|null $explanationEntities
      * @param MessageEntity[]|null $descriptionEntities
+     * @param string[]|null $countryCodes
      *
      * @see https://core.telegram.org/bots/api#sendpoll
      */
@@ -2567,9 +2569,11 @@ final class TelegramBotApi
         ?string $explanation = null,
         ?string $explanationParseMode = null,
         ?array $explanationEntities = null,
+        ?InputPollMedia $explanationMedia = null,
         ?int $openPeriod = null,
         ?DateTimeImmutable $closeDate = null,
         ?bool $isClosed = null,
+        ?InputPollMedia $media = null,
         ?bool $disableNotification = null,
         ?bool $protectContent = null,
         ?string $messageEffectId = null,
@@ -2580,6 +2584,8 @@ final class TelegramBotApi
         ?bool $shuffleOptions = null,
         ?bool $allowAddingOptions = null,
         ?bool $hideResultsUntilCloses = null,
+        ?bool $membersOnly = null,
+        ?array $countryCodes = null,
         ?string $description = null,
         ?string $descriptionParseMode = null,
         ?array $descriptionEntities = null,
@@ -2600,9 +2606,11 @@ final class TelegramBotApi
                 $explanation,
                 $explanationParseMode,
                 $explanationEntities,
+                $explanationMedia,
                 $openPeriod,
                 $closeDate,
                 $isClosed,
+                $media,
                 $disableNotification,
                 $protectContent,
                 $messageEffectId,
@@ -2613,6 +2621,8 @@ final class TelegramBotApi
                 $shuffleOptions,
                 $allowAddingOptions,
                 $hideResultsUntilCloses,
+                $membersOnly,
+                $countryCodes,
                 $description,
                 $descriptionParseMode,
                 $descriptionEntities,

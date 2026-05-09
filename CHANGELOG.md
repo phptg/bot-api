@@ -16,6 +16,7 @@
 - New #199: Add `explanationMedia`, `media`, `membersOnly` and `countryCodes` fields to `Poll` type.
 - New #199: Add `media` field to `PollOption` type.
 - New #199: Add `InputPollMedia` and `InputPollOptionMedia` types.
+- New #199: Add `explanationMedia`, `media`, `membersOnly` and `countryCodes` parameters to `SendPoll` method.
 
 ## 0.20 April 26, 2026
 

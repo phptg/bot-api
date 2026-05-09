@@ -20,4 +20,3 @@ interface InputPollOptionMedia
      */
     public function toRequestArray(?FileCollector $fileCollector = null): array;
 }
-

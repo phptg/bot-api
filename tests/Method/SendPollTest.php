@@ -10,6 +10,7 @@ use Phptg\BotApi\Method\SendPoll;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Type\ForceReply;
+use Phptg\BotApi\Type\InputMediaPhoto;
 use Phptg\BotApi\Type\InputPollOption;
 use Phptg\BotApi\Type\MessageEntity;
 use Phptg\BotApi\Type\ReplyParameters;
@@ -49,6 +50,8 @@ final class SendPollTest extends TestCase
         $date = new DateTimeImmutable();
         $replyParameters = new ReplyParameters(23);
         $replyMarkup = new ForceReply();
+        $explanationMedia = new InputMediaPhoto('file_id1');
+        $pollMedia = new InputMediaPhoto('file_id2');
         $method = new SendPoll(
             12,
             'How are you?',
@@ -64,9 +67,11 @@ final class SendPollTest extends TestCase
             'Good explanation',
             'Markdown',
             [$messageEntity2],
+            $explanationMedia,
             300,
             $date,
             true,
+            $pollMedia,
             false,
             false,
             'meid2',
@@ -77,6 +82,8 @@ final class SendPollTest extends TestCase
             true,
             true,
             true,
+            false,
+            ['US', 'GB'],
             'Poll description',
             'HTML',
             [$messageEntity3],
@@ -103,16 +110,20 @@ final class SendPollTest extends TestCase
                 'shuffle_options' => true,
                 'allow_adding_options' => true,
                 'hide_results_until_closes' => true,
+                'members_only' => false,
+                'country_codes' => ['US', 'GB'],
                 'correct_option_ids' => [0, 1],
                 'explanation' => 'Good explanation',
                 'explanation_parse_mode' => 'Markdown',
                 'explanation_entities' => [$messageEntity2->toRequestArray()],
+                'explanation_media' => $explanationMedia->toRequestArray(),
                 'open_period' => 300,
                 'close_date' => $date->getTimestamp(),
                 'is_closed' => true,
                 'description' => 'Poll description',
                 'description_parse_mode' => 'HTML',
                 'description_entities' => [$messageEntity3->toRequestArray()],
+                'media' => $pollMedia->toRequestArray(),
                 'disable_notification' => false,
                 'protect_content' => false,
                 'allow_paid_broadcast' => true,

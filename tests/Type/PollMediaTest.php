@@ -7,8 +7,6 @@ namespace Phptg\BotApi\Tests\Type;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\ParseResult\ObjectFactory;
 use Phptg\BotApi\Type\PollMedia;
-use Phptg\BotApi\Type\Location;
-use Phptg\BotApi\Type\Sticker\Sticker;
 
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertNull;
