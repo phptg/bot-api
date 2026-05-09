@@ -11,7 +11,7 @@ use Phptg\BotApi\FileCollector;
  *
  * @api
  */
-final readonly class InputMediaDocument implements InputMedia
+final readonly class InputMediaDocument implements InputMedia, InputPollMedia
 {
     /**
      * @param MessageEntity[]|null $captionEntities

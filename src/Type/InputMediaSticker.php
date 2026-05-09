@@ -11,7 +11,7 @@ use Phptg\BotApi\FileCollector;
  *
  * @api
  */
-final readonly class InputMediaSticker implements InputMedia
+final readonly class InputMediaSticker implements InputPollOptionMedia
 {
     public function __construct(
         public string|InputFile $media,

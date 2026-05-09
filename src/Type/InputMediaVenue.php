@@ -11,7 +11,7 @@ use Phptg\BotApi\FileCollector;
  *
  * @api
  */
-final readonly class InputMediaVenue implements InputMedia
+final readonly class InputMediaVenue implements InputPollMedia, InputPollOptionMedia
 {
     public function __construct(
         public float $latitude,
