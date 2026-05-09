@@ -2083,6 +2083,23 @@ final class TelegramBotApiTest extends TestCase
         assertSame(7, $result->messageId);
     }
 
+    public function testSendLivePhoto(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            'message_id' => 7,
+            'date' => 1620000000,
+            'chat' => [
+                'id' => 1,
+                'type' => 'private',
+            ],
+        ]);
+
+        $result = $api->sendLivePhoto(12, 'fid1', 'fid2');
+
+        assertInstanceOf(Message::class, $result);
+        assertSame(7, $result->messageId);
+    }
+
     public function testSendMediaGroup(): void
     {
         $api = TestHelper::createSuccessStubApi([

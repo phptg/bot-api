@@ -104,6 +104,7 @@ use Phptg\BotApi\Method\SendContact;
 use Phptg\BotApi\Method\SendDice;
 use Phptg\BotApi\Method\SendDocument;
 use Phptg\BotApi\Method\SendLocation;
+use Phptg\BotApi\Method\SendLivePhoto;
 use Phptg\BotApi\Method\SendMediaGroup;
 use Phptg\BotApi\Method\SendMessage;
 use Phptg\BotApi\Method\SendMessageDraft;
@@ -2377,6 +2378,55 @@ final class TelegramBotApi
                 $replyParameters,
                 $allowPaidBroadcast,
                 $directMessagesTopicId,
+            ),
+        );
+    }
+
+    /**
+     * @param MessageEntity[]|null $captionEntities
+     *
+     * @see https://core.telegram.org/bots/api#sendlivephoto
+     */
+    public function sendLivePhoto(
+        int|string $chatId,
+        string|InputFile $livePhoto,
+        string|InputFile $photo,
+        ?string $businessConnectionId = null,
+        ?int $messageThreadId = null,
+        ?int $directMessagesTopicId = null,
+        ?string $caption = null,
+        ?string $parseMode = null,
+        ?array $captionEntities = null,
+        ?bool $showCaptionAboveMedia = null,
+        ?bool $hasSpoiler = null,
+        ?bool $disableNotification = null,
+        ?bool $protectContent = null,
+        ?bool $allowPaidBroadcast = null,
+        ?string $messageEffectId = null,
+        ?SuggestedPostParameters $suggestedPostParameters = null,
+        ?ReplyParameters $replyParameters = null,
+        InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup = null,
+    ): FailResult|Message {
+        return $this->call(
+            new SendLivePhoto(
+                $chatId,
+                $livePhoto,
+                $photo,
+                $businessConnectionId,
+                $messageThreadId,
+                $directMessagesTopicId,
+                $caption,
+                $parseMode,
+                $captionEntities,
+                $showCaptionAboveMedia,
+                $hasSpoiler,
+                $disableNotification,
+                $protectContent,
+                $allowPaidBroadcast,
+                $messageEffectId,
+                $suggestedPostParameters,
+                $replyParameters,
+                $replyMarkup,
             ),
         );
     }
