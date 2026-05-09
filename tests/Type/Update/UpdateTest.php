@@ -31,6 +31,7 @@ final class UpdateTest extends TestCase
         assertNull($update->businessMessage);
         assertNull($update->editedBusinessMessage);
         assertNull($update->deletedBusinessMessages);
+        assertNull($update->guestMessage);
         assertNull($update->messageReaction);
         assertNull($update->messageReactionCount);
         assertNull($update->inlineQuery);
@@ -130,6 +131,16 @@ final class UpdateTest extends TestCase
                     'type' => 'private',
                 ],
                 'message_ids' => [7, 8],
+            ],
+            'guest_message' => [
+                'message_id' => 9,
+                'date' => 1625150000,
+                'chat' => [
+                    'id' => 23,
+                    'type' => 'private',
+                ],
+                'guest_query_id' => 'guest_123',
+                'text' => 'Guest message',
             ],
             'message_reaction' => [
                 'chat' => [
@@ -362,6 +373,8 @@ final class UpdateTest extends TestCase
         assertSame(5, $update->businessMessage?->messageId);
         assertSame(6, $update->editedBusinessMessage?->messageId);
         assertSame('bcid2', $update->deletedBusinessMessages?->businessConnectionId);
+        assertSame(9, $update->guestMessage?->messageId);
+        assertSame('guest_123', $update->guestMessage?->guestQueryId);
         assertSame(79, $update->messageReaction?->messageId);
         assertSame(80, $update->messageReactionCount?->messageId);
         assertSame('iqid1', $update->inlineQuery?->id);
