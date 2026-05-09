@@ -40,10 +40,12 @@ final readonly class Poll
         public ?string $explanation = null,
         #[ArrayOfObjectsValue(MessageEntity::class)]
         public ?array $explanationEntities = null,
+        public ?PollMedia $explanationMedia = null,
         public ?int $openPeriod = null,
         public ?int $closeDate = null,
         public ?string $description = null,
         #[ArrayOfObjectsValue(MessageEntity::class)]
         public ?array $descriptionEntities = null,
+        public ?PollMedia $media = null,
     ) {}
 }

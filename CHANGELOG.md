@@ -13,6 +13,7 @@
 - New #199: Add `DeleteMessageReaction` method.
 - New #199: Add `InputMediaSticker`, `InputMediaVenue` and `InputMediaLocation` types.
 - New #199: Add `PollMedia` and `LivePhoto` type.
+- New #199: Add `explanationMedia` and `media` fields to `Poll` type.
 
 ## 0.20 April 26, 2026
 
