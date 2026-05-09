@@ -239,6 +239,7 @@ final class UpdateTest extends TestCase
                 'type' => 'regular',
                 'allows_multiple_answers' => false,
                 'allows_revoting' => true,
+                'members_only' => false,
             ],
             'poll_answer' => [
                 'poll_id' => 'poll2',

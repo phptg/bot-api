@@ -30,6 +30,7 @@ final class PollTest extends TestCase
             'regular',
             true,
             false,
+            true,
         );
 
         assertSame('12', $poll->id);
@@ -41,6 +42,8 @@ final class PollTest extends TestCase
         assertSame('regular', $poll->type);
         assertTrue($poll->allowsMultipleAnswers);
         assertFalse($poll->allowsRevoting);
+        assertTrue($poll->membersOnly);
+        assertNull($poll->countryCodes);
         assertNull($poll->questionEntities);
         assertNull($poll->correctOptionIds);
         assertNull($poll->explanation);
@@ -67,6 +70,7 @@ final class PollTest extends TestCase
             'type' => 'regular',
             'allows_multiple_answers' => true,
             'allows_revoting' => true,
+            'members_only' => true,
             'question_entities' => [
                 [
                     'offset' => 0,
@@ -110,6 +114,7 @@ final class PollTest extends TestCase
                     'is_video' => false,
                 ],
             ],
+            'country_codes' => ['US', 'GB', 'DE'],
         ], null, Poll::class);
 
         assertSame('12', $poll->id);
@@ -124,6 +129,9 @@ final class PollTest extends TestCase
         assertSame('regular', $poll->type);
         assertTrue($poll->allowsMultipleAnswers);
         assertTrue($poll->allowsRevoting);
+
+        assertTrue($poll->membersOnly);
+        assertSame(['US', 'GB', 'DE'], $poll->countryCodes);
 
         assertCount(1, $poll->questionEntities);
         assertSame(35, $poll->questionEntities[0]->length);

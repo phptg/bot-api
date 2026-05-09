@@ -353,6 +353,7 @@ final class MessageTest extends TestCase
                 'type' => 'regular',
                 'allows_multiple_answers' => true,
                 'allows_revoting' => false,
+                'members_only' => true,
             ],
             'venue' => [
                 'location' => [

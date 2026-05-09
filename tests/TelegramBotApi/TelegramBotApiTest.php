@@ -2530,6 +2530,7 @@ final class TelegramBotApiTest extends TestCase
             'type' => 'regular',
             'allows_multiple_answers' => true,
             'allows_revoting' => false,
+            'members_only' => true,
         ]);
 
         $result = $api->stopPoll(1, 2);
