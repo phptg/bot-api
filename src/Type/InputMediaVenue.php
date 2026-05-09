@@ -29,6 +29,9 @@ final readonly class InputMediaVenue implements InputPollMedia, InputPollOptionM
         return 'venue';
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(?FileCollector $fileCollector = null): array
     {
         return array_filter(

@@ -30,6 +30,9 @@ final readonly class InputMediaPhoto implements InputMedia, InputPollMedia, Inpu
         return 'photo';
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(?FileCollector $fileCollector = null): array
     {
         if ($fileCollector !== null) {

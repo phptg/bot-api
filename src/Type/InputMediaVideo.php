@@ -37,6 +37,9 @@ final readonly class InputMediaVideo implements InputMedia, InputPollMedia, Inpu
         return 'video';
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(?FileCollector $fileCollector = null): array
     {
         if ($fileCollector !== null) {

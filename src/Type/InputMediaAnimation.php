@@ -34,6 +34,9 @@ final readonly class InputMediaAnimation implements InputMedia, InputPollMedia, 
         return 'animation';
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(?FileCollector $fileCollector = null): array
     {
         if ($fileCollector !== null) {

@@ -24,6 +24,9 @@ final readonly class InputMediaLocation implements InputPollMedia, InputPollOpti
         return 'location';
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(?FileCollector $fileCollector = null): array
     {
         return array_filter(

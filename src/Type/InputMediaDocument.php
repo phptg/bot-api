@@ -30,6 +30,9 @@ final readonly class InputMediaDocument implements InputMedia, InputPollMedia
         return 'document';
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(?FileCollector $fileCollector = null): array
     {
         if ($fileCollector !== null) {
