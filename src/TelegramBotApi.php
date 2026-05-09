@@ -25,6 +25,7 @@ use Phptg\BotApi\Method\CreateChatSubscriptionInviteLink;
 use Phptg\BotApi\Method\CreateForumTopic;
 use Phptg\BotApi\Method\DeclineChatJoinRequest;
 use Phptg\BotApi\Method\DeclineSuggestedPost;
+use Phptg\BotApi\Method\DeleteAllMessageReactions;
 use Phptg\BotApi\Method\DeleteChatPhoto;
 use Phptg\BotApi\Method\DeleteChatStickerSet;
 use Phptg\BotApi\Method\DeleteForumTopic;
@@ -746,6 +747,19 @@ final class TelegramBotApi
     {
         return $this->call(
             new DeclineSuggestedPost($chatId, $messageId, $comment),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#deleteallmessagereactions
+     */
+    public function deleteAllMessageReactions(
+        int|string $chatId,
+        ?int $userId = null,
+        ?int $actorChatId = null,
+    ): FailResult|true {
+        return $this->call(
+            new DeleteAllMessageReactions($chatId, $userId, $actorChatId),
         );
     }
 

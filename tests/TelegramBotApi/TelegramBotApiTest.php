@@ -744,6 +744,15 @@ final class TelegramBotApiTest extends TestCase
         assertTrue($result);
     }
 
+    public function testDeleteAllMessageReactions(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->deleteAllMessageReactions(1);
+
+        assertTrue($result);
+    }
+
     public function testDeleteBusinessMessages(): void
     {
         $api = TestHelper::createSuccessStubApi(true);

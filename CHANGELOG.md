@@ -9,6 +9,7 @@
 - New #199: Add `AnswerGuestQuery` method.
 - New #199: Add `canReactToMessages` field to `ChatMemberRestricted` and `ChatPermissions` types.
 - New #199: Add `returnBots` parameter to `GetChatAdministrators` method.
+- New #199: Add `DeleteAllMessageReactions` method.
 
 ## 0.20 April 26, 2026
 
