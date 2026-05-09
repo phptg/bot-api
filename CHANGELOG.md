@@ -19,6 +19,7 @@
 - New #199: Add `live_photo` field to `Message` and `ExternalReplyInfo` types.
 - New #199: Add `SendLivePhoto` method.
 - New #199: Add `PaidMediaLivePhoto` type.
+- New #199: Add `InputPaidMediaLivePhoto` type.
 - New #199: Add `explanationMedia`, `media`, `membersOnly` and `countryCodes` parameters to `SendPoll` method.
 - New #199: Add `media` field to `InputPollOption` type.
 
