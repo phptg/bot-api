@@ -2374,6 +2374,15 @@ final class TelegramBotApiTest extends TestCase
         assertTrue($result);
     }
 
+    public function testSetManagedBotAccessSettings(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->setManagedBotAccessSettings(789, true, [1, 2]);
+
+        assertTrue($result);
+    }
+
     public function testSetCustomEmojiStickerSetThumbnail(): void
     {
         $api = TestHelper::createSuccessStubApi(true);

@@ -129,6 +129,7 @@ use Phptg\BotApi\Method\SetChatPermissions;
 use Phptg\BotApi\Method\SetChatPhoto;
 use Phptg\BotApi\Method\SetChatStickerSet;
 use Phptg\BotApi\Method\SetChatTitle;
+use Phptg\BotApi\Method\SetManagedBotAccessSettings;
 use Phptg\BotApi\Method\SetMessageReaction;
 use Phptg\BotApi\Method\SetMyCommands;
 use Phptg\BotApi\Method\SetMyDefaultAdministratorRights;
@@ -3071,6 +3072,18 @@ final class TelegramBotApi
     {
         return $this->call(
             new SetChatTitle($chatId, $title),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#setmanagedbotaccesssettings
+     *
+     * @param int[]|null $addedUserIds
+     */
+    public function setManagedBotAccessSettings(int $userId, bool $isAccessRestricted, ?array $addedUserIds = null): FailResult|true
+    {
+        return $this->call(
+            new SetManagedBotAccessSettings($userId, $isAccessRestricted, $addedUserIds),
         );
     }
 
