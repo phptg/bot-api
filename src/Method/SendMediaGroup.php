@@ -10,6 +10,7 @@ use Phptg\BotApi\FileCollector;
 use Phptg\BotApi\MethodInterface;
 use Phptg\BotApi\Type\InputMediaAudio;
 use Phptg\BotApi\Type\InputMediaDocument;
+use Phptg\BotApi\Type\InputMediaLivePhoto;
 use Phptg\BotApi\Type\InputMediaPhoto;
 use Phptg\BotApi\Type\InputMediaVideo;
 use Phptg\BotApi\Type\Message;
@@ -23,7 +24,7 @@ use Phptg\BotApi\Type\ReplyParameters;
 final readonly class SendMediaGroup implements MethodInterface
 {
     /**
-     * @param InputMediaAudio[]|InputMediaDocument[]|InputMediaPhoto[]|InputMediaVideo[] $media
+     * @param InputMediaAudio[]|InputMediaDocument[]|InputMediaLivePhoto[]|InputMediaPhoto[]|InputMediaVideo[] $media
      */
     public function __construct(
         private int|string $chatId,
@@ -53,7 +54,7 @@ final readonly class SendMediaGroup implements MethodInterface
         $fileCollector = new FileCollector();
         $media = array_map(
             static function (
-                InputMediaAudio|InputMediaDocument|InputMediaPhoto|InputMediaVideo $inputMedia,
+                InputMediaAudio|InputMediaDocument|InputMediaLivePhoto|InputMediaPhoto|InputMediaVideo $inputMedia,
             ) use ($fileCollector): array {
                 return $inputMedia->toRequestArray($fileCollector);
             },

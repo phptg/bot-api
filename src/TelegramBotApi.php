@@ -214,6 +214,7 @@ use Phptg\BotApi\Type\InputFile;
 use Phptg\BotApi\Type\InputMedia;
 use Phptg\BotApi\Type\InputMediaAudio;
 use Phptg\BotApi\Type\InputMediaDocument;
+use Phptg\BotApi\Type\InputMediaLivePhoto;
 use Phptg\BotApi\Type\InputMediaPhoto;
 use Phptg\BotApi\Type\InputMediaVideo;
 use Phptg\BotApi\Type\InputPaidMedia;
@@ -2351,7 +2352,7 @@ final class TelegramBotApi
     /**
      * @see https://core.telegram.org/bots/api#sendmediagroup
      *
-     * @param InputMediaAudio[]|InputMediaDocument[]|InputMediaPhoto[]|InputMediaVideo[] $media
+     * @param InputMediaAudio[]|InputMediaDocument[]|InputMediaLivePhoto[]|InputMediaPhoto[]|InputMediaVideo[] $media
      * @return FailResult|Message[]
      */
     public function sendMediaGroup(

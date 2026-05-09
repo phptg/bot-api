@@ -22,6 +22,7 @@
 - New #199: Add `InputPaidMediaLivePhoto` type.
 - New #199: Add `explanationMedia`, `media`, `membersOnly` and `countryCodes` parameters to `SendPoll` method.
 - New #199: Add `media` field to `InputPollOption` type.
+- Enh #199: `SendMediaGroup` method now supports `InputMediaLivePhoto` type.
 
 ## 0.20 April 26, 2026
 
