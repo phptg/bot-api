@@ -7,7 +7,6 @@ namespace Phptg\BotApi\Tests\Type;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\ParseResult\ObjectFactory;
 use Phptg\BotApi\Type\RichBlockCaption;
-
 use Phptg\BotApi\Type\RichTextBold;
 
 use function PHPUnit\Framework\assertInstanceOf;

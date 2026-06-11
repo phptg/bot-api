@@ -12,7 +12,6 @@ use Phptg\BotApi\Type\RichMessage;
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertNull;
-use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;
 
 final class RichMessageTest extends TestCase
