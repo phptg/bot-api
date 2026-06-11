@@ -16,6 +16,7 @@
   `RichBlockAudio`, `RichBlockPhoto`, `RichBlockVideo`, `RichBlockVoiceNote`, `RichBlockThinking`.
 - New #200: Add `RichMessage` type.
 - New #200: Add `InputRichMessage` and `InputRichMessageContent` types.
+- New #200: Add `SendRichMessage` method.
 - New #200: Add `richMessage` field to `Message` type.
 
 ## 0.21 May 9, 2026

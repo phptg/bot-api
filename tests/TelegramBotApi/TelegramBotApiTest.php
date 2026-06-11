@@ -35,6 +35,7 @@ use Phptg\BotApi\Type\Inline\SentWebAppMessage;
 use Phptg\BotApi\Type\SentGuestMessage;
 use Phptg\BotApi\Type\InputChecklist;
 use Phptg\BotApi\Type\InputFile;
+use Phptg\BotApi\Type\InputRichMessage;
 use Phptg\BotApi\Type\InputMediaPhoto;
 use Phptg\BotApi\Type\InputProfilePhotoStatic;
 use Phptg\BotApi\Type\InputStoryContentPhoto;
@@ -2317,6 +2318,23 @@ final class TelegramBotApiTest extends TestCase
         ]);
 
         $result = $api->sendVoice(12, 'https://example.com/wow.mp3');
+
+        assertInstanceOf(Message::class, $result);
+        assertSame(7, $result->messageId);
+    }
+
+    public function testSendRichMessage(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            'message_id' => 7,
+            'date' => 1620000000,
+            'chat' => [
+                'id' => 1,
+                'type' => 'private',
+            ],
+        ]);
+
+        $result = $api->sendRichMessage(12, new InputRichMessage(html: '<b>Hello</b>'));
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);

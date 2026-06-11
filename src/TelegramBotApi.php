@@ -116,6 +116,7 @@ use Phptg\BotApi\Method\SendPoll;
 use Phptg\BotApi\Method\SendVenue;
 use Phptg\BotApi\Method\SendVideo;
 use Phptg\BotApi\Method\SendVideoNote;
+use Phptg\BotApi\Method\SendRichMessage;
 use Phptg\BotApi\Method\SendVoice;
 use Phptg\BotApi\Method\SetBusinessAccountBio;
 use Phptg\BotApi\Method\SetBusinessAccountGiftSettings;
@@ -215,6 +216,7 @@ use Phptg\BotApi\Type\KeyboardButton;
 use Phptg\BotApi\Type\PreparedKeyboardButton;
 use Phptg\BotApi\Type\InputChecklist;
 use Phptg\BotApi\Type\InputFile;
+use Phptg\BotApi\Type\InputRichMessage;
 use Phptg\BotApi\Type\InputMedia;
 use Phptg\BotApi\Type\InputMediaAudio;
 use Phptg\BotApi\Type\InputMediaDocument;
@@ -2932,6 +2934,41 @@ final class TelegramBotApi
                 $allowPaidBroadcast,
                 $directMessagesTopicId,
                 $suggestedPostParameters,
+            ),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#sendrichmessage
+     */
+    public function sendRichMessage(
+        int|string $chatId,
+        InputRichMessage $richMessage,
+        ?string $businessConnectionId = null,
+        ?int $messageThreadId = null,
+        ?int $directMessagesTopicId = null,
+        ?bool $disableNotification = null,
+        ?bool $protectContent = null,
+        ?bool $allowPaidBroadcast = null,
+        ?string $messageEffectId = null,
+        ?SuggestedPostParameters $suggestedPostParameters = null,
+        ?ReplyParameters $replyParameters = null,
+        InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup = null,
+    ): FailResult|Message {
+        return $this->call(
+            new SendRichMessage(
+                $chatId,
+                $richMessage,
+                $businessConnectionId,
+                $messageThreadId,
+                $directMessagesTopicId,
+                $disableNotification,
+                $protectContent,
+                $allowPaidBroadcast,
+                $messageEffectId,
+                $suggestedPostParameters,
+                $replyParameters,
+                $replyMarkup,
             ),
         );
     }
