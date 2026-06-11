@@ -20,6 +20,7 @@ use Phptg\BotApi\Type\GeneralForumTopicHidden;
 use Phptg\BotApi\Type\GeneralForumTopicUnhidden;
 use Phptg\BotApi\Type\GiveawayCreated;
 use Phptg\BotApi\Type\Message;
+use Phptg\BotApi\Type\RichMessage;
 use Phptg\BotApi\Type\MessageOriginHiddenUser;
 use Phptg\BotApi\Type\PaidMediaPhoto;
 use Phptg\BotApi\Type\Payment\RefundedPayment;
@@ -263,6 +264,11 @@ final class MessageTest extends TestCase
                 'send_date' => 1640995200,
             ],
             'effect_id' => 'e235',
+            'rich_message' => [
+                'blocks' => [
+                    ['type' => 'paragraph', 'text' => 'hello'],
+                ],
+            ],
             'animation' => [
                 'file_id' => 'an1',
                 'file_unique_id' => 'fu1',
@@ -737,6 +743,7 @@ final class MessageTest extends TestCase
 
         assertSame('https://example.com/lpo', $message->linkPreviewOptions?->url);
         assertSame('e235', $message->effectId);
+        assertInstanceOf(RichMessage::class, $message->richMessage);
         assertSame('an1', $message->animation?->fileId);
         assertSame('f2', $message->audio?->fileId);
         assertSame('f3', $message->document?->fileId);

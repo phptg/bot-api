@@ -149,5 +149,6 @@ final readonly class Message
         public ?ManagedBotCreated $managedBotCreated = null,
         public ?PollOptionAdded $pollOptionAdded = null,
         public ?PollOptionDeleted $pollOptionDeleted = null,
+        public ?RichMessage $richMessage = null,
     ) {}
 }
