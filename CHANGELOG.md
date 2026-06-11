@@ -14,6 +14,7 @@
   `RichBlockAnchor`, `RichBlockList`, `RichBlockBlockQuotation`, `RichBlockPullQuotation`, `RichBlockCollage`,
   `RichBlockSlideshow`, `RichBlockTable`, `RichBlockDetails`, `RichBlockMap`, `RichBlockAnimation`,
   `RichBlockAudio`, `RichBlockPhoto`, `RichBlockVideo`, `RichBlockVoiceNote`, `RichBlockThinking`.
+- New #200: Add `RichMessage` type.
 
 ## 0.21 May 9, 2026
 
