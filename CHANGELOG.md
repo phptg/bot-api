@@ -1,5 +1,14 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.21.1 under development
+
+- New #200: Add `RichText` interface and 25 rich text types: `RichTextBold`, `RichTextItalic`, `RichTextUnderline`,
+  `RichTextStrikethrough`, `RichTextSpoiler`, `RichTextDateTime`, `RichTextTextMention`, `RichTextSubscript`,
+  `RichTextSuperscript`, `RichTextMarked`, `RichTextCode`, `RichTextCustomEmoji`, `RichTextMathematicalExpression`,
+  `RichTextUrl`, `RichTextEmailAddress`, `RichTextPhoneNumber`, `RichTextBankCardNumber`, `RichTextMention`,
+  `RichTextHashtag`, `RichTextCashtag`, `RichTextBotCommand`, `RichTextAnchor`, `RichTextAnchorLink`,
+  `RichTextReference`, `RichTextReferenceLink`.
+
 ## 0.21 May 9, 2026
 
 - New #199: Add `supportsGuestQueries` field to `User` type.
