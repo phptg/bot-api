@@ -13,6 +13,7 @@ use ReflectionParameter;
 use ReflectionProperty;
 use Phptg\BotApi\ParseResult\ValueProcessor\BackgroundFillValue;
 use Phptg\BotApi\ParseResult\ValueProcessor\BackgroundTypeValue;
+use Phptg\BotApi\ParseResult\ValueProcessor\RichBlockValue;
 use Phptg\BotApi\ParseResult\ValueProcessor\BooleanValue;
 use Phptg\BotApi\ParseResult\ValueProcessor\ChatBoostSourceValue;
 use Phptg\BotApi\ParseResult\ValueProcessor\ChatMemberValue;
@@ -28,6 +29,7 @@ use Phptg\BotApi\ParseResult\ValueProcessor\TrueValue;
 use Phptg\BotApi\ParseResult\ValueProcessor\ValueProcessorInterface;
 use Phptg\BotApi\Type\BackgroundFill;
 use Phptg\BotApi\Type\BackgroundType;
+use Phptg\BotApi\Type\RichBlock;
 use Phptg\BotApi\Type\ChatBoostSource;
 use Phptg\BotApi\Type\ChatMember;
 use Phptg\BotApi\Type\MessageOrigin;
@@ -165,6 +167,7 @@ final class ObjectFactory
                 'bool' => new BooleanValue(),
                 DateTimeImmutable::class => new DateValue(),
                 ChatBoostSource::class => new ChatBoostSourceValue(),
+                RichBlock::class => new RichBlockValue(),
                 BackgroundFill::class => new BackgroundFillValue(),
                 BackgroundType::class => new BackgroundTypeValue(),
                 ChatMember::class => new ChatMemberValue(),

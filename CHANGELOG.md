@@ -8,7 +8,12 @@
   `RichTextUrl`, `RichTextEmailAddress`, `RichTextPhoneNumber`, `RichTextBankCardNumber`, `RichTextMention`,
   `RichTextHashtag`, `RichTextCashtag`, `RichTextBotCommand`, `RichTextAnchor`, `RichTextAnchorLink`,
   `RichTextReference`, `RichTextReferenceLink`.
-- New #200: Add `RichBlockCaption` and `RichBlockTableCell` types.
+- New #200: Add `RichBlockCaption`, `RichBlockTableCell`, and `RichBlockListItem` types.
+- New #200: Add `RichBlock` interface and 21 rich block types: `RichBlockParagraph`, `RichBlockSectionHeading`,
+  `RichBlockPreformatted`, `RichBlockFooter`, `RichBlockDivider`, `RichBlockMathematicalExpression`,
+  `RichBlockAnchor`, `RichBlockList`, `RichBlockBlockQuotation`, `RichBlockPullQuotation`, `RichBlockCollage`,
+  `RichBlockSlideshow`, `RichBlockTable`, `RichBlockDetails`, `RichBlockMap`, `RichBlockAnimation`,
+  `RichBlockAudio`, `RichBlockPhoto`, `RichBlockVideo`, `RichBlockVoiceNote`, `RichBlockThinking`.
 
 ## 0.21 May 9, 2026
 
