@@ -117,6 +117,7 @@ use Phptg\BotApi\Method\SendVenue;
 use Phptg\BotApi\Method\SendVideo;
 use Phptg\BotApi\Method\SendVideoNote;
 use Phptg\BotApi\Method\SendRichMessage;
+use Phptg\BotApi\Method\SendRichMessageDraft;
 use Phptg\BotApi\Method\SendVoice;
 use Phptg\BotApi\Method\SetBusinessAccountBio;
 use Phptg\BotApi\Method\SetBusinessAccountGiftSettings;
@@ -2969,6 +2970,25 @@ final class TelegramBotApi
                 $suggestedPostParameters,
                 $replyParameters,
                 $replyMarkup,
+            ),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#sendrichmessagedraft
+     */
+    public function sendRichMessageDraft(
+        int $chatId,
+        int $draftId,
+        InputRichMessage $richMessage,
+        ?int $messageThreadId = null,
+    ): FailResult|true {
+        return $this->call(
+            new SendRichMessageDraft(
+                $chatId,
+                $draftId,
+                $richMessage,
+                $messageThreadId,
             ),
         );
     }
