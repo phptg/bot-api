@@ -8,6 +8,7 @@
   `RichTextUrl`, `RichTextEmailAddress`, `RichTextPhoneNumber`, `RichTextBankCardNumber`, `RichTextMention`,
   `RichTextHashtag`, `RichTextCashtag`, `RichTextBotCommand`, `RichTextAnchor`, `RichTextAnchorLink`,
   `RichTextReference`, `RichTextReferenceLink`.
+- New #200: Add `RichBlockCaption` and `RichBlockTableCell` types.
 
 ## 0.21 May 9, 2026
 
