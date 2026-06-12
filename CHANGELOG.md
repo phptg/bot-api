@@ -21,6 +21,7 @@
 - Enh #200: Make `text` parameter of `EditMessageText` method optional.
 - New #200: Add `richMessage` field to `Message` type.
 - New #200: Add `supportsJoinRequestQueries` field to `User` type.
+- New #200: Add `guardBot` field to `ChatFullInfo` type.
 
 ## 0.21 May 9, 2026
 

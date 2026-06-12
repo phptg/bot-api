@@ -20,6 +20,7 @@ use Phptg\BotApi\Type\Message;
 use Phptg\BotApi\Type\ReactionTypeCustomEmoji;
 use Phptg\BotApi\Type\Audio;
 use Phptg\BotApi\Type\UniqueGiftColors;
+use Phptg\BotApi\Type\User;
 use Phptg\BotApi\Type\UserRating;
 
 use function PHPUnit\Framework\assertCount;
@@ -87,6 +88,7 @@ final class ChatFullInfoTest extends TestCase
         assertNull($info->uniqueGiftColors);
         assertNull($info->paidMessageStarCount);
         assertNull($info->firstProfileAudio);
+        assertNull($info->guardBot);
     }
 
     public function testFromTelegramResult(): void
@@ -213,6 +215,11 @@ final class ChatFullInfoTest extends TestCase
                 'dark_theme_other_colors' => [0x2A2A2A, 0x3A3A3A],
             ],
             'paid_message_star_count' => 100,
+            'guard_bot' => [
+                'id' => 42,
+                'is_bot' => true,
+                'first_name' => 'GuardBot',
+            ],
         ], null, ChatFullInfo::class);
 
         assertSame(23, $info->id);
@@ -314,5 +321,9 @@ final class ChatFullInfoTest extends TestCase
         assertSame(180, $info->firstProfileAudio->duration);
         assertSame('Artist', $info->firstProfileAudio->performer);
         assertSame('Song', $info->firstProfileAudio->title);
+
+        assertInstanceOf(User::class, $info->guardBot);
+        assertSame(42, $info->guardBot->id);
+        assertSame('GuardBot', $info->guardBot->firstName);
     }
 }
