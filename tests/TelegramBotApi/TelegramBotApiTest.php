@@ -2332,6 +2332,15 @@ final class TelegramBotApiTest extends TestCase
         assertSame(7, $result->messageId);
     }
 
+    public function testSendChatJoinRequestWebApp(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->sendChatJoinRequestWebApp('qid1', 'https://example.com/app');
+
+        assertTrue($result);
+    }
+
     public function testSendRichMessage(): void
     {
         $api = TestHelper::createSuccessStubApi([

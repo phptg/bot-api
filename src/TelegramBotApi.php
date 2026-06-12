@@ -117,6 +117,7 @@ use Phptg\BotApi\Method\SendPoll;
 use Phptg\BotApi\Method\SendVenue;
 use Phptg\BotApi\Method\SendVideo;
 use Phptg\BotApi\Method\SendVideoNote;
+use Phptg\BotApi\Method\SendChatJoinRequestWebApp;
 use Phptg\BotApi\Method\SendRichMessage;
 use Phptg\BotApi\Method\SendRichMessageDraft;
 use Phptg\BotApi\Method\SendVoice;
@@ -2948,6 +2949,14 @@ final class TelegramBotApi
                 $suggestedPostParameters,
             ),
         );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#sendchatjoinrequestwebapp
+     */
+    public function sendChatJoinRequestWebApp(string $chatJoinRequestQueryId, string $webAppUrl): FailResult|true
+    {
+        return $this->call(new SendChatJoinRequestWebApp($chatJoinRequestQueryId, $webAppUrl));
     }
 
     /**
