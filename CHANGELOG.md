@@ -1,6 +1,6 @@
 # Telegram Bot API for PHP Change Log
 
-## 0.21.1 under development
+## 0.21.1 June 12, 2026
 
 - New #200: Add `RichText` interface and 25 rich text types: `RichTextBold`, `RichTextItalic`, `RichTextUnderline`,
   `RichTextStrikethrough`, `RichTextSpoiler`, `RichTextDateTime`, `RichTextTextMention`, `RichTextSubscript`,
@@ -18,7 +18,6 @@
 - New #200: Add `InputRichMessage` and `InputRichMessageContent` types.
 - New #200: Add `SendRichMessage` and `SendRichMessageDraft` methods.
 - New #200: Add `richMessage` parameter to `EditMessageText` method.
-- Enh #200: Make `text` parameter of `EditMessageText` method optional.
 - New #200: Add `richMessage` field to `Message` type.
 - New #200: Add `supportsJoinRequestQueries` field to `User` type.
 - New #200: Add `guardBot` field to `ChatFullInfo` type.
@@ -27,6 +26,7 @@
 - New #200: Add `Link` type.
 - New #200: Add `link` field to `PollMedia` type.
 - New #200: Add `InputMediaLink` type.
+- Enh #200: Make `text` parameter of `EditMessageText` method optional.
 
 ## 0.21 May 9, 2026
 

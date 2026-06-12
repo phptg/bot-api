@@ -15,7 +15,7 @@
 
 The package provides a simple and convenient way to interact with the Telegram Bot API.
 
-✔️ Telegram Bot API 10.0 (May 8, 2026) is **fully supported**.
+✔️ Telegram Bot API 10.1 (June 11, 2026) is **fully supported**.
 
 ♻️ **Zero dependencies** — no third-party libraries, only native PHP.
 
