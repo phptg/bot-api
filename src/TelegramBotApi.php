@@ -1062,7 +1062,7 @@ final class TelegramBotApi
      * @param MessageEntity[]|null $entities
      */
     public function editMessageText(
-        string $text,
+        ?string $text = null,
         ?string $businessConnectionId = null,
         int|string|null $chatId = null,
         ?int $messageId = null,
@@ -1071,6 +1071,7 @@ final class TelegramBotApi
         ?array $entities = null,
         ?LinkPreviewOptions $linkPreviewOptions = null,
         ?InlineKeyboardMarkup $replyMarkup = null,
+        ?InputRichMessage $richMessage = null,
     ): FailResult|Message|true {
         return $this->call(
             new EditMessageText(
@@ -1083,6 +1084,7 @@ final class TelegramBotApi
                 $entities,
                 $linkPreviewOptions,
                 $replyMarkup,
+                $richMessage,
             ),
         );
     }

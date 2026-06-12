@@ -17,6 +17,8 @@
 - New #200: Add `RichMessage` type.
 - New #200: Add `InputRichMessage` and `InputRichMessageContent` types.
 - New #200: Add `SendRichMessage` and `SendRichMessageDraft` methods.
+- New #200: Add `richMessage` parameter to `EditMessageText` method.
+- Enh #200: Make `text` parameter of `EditMessageText` method optional.
 - New #200: Add `richMessage` field to `Message` type.
 
 ## 0.21 May 9, 2026
