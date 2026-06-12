@@ -26,6 +26,7 @@
 - New #200: Add `AnswerChatJoinRequestQuery` and `SendChatJoinRequestWebApp` methods.
 - New #200: Add `Link` type.
 - New #200: Add `link` field to `PollMedia` type.
+- New #200: Add `InputMediaLink` type.
 
 ## 0.21 May 9, 2026
 
