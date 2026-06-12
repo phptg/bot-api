@@ -11,6 +11,7 @@ use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Type\InlineKeyboardButton;
 use Phptg\BotApi\Type\InlineKeyboardMarkup;
+use Phptg\BotApi\Type\InputRichMessage;
 use Phptg\BotApi\Type\LinkPreviewOptions;
 use Phptg\BotApi\Type\Message;
 use Phptg\BotApi\Type\MessageEntity;
@@ -40,6 +41,7 @@ final class EditMessageTextTest extends TestCase
         $messageEntity = new MessageEntity('bold', 0, 4);
         $linkPreviewOptions = new LinkPreviewOptions(true);
         $replyMarkup = new InlineKeyboardMarkup([[new InlineKeyboardButton('hello')]]);
+        $richMessage = new InputRichMessage(html: '<b>Hello</b>');
         $method = new EditMessageText(
             'test',
             'bcid1',
@@ -50,6 +52,7 @@ final class EditMessageTextTest extends TestCase
             [$messageEntity],
             $linkPreviewOptions,
             $replyMarkup,
+            $richMessage,
         );
 
         assertSame(
@@ -62,6 +65,7 @@ final class EditMessageTextTest extends TestCase
                 'parse_mode' => 'HTML',
                 'entities' => [$messageEntity->toRequestArray()],
                 'link_preview_options' => $linkPreviewOptions->toRequestArray(),
+                'rich_message' => $richMessage->toRequestArray(),
                 'reply_markup' => $replyMarkup->toRequestArray(),
             ],
             $method->getData(),

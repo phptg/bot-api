@@ -1,5 +1,33 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.21.1 June 12, 2026
+
+- New #200: Add `RichText` interface and 25 rich text types: `RichTextBold`, `RichTextItalic`, `RichTextUnderline`,
+  `RichTextStrikethrough`, `RichTextSpoiler`, `RichTextDateTime`, `RichTextTextMention`, `RichTextSubscript`,
+  `RichTextSuperscript`, `RichTextMarked`, `RichTextCode`, `RichTextCustomEmoji`, `RichTextMathematicalExpression`,
+  `RichTextUrl`, `RichTextEmailAddress`, `RichTextPhoneNumber`, `RichTextBankCardNumber`, `RichTextMention`,
+  `RichTextHashtag`, `RichTextCashtag`, `RichTextBotCommand`, `RichTextAnchor`, `RichTextAnchorLink`,
+  `RichTextReference`, `RichTextReferenceLink`.
+- New #200: Add `RichBlockCaption`, `RichBlockTableCell`, and `RichBlockListItem` types.
+- New #200: Add `RichBlock` interface and 21 rich block types: `RichBlockParagraph`, `RichBlockSectionHeading`,
+  `RichBlockPreformatted`, `RichBlockFooter`, `RichBlockDivider`, `RichBlockMathematicalExpression`,
+  `RichBlockAnchor`, `RichBlockList`, `RichBlockBlockQuotation`, `RichBlockPullQuotation`, `RichBlockCollage`,
+  `RichBlockSlideshow`, `RichBlockTable`, `RichBlockDetails`, `RichBlockMap`, `RichBlockAnimation`,
+  `RichBlockAudio`, `RichBlockPhoto`, `RichBlockVideo`, `RichBlockVoiceNote`, `RichBlockThinking`.
+- New #200: Add `RichMessage` type.
+- New #200: Add `InputRichMessage` and `InputRichMessageContent` types.
+- New #200: Add `SendRichMessage` and `SendRichMessageDraft` methods.
+- New #200: Add `richMessage` parameter to `EditMessageText` method.
+- New #200: Add `richMessage` field to `Message` type.
+- New #200: Add `supportsJoinRequestQueries` field to `User` type.
+- New #200: Add `guardBot` field to `ChatFullInfo` type.
+- New #200: Add `queryId` field to `ChatJoinRequest` type.
+- New #200: Add `AnswerChatJoinRequestQuery` and `SendChatJoinRequestWebApp` methods.
+- New #200: Add `Link` type.
+- New #200: Add `link` field to `PollMedia` type.
+- New #200: Add `InputMediaLink` type.
+- Enh #200: Make `text` parameter of `EditMessageText` method optional.
+
 ## 0.21 May 9, 2026
 
 - New #199: Add `supportsGuestQueries` field to `User` type.

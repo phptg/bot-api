@@ -8,6 +8,7 @@ use Phptg\BotApi\ParseResult\ValueProcessor\ObjectOrTrueValue;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\MethodInterface;
 use Phptg\BotApi\Type\InlineKeyboardMarkup;
+use Phptg\BotApi\Type\InputRichMessage;
 use Phptg\BotApi\Type\LinkPreviewOptions;
 use Phptg\BotApi\Type\Message;
 use Phptg\BotApi\Type\MessageEntity;
@@ -23,7 +24,7 @@ final readonly class EditMessageText implements MethodInterface
      * @param MessageEntity[]|null $entities
      */
     public function __construct(
-        private string $text,
+        private ?string $text = null,
         private ?string $businessConnectionId = null,
         private int|string|null $chatId = null,
         private ?int $messageId = null,
@@ -32,6 +33,7 @@ final readonly class EditMessageText implements MethodInterface
         private ?array $entities = null,
         private ?LinkPreviewOptions $linkPreviewOptions = null,
         private ?InlineKeyboardMarkup $replyMarkup = null,
+        private ?InputRichMessage $richMessage = null,
     ) {}
 
     public function getHttpMethod(): HttpMethod
@@ -59,6 +61,7 @@ final readonly class EditMessageText implements MethodInterface
                     $this->entities,
                 ),
                 'link_preview_options' => $this->linkPreviewOptions?->toRequestArray(),
+                'rich_message' => $this->richMessage?->toRequestArray(),
                 'reply_markup' => $this->replyMarkup?->toRequestArray(),
             ],
             static fn(mixed $value): bool => $value !== null,

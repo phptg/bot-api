@@ -28,5 +28,6 @@ final readonly class PollMedia
         public ?Sticker $sticker = null,
         public ?Venue $venue = null,
         public ?Video $video = null,
+        public ?Link $link = null,
     ) {}
 }

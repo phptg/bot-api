@@ -10,6 +10,7 @@ use LogicException;
 use Psr\Log\LoggerInterface;
 use SensitiveParameter;
 use Phptg\BotApi\Method\AnswerCallbackQuery;
+use Phptg\BotApi\Method\AnswerChatJoinRequestQuery;
 use Phptg\BotApi\Method\ApproveChatJoinRequest;
 use Phptg\BotApi\Method\ApproveSuggestedPost;
 use Phptg\BotApi\Method\BanChatMember;
@@ -116,6 +117,9 @@ use Phptg\BotApi\Method\SendPoll;
 use Phptg\BotApi\Method\SendVenue;
 use Phptg\BotApi\Method\SendVideo;
 use Phptg\BotApi\Method\SendVideoNote;
+use Phptg\BotApi\Method\SendChatJoinRequestWebApp;
+use Phptg\BotApi\Method\SendRichMessage;
+use Phptg\BotApi\Method\SendRichMessageDraft;
 use Phptg\BotApi\Method\SendVoice;
 use Phptg\BotApi\Method\SetBusinessAccountBio;
 use Phptg\BotApi\Method\SetBusinessAccountGiftSettings;
@@ -215,6 +219,7 @@ use Phptg\BotApi\Type\KeyboardButton;
 use Phptg\BotApi\Type\PreparedKeyboardButton;
 use Phptg\BotApi\Type\InputChecklist;
 use Phptg\BotApi\Type\InputFile;
+use Phptg\BotApi\Type\InputRichMessage;
 use Phptg\BotApi\Type\InputMedia;
 use Phptg\BotApi\Type\InputMediaAudio;
 use Phptg\BotApi\Type\InputMediaDocument;
@@ -392,6 +397,14 @@ final class TelegramBotApi
         return $this->call(
             new AnswerCallbackQuery($callbackQueryId, $text, $showAlert, $url, $cacheTime),
         );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#answerchatjoinrequestquery
+     */
+    public function answerChatJoinRequestQuery(string $chatJoinRequestQueryId, string $result): FailResult|true
+    {
+        return $this->call(new AnswerChatJoinRequestQuery($chatJoinRequestQueryId, $result));
     }
 
     /**
@@ -1059,7 +1072,7 @@ final class TelegramBotApi
      * @param MessageEntity[]|null $entities
      */
     public function editMessageText(
-        string $text,
+        ?string $text = null,
         ?string $businessConnectionId = null,
         int|string|null $chatId = null,
         ?int $messageId = null,
@@ -1068,6 +1081,7 @@ final class TelegramBotApi
         ?array $entities = null,
         ?LinkPreviewOptions $linkPreviewOptions = null,
         ?InlineKeyboardMarkup $replyMarkup = null,
+        ?InputRichMessage $richMessage = null,
     ): FailResult|Message|true {
         return $this->call(
             new EditMessageText(
@@ -1080,6 +1094,7 @@ final class TelegramBotApi
                 $entities,
                 $linkPreviewOptions,
                 $replyMarkup,
+                $richMessage,
             ),
         );
     }
@@ -2932,6 +2947,68 @@ final class TelegramBotApi
                 $allowPaidBroadcast,
                 $directMessagesTopicId,
                 $suggestedPostParameters,
+            ),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#sendchatjoinrequestwebapp
+     */
+    public function sendChatJoinRequestWebApp(string $chatJoinRequestQueryId, string $webAppUrl): FailResult|true
+    {
+        return $this->call(new SendChatJoinRequestWebApp($chatJoinRequestQueryId, $webAppUrl));
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#sendrichmessage
+     */
+    public function sendRichMessage(
+        int|string $chatId,
+        InputRichMessage $richMessage,
+        ?string $businessConnectionId = null,
+        ?int $messageThreadId = null,
+        ?int $directMessagesTopicId = null,
+        ?bool $disableNotification = null,
+        ?bool $protectContent = null,
+        ?bool $allowPaidBroadcast = null,
+        ?string $messageEffectId = null,
+        ?SuggestedPostParameters $suggestedPostParameters = null,
+        ?ReplyParameters $replyParameters = null,
+        InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup = null,
+    ): FailResult|Message {
+        return $this->call(
+            new SendRichMessage(
+                $chatId,
+                $richMessage,
+                $businessConnectionId,
+                $messageThreadId,
+                $directMessagesTopicId,
+                $disableNotification,
+                $protectContent,
+                $allowPaidBroadcast,
+                $messageEffectId,
+                $suggestedPostParameters,
+                $replyParameters,
+                $replyMarkup,
+            ),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#sendrichmessagedraft
+     */
+    public function sendRichMessageDraft(
+        int $chatId,
+        int $draftId,
+        InputRichMessage $richMessage,
+        ?int $messageThreadId = null,
+    ): FailResult|true {
+        return $this->call(
+            new SendRichMessageDraft(
+                $chatId,
+                $draftId,
+                $richMessage,
+                $messageThreadId,
             ),
         );
     }

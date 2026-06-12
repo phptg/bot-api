@@ -31,6 +31,7 @@ final class ChatJoinRequestTest extends TestCase
         assertSame($date, $chatJoinRequest->date);
         assertNull($chatJoinRequest->bio);
         assertNull($chatJoinRequest->inviteLink);
+        assertNull($chatJoinRequest->queryId);
     }
 
     public function testFromTelegramResult(): void
@@ -59,6 +60,7 @@ final class ChatJoinRequestTest extends TestCase
                 'is_primary' => false,
                 'is_revoked' => false,
             ],
+            'query_id' => 'qid123',
         ];
 
         $chatJoinRequest = (new ObjectFactory())->create($result, null, ChatJoinRequest::class);
@@ -75,5 +77,7 @@ final class ChatJoinRequestTest extends TestCase
 
         assertInstanceOf(ChatInviteLink::class, $chatJoinRequest->inviteLink);
         assertSame('https://t.me/joinchat/x1', $chatJoinRequest->inviteLink->inviteLink);
+
+        assertSame('qid123', $chatJoinRequest->queryId);
     }
 }

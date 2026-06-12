@@ -6,9 +6,11 @@ namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\Link;
 use Phptg\BotApi\Type\PollMedia;
 
 use function PHPUnit\Framework\assertCount;
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 
@@ -27,6 +29,7 @@ final class PollMediaTest extends TestCase
         assertNull($pollMedia->sticker);
         assertNull($pollMedia->venue);
         assertNull($pollMedia->video);
+        assertNull($pollMedia->link);
     }
 
     public function testFromTelegramResult(): void
@@ -97,6 +100,9 @@ final class PollMediaTest extends TestCase
                 'height' => 1080,
                 'duration' => 30,
             ],
+            'link' => [
+                'url' => 'https://example.com',
+            ],
         ], null, PollMedia::class);
 
         assertSame('animation_file_id', $pollMedia->animation?->fileId);
@@ -110,5 +116,7 @@ final class PollMediaTest extends TestCase
         assertSame('sticker_file_id', $pollMedia->sticker?->fileId);
         assertSame('Kremlin', $pollMedia->venue?->title);
         assertSame('video_file_id', $pollMedia->video?->fileId);
+        assertInstanceOf(Link::class, $pollMedia->link);
+        assertSame('https://example.com', $pollMedia->link->url);
     }
 }

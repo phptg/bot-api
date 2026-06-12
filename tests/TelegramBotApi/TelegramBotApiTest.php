@@ -35,6 +35,7 @@ use Phptg\BotApi\Type\Inline\SentWebAppMessage;
 use Phptg\BotApi\Type\SentGuestMessage;
 use Phptg\BotApi\Type\InputChecklist;
 use Phptg\BotApi\Type\InputFile;
+use Phptg\BotApi\Type\InputRichMessage;
 use Phptg\BotApi\Type\InputMediaPhoto;
 use Phptg\BotApi\Type\InputProfilePhotoStatic;
 use Phptg\BotApi\Type\InputStoryContentPhoto;
@@ -494,6 +495,15 @@ final class TelegramBotApiTest extends TestCase
         $api = TestHelper::createSuccessStubApi(true);
 
         $result = $api->answerCallbackQuery('id');
+
+        assertTrue($result);
+    }
+
+    public function testAnswerChatJoinRequestQuery(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->answerChatJoinRequestQuery('qid1', 'approve');
 
         assertTrue($result);
     }
@@ -2320,6 +2330,41 @@ final class TelegramBotApiTest extends TestCase
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
+    }
+
+    public function testSendChatJoinRequestWebApp(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->sendChatJoinRequestWebApp('qid1', 'https://example.com/app');
+
+        assertTrue($result);
+    }
+
+    public function testSendRichMessage(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            'message_id' => 7,
+            'date' => 1620000000,
+            'chat' => [
+                'id' => 1,
+                'type' => 'private',
+            ],
+        ]);
+
+        $result = $api->sendRichMessage(12, new InputRichMessage(html: '<b>Hello</b>'));
+
+        assertInstanceOf(Message::class, $result);
+        assertSame(7, $result->messageId);
+    }
+
+    public function testSendRichMessageDraft(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->sendRichMessageDraft(12, 1, new InputRichMessage(html: '<b>Hello</b>'));
+
+        assertTrue($result);
     }
 
     public function testSetChatAdministratorCustomTitle(): void
