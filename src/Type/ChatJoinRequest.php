@@ -20,5 +20,6 @@ final readonly class ChatJoinRequest
         public DateTimeImmutable $date,
         public ?string $bio = null,
         public ?ChatInviteLink $inviteLink = null,
+        public ?string $queryId = null,
     ) {}
 }
