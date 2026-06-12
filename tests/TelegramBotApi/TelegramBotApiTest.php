@@ -499,6 +499,15 @@ final class TelegramBotApiTest extends TestCase
         assertTrue($result);
     }
 
+    public function testAnswerChatJoinRequestQuery(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->answerChatJoinRequestQuery('qid1', 'approve');
+
+        assertTrue($result);
+    }
+
     public function testAnswerGuestQuery(): void
     {
         $api = TestHelper::createSuccessStubApi([

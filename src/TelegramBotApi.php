@@ -10,6 +10,7 @@ use LogicException;
 use Psr\Log\LoggerInterface;
 use SensitiveParameter;
 use Phptg\BotApi\Method\AnswerCallbackQuery;
+use Phptg\BotApi\Method\AnswerChatJoinRequestQuery;
 use Phptg\BotApi\Method\ApproveChatJoinRequest;
 use Phptg\BotApi\Method\ApproveSuggestedPost;
 use Phptg\BotApi\Method\BanChatMember;
@@ -395,6 +396,14 @@ final class TelegramBotApi
         return $this->call(
             new AnswerCallbackQuery($callbackQueryId, $text, $showAlert, $url, $cacheTime),
         );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#answerchatjoinrequestquery
+     */
+    public function answerChatJoinRequestQuery(string $chatJoinRequestQueryId, string $result): FailResult|true
+    {
+        return $this->call(new AnswerChatJoinRequestQuery($chatJoinRequestQueryId, $result));
     }
 
     /**

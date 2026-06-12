@@ -23,6 +23,7 @@
 - New #200: Add `supportsJoinRequestQueries` field to `User` type.
 - New #200: Add `guardBot` field to `ChatFullInfo` type.
 - New #200: Add `queryId` field to `ChatJoinRequest` type.
+- New #200: Add `AnswerChatJoinRequestQuery` method.
 
 ## 0.21 May 9, 2026
 
