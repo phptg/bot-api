@@ -35,6 +35,7 @@ final class UserTest extends TestCase
         assertNull($user->hasTopicsEnabled);
         assertNull($user->allowsUsersToCreateTopics);
         assertNull($user->canManageBots);
+        assertNull($user->supportsJoinRequestQueries);
     }
 
     public function testToRequestArray(): void
@@ -54,6 +55,7 @@ final class UserTest extends TestCase
             true,
             true,
             false,
+            true,
             true,
             true,
             true,
@@ -78,6 +80,7 @@ final class UserTest extends TestCase
                 'has_topics_enabled' => true,
                 'allows_users_to_create_topics' => true,
                 'can_manage_bots' => true,
+                'supports_join_request_queries' => true,
             ],
             $user->toRequestArray(),
         );
@@ -103,6 +106,7 @@ final class UserTest extends TestCase
             'has_topics_enabled' => true,
             'allows_users_to_create_topics' => true,
             'can_manage_bots' => true,
+            'supports_join_request_queries' => true,
         ], null, User::class);
 
         assertInstanceOf(User::class, $user);
@@ -123,5 +127,6 @@ final class UserTest extends TestCase
         assertSame(true, $user->hasTopicsEnabled);
         assertSame(true, $user->allowsUsersToCreateTopics);
         assertSame(true, $user->canManageBots);
+        assertSame(true, $user->supportsJoinRequestQueries);
     }
 }
