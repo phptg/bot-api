@@ -24,6 +24,8 @@
 - New #200: Add `guardBot` field to `ChatFullInfo` type.
 - New #200: Add `queryId` field to `ChatJoinRequest` type.
 - New #200: Add `AnswerChatJoinRequestQuery` and `SendChatJoinRequestWebApp` methods.
+- New #200: Add `Link` type.
+- New #200: Add `link` field to `PollMedia` type.
 
 ## 0.21 May 9, 2026
 
