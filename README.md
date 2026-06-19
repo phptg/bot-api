@@ -8,7 +8,7 @@
 
 [![Latest Stable Version](https://poser.pugx.org/phptg/bot-api/v)](https://packagist.org/packages/phptg/bot-api)
 [![Total Downloads](https://poser.pugx.org/phptg/bot-api/downloads)](https://packagist.org/packages/phptg/bot-api)
-[![Build status](https://github.com/phptg/bot-api/actions/workflows/build.yml/badge.svg)](https://github.com/phptg/bot-api/actions/workflows/build.yml)
+[![Build status](https://github.com/phptg/bot-api/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/phptg/bot-api/actions/workflows/build.yml?query=branch%3Amaster)
 [![Coverage Status](https://coveralls.io/repos/github/phptg/bot-api/badge.svg)](https://coveralls.io/github/phptg/bot-api)
 [![Mutation score](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fphptg%2Fbot-api%2Fmaster)](https://dashboard.stryker-mutator.io/reports/github.com/phptg/bot-api/master)
 [![Static analysis](https://github.com/phptg/bot-api/actions/workflows/psalm.yml/badge.svg?branch=master)](https://github.com/phptg/bot-api/actions/workflows/psalm.yml?query=branch%3Amaster)
