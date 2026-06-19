@@ -1,9 +1,16 @@
+name: mutation test
+
 on:
   pull_request:
   push:
     branches: [ 'master' ]
 
-name: mutation test
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   mutation:
@@ -11,28 +18,32 @@ jobs:
 
     runs-on: ${{ matrix.os }}
 
+    environment:
+      name: ${{ github.event_name == 'push' && 'Mutation testing' || '' }}
+      deployment: false
+
     strategy:
       matrix:
-        os:
-          - ubuntu-latest
-        php:
-          - "8.5"
+        os: [ubuntu-latest]
+        php: ["8.5"]
 
     steps:
-      - name: Checkout.
-        uses: actions/checkout@v6
+      - name: Checkout
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: false
 
-      - name: Install PHP with extensions.
-        uses: shivammathur/setup-php@v2
+      - name: Install PHP with extensions
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with:
           php-version: "${{ matrix.php }}"
           ini-values: memory_limit=-1
           coverage: xdebug
 
       - name: Install Composer dependencies
-        uses: ramsey/composer-install@v3
+        uses: ramsey/composer-install@a8d0d959dab41457692a5e2041bd9b757a119e3f # 3.2.1
 
-      - name: Run infection.
+      - name: Run infection
         run: vendor/bin/infection --threads=max --ignore-msi-with-no-mutations
         env:
-          STRYKER_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}
+          STRYKER_DASHBOARD_API_KEY: ${{ github.event_name == 'push' && secrets.STRYKER_DASHBOARD_API_KEY || '' }}
