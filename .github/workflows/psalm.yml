@@ -1,10 +1,17 @@
+name: static analysis
+
 on:
   pull_request:
   push:
     branches:
       - master
 
-name: static analysis
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   psalm:
@@ -24,17 +31,21 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: false
 
       - name: Install PHP with extensions
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with:
           coverage: none
           php-version: ${{ matrix.php }}
           tools: composer:v2, cs2pr
 
       - name: Install Composer dependencies
-        uses: ramsey/composer-install@v3
+        uses: ramsey/composer-install@a8d0d959dab41457692a5e2041bd9b757a119e3f # 3.2.1
 
       - name: Static analysis
-        run: vendor/bin/psalm --shepherd --stats --output-format=checkstyle --php-version=${{ matrix.php }} | cs2pr --graceful-warnings --colorize
+        env:
+          PHP_VERSION: ${{ matrix.php }}
+        run: vendor/bin/psalm --shepherd --stats --output-format=checkstyle --php-version=$PHP_VERSION | cs2pr --graceful-warnings --colorize
