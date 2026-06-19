@@ -3,7 +3,11 @@ name: zizmor
 on:
   push:
     branches: [ 'master' ]
+    paths: &paths
+      - '.github/**/*.yml'
+      - '.github/**/*.yaml'
   pull_request:
+    paths: *paths
 
 permissions: {}
 
