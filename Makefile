@@ -13,7 +13,7 @@ scaffolder: ## Run scaffolder
       --volume .:/project \
       --user $(shell id -u):$(shell id -g) \
       --interactive --tty --rm --init \
-      ghcr.io/phptg/scaffolder@sha256:770ec561a4a31058e6b1f74620ecbef872301f1440423e29b85de79e31d55e92 \
+      ghcr.io/phptg/scaffolder@sha256:c732b78955ce8cfc21e9bb86c6cbcd3d46147ceed07894b71dcfad7fa317e14e \
       $(ARGS)
 
 # Output the help for each task, see https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
