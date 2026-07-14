@@ -17,13 +17,13 @@ final class InputRichBlockVoiceNoteTest extends TestCase
 {
     public function testBase(): void
     {
-        $voiceNote = new InputRichBlockVoiceNote(new InputMediaVoiceNote('https://example.com/a.ogg'));
+        $voiceNote = new InputRichBlockVoiceNote(new InputMediaVoiceNote('voice_file_id_1'));
 
         assertSame('voice_note', $voiceNote->getType());
         assertSame(
             [
                 'type' => 'voice_note',
-                'voice_note' => ['type' => 'voice_note', 'media' => 'https://example.com/a.ogg'],
+                'voice_note' => ['type' => 'voice_note', 'media' => 'voice_file_id_1'],
             ],
             $voiceNote->toRequestArray(),
         );
@@ -32,14 +32,14 @@ final class InputRichBlockVoiceNoteTest extends TestCase
     public function testFull(): void
     {
         $voiceNote = new InputRichBlockVoiceNote(
-            new InputMediaVoiceNote('https://example.com/a.ogg'),
+            new InputMediaVoiceNote('voice_file_id_1'),
             new RichBlockCaption('caption'),
         );
 
         assertSame(
             [
                 'type' => 'voice_note',
-                'voice_note' => ['type' => 'voice_note', 'media' => 'https://example.com/a.ogg'],
+                'voice_note' => ['type' => 'voice_note', 'media' => 'voice_file_id_1'],
                 'caption' => ['text' => 'caption'],
             ],
             $voiceNote->toRequestArray(),
