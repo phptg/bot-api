@@ -150,5 +150,6 @@ final readonly class Message
         public ?PollOptionAdded $pollOptionAdded = null,
         public ?PollOptionDeleted $pollOptionDeleted = null,
         public ?RichMessage $richMessage = null,
+        public ?User $receiverUser = null,
     ) {}
 }
