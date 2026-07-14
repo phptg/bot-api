@@ -13,6 +13,9 @@
   `InputRichBlockVoiceNote`, `InputRichBlockThinking`.
 - New #211: Add `isEphemeral` field to `BotCommand` type.
 - New #211: Add `receiverUser` and `ephemeralMessageId` fields to `Message` type.
+- New #211: Add `receiverUserId` and `callbackQueryId` parameters to `SendMessage`, `SendAnimation`, `SendAudio`,
+  `SendDocument`, `SendPhoto`, `SendSticker`, `SendVideo`, `SendVideoNote`, `SendVoice`, `SendContact`,
+  `SendLocation` and `SendVenue` methods.
 - Enh #211: `RichText` types, `RichBlockCaption`, `RichBlockTableCell` and `Location` now support serialization
   back into a request array via `toRequestArray()`.
 

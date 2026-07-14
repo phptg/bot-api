@@ -55,6 +55,8 @@ final class SendContactTest extends TestCase
             new SuggestedPostParameters(
                 new SuggestedPostPrice('USD', 10),
             ),
+            789,
+            'cbq1',
         );
 
         assertSame(
@@ -63,6 +65,8 @@ final class SendContactTest extends TestCase
                 'chat_id' => 12,
                 'message_thread_id' => 99,
                 'direct_messages_topic_id' => 123,
+                'receiver_user_id' => 789,
+                'callback_query_id' => 'cbq1',
                 'phone_number' => '1234567890',
                 'first_name' => 'John',
                 'last_name' => 'Doe',

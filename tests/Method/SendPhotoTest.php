@@ -60,6 +60,8 @@ final class SendPhotoTest extends TestCase
             new SuggestedPostParameters(
                 new SuggestedPostPrice('USD', 10),
             ),
+            789,
+            'cbq1',
         );
 
         assertSame(
@@ -69,6 +71,8 @@ final class SendPhotoTest extends TestCase
                 'business_connection_id' => 'bcid1',
                 'message_thread_id' => 99,
                 'direct_messages_topic_id' => 123,
+                'receiver_user_id' => 789,
+                'callback_query_id' => 'cbq1',
                 'caption' => 'Caption',
                 'parse_mode' => 'parse',
                 'caption_entities' => [$entity->toRequestArray()],

@@ -45,6 +45,8 @@ final readonly class SendPhoto implements MethodInterface
         private ?bool $allowPaidBroadcast = null,
         private ?int $directMessagesTopicId = null,
         private ?SuggestedPostParameters $suggestedPostParameters = null,
+        private ?int $receiverUserId = null,
+        private ?string $callbackQueryId = null,
     ) {}
 
     public function getHttpMethod(): HttpMethod
@@ -66,6 +68,8 @@ final readonly class SendPhoto implements MethodInterface
                 'business_connection_id' => $this->businessConnectionId,
                 'message_thread_id' => $this->messageThreadId,
                 'direct_messages_topic_id' => $this->directMessagesTopicId,
+                'receiver_user_id' => $this->receiverUserId,
+                'callback_query_id' => $this->callbackQueryId,
                 'caption' => $this->caption,
                 'parse_mode' => $this->parseMode,
                 'caption_entities' => $this->captionEntities === null ? null : array_map(
