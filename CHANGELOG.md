@@ -1,6 +1,6 @@
 # Telegram Bot API for PHP Change Log
 
-## 0.21.2 under construction
+## 0.21.2 July 15, 2026
 
 - New #211: Add `InputMediaVoiceNote`, `InputRichMessageMedia`, `InputRichBlockListItem`, `Community`,
   `CommunityChatAdded`, `CommunityChatRemoved` and `BotSubscriptionUpdated` types.
