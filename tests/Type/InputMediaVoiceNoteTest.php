@@ -17,13 +17,13 @@ final class InputMediaVoiceNoteTest extends TestCase
 {
     public function testBase(): void
     {
-        $inputMedia = new InputMediaVoiceNote('https://example.com/voice.ogg');
+        $inputMedia = new InputMediaVoiceNote('voice_file_id_1');
 
         assertSame('voice_note', $inputMedia->getType());
         assertSame(
             [
                 'type' => 'voice_note',
-                'media' => 'https://example.com/voice.ogg',
+                'media' => 'voice_file_id_1',
             ],
             $inputMedia->toRequestArray(),
         );
@@ -32,7 +32,7 @@ final class InputMediaVoiceNoteTest extends TestCase
         assertSame(
             [
                 'type' => 'voice_note',
-                'media' => 'https://example.com/voice.ogg',
+                'media' => 'voice_file_id_1',
             ],
             $inputMedia->toRequestArray($fileCollector),
         );
