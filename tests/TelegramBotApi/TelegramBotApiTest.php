@@ -809,6 +809,15 @@ final class TelegramBotApiTest extends TestCase
         assertTrue($result);
     }
 
+    public function testDeleteEphemeralMessage(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->deleteEphemeralMessage(23, 45, 34);
+
+        assertTrue($result);
+    }
+
     public function testDeleteMessage(): void
     {
         $api = TestHelper::createSuccessStubApi(true);

@@ -175,6 +175,7 @@ use Phptg\BotApi\Method\Update\GetUpdates;
 use Phptg\BotApi\Method\Update\GetWebhookInfo;
 use Phptg\BotApi\Method\Update\SetWebhook;
 use Phptg\BotApi\Method\UpdatingMessage\DeleteBusinessMessages;
+use Phptg\BotApi\Method\UpdatingMessage\DeleteEphemeralMessage;
 use Phptg\BotApi\Method\UpdatingMessage\DeleteMessage;
 use Phptg\BotApi\Method\UpdatingMessage\DeleteMessages;
 use Phptg\BotApi\Method\UpdatingMessage\EditEphemeralMessageCaption;
@@ -842,6 +843,17 @@ final class TelegramBotApi
         return $this->call(
             new DeleteMessageReaction($chatId, $messageId, $userId, $actorChatId),
         );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#deleteephemeralmessage
+     */
+    public function deleteEphemeralMessage(
+        int|string $chatId,
+        int $receiverUserId,
+        int $ephemeralMessageId,
+    ): FailResult|true {
+        return $this->call(new DeleteEphemeralMessage($chatId, $receiverUserId, $ephemeralMessageId));
     }
 
     /**

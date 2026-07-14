@@ -17,8 +17,8 @@
   `SendDocument`, `SendPhoto`, `SendSticker`, `SendVideo`, `SendVideoNote`, `SendVoice`, `SendContact`,
   `SendLocation` and `SendVenue` methods.
 - New #211: Add `ephemeralMessageId` field to `ReplyParameters` type.
-- New #211: Add `EditEphemeralMessageText`, `EditEphemeralMessageMedia`, `EditEphemeralMessageCaption` and
-  `EditEphemeralMessageReplyMarkup` methods.
+- New #211: Add `EditEphemeralMessageText`, `EditEphemeralMessageMedia`, `EditEphemeralMessageCaption`,
+  `EditEphemeralMessageReplyMarkup` and `DeleteEphemeralMessage` methods.
 - Chg #211: Make `messageId` field of `ReplyParameters` type optional.
 - Enh #211: `RichText` types, `RichBlockCaption`, `RichBlockTableCell` and `Location` now support serialization
   back into a request array via `toRequestArray()`.
