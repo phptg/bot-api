@@ -17,11 +17,11 @@ final class InputRichBlockVideoTest extends TestCase
 {
     public function testBase(): void
     {
-        $video = new InputRichBlockVideo(new InputMediaVideo('https://example.com/a.mp4'));
+        $video = new InputRichBlockVideo(new InputMediaVideo('video_file_id_1'));
 
         assertSame('video', $video->getType());
         assertSame(
-            ['type' => 'video', 'video' => ['type' => 'video', 'media' => 'https://example.com/a.mp4']],
+            ['type' => 'video', 'video' => ['type' => 'video', 'media' => 'video_file_id_1']],
             $video->toRequestArray(),
         );
     }
@@ -29,14 +29,14 @@ final class InputRichBlockVideoTest extends TestCase
     public function testFull(): void
     {
         $video = new InputRichBlockVideo(
-            new InputMediaVideo('https://example.com/a.mp4'),
+            new InputMediaVideo('video_file_id_1'),
             new RichBlockCaption('caption'),
         );
 
         assertSame(
             [
                 'type' => 'video',
-                'video' => ['type' => 'video', 'media' => 'https://example.com/a.mp4'],
+                'video' => ['type' => 'video', 'media' => 'video_file_id_1'],
                 'caption' => ['text' => 'caption'],
             ],
             $video->toRequestArray(),
