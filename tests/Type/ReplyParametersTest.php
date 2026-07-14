@@ -16,9 +16,9 @@ final class ReplyParametersTest extends TestCase
 {
     public function testBase(): void
     {
-        $replyParameters = new ReplyParameters(99);
+        $replyParameters = new ReplyParameters();
 
-        assertSame(99, $replyParameters->messageId);
+        assertNull($replyParameters->messageId);
         assertNull($replyParameters->chatId);
         assertNull($replyParameters->allowSendingWithoutReply);
         assertNull($replyParameters->quote);
@@ -27,16 +27,12 @@ final class ReplyParametersTest extends TestCase
         assertNull($replyParameters->quotePosition);
         assertNull($replyParameters->checklistTaskId);
         assertNull($replyParameters->pollOptionId);
+        assertNull($replyParameters->ephemeralMessageId);
 
-        assertSame(
-            [
-                'message_id' => 99,
-            ],
-            $replyParameters->toRequestArray(),
-        );
+        assertSame([], $replyParameters->toRequestArray());
     }
 
-    public function testFilled(): void
+    public function testFull(): void
     {
         $quoteEntity = new MessageEntity('bold', 0, 4);
         $replyParameters = new ReplyParameters(
@@ -49,6 +45,7 @@ final class ReplyParametersTest extends TestCase
             23,
             456,
             'pid1',
+            789,
         );
 
         assertSame(99, $replyParameters->messageId);
@@ -60,11 +57,13 @@ final class ReplyParametersTest extends TestCase
         assertSame(23, $replyParameters->quotePosition);
         assertSame(456, $replyParameters->checklistTaskId);
         assertSame('pid1', $replyParameters->pollOptionId);
+        assertSame(789, $replyParameters->ephemeralMessageId);
 
         assertSame(
             [
                 'message_id' => 99,
                 'chat_id' => 102,
+                'ephemeral_message_id' => 789,
                 'allow_sending_without_reply' => true,
                 'quote' => 'text',
                 'quote_parse_mode' => 'best',
