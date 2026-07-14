@@ -15,6 +15,7 @@ final readonly class InputRichMessage
 {
     /**
      * @param InputRichMessageMedia[]|null $media
+     * @param InputRichBlock[]|null $blocks
      */
     public function __construct(
         public ?string $html = null,
@@ -22,6 +23,7 @@ final readonly class InputRichMessage
         public ?true $isRtl = null,
         public ?true $skipEntityDetection = null,
         public ?array $media = null,
+        public ?array $blocks = null,
     ) {}
 
     /**
@@ -31,6 +33,10 @@ final readonly class InputRichMessage
     {
         return array_filter(
             [
+                'blocks' => $this->blocks === null ? null : array_map(
+                    static fn(InputRichBlock $block) => $block->toRequestArray($fileCollector),
+                    $this->blocks,
+                ),
                 'html' => $this->html,
                 'markdown' => $this->markdown,
                 'media' => $this->media === null ? null : array_map(
