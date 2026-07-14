@@ -75,5 +75,6 @@ final readonly class ChatFullInfo
         public ?int $paidMessageStarCount = null,
         public ?Audio $firstProfileAudio = null,
         public ?User $guardBot = null,
+        public ?Community $community = null,
     ) {}
 }

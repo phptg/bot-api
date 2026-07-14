@@ -15,6 +15,7 @@
 - New #211: Add `isEphemeral` field to `BotCommand` type.
 - New #211: Add `receiverUser`, `ephemeralMessageId`, `communityChatAdded` and `communityChatRemoved` fields to
   `Message` type.
+- New #211: Add `community` field to `ChatFullInfo` type.
 - New #211: Add `receiverUserId` and `callbackQueryId` parameters to `SendMessage`, `SendAnimation`, `SendAudio`,
   `SendDocument`, `SendPhoto`, `SendSticker`, `SendVideo`, `SendVideoNote`, `SendVoice`, `SendContact`,
   `SendLocation` and `SendVenue` methods.
