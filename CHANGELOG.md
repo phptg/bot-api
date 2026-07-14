@@ -2,7 +2,8 @@
 
 ## 0.21.2 under construction
 
-- New #211: Add `InputMediaVoiceNote`, `InputRichMessageMedia`, `InputRichBlockListItem` and `Community` types.
+- New #211: Add `InputMediaVoiceNote`, `InputRichMessageMedia`, `InputRichBlockListItem`, `Community`,
+  `CommunityChatAdded` and `CommunityChatRemoved` types.
 - New #211: Add `media` and `blocks` fields to `InputRichMessage` type.
 - New #211: Add `InputRichBlock` interface and 21 input rich block types: `InputRichBlockParagraph`,
   `InputRichBlockSectionHeading`, `InputRichBlockPreformatted`, `InputRichBlockFooter`, `InputRichBlockDivider`,
