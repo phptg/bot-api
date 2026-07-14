@@ -20,7 +20,7 @@ final class EditEphemeralMessageMediaTest extends TestCase
 {
     public function testBase(): void
     {
-        $media = new InputMediaPhoto('https://example.com/photo.jpg');
+        $media = new InputMediaPhoto('photo_file_id_1');
         $method = new EditEphemeralMessageMedia(23, 45, 34, $media);
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
