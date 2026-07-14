@@ -156,6 +156,7 @@ final class MessageTest extends TestCase
         assertNull($message->pollOptionAdded);
         assertNull($message->pollOptionDeleted);
         assertNull($message->receiverUser);
+        assertNull($message->ephemeralMessageId);
     }
 
     public function testFromTelegramResult(): void
@@ -192,6 +193,7 @@ final class MessageTest extends TestCase
                 'is_bot' => false,
                 'first_name' => 'Jane',
             ],
+            'ephemeral_message_id' => 43,
             'business_connection_id' => 'btest',
             'guest_query_id' => 'guest_query_123',
             'forward_origin' => [
@@ -863,5 +865,6 @@ final class MessageTest extends TestCase
         assertSame('pid2', $message->pollOptionDeleted?->optionPersistentId);
         assertSame('Deleted option', $message->pollOptionDeleted?->optionText);
         assertSame(130, $message->receiverUser?->id);
+        assertSame(43, $message->ephemeralMessageId);
     }
 }

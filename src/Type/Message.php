@@ -151,5 +151,6 @@ final readonly class Message
         public ?PollOptionDeleted $pollOptionDeleted = null,
         public ?RichMessage $richMessage = null,
         public ?User $receiverUser = null,
+        public ?int $ephemeralMessageId = null,
     ) {}
 }
