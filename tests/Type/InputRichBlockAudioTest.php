@@ -17,11 +17,11 @@ final class InputRichBlockAudioTest extends TestCase
 {
     public function testBase(): void
     {
-        $audio = new InputRichBlockAudio(new InputMediaAudio('https://example.com/a.mp3'));
+        $audio = new InputRichBlockAudio(new InputMediaAudio('audio_file_id_1'));
 
         assertSame('audio', $audio->getType());
         assertSame(
-            ['type' => 'audio', 'audio' => ['type' => 'audio', 'media' => 'https://example.com/a.mp3']],
+            ['type' => 'audio', 'audio' => ['type' => 'audio', 'media' => 'audio_file_id_1']],
             $audio->toRequestArray(),
         );
     }
@@ -29,14 +29,14 @@ final class InputRichBlockAudioTest extends TestCase
     public function testFull(): void
     {
         $audio = new InputRichBlockAudio(
-            new InputMediaAudio('https://example.com/a.mp3'),
+            new InputMediaAudio('audio_file_id_1'),
             new RichBlockCaption('caption'),
         );
 
         assertSame(
             [
                 'type' => 'audio',
-                'audio' => ['type' => 'audio', 'media' => 'https://example.com/a.mp3'],
+                'audio' => ['type' => 'audio', 'media' => 'audio_file_id_1'],
                 'caption' => ['text' => 'caption'],
             ],
             $audio->toRequestArray(),
