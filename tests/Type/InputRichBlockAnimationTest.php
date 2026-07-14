@@ -17,11 +17,11 @@ final class InputRichBlockAnimationTest extends TestCase
 {
     public function testBase(): void
     {
-        $animation = new InputRichBlockAnimation(new InputMediaAnimation('https://example.com/a.mp4'));
+        $animation = new InputRichBlockAnimation(new InputMediaAnimation('animation_file_id_1'));
 
         assertSame('animation', $animation->getType());
         assertSame(
-            ['type' => 'animation', 'animation' => ['type' => 'animation', 'media' => 'https://example.com/a.mp4']],
+            ['type' => 'animation', 'animation' => ['type' => 'animation', 'media' => 'animation_file_id_1']],
             $animation->toRequestArray(),
         );
     }
@@ -29,14 +29,14 @@ final class InputRichBlockAnimationTest extends TestCase
     public function testFull(): void
     {
         $animation = new InputRichBlockAnimation(
-            new InputMediaAnimation('https://example.com/a.mp4'),
+            new InputMediaAnimation('animation_file_id_1'),
             new RichBlockCaption('caption'),
         );
 
         assertSame(
             [
                 'type' => 'animation',
-                'animation' => ['type' => 'animation', 'media' => 'https://example.com/a.mp4'],
+                'animation' => ['type' => 'animation', 'media' => 'animation_file_id_1'],
                 'caption' => ['text' => 'caption'],
             ],
             $animation->toRequestArray(),
