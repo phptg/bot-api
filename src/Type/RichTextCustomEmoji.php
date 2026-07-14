@@ -20,4 +20,13 @@ final readonly class RichTextCustomEmoji implements RichText
     {
         return 'custom_emoji';
     }
+
+    public function toRequestArray(): array
+    {
+        return [
+            'type' => $this->getType(),
+            'custom_emoji_id' => $this->customEmojiId,
+            'alternative_text' => $this->alternativeText,
+        ];
+    }
 }

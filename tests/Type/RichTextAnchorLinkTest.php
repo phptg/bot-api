@@ -19,6 +19,10 @@ final class RichTextAnchorLinkTest extends TestCase
         assertSame('anchor_link', $anchorLink->getType());
         assertSame('hello', $anchorLink->text);
         assertSame('section1', $anchorLink->anchorName);
+        assertSame(
+            ['type' => 'anchor_link', 'text' => 'hello', 'anchor_name' => 'section1'],
+            $anchorLink->toRequestArray(),
+        );
     }
 
     public function testFromTelegramResult(): void

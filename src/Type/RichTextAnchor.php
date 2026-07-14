@@ -19,4 +19,12 @@ final readonly class RichTextAnchor implements RichText
     {
         return 'anchor';
     }
+
+    public function toRequestArray(): array
+    {
+        return [
+            'type' => $this->getType(),
+            'name' => $this->name,
+        ];
+    }
 }

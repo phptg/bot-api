@@ -21,6 +21,7 @@ final class RichBlockCaptionTest extends TestCase
 
         assertSame('hello', $caption->text);
         assertNull($caption->credit);
+        assertSame(['text' => 'hello'], $caption->toRequestArray());
     }
 
     public function testFull(): void
@@ -29,6 +30,10 @@ final class RichBlockCaptionTest extends TestCase
 
         assertSame('hello', $caption->text);
         assertSame('world', $caption->credit);
+        assertSame(
+            ['text' => 'hello', 'credit' => 'world'],
+            $caption->toRequestArray(),
+        );
     }
 
     public function testFromTelegramResult(): void

@@ -26,6 +26,10 @@ final class RichBlockTableCellTest extends TestCase
         assertNull($cell->isHeader);
         assertNull($cell->colspan);
         assertNull($cell->rowspan);
+        assertSame(
+            ['align' => 'left', 'valign' => 'top'],
+            $cell->toRequestArray(),
+        );
     }
 
     public function testFull(): void
@@ -38,6 +42,17 @@ final class RichBlockTableCellTest extends TestCase
         assertTrue($cell->isHeader);
         assertSame(2, $cell->colspan);
         assertSame(3, $cell->rowspan);
+        assertSame(
+            [
+                'align' => 'center',
+                'valign' => 'middle',
+                'text' => 'hello',
+                'is_header' => true,
+                'colspan' => 2,
+                'rowspan' => 3,
+            ],
+            $cell->toRequestArray(),
+        );
     }
 
     public function testFromTelegramResult(): void

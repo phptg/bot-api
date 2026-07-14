@@ -19,6 +19,10 @@ final class RichTextCashtagTest extends TestCase
         assertSame('cashtag', $cashtag->getType());
         assertSame('hello', $cashtag->text);
         assertSame('$AAPL', $cashtag->cashtag);
+        assertSame(
+            ['type' => 'cashtag', 'text' => 'hello', 'cashtag' => '$AAPL'],
+            $cashtag->toRequestArray(),
+        );
     }
 
     public function testFromTelegramResult(): void

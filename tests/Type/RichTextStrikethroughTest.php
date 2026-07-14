@@ -18,6 +18,7 @@ final class RichTextStrikethroughTest extends TestCase
 
         assertSame('strikethrough', $strikethrough->getType());
         assertSame('hello', $strikethrough->text);
+        assertSame(['type' => 'strikethrough', 'text' => 'hello'], $strikethrough->toRequestArray());
     }
 
     public function testFromTelegramResult(): void

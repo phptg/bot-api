@@ -19,6 +19,10 @@ final class RichTextEmailAddressTest extends TestCase
         assertSame('email_address', $emailAddress->getType());
         assertSame('hello', $emailAddress->text);
         assertSame('test@example.com', $emailAddress->emailAddress);
+        assertSame(
+            ['type' => 'email_address', 'text' => 'hello', 'email_address' => 'test@example.com'],
+            $emailAddress->toRequestArray(),
+        );
     }
 
     public function testFromTelegramResult(): void

@@ -19,6 +19,10 @@ final class RichTextReferenceTest extends TestCase
         assertSame('reference', $reference->getType());
         assertSame('hello', $reference->text);
         assertSame('ref1', $reference->name);
+        assertSame(
+            ['type' => 'reference', 'text' => 'hello', 'name' => 'ref1'],
+            $reference->toRequestArray(),
+        );
     }
 
     public function testFromTelegramResult(): void

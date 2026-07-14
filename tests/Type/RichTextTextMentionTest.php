@@ -21,6 +21,14 @@ final class RichTextTextMentionTest extends TestCase
         assertSame('text_mention', $textMention->getType());
         assertSame('hello', $textMention->text);
         assertSame($user, $textMention->user);
+        assertSame(
+            [
+                'type' => 'text_mention',
+                'text' => 'hello',
+                'user' => ['id' => 123, 'is_bot' => false, 'first_name' => 'John'],
+            ],
+            $textMention->toRequestArray(),
+        );
     }
 
     public function testFromTelegramResult(): void

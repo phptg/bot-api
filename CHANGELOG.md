@@ -2,8 +2,17 @@
 
 ## 0.21.2 under construction
 
-- New #211: Add `InputMediaVoiceNote` and `InputRichMessageMedia` types.
+- New #211: Add `InputMediaVoiceNote`, `InputRichMessageMedia` and `InputRichBlockListItem` types.
 - New #211: Add `media` field to `InputRichMessage` type.
+- New #211: Add `InputRichBlock` interface and 21 input rich block types: `InputRichBlockParagraph`,
+  `InputRichBlockSectionHeading`, `InputRichBlockPreformatted`, `InputRichBlockFooter`, `InputRichBlockDivider`,
+  `InputRichBlockMathematicalExpression`, `InputRichBlockAnchor`, `InputRichBlockList`,
+  `InputRichBlockBlockQuotation`, `InputRichBlockPullQuotation`, `InputRichBlockCollage`,
+  `InputRichBlockSlideshow`, `InputRichBlockTable`, `InputRichBlockDetails`, `InputRichBlockMap`,
+  `InputRichBlockAnimation`, `InputRichBlockAudio`, `InputRichBlockPhoto`, `InputRichBlockVideo`,
+  `InputRichBlockVoiceNote`, `InputRichBlockThinking`.
+- Enh #211: `RichText` types, `RichBlockCaption`, `RichBlockTableCell` and `Location` now support serialization
+  back into a request array via `toRequestArray()`.
 
 ## 0.21.1 June 12, 2026
 
