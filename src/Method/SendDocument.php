@@ -45,6 +45,8 @@ final readonly class SendDocument implements MethodInterface
         private ?bool $allowPaidBroadcast = null,
         private ?int $directMessagesTopicId = null,
         private ?SuggestedPostParameters $suggestedPostParameters = null,
+        private ?int $receiverUserId = null,
+        private ?string $callbackQueryId = null,
     ) {}
 
     public function getHttpMethod(): HttpMethod
@@ -65,6 +67,8 @@ final readonly class SendDocument implements MethodInterface
                 'chat_id' => $this->chatId,
                 'message_thread_id' => $this->messageThreadId,
                 'direct_messages_topic_id' => $this->directMessagesTopicId,
+                'receiver_user_id' => $this->receiverUserId,
+                'callback_query_id' => $this->callbackQueryId,
                 'document' => $this->document,
                 'thumbnail' => $this->thumbnail,
                 'caption' => $this->caption,

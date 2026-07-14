@@ -20,6 +20,15 @@ final class RichTextDateTimeTest extends TestCase
         assertSame('hello', $dateTime->text);
         assertSame(1749600000, $dateTime->unixTime);
         assertSame('Y-m-d H:i:s', $dateTime->dateTimeFormat);
+        assertSame(
+            [
+                'type' => 'date_time',
+                'text' => 'hello',
+                'unix_time' => 1749600000,
+                'date_time_format' => 'Y-m-d H:i:s',
+            ],
+            $dateTime->toRequestArray(),
+        );
     }
 
     public function testFromTelegramResult(): void

@@ -19,6 +19,10 @@ final class RichTextBankCardNumberTest extends TestCase
         assertSame('bank_card_number', $bankCardNumber->getType());
         assertSame('hello', $bankCardNumber->text);
         assertSame('4111111111111111', $bankCardNumber->bankCardNumber);
+        assertSame(
+            ['type' => 'bank_card_number', 'text' => 'hello', 'bank_card_number' => '4111111111111111'],
+            $bankCardNumber->toRequestArray(),
+        );
     }
 
     public function testFromTelegramResult(): void

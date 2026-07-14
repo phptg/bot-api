@@ -19,6 +19,10 @@ final class RichTextReferenceLinkTest extends TestCase
         assertSame('reference_link', $referenceLink->getType());
         assertSame('hello', $referenceLink->text);
         assertSame('ref1', $referenceLink->referenceName);
+        assertSame(
+            ['type' => 'reference_link', 'text' => 'hello', 'reference_name' => 'ref1'],
+            $referenceLink->toRequestArray(),
+        );
     }
 
     public function testFromTelegramResult(): void

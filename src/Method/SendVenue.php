@@ -42,6 +42,8 @@ final readonly class SendVenue implements MethodInterface
         private ?bool $allowPaidBroadcast = null,
         private ?int $directMessagesTopicId = null,
         private ?SuggestedPostParameters $suggestedPostParameters = null,
+        private ?int $receiverUserId = null,
+        private ?string $callbackQueryId = null,
     ) {}
 
     public function getHttpMethod(): HttpMethod
@@ -62,6 +64,8 @@ final readonly class SendVenue implements MethodInterface
                 'chat_id' => $this->chatId,
                 'message_thread_id' => $this->messageThreadId,
                 'direct_messages_topic_id' => $this->directMessagesTopicId,
+                'receiver_user_id' => $this->receiverUserId,
+                'callback_query_id' => $this->callbackQueryId,
                 'latitude' => $this->latitude,
                 'longitude' => $this->longitude,
                 'title' => $this->title,

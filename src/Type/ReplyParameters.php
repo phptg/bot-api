@@ -15,7 +15,7 @@ final readonly class ReplyParameters
      * @param MessageEntity[]|null $quoteEntities
      */
     public function __construct(
-        public int $messageId,
+        public ?int $messageId = null,
         public int|string|null $chatId = null,
         public ?bool $allowSendingWithoutReply = null,
         public ?string $quote = null,
@@ -24,6 +24,7 @@ final readonly class ReplyParameters
         public ?int $quotePosition = null,
         public ?int $checklistTaskId = null,
         public ?string $pollOptionId = null,
+        public ?int $ephemeralMessageId = null,
     ) {}
 
     public function toRequestArray(): array
@@ -32,6 +33,7 @@ final readonly class ReplyParameters
             [
                 'message_id' => $this->messageId,
                 'chat_id' => $this->chatId,
+                'ephemeral_message_id' => $this->ephemeralMessageId,
                 'allow_sending_without_reply' => $this->allowSendingWithoutReply,
                 'quote' => $this->quote,
                 'quote_parse_mode' => $this->quoteParseMode,

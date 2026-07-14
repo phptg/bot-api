@@ -18,6 +18,10 @@ final class RichTextMathematicalExpressionTest extends TestCase
 
         assertSame('mathematical_expression', $expression->getType());
         assertSame('E = mc^2', $expression->expression);
+        assertSame(
+            ['type' => 'mathematical_expression', 'expression' => 'E = mc^2'],
+            $expression->toRequestArray(),
+        );
     }
 
     public function testFromTelegramResult(): void

@@ -18,6 +18,7 @@ final class RichTextSubscriptTest extends TestCase
 
         assertSame('subscript', $subscript->getType());
         assertSame('hello', $subscript->text);
+        assertSame(['type' => 'subscript', 'text' => 'hello'], $subscript->toRequestArray());
     }
 
     public function testFromTelegramResult(): void

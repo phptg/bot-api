@@ -19,6 +19,10 @@ final class RichTextBotCommandTest extends TestCase
         assertSame('bot_command', $botCommand->getType());
         assertSame('hello', $botCommand->text);
         assertSame('/start', $botCommand->botCommand);
+        assertSame(
+            ['type' => 'bot_command', 'text' => 'hello', 'bot_command' => '/start'],
+            $botCommand->toRequestArray(),
+        );
     }
 
     public function testFromTelegramResult(): void

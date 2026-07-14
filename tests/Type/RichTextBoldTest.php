@@ -18,6 +18,7 @@ final class RichTextBoldTest extends TestCase
 
         assertSame('bold', $bold->getType());
         assertSame('hello', $bold->text);
+        assertSame(['type' => 'bold', 'text' => 'hello'], $bold->toRequestArray());
     }
 
     public function testFromTelegramResult(): void

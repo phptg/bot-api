@@ -23,6 +23,30 @@ final class LocationTest extends TestCase
         assertNull($location->livePeriod);
         assertNull($location->heading);
         assertNull($location->proximityAlertRadius);
+        assertSame(
+            [
+                'latitude' => 1.234,
+                'longitude' => 5.678,
+            ],
+            $location->toRequestArray(),
+        );
+    }
+
+    public function testFull(): void
+    {
+        $location = new Location(1.234, 5.678, 0.1, 60, 90, 100);
+
+        assertSame(
+            [
+                'latitude' => 1.234,
+                'longitude' => 5.678,
+                'horizontal_accuracy' => 0.1,
+                'live_period' => 60,
+                'heading' => 90,
+                'proximity_alert_radius' => 100,
+            ],
+            $location->toRequestArray(),
+        );
     }
 
     public function testFromTelegramResult(): void

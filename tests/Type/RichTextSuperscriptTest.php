@@ -18,6 +18,7 @@ final class RichTextSuperscriptTest extends TestCase
 
         assertSame('superscript', $superscript->getType());
         assertSame('hello', $superscript->text);
+        assertSame(['type' => 'superscript', 'text' => 'hello'], $superscript->toRequestArray());
     }
 
     public function testFromTelegramResult(): void

@@ -19,4 +19,12 @@ final readonly class RichTextMathematicalExpression implements RichText
     {
         return 'mathematical_expression';
     }
+
+    public function toRequestArray(): array
+    {
+        return [
+            'type' => $this->getType(),
+            'expression' => $this->expression,
+        ];
+    }
 }

@@ -18,6 +18,7 @@ final class RichTextSpoilerTest extends TestCase
 
         assertSame('spoiler', $spoiler->getType());
         assertSame('hello', $spoiler->text);
+        assertSame(['type' => 'spoiler', 'text' => 'hello'], $spoiler->toRequestArray());
     }
 
     public function testFromTelegramResult(): void

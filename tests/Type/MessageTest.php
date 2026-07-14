@@ -12,6 +12,7 @@ use Phptg\BotApi\Type\Checklist;
 use Phptg\BotApi\Type\ChecklistTask;
 use Phptg\BotApi\Type\ChecklistTasksAdded;
 use Phptg\BotApi\Type\ChecklistTasksDone;
+use Phptg\BotApi\Type\CommunityChatRemoved;
 use Phptg\BotApi\Type\DirectMessagePriceChanged;
 use Phptg\BotApi\Type\ExternalReplyInfo;
 use Phptg\BotApi\Type\ForumTopicClosed;
@@ -155,6 +156,10 @@ final class MessageTest extends TestCase
         assertNull($message->managedBotCreated);
         assertNull($message->pollOptionAdded);
         assertNull($message->pollOptionDeleted);
+        assertNull($message->receiverUser);
+        assertNull($message->ephemeralMessageId);
+        assertNull($message->communityChatAdded);
+        assertNull($message->communityChatRemoved);
     }
 
     public function testFromTelegramResult(): void
@@ -186,6 +191,12 @@ final class MessageTest extends TestCase
                 'first_name' => 'JohnBot',
             ],
             'sender_tag' => 'admin-tag',
+            'receiver_user' => [
+                'id' => 130,
+                'is_bot' => false,
+                'first_name' => 'Jane',
+            ],
+            'ephemeral_message_id' => 43,
             'business_connection_id' => 'btest',
             'guest_query_id' => 'guest_query_123',
             'forward_origin' => [
@@ -700,6 +711,13 @@ final class MessageTest extends TestCase
                 'option_persistent_id' => 'pid2',
                 'option_text' => 'Deleted option',
             ],
+            'community_chat_added' => [
+                'community' => [
+                    'id' => 987,
+                    'name' => 'My Community',
+                ],
+            ],
+            'community_chat_removed' => [],
         ], null, Message::class);
 
         assertSame(7, $message->messageId);
@@ -856,5 +874,10 @@ final class MessageTest extends TestCase
         assertSame('New option', $message->pollOptionAdded?->optionText);
         assertSame('pid2', $message->pollOptionDeleted?->optionPersistentId);
         assertSame('Deleted option', $message->pollOptionDeleted?->optionText);
+        assertSame(130, $message->receiverUser?->id);
+        assertSame(43, $message->ephemeralMessageId);
+        assertSame(987, $message->communityChatAdded?->community->id);
+        assertSame('My Community', $message->communityChatAdded?->community->name);
+        assertInstanceOf(CommunityChatRemoved::class, $message->communityChatRemoved);
     }
 }

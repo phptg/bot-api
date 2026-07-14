@@ -18,6 +18,7 @@ final class RichTextMarkedTest extends TestCase
 
         assertSame('marked', $marked->getType());
         assertSame('hello', $marked->text);
+        assertSame(['type' => 'marked', 'text' => 'hello'], $marked->toRequestArray());
     }
 
     public function testFromTelegramResult(): void

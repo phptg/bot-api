@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Method\UpdatingMessage;
 
+use Phptg\BotApi\FileCollector;
 use Phptg\BotApi\ParseResult\ValueProcessor\ObjectOrTrueValue;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\MethodInterface;
@@ -48,6 +49,8 @@ final readonly class EditMessageText implements MethodInterface
 
     public function getData(): array
     {
+        $fileCollector = new FileCollector();
+
         return array_filter(
             [
                 'business_connection_id' => $this->businessConnectionId,
@@ -61,8 +64,9 @@ final readonly class EditMessageText implements MethodInterface
                     $this->entities,
                 ),
                 'link_preview_options' => $this->linkPreviewOptions?->toRequestArray(),
-                'rich_message' => $this->richMessage?->toRequestArray(),
+                'rich_message' => $this->richMessage?->toRequestArray($fileCollector),
                 'reply_markup' => $this->replyMarkup?->toRequestArray(),
+                ...$fileCollector->get(),
             ],
             static fn(mixed $value): bool => $value !== null,
         );

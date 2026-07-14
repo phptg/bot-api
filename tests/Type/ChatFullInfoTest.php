@@ -89,6 +89,7 @@ final class ChatFullInfoTest extends TestCase
         assertNull($info->paidMessageStarCount);
         assertNull($info->firstProfileAudio);
         assertNull($info->guardBot);
+        assertNull($info->community);
     }
 
     public function testFromTelegramResult(): void
@@ -220,6 +221,10 @@ final class ChatFullInfoTest extends TestCase
                 'is_bot' => true,
                 'first_name' => 'GuardBot',
             ],
+            'community' => [
+                'id' => 987,
+                'name' => 'My Community',
+            ],
         ], null, ChatFullInfo::class);
 
         assertSame(23, $info->id);
@@ -325,5 +330,7 @@ final class ChatFullInfoTest extends TestCase
         assertInstanceOf(User::class, $info->guardBot);
         assertSame(42, $info->guardBot->id);
         assertSame('GuardBot', $info->guardBot->firstName);
+        assertSame(987, $info->community?->id);
+        assertSame('My Community', $info->community?->name);
     }
 }

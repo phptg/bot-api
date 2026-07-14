@@ -18,6 +18,7 @@ final class RichTextItalicTest extends TestCase
 
         assertSame('italic', $italic->getType());
         assertSame('hello', $italic->text);
+        assertSame(['type' => 'italic', 'text' => 'hello'], $italic->toRequestArray());
     }
 
     public function testFromTelegramResult(): void

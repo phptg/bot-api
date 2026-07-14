@@ -1,5 +1,32 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.21.2 July 15, 2026
+
+- New #211: Add `InputMediaVoiceNote`, `InputRichMessageMedia`, `InputRichBlockListItem`, `Community`,
+  `CommunityChatAdded`, `CommunityChatRemoved` and `BotSubscriptionUpdated` types.
+- New #211: Add `media` and `blocks` fields to `InputRichMessage` type.
+- New #211: Add `InputRichBlock` interface and 21 input rich block types: `InputRichBlockParagraph`,
+  `InputRichBlockSectionHeading`, `InputRichBlockPreformatted`, `InputRichBlockFooter`, `InputRichBlockDivider`,
+  `InputRichBlockMathematicalExpression`, `InputRichBlockAnchor`, `InputRichBlockList`,
+  `InputRichBlockBlockQuotation`, `InputRichBlockPullQuotation`, `InputRichBlockCollage`,
+  `InputRichBlockSlideshow`, `InputRichBlockTable`, `InputRichBlockDetails`, `InputRichBlockMap`,
+  `InputRichBlockAnimation`, `InputRichBlockAudio`, `InputRichBlockPhoto`, `InputRichBlockVideo`,
+  `InputRichBlockVoiceNote`, `InputRichBlockThinking`.
+- New #211: Add `isEphemeral` field to `BotCommand` type.
+- New #211: Add `receiverUser`, `ephemeralMessageId`, `communityChatAdded` and `communityChatRemoved` fields to
+  `Message` type.
+- New #211: Add `community` field to `ChatFullInfo` type.
+- New #211: Add `subscription` field to `Update` type.
+- New #211: Add `receiverUserId` and `callbackQueryId` parameters to `SendMessage`, `SendAnimation`, `SendAudio`,
+  `SendDocument`, `SendPhoto`, `SendSticker`, `SendVideo`, `SendVideoNote`, `SendVoice`, `SendContact`,
+  `SendLocation` and `SendVenue` methods.
+- New #211: Add `ephemeralMessageId` field to `ReplyParameters` type.
+- New #211: Add `EditEphemeralMessageText`, `EditEphemeralMessageMedia`, `EditEphemeralMessageCaption`,
+  `EditEphemeralMessageReplyMarkup` and `DeleteEphemeralMessage` methods.
+- Chg #211: Make `messageId` field of `ReplyParameters` type optional.
+- Enh #211: `RichText` types, `RichBlockCaption`, `RichBlockTableCell` and `Location` now support serialization
+  back into a request array via `toRequestArray()`.
+
 ## 0.21.1 June 12, 2026
 
 - New #200: Add `RichText` interface and 25 rich text types: `RichTextBold`, `RichTextItalic`, `RichTextUnderline`,

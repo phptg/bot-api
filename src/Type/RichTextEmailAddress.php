@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phptg\BotApi\Type;
 
 use Phptg\BotApi\ParseResult\ValueProcessor\RichTextValue;
+use Phptg\BotApi\RichTextConverter;
 
 /**
  * @see https://core.telegram.org/bots/api#richtextemailaddress
@@ -22,5 +23,14 @@ final readonly class RichTextEmailAddress implements RichText
     public function getType(): string
     {
         return 'email_address';
+    }
+
+    public function toRequestArray(): array
+    {
+        return [
+            'type' => $this->getType(),
+            'text' => RichTextConverter::toRequestArray($this->text),
+            'email_address' => $this->emailAddress,
+        ];
     }
 }

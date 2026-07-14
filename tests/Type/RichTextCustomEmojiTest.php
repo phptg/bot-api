@@ -19,6 +19,10 @@ final class RichTextCustomEmojiTest extends TestCase
         assertSame('custom_emoji', $customEmoji->getType());
         assertSame('emoji123', $customEmoji->customEmojiId);
         assertSame('😀', $customEmoji->alternativeText);
+        assertSame(
+            ['type' => 'custom_emoji', 'custom_emoji_id' => 'emoji123', 'alternative_text' => '😀'],
+            $customEmoji->toRequestArray(),
+        );
     }
 
     public function testFromTelegramResult(): void

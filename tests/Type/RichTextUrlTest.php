@@ -19,6 +19,10 @@ final class RichTextUrlTest extends TestCase
         assertSame('url', $url->getType());
         assertSame('hello', $url->text);
         assertSame('https://example.com', $url->url);
+        assertSame(
+            ['type' => 'url', 'text' => 'hello', 'url' => 'https://example.com'],
+            $url->toRequestArray(),
+        );
     }
 
     public function testFromTelegramResult(): void

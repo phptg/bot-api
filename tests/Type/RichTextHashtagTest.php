@@ -19,6 +19,10 @@ final class RichTextHashtagTest extends TestCase
         assertSame('hashtag', $hashtag->getType());
         assertSame('hello', $hashtag->text);
         assertSame('#world', $hashtag->hashtag);
+        assertSame(
+            ['type' => 'hashtag', 'text' => 'hello', 'hashtag' => '#world'],
+            $hashtag->toRequestArray(),
+        );
     }
 
     public function testFromTelegramResult(): void

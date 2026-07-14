@@ -18,6 +18,7 @@ final class RichTextCodeTest extends TestCase
 
         assertSame('code', $code->getType());
         assertSame('hello', $code->text);
+        assertSame(['type' => 'code', 'text' => 'hello'], $code->toRequestArray());
     }
 
     public function testFromTelegramResult(): void

@@ -19,4 +19,22 @@ final readonly class Location
         public ?int $heading = null,
         public ?int $proximityAlertRadius = null,
     ) {}
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function toRequestArray(): array
+    {
+        return array_filter(
+            [
+                'latitude' => $this->latitude,
+                'longitude' => $this->longitude,
+                'horizontal_accuracy' => $this->horizontalAccuracy,
+                'live_period' => $this->livePeriod,
+                'heading' => $this->heading,
+                'proximity_alert_radius' => $this->proximityAlertRadius,
+            ],
+            static fn(mixed $value): bool => $value !== null,
+        );
+    }
 }

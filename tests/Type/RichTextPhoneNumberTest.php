@@ -19,6 +19,10 @@ final class RichTextPhoneNumberTest extends TestCase
         assertSame('phone_number', $phoneNumber->getType());
         assertSame('hello', $phoneNumber->text);
         assertSame('+1234567890', $phoneNumber->phoneNumber);
+        assertSame(
+            ['type' => 'phone_number', 'text' => 'hello', 'phone_number' => '+1234567890'],
+            $phoneNumber->toRequestArray(),
+        );
     }
 
     public function testFromTelegramResult(): void

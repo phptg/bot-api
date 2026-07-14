@@ -18,6 +18,7 @@ final class RichTextUnderlineTest extends TestCase
 
         assertSame('underline', $underline->getType());
         assertSame('hello', $underline->text);
+        assertSame(['type' => 'underline', 'text' => 'hello'], $underline->toRequestArray());
     }
 
     public function testFromTelegramResult(): void
