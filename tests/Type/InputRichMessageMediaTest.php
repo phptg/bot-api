@@ -18,7 +18,7 @@ final class InputRichMessageMediaTest extends TestCase
     {
         $media = new InputRichMessageMedia(
             'photo1',
-            new InputMediaPhoto('https://example.com/photo.jpg'),
+            new InputMediaPhoto('photo_file_id_1'),
         );
 
         assertSame(
@@ -26,7 +26,7 @@ final class InputRichMessageMediaTest extends TestCase
                 'id' => 'photo1',
                 'media' => [
                     'type' => 'photo',
-                    'media' => 'https://example.com/photo.jpg',
+                    'media' => 'photo_file_id_1',
                 ],
             ],
             $media->toRequestArray(),
