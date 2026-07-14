@@ -17,11 +17,11 @@ final class InputRichBlockPhotoTest extends TestCase
 {
     public function testBase(): void
     {
-        $photo = new InputRichBlockPhoto(new InputMediaPhoto('https://example.com/a.jpg'));
+        $photo = new InputRichBlockPhoto(new InputMediaPhoto('photo_file_id_1'));
 
         assertSame('photo', $photo->getType());
         assertSame(
-            ['type' => 'photo', 'photo' => ['type' => 'photo', 'media' => 'https://example.com/a.jpg']],
+            ['type' => 'photo', 'photo' => ['type' => 'photo', 'media' => 'photo_file_id_1']],
             $photo->toRequestArray(),
         );
     }
@@ -29,14 +29,14 @@ final class InputRichBlockPhotoTest extends TestCase
     public function testFull(): void
     {
         $photo = new InputRichBlockPhoto(
-            new InputMediaPhoto('https://example.com/a.jpg'),
+            new InputMediaPhoto('photo_file_id_1'),
             new RichBlockCaption('caption'),
         );
 
         assertSame(
             [
                 'type' => 'photo',
-                'photo' => ['type' => 'photo', 'media' => 'https://example.com/a.jpg'],
+                'photo' => ['type' => 'photo', 'media' => 'photo_file_id_1'],
                 'caption' => ['text' => 'caption'],
             ],
             $photo->toRequestArray(),
