@@ -177,6 +177,10 @@ use Phptg\BotApi\Method\Update\SetWebhook;
 use Phptg\BotApi\Method\UpdatingMessage\DeleteBusinessMessages;
 use Phptg\BotApi\Method\UpdatingMessage\DeleteMessage;
 use Phptg\BotApi\Method\UpdatingMessage\DeleteMessages;
+use Phptg\BotApi\Method\UpdatingMessage\EditEphemeralMessageCaption;
+use Phptg\BotApi\Method\UpdatingMessage\EditEphemeralMessageMedia;
+use Phptg\BotApi\Method\UpdatingMessage\EditEphemeralMessageReplyMarkup;
+use Phptg\BotApi\Method\UpdatingMessage\EditEphemeralMessageText;
 use Phptg\BotApi\Method\UpdatingMessage\EditMessageCaption;
 use Phptg\BotApi\Method\UpdatingMessage\EditMessageLiveLocation;
 use Phptg\BotApi\Method\UpdatingMessage\EditMessageMedia;
@@ -934,6 +938,102 @@ final class TelegramBotApi
     {
         return $this->call(
             new EditGeneralForumTopic($chatId, $name),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#editephemeralmessagetext
+     *
+     * @param MessageEntity[]|null $entities
+     */
+    public function editEphemeralMessageText(
+        int|string $chatId,
+        int $receiverUserId,
+        int $ephemeralMessageId,
+        string $text,
+        ?string $parseMode = null,
+        ?array $entities = null,
+        ?LinkPreviewOptions $linkPreviewOptions = null,
+        ?InlineKeyboardMarkup $replyMarkup = null,
+    ): FailResult|true {
+        return $this->call(
+            new EditEphemeralMessageText(
+                $chatId,
+                $receiverUserId,
+                $ephemeralMessageId,
+                $text,
+                $parseMode,
+                $entities,
+                $linkPreviewOptions,
+                $replyMarkup,
+            ),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#editephemeralmessagemedia
+     */
+    public function editEphemeralMessageMedia(
+        int|string $chatId,
+        int $receiverUserId,
+        int $ephemeralMessageId,
+        InputMedia $media,
+        ?InlineKeyboardMarkup $replyMarkup = null,
+    ): FailResult|true {
+        return $this->call(
+            new EditEphemeralMessageMedia(
+                $chatId,
+                $receiverUserId,
+                $ephemeralMessageId,
+                $media,
+                $replyMarkup,
+            ),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#editephemeralmessagecaption
+     *
+     * @param MessageEntity[]|null $captionEntities
+     */
+    public function editEphemeralMessageCaption(
+        int|string $chatId,
+        int $receiverUserId,
+        int $ephemeralMessageId,
+        ?string $caption = null,
+        ?string $parseMode = null,
+        ?array $captionEntities = null,
+        ?InlineKeyboardMarkup $replyMarkup = null,
+    ): FailResult|true {
+        return $this->call(
+            new EditEphemeralMessageCaption(
+                $chatId,
+                $receiverUserId,
+                $ephemeralMessageId,
+                $caption,
+                $parseMode,
+                $captionEntities,
+                $replyMarkup,
+            ),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#editephemeralmessagereplymarkup
+     */
+    public function editEphemeralMessageReplyMarkup(
+        int|string $chatId,
+        int $receiverUserId,
+        int $ephemeralMessageId,
+        ?InlineKeyboardMarkup $replyMarkup = null,
+    ): FailResult|true {
+        return $this->call(
+            new EditEphemeralMessageReplyMarkup(
+                $chatId,
+                $receiverUserId,
+                $ephemeralMessageId,
+                $replyMarkup,
+            ),
         );
     }
 

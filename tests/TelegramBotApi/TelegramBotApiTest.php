@@ -912,6 +912,47 @@ final class TelegramBotApiTest extends TestCase
         assertTrue($result);
     }
 
+    public function testEditEphemeralMessageText(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->editEphemeralMessageText(23, 45, 34, 'hello');
+
+        assertTrue($result);
+    }
+
+    public function testEditEphemeralMessageMedia(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->editEphemeralMessageMedia(
+            23,
+            45,
+            34,
+            new InputMediaPhoto('https://example.com/photo.jpg'),
+        );
+
+        assertTrue($result);
+    }
+
+    public function testEditEphemeralMessageCaption(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->editEphemeralMessageCaption(23, 45, 34);
+
+        assertTrue($result);
+    }
+
+    public function testEditEphemeralMessageReplyMarkup(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->editEphemeralMessageReplyMarkup(23, 45, 34);
+
+        assertTrue($result);
+    }
+
     public function testEditMessageCaption(): void
     {
         $api = TestHelper::createSuccessStubApi(true);
