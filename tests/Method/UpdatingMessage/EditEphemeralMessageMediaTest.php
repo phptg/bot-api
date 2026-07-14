@@ -38,7 +38,7 @@ final class EditEphemeralMessageMediaTest extends TestCase
 
     public function testFull(): void
     {
-        $media = new InputMediaPhoto('https://example.com/photo.jpg');
+        $media = new InputMediaPhoto('photo_file_id_1');
         $replyMarkup = new InlineKeyboardMarkup([[new InlineKeyboardButton('hello')]]);
         $method = new EditEphemeralMessageMedia(23, 45, 34, $media, $replyMarkup);
 
