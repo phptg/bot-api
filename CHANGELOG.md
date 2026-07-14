@@ -1,5 +1,9 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.21.2 under construction
+
+- New #211: Add `InputMediaVoiceNote` type.
+
 ## 0.21.1 June 12, 2026
 
 - New #200: Add `RichText` interface and 25 rich text types: `RichTextBold`, `RichTextItalic`, `RichTextUnderline`,
