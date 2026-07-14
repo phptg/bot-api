@@ -11,6 +11,7 @@
   `InputRichBlockSlideshow`, `InputRichBlockTable`, `InputRichBlockDetails`, `InputRichBlockMap`,
   `InputRichBlockAnimation`, `InputRichBlockAudio`, `InputRichBlockPhoto`, `InputRichBlockVideo`,
   `InputRichBlockVoiceNote`, `InputRichBlockThinking`.
+- New #211: Add `isEphemeral` field to `BotCommand` type.
 - Enh #211: `RichText` types, `RichBlockCaption`, `RichBlockTableCell` and `Location` now support serialization
   back into a request array via `toRequestArray()`.
 
