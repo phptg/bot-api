@@ -3,6 +3,7 @@
 ## 0.21.2 under construction
 
 - New #211: Add `InputMediaVoiceNote` and `InputRichMessageMedia` types.
+- New #211: Add `media` field to `InputRichMessage` type.
 
 ## 0.21.1 June 12, 2026
 

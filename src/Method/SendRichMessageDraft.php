@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Method;
 
+use Phptg\BotApi\FileCollector;
 use Phptg\BotApi\MethodInterface;
 use Phptg\BotApi\ParseResult\ValueProcessor\TrueValue;
 use Phptg\BotApi\Transport\HttpMethod;
@@ -35,12 +36,15 @@ final readonly class SendRichMessageDraft implements MethodInterface
 
     public function getData(): array
     {
+        $fileCollector = new FileCollector();
+
         return array_filter(
             [
                 'chat_id' => $this->chatId,
                 'message_thread_id' => $this->messageThreadId,
                 'draft_id' => $this->draftId,
-                'rich_message' => $this->richMessage->toRequestArray(),
+                'rich_message' => $this->richMessage->toRequestArray($fileCollector),
+                ...$fileCollector->get(),
             ],
             static fn(mixed $value): bool => $value !== null,
         );

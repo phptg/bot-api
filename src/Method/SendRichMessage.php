@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Method;
 
+use Phptg\BotApi\FileCollector;
 use Phptg\BotApi\MethodInterface;
 use Phptg\BotApi\ParseResult\ValueProcessor\ObjectValue;
 use Phptg\BotApi\Transport\HttpMethod;
@@ -50,13 +51,15 @@ final readonly class SendRichMessage implements MethodInterface
 
     public function getData(): array
     {
+        $fileCollector = new FileCollector();
+
         return array_filter(
             [
                 'business_connection_id' => $this->businessConnectionId,
                 'chat_id' => $this->chatId,
                 'message_thread_id' => $this->messageThreadId,
                 'direct_messages_topic_id' => $this->directMessagesTopicId,
-                'rich_message' => $this->richMessage->toRequestArray(),
+                'rich_message' => $this->richMessage->toRequestArray($fileCollector),
                 'disable_notification' => $this->disableNotification,
                 'protect_content' => $this->protectContent,
                 'allow_paid_broadcast' => $this->allowPaidBroadcast,
@@ -64,6 +67,7 @@ final readonly class SendRichMessage implements MethodInterface
                 'suggested_post_parameters' => $this->suggestedPostParameters?->toRequestArray(),
                 'reply_parameters' => $this->replyParameters?->toRequestArray(),
                 'reply_markup' => $this->replyMarkup?->toRequestArray(),
+                ...$fileCollector->get(),
             ],
             static fn(mixed $value): bool => $value !== null,
         );
