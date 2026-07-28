@@ -1,5 +1,9 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.21.3 under development
+
+- Enh #214: Rework `.gitattributes` to explicitly allow only distribution files for export.
+
 ## 0.21.2 July 15, 2026
 
 - New #211: Add `InputMediaVoiceNote`, `InputRichMessageMedia`, `InputRichBlockListItem`, `Community`,
