@@ -14,14 +14,7 @@ return RectorConfig::configure()
         __DIR__ . '/tests',
     ])
     ->withPhpSets(php82: true)
-    ->withConfiguredRule(
-        AddSensitiveParameterAttributeRector::class,
-        [
-            'sensitive_parameters' => ['token', 'providerToken', 'secretToken'],
-        ]
-    )
     ->withSkip([
         ClosureToArrowFunctionRector::class,
-        NullToStrictStringFuncCallArgRector::class,
         ClassPropertyAssignToConstructorPromotionRector::class,
     ]);
