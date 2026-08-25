@@ -46,6 +46,7 @@ final class EditEphemeralMessageCaptionTest extends TestCase
             ParseMode::MARKDOWN_V2,
             [$messageEntity],
             $replyMarkup,
+            true,
         );
 
         assertSame(
@@ -56,6 +57,7 @@ final class EditEphemeralMessageCaptionTest extends TestCase
                 'caption' => 'test',
                 'parse_mode' => 'MarkdownV2',
                 'caption_entities' => [$messageEntity->toRequestArray()],
+                'show_caption_above_media' => true,
                 'reply_markup' => $replyMarkup->toRequestArray(),
             ],
             $method->getData(),

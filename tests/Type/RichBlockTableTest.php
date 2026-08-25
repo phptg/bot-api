@@ -31,12 +31,13 @@ final class RichBlockTableTest extends TestCase
         assertNull($table->isBordered);
         assertNull($table->isStriped);
         assertNull($table->caption);
+        assertNull($table->isCompact);
     }
 
     public function testFull(): void
     {
         $cell = new RichBlockTableCell('center', 'middle');
-        $table = new RichBlockTable([[$cell]], true, true, 'caption');
+        $table = new RichBlockTable([[$cell]], true, true, 'caption', true);
 
         assertSame('table', $table->getType());
         assertCount(1, $table->cells);
@@ -46,6 +47,7 @@ final class RichBlockTableTest extends TestCase
         assertTrue($table->isBordered);
         assertTrue($table->isStriped);
         assertSame('caption', $table->caption);
+        assertTrue($table->isCompact);
     }
 
     public function testFromTelegramResult(): void
@@ -68,6 +70,7 @@ final class RichBlockTableTest extends TestCase
         assertNull($table->isBordered);
         assertNull($table->isStriped);
         assertNull($table->caption);
+        assertNull($table->isCompact);
     }
 
     public function testFromTelegramResultFull(): void
@@ -81,6 +84,7 @@ final class RichBlockTableTest extends TestCase
             ],
             'is_bordered' => true,
             'is_striped' => true,
+            'is_compact' => true,
             'caption' => ['type' => 'bold', 'text' => 'caption'],
         ], null, RichBlockTable::class);
 
@@ -94,5 +98,6 @@ final class RichBlockTableTest extends TestCase
         assertTrue($table->isStriped);
         assertInstanceOf(RichTextBold::class, $table->caption);
         assertSame('caption', $table->caption->text);
+        assertTrue($table->isCompact);
     }
 }

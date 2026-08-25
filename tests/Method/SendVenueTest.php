@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\SendVenue;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\EphemeralMessageParameters;
 use Phptg\BotApi\Type\ForceReply;
 use Phptg\BotApi\Type\ReplyParameters;
 use Phptg\BotApi\Type\SuggestedPostParameters;
@@ -61,8 +62,7 @@ final class SendVenueTest extends TestCase
             new SuggestedPostParameters(
                 new SuggestedPostPrice('USD', 10),
             ),
-            789,
-            'cbq1',
+            new EphemeralMessageParameters(789, 'cbq1', true),
         );
 
         assertSame(
@@ -71,8 +71,11 @@ final class SendVenueTest extends TestCase
                 'chat_id' => 12,
                 'message_thread_id' => 99,
                 'direct_messages_topic_id' => 123,
-                'receiver_user_id' => 789,
-                'callback_query_id' => 'cbq1',
+                'ephemeral_message_parameters' => [
+                    'receiver_user_id' => 789,
+                    'callback_query_id' => 'cbq1',
+                    'replace_callback_query_message' => true,
+                ],
                 'latitude' => 1.1,
                 'longitude' => 2.2,
                 'title' => 'Moscow',

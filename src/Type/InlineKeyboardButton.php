@@ -27,6 +27,7 @@ final readonly class InlineKeyboardButton
         public ?CopyTextButton $copyText = null,
         public ?string $iconCustomEmojiId = null,
         public ?string $style = null,
+        public ?DisabledButton $disabled = null,
     ) {}
 
     public function toRequestArray(): array
@@ -46,6 +47,7 @@ final readonly class InlineKeyboardButton
                 'copy_text' => $this->copyText?->toRequestArray(),
                 'callback_game' => $this->callbackGame?->toRequestArray(),
                 'pay' => $this->pay,
+                'disabled' => $this->disabled?->toRequestArray(),
             ],
             static fn(mixed $value): bool => $value !== null,
         );

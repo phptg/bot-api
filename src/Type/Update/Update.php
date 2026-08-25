@@ -21,6 +21,7 @@ use Phptg\BotApi\Type\Inline\ChosenInlineResult;
 use Phptg\BotApi\Type\Inline\InlineQuery;
 use Phptg\BotApi\Type\ManagedBotUpdated;
 use Phptg\BotApi\Type\Message;
+use Phptg\BotApi\Type\MessageGenerationStopped;
 use Phptg\BotApi\Type\MessageReactionCountUpdated;
 use Phptg\BotApi\Type\MessageReactionUpdated;
 use Phptg\BotApi\Type\Payment\BotSubscriptionUpdated;
@@ -68,6 +69,7 @@ final class Update
         public readonly ?PaidMediaPurchased $purchasedPaidMedia = null,
         public readonly ?ManagedBotUpdated $managedBot = null,
         public readonly ?BotSubscriptionUpdated $subscription = null,
+        public readonly ?MessageGenerationStopped $stoppedMessageGeneration = null,
     ) {}
 
     /**

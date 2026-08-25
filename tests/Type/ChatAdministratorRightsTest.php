@@ -17,7 +17,7 @@ final class ChatAdministratorRightsTest extends TestCase
 {
     public function testBase(): void
     {
-        $rights = new ChatAdministratorRights(true, true, true, true, true, true, true, true, true, true, false);
+        $rights = new ChatAdministratorRights(true, true, true, true, true, true, true, true, true, true, false, true);
 
         assertTrue($rights->isAnonymous);
         assertTrue($rights->canManageChat);
@@ -36,6 +36,7 @@ final class ChatAdministratorRightsTest extends TestCase
         assertNull($rights->canManageTopics);
         assertNull($rights->canManageDirectMessages);
         assertNull($rights->canManageTags);
+        assertTrue($rights->canSendWelcomeMessages);
 
         assertSame(
             [
@@ -50,6 +51,7 @@ final class ChatAdministratorRightsTest extends TestCase
                 'can_post_stories' => true,
                 'can_edit_stories' => true,
                 'can_delete_stories' => false,
+                'can_send_welcome_messages' => true,
             ],
             $rights->toRequestArray(),
         );
@@ -75,6 +77,7 @@ final class ChatAdministratorRightsTest extends TestCase
             'can_manage_topics' => true,
             'can_manage_direct_messages' => false,
             'can_manage_tags' => true,
+            'can_send_welcome_messages' => true,
         ], null, ChatAdministratorRights::class);
 
         assertTrue($type->isAnonymous);
@@ -94,6 +97,7 @@ final class ChatAdministratorRightsTest extends TestCase
         assertTrue($type->canManageTopics);
         assertFalse($type->canManageDirectMessages);
         assertTrue($type->canManageTags);
+        assertTrue($type->canSendWelcomeMessages);
         assertSame(
             [
                 'is_anonymous' => true,
@@ -113,6 +117,7 @@ final class ChatAdministratorRightsTest extends TestCase
                 'can_manage_topics' => true,
                 'can_manage_direct_messages' => false,
                 'can_manage_tags' => true,
+                'can_send_welcome_messages' => true,
             ],
             $type->toRequestArray(),
         );

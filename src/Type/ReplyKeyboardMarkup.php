@@ -22,6 +22,7 @@ final readonly class ReplyKeyboardMarkup
         public ?bool $oneTimeKeyboard = null,
         public ?string $inputFieldPlaceholder = null,
         public ?bool $selective = null,
+        public ?bool $forceReply = null,
     ) {}
 
     public function toRequestArray(): array
@@ -40,6 +41,7 @@ final readonly class ReplyKeyboardMarkup
                 'one_time_keyboard' => $this->oneTimeKeyboard,
                 'input_field_placeholder' => $this->inputFieldPlaceholder,
                 'selective' => $this->selective,
+                'force_reply' => $this->forceReply,
             ],
             static fn(mixed $value): bool => $value !== null,
         );

@@ -6,6 +6,7 @@ namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\MessageEntity;
 use Phptg\BotApi\Type\Sticker\Sticker;
 use Phptg\BotApi\Type\UniqueGiftBackdrop;
 use Phptg\BotApi\Type\UniqueGiftBackdropColors;
@@ -14,9 +15,12 @@ use Phptg\BotApi\Type\UniqueGift;
 use Phptg\BotApi\Type\UniqueGiftModel;
 use Phptg\BotApi\Type\UniqueGiftSymbol;
 
+use function PHPUnit\Framework\assertContainsOnlyInstancesOf;
+use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
+use function PHPUnit\Framework\assertTrue;
 
 final class UniqueGiftInfoTest extends TestCase
 {
@@ -68,6 +72,9 @@ final class UniqueGiftInfoTest extends TestCase
         assertNull($uniqueGiftInfo->lastResaleCurrency);
         assertNull($uniqueGiftInfo->lastResaleAmount);
         assertNull($uniqueGiftInfo->nextTransferDate);
+        assertNull($uniqueGiftInfo->text);
+        assertNull($uniqueGiftInfo->entities);
+        assertNull($uniqueGiftInfo->isPrivate);
     }
 
     public function testFromTelegramResult(): void
@@ -121,6 +128,11 @@ final class UniqueGiftInfoTest extends TestCase
             'owned_gift_id' => 'owned-id1',
             'transfer_star_count' => 15,
             'next_transfer_date' => 1700000000,
+            'text' => 'Happy birthday!',
+            'entities' => [
+                ['type' => 'bold', 'offset' => 0, 'length' => 5],
+            ],
+            'is_private' => true,
         ], null, UniqueGiftInfo::class);
 
         assertInstanceOf(UniqueGiftInfo::class, $type);
@@ -131,5 +143,10 @@ final class UniqueGiftInfoTest extends TestCase
         assertSame('XTR', $type->lastResaleCurrency);
         assertSame(99, $type->lastResaleAmount);
         assertSame(1700000000, $type->nextTransferDate?->getTimestamp());
+        assertSame('Happy birthday!', $type->text);
+        assertContainsOnlyInstancesOf(MessageEntity::class, $type->entities);
+        assertCount(1, $type->entities);
+        assertSame('bold', $type->entities[0]->type);
+        assertTrue($type->isPrivate);
     }
 }

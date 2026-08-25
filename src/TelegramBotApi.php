@@ -211,6 +211,7 @@ use Phptg\BotApi\Type\ChatFullInfo;
 use Phptg\BotApi\Type\ChatInviteLink;
 use Phptg\BotApi\Type\ChatMember;
 use Phptg\BotApi\Type\ChatPermissions;
+use Phptg\BotApi\Type\EphemeralMessageParameters;
 use Phptg\BotApi\Type\File;
 use Phptg\BotApi\Type\ForceReply;
 use Phptg\BotApi\Type\ForumTopic;
@@ -962,11 +963,12 @@ final class TelegramBotApi
         int|string $chatId,
         int $receiverUserId,
         int $ephemeralMessageId,
-        string $text,
+        ?string $text = null,
         ?string $parseMode = null,
         ?array $entities = null,
         ?LinkPreviewOptions $linkPreviewOptions = null,
         ?InlineKeyboardMarkup $replyMarkup = null,
+        ?InputRichMessage $richMessage = null,
     ): FailResult|true {
         return $this->call(
             new EditEphemeralMessageText(
@@ -978,6 +980,7 @@ final class TelegramBotApi
                 $entities,
                 $linkPreviewOptions,
                 $replyMarkup,
+                $richMessage,
             ),
         );
     }
@@ -1016,6 +1019,7 @@ final class TelegramBotApi
         ?string $parseMode = null,
         ?array $captionEntities = null,
         ?InlineKeyboardMarkup $replyMarkup = null,
+        ?bool $showCaptionAboveMedia = null,
     ): FailResult|true {
         return $this->call(
             new EditEphemeralMessageCaption(
@@ -1026,6 +1030,7 @@ final class TelegramBotApi
                 $parseMode,
                 $captionEntities,
                 $replyMarkup,
+                $showCaptionAboveMedia,
             ),
         );
     }
@@ -1856,6 +1861,7 @@ final class TelegramBotApi
         ?bool $canManageTopics = null,
         ?bool $canManageDirectMessages = null,
         ?bool $canManageTags = null,
+        ?bool $canSendWelcomeMessages = null,
     ): FailResult|true {
         return $this->call(
             new PromoteChatMember(
@@ -1878,6 +1884,7 @@ final class TelegramBotApi
                 $canManageTopics,
                 $canManageDirectMessages,
                 $canManageTags,
+                $canSendWelcomeMessages,
             ),
         );
     }
@@ -2070,8 +2077,7 @@ final class TelegramBotApi
         ?bool $allowPaidBroadcast = null,
         ?int $directMessagesTopicId = null,
         ?SuggestedPostParameters $suggestedPostParameters = null,
-        ?int $receiverUserId = null,
-        ?string $callbackQueryId = null,
+        ?EphemeralMessageParameters $ephemeralMessageParameters = null,
     ): FailResult|Message {
         return $this->call(
             new SendAnimation(
@@ -2096,8 +2102,7 @@ final class TelegramBotApi
                 $allowPaidBroadcast,
                 $directMessagesTopicId,
                 $suggestedPostParameters,
-                $receiverUserId,
-                $callbackQueryId,
+                $ephemeralMessageParameters,
             ),
         );
     }
@@ -2127,8 +2132,7 @@ final class TelegramBotApi
         ?bool $allowPaidBroadcast = null,
         ?int $directMessagesTopicId = null,
         ?SuggestedPostParameters $suggestedPostParameters = null,
-        ?int $receiverUserId = null,
-        ?string $callbackQueryId = null,
+        ?EphemeralMessageParameters $ephemeralMessageParameters = null,
     ): FailResult|Message {
         return $this->call(
             new SendAudio(
@@ -2151,8 +2155,7 @@ final class TelegramBotApi
                 $allowPaidBroadcast,
                 $directMessagesTopicId,
                 $suggestedPostParameters,
-                $receiverUserId,
-                $callbackQueryId,
+                $ephemeralMessageParameters,
             ),
         );
     }
@@ -2195,8 +2198,7 @@ final class TelegramBotApi
         ?bool $allowPaidBroadcast = null,
         ?int $directMessagesTopicId = null,
         ?SuggestedPostParameters $suggestedPostParameters = null,
-        ?int $receiverUserId = null,
-        ?string $callbackQueryId = null,
+        ?EphemeralMessageParameters $ephemeralMessageParameters = null,
     ): FailResult|Message {
         return $this->call(
             new SendContact(
@@ -2215,8 +2217,7 @@ final class TelegramBotApi
                 $allowPaidBroadcast,
                 $directMessagesTopicId,
                 $suggestedPostParameters,
-                $receiverUserId,
-                $callbackQueryId,
+                $ephemeralMessageParameters,
             ),
         );
     }
@@ -2306,8 +2307,7 @@ final class TelegramBotApi
         ?bool $allowPaidBroadcast = null,
         ?int $directMessagesTopicId = null,
         ?SuggestedPostParameters $suggestedPostParameters = null,
-        ?int $receiverUserId = null,
-        ?string $callbackQueryId = null,
+        ?EphemeralMessageParameters $ephemeralMessageParameters = null,
     ): FailResult|Message {
         return $this->call(
             new SendDocument(
@@ -2328,8 +2328,7 @@ final class TelegramBotApi
                 $allowPaidBroadcast,
                 $directMessagesTopicId,
                 $suggestedPostParameters,
-                $receiverUserId,
-                $callbackQueryId,
+                $ephemeralMessageParameters,
             ),
         );
     }
@@ -2490,8 +2489,7 @@ final class TelegramBotApi
         ?bool $allowPaidBroadcast = null,
         ?int $directMessagesTopicId = null,
         ?SuggestedPostParameters $suggestedPostParameters = null,
-        ?int $receiverUserId = null,
-        ?string $callbackQueryId = null,
+        ?EphemeralMessageParameters $ephemeralMessageParameters = null,
     ): FailResult|Message {
         return $this->call(
             new SendLocation(
@@ -2512,8 +2510,7 @@ final class TelegramBotApi
                 $allowPaidBroadcast,
                 $directMessagesTopicId,
                 $suggestedPostParameters,
-                $receiverUserId,
-                $callbackQueryId,
+                $ephemeralMessageParameters,
             ),
         );
     }
@@ -2576,6 +2573,7 @@ final class TelegramBotApi
         ?SuggestedPostParameters $suggestedPostParameters = null,
         ?ReplyParameters $replyParameters = null,
         InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup = null,
+        ?EphemeralMessageParameters $ephemeralMessageParameters = null,
     ): FailResult|Message {
         return $this->call(
             new SendLivePhoto(
@@ -2597,6 +2595,7 @@ final class TelegramBotApi
                 $suggestedPostParameters,
                 $replyParameters,
                 $replyMarkup,
+                $ephemeralMessageParameters,
             ),
         );
     }
@@ -2622,8 +2621,7 @@ final class TelegramBotApi
         ?bool $allowPaidBroadcast = null,
         ?int $directMessagesTopicId = null,
         ?SuggestedPostParameters $suggestedPostParameters = null,
-        ?int $receiverUserId = null,
-        ?string $callbackQueryId = null,
+        ?EphemeralMessageParameters $ephemeralMessageParameters = null,
     ): FailResult|Message {
         return $this->call(
             new SendMessage(
@@ -2642,8 +2640,7 @@ final class TelegramBotApi
                 $allowPaidBroadcast,
                 $directMessagesTopicId,
                 $suggestedPostParameters,
-                $receiverUserId,
-                $callbackQueryId,
+                $ephemeralMessageParameters,
             ),
         );
     }
@@ -2660,6 +2657,8 @@ final class TelegramBotApi
         ?int $messageThreadId = null,
         ?string $parseMode = null,
         ?array $entities = null,
+        ?bool $canStop = null,
+        ?bool $keepOnStop = null,
     ): FailResult|true {
         return $this->call(
             new SendMessageDraft(
@@ -2669,6 +2668,8 @@ final class TelegramBotApi
                 $messageThreadId,
                 $parseMode,
                 $entities,
+                $canStop,
+                $keepOnStop,
             ),
         );
     }
@@ -2744,8 +2745,7 @@ final class TelegramBotApi
         ?bool $allowPaidBroadcast = null,
         ?int $directMessagesTopicId = null,
         ?SuggestedPostParameters $suggestedPostParameters = null,
-        ?int $receiverUserId = null,
-        ?string $callbackQueryId = null,
+        ?EphemeralMessageParameters $ephemeralMessageParameters = null,
     ): FailResult|Message {
         return $this->call(
             new SendPhoto(
@@ -2766,8 +2766,7 @@ final class TelegramBotApi
                 $allowPaidBroadcast,
                 $directMessagesTopicId,
                 $suggestedPostParameters,
-                $receiverUserId,
-                $callbackQueryId,
+                $ephemeralMessageParameters,
             ),
         );
     }
@@ -2875,8 +2874,7 @@ final class TelegramBotApi
         ?bool $allowPaidBroadcast = null,
         ?int $directMessagesTopicId = null,
         ?SuggestedPostParameters $suggestedPostParameters = null,
-        ?int $receiverUserId = null,
-        ?string $callbackQueryId = null,
+        ?EphemeralMessageParameters $ephemeralMessageParameters = null,
     ): FailResult|Message {
         return $this->call(
             new SendSticker(
@@ -2893,8 +2891,7 @@ final class TelegramBotApi
                 $allowPaidBroadcast,
                 $directMessagesTopicId,
                 $suggestedPostParameters,
-                $receiverUserId,
-                $callbackQueryId,
+                $ephemeralMessageParameters,
             ),
         );
     }
@@ -2922,8 +2919,7 @@ final class TelegramBotApi
         ?bool $allowPaidBroadcast = null,
         ?int $directMessagesTopicId = null,
         ?SuggestedPostParameters $suggestedPostParameters = null,
-        ?int $receiverUserId = null,
-        ?string $callbackQueryId = null,
+        ?EphemeralMessageParameters $ephemeralMessageParameters = null,
     ): FailResult|Message {
         return $this->call(
             new SendVenue(
@@ -2946,8 +2942,7 @@ final class TelegramBotApi
                 $allowPaidBroadcast,
                 $directMessagesTopicId,
                 $suggestedPostParameters,
-                $receiverUserId,
-                $callbackQueryId,
+                $ephemeralMessageParameters,
             ),
         );
     }
@@ -2982,8 +2977,7 @@ final class TelegramBotApi
         ?int $startTimestamp = null,
         ?int $directMessagesTopicId = null,
         ?SuggestedPostParameters $suggestedPostParameters = null,
-        ?int $receiverUserId = null,
-        ?string $callbackQueryId = null,
+        ?EphemeralMessageParameters $ephemeralMessageParameters = null,
     ): FailResult|Message {
         return $this->call(
             new SendVideo(
@@ -3011,8 +3005,7 @@ final class TelegramBotApi
                 $startTimestamp,
                 $directMessagesTopicId,
                 $suggestedPostParameters,
-                $receiverUserId,
-                $callbackQueryId,
+                $ephemeralMessageParameters,
             ),
         );
     }
@@ -3036,8 +3029,7 @@ final class TelegramBotApi
         ?bool $allowPaidBroadcast = null,
         ?int $directMessagesTopicId = null,
         ?SuggestedPostParameters $suggestedPostParameters = null,
-        ?int $receiverUserId = null,
-        ?string $callbackQueryId = null,
+        ?EphemeralMessageParameters $ephemeralMessageParameters = null,
     ): FailResult|Message {
         return $this->call(
             new SendVideoNote(
@@ -3056,8 +3048,7 @@ final class TelegramBotApi
                 $allowPaidBroadcast,
                 $directMessagesTopicId,
                 $suggestedPostParameters,
-                $receiverUserId,
-                $callbackQueryId,
+                $ephemeralMessageParameters,
             ),
         );
     }
@@ -3084,8 +3075,7 @@ final class TelegramBotApi
         ?bool $allowPaidBroadcast = null,
         ?int $directMessagesTopicId = null,
         ?SuggestedPostParameters $suggestedPostParameters = null,
-        ?int $receiverUserId = null,
-        ?string $callbackQueryId = null,
+        ?EphemeralMessageParameters $ephemeralMessageParameters = null,
     ): FailResult|Message {
         return $this->call(
             new SendVoice(
@@ -3105,8 +3095,7 @@ final class TelegramBotApi
                 $allowPaidBroadcast,
                 $directMessagesTopicId,
                 $suggestedPostParameters,
-                $receiverUserId,
-                $callbackQueryId,
+                $ephemeralMessageParameters,
             ),
         );
     }
@@ -3135,6 +3124,7 @@ final class TelegramBotApi
         ?SuggestedPostParameters $suggestedPostParameters = null,
         ?ReplyParameters $replyParameters = null,
         InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup = null,
+        ?EphemeralMessageParameters $ephemeralMessageParameters = null,
     ): FailResult|Message {
         return $this->call(
             new SendRichMessage(
@@ -3150,6 +3140,7 @@ final class TelegramBotApi
                 $suggestedPostParameters,
                 $replyParameters,
                 $replyMarkup,
+                $ephemeralMessageParameters,
             ),
         );
     }
@@ -3162,6 +3153,8 @@ final class TelegramBotApi
         int $draftId,
         InputRichMessage $richMessage,
         ?int $messageThreadId = null,
+        ?bool $canStop = null,
+        ?bool $keepOnStop = null,
     ): FailResult|true {
         return $this->call(
             new SendRichMessageDraft(
@@ -3169,6 +3162,8 @@ final class TelegramBotApi
                 $draftId,
                 $richMessage,
                 $messageThreadId,
+                $canStop,
+                $keepOnStop,
             ),
         );
     }

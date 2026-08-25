@@ -25,6 +25,7 @@ final readonly class ChatMemberAdministrator implements ChatMember
         public bool $canPostStories,
         public bool $canEditStories,
         public bool $canDeleteStories,
+        public bool $canSendWelcomeMessages,
         public ?bool $canPostMessages = null,
         public ?bool $canEditMessages = null,
         public ?bool $canPinMessages = null,

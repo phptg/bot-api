@@ -24,6 +24,7 @@ final readonly class RichBlockTable implements RichBlock
         public ?true $isStriped = null,
         #[RichTextValue]
         public string|array|RichText|null $caption = null,
+        public ?true $isCompact = null,
     ) {}
 
     public function getType(): string

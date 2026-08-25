@@ -21,6 +21,7 @@ use Phptg\BotApi\Type\RichTextAnchorLink;
 use Phptg\BotApi\Type\RichTextReference;
 use Phptg\BotApi\Type\RichTextReferenceLink;
 use Phptg\BotApi\Type\RichTextBotCommand;
+use Phptg\BotApi\Type\RichTextButton;
 use Phptg\BotApi\Type\RichTextCashtag;
 use Phptg\BotApi\Type\RichTextHashtag;
 use Phptg\BotApi\Type\RichTextMention;
@@ -75,6 +76,7 @@ final readonly class RichTextValue implements ValueProcessorInterface
         'anchor_link' => RichTextAnchorLink::class,
         'reference' => RichTextReference::class,
         'reference_link' => RichTextReferenceLink::class,
+        'button' => RichTextButton::class,
     ];
 
     public function process(mixed $value, ?string $key, ObjectFactory $objectFactory): string|array|RichText

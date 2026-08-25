@@ -56,6 +56,7 @@ final class GetMyDefaultAdministratorRightsTest extends TestCase
             'can_edit_messages' => true,
             'can_pin_messages' => false,
             'can_manage_topics' => true,
+            'can_send_welcome_messages' => true,
         ])->call($method);
 
         assertTrue($preparedResult->isAnonymous);
@@ -73,5 +74,6 @@ final class GetMyDefaultAdministratorRightsTest extends TestCase
         assertTrue($preparedResult->canEditMessages);
         assertFalse($preparedResult->canPinMessages);
         assertTrue($preparedResult->canManageTopics);
+        assertTrue($preparedResult->canSendWelcomeMessages);
     }
 }

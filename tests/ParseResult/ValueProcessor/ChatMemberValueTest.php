@@ -56,6 +56,7 @@ final class ChatMemberValueTest extends TestCase
                     'can_post_stories' => true,
                     'can_edit_stories' => true,
                     'can_delete_stories' => true,
+                    'can_send_welcome_messages' => true,
                 ],
             ],
             [

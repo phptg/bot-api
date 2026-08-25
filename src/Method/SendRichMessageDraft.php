@@ -22,6 +22,8 @@ final readonly class SendRichMessageDraft implements MethodInterface
         private int $draftId,
         private InputRichMessage $richMessage,
         private ?int $messageThreadId = null,
+        private ?bool $canStop = null,
+        private ?bool $keepOnStop = null,
     ) {}
 
     public function getHttpMethod(): HttpMethod
@@ -44,6 +46,8 @@ final readonly class SendRichMessageDraft implements MethodInterface
                 'message_thread_id' => $this->messageThreadId,
                 'draft_id' => $this->draftId,
                 'rich_message' => $this->richMessage->toRequestArray($fileCollector),
+                'can_stop' => $this->canStop,
+                'keep_on_stop' => $this->keepOnStop,
                 ...$fileCollector->get(),
             ],
             static fn(mixed $value): bool => $value !== null,

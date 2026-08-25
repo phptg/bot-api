@@ -23,6 +23,7 @@ final readonly class ChatAdministratorRights
         public bool $canPostStories,
         public bool $canEditStories,
         public bool $canDeleteStories,
+        public bool $canSendWelcomeMessages,
         public ?bool $canPostMessages = null,
         public ?bool $canEditMessages = null,
         public ?bool $canPinMessages = null,
@@ -52,6 +53,7 @@ final readonly class ChatAdministratorRights
                 'can_manage_topics' => $this->canManageTopics,
                 'can_manage_direct_messages' => $this->canManageDirectMessages,
                 'can_manage_tags' => $this->canManageTags,
+                'can_send_welcome_messages' => $this->canSendWelcomeMessages,
             ],
             static fn(mixed $value): bool => $value !== null,
         );

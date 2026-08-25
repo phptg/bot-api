@@ -26,6 +26,7 @@ final class ReplyKeyboardMarkupTest extends TestCase
         assertNull($markup->oneTimeKeyboard);
         assertNull($markup->inputFieldPlaceholder);
         assertNull($markup->selective);
+        assertNull($markup->forceReply);
 
         assertSame(
             [
@@ -38,7 +39,7 @@ final class ReplyKeyboardMarkupTest extends TestCase
     public function testFilled(): void
     {
         $button = new KeyboardButton('text');
-        $markup = new ReplyKeyboardMarkup([[$button]], true, false, true, 'test', true);
+        $markup = new ReplyKeyboardMarkup([[$button]], true, false, true, 'test', true, true);
 
         assertSame([[$button]], $markup->keyboard);
         assertTrue($markup->isPersistent);
@@ -46,6 +47,7 @@ final class ReplyKeyboardMarkupTest extends TestCase
         assertTrue($markup->oneTimeKeyboard);
         assertSame('test', $markup->inputFieldPlaceholder);
         assertTrue($markup->selective);
+        assertTrue($markup->forceReply);
 
         assertSame(
             [
@@ -55,6 +57,7 @@ final class ReplyKeyboardMarkupTest extends TestCase
                 'one_time_keyboard' => true,
                 'input_field_placeholder' => 'test',
                 'selective' => true,
+                'force_reply' => true,
             ],
             $markup->toRequestArray(),
         );

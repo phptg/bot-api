@@ -11,6 +11,7 @@ use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Type\InlineKeyboardButton;
 use Phptg\BotApi\Type\InlineKeyboardMarkup;
+use Phptg\BotApi\Type\InputRichMessage;
 use Phptg\BotApi\Type\LinkPreviewOptions;
 use Phptg\BotApi\Type\MessageEntity;
 
@@ -21,7 +22,7 @@ final class EditEphemeralMessageTextTest extends TestCase
 {
     public function testBase(): void
     {
-        $method = new EditEphemeralMessageText(23, 45, 34, 'hello');
+        $method = new EditEphemeralMessageText(23, 45, 34);
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('editEphemeralMessageText', $method->getApiMethod());
@@ -30,7 +31,6 @@ final class EditEphemeralMessageTextTest extends TestCase
                 'chat_id' => 23,
                 'receiver_user_id' => 45,
                 'ephemeral_message_id' => 34,
-                'text' => 'hello',
             ],
             $method->getData(),
         );
@@ -50,6 +50,7 @@ final class EditEphemeralMessageTextTest extends TestCase
             [$messageEntity],
             $linkPreviewOptions,
             $replyMarkup,
+            new InputRichMessage(html: '<b>hello</b>'),
         );
 
         assertSame(
@@ -60,6 +61,7 @@ final class EditEphemeralMessageTextTest extends TestCase
                 'text' => 'hello',
                 'parse_mode' => 'MarkdownV2',
                 'entities' => [$messageEntity->toRequestArray()],
+                'rich_message' => ['html' => '<b>hello</b>'],
                 'link_preview_options' => $linkPreviewOptions->toRequestArray(),
                 'reply_markup' => $replyMarkup->toRequestArray(),
             ],

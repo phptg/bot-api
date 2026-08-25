@@ -1,7 +1,29 @@
 # Telegram Bot API for PHP Change Log
 
-## 0.21.3 under development
+## 0.22 August 25, 2026
 
+- New #217: Add `DisabledButton`, `RichMessageButton`, `RichTextButton`, `RichBlockButtons`,
+  `InputRichBlockButtons`, `RichBlockExpandableBlockQuotation`, `InputRichBlockExpandableBlockQuotation`,
+  `RichBlockDocument`, `InputRichBlockDocument`, `EphemeralMessageParameters`, `MessageGenerationStopped` and
+  `CommunityChatJoined` types.
+- New #217: Add `disabled` field to `InlineKeyboardButton` type.
+- New #217: Add `forceReply` field to `InlineKeyboardMarkup` and `ReplyKeyboardMarkup` types.
+- New #217: Add `isCompact` field to `RichBlockTable` and `InputRichBlockTable` types.
+- New #217: Add `canSendWelcomeMessages` field to `ChatAdministratorRights` and `ChatMemberAdministrator` types.
+- New #217: Add `stoppedMessageGeneration` field to `Update` type.
+- New #217: Add `communityChatJoined` field to `Message` type.
+- New #217: Add `text`, `entities` and `isPrivate` fields to `UniqueGiftInfo` type.
+- New #217: Add `ephemeralMessageParameters` parameter to `SendMessage`, `SendAnimation`, `SendAudio`,
+  `SendDocument`, `SendLivePhoto`, `SendPhoto`, `SendSticker`, `SendVideo`, `SendVideoNote`, `SendVoice`,
+  `SendContact`, `SendLocation`, `SendVenue` and `SendRichMessage` methods.
+- New #217: Add `showCaptionAboveMedia` parameter to `EditEphemeralMessageCaption` method.
+- New #217: Add `richMessage` parameter to `EditEphemeralMessageText` method.
+- New #217: Add `canSendWelcomeMessages` parameter to `PromoteChatMember` method.
+- New #217: Add `canStop` and `keepOnStop` parameters to `SendMessageDraft` and `SendRichMessageDraft` methods.
+- Chg #217: Remove `receiverUserId` and `callbackQueryId` parameters from `SendMessage`, `SendAnimation`,
+  `SendAudio`, `SendDocument`, `SendPhoto`, `SendSticker`, `SendVideo`, `SendVideoNote`, `SendVoice`,
+  `SendContact`, `SendLocation` and `SendVenue` methods, use `ephemeralMessageParameters` parameter instead.
+- Enh #217: Make `text` parameter of `EditEphemeralMessageText` method optional.
 - Enh #214: Rework `.gitattributes` to explicitly allow only distribution files for export.
 
 ## 0.21.2 July 15, 2026
