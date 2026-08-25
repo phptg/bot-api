@@ -11,6 +11,7 @@ use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Type\InlineKeyboardButton;
 use Phptg\BotApi\Type\InlineKeyboardMarkup;
+use Phptg\BotApi\Type\InputRichMessage;
 use Phptg\BotApi\Type\LinkPreviewOptions;
 use Phptg\BotApi\Type\MessageEntity;
 
@@ -50,6 +51,7 @@ final class EditEphemeralMessageTextTest extends TestCase
             [$messageEntity],
             $linkPreviewOptions,
             $replyMarkup,
+            new InputRichMessage(html: '<b>hello</b>'),
         );
 
         assertSame(
@@ -60,6 +62,7 @@ final class EditEphemeralMessageTextTest extends TestCase
                 'text' => 'hello',
                 'parse_mode' => 'MarkdownV2',
                 'entities' => [$messageEntity->toRequestArray()],
+                'rich_message' => ['html' => '<b>hello</b>'],
                 'link_preview_options' => $linkPreviewOptions->toRequestArray(),
                 'reply_markup' => $replyMarkup->toRequestArray(),
             ],

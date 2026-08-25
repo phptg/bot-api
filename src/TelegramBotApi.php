@@ -963,11 +963,12 @@ final class TelegramBotApi
         int|string $chatId,
         int $receiverUserId,
         int $ephemeralMessageId,
-        string $text,
+        ?string $text = null,
         ?string $parseMode = null,
         ?array $entities = null,
         ?LinkPreviewOptions $linkPreviewOptions = null,
         ?InlineKeyboardMarkup $replyMarkup = null,
+        ?InputRichMessage $richMessage = null,
     ): FailResult|true {
         return $this->call(
             new EditEphemeralMessageText(
@@ -979,6 +980,7 @@ final class TelegramBotApi
                 $entities,
                 $linkPreviewOptions,
                 $replyMarkup,
+                $richMessage,
             ),
         );
     }

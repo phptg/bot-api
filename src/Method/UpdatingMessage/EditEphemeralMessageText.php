@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Method\UpdatingMessage;
 
+use Phptg\BotApi\FileCollector;
 use Phptg\BotApi\ParseResult\ValueProcessor\TrueValue;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\MethodInterface;
 use Phptg\BotApi\Type\InlineKeyboardMarkup;
+use Phptg\BotApi\Type\InputRichMessage;
 use Phptg\BotApi\Type\LinkPreviewOptions;
 use Phptg\BotApi\Type\MessageEntity;
 
@@ -25,11 +27,12 @@ final readonly class EditEphemeralMessageText implements MethodInterface
         private int|string $chatId,
         private int $receiverUserId,
         private int $ephemeralMessageId,
-        private string $text,
+        private ?string $text = null,
         private ?string $parseMode = null,
         private ?array $entities = null,
         private ?LinkPreviewOptions $linkPreviewOptions = null,
         private ?InlineKeyboardMarkup $replyMarkup = null,
+        private ?InputRichMessage $richMessage = null,
     ) {}
 
     public function getHttpMethod(): HttpMethod
@@ -44,6 +47,8 @@ final readonly class EditEphemeralMessageText implements MethodInterface
 
     public function getData(): array
     {
+        $fileCollector = new FileCollector();
+
         return array_filter(
             [
                 'chat_id' => $this->chatId,
@@ -55,8 +60,10 @@ final readonly class EditEphemeralMessageText implements MethodInterface
                     static fn(MessageEntity $entity) => $entity->toRequestArray(),
                     $this->entities,
                 ),
+                'rich_message' => $this->richMessage?->toRequestArray($fileCollector),
                 'link_preview_options' => $this->linkPreviewOptions?->toRequestArray(),
                 'reply_markup' => $this->replyMarkup?->toRequestArray(),
+                ...$fileCollector->get(),
             ],
             static fn(mixed $value): bool => $value !== null,
         );
