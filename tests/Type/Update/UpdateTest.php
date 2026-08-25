@@ -49,6 +49,7 @@ final class UpdateTest extends TestCase
         assertNull($update->purchasedPaidMedia);
         assertNull($update->managedBot);
         assertNull($update->subscription);
+        assertNull($update->stoppedMessageGeneration);
         assertNull($update->getRaw());
         assertNull($update->getRaw(true));
     }
@@ -372,6 +373,14 @@ final class UpdateTest extends TestCase
                 'invoice_payload' => 'sub_payload',
                 'state' => 'canceled',
             ],
+            'stopped_message_generation' => [
+                'chat' => [
+                    'id' => 654,
+                    'type' => 'private',
+                ],
+                'message_thread_id' => 12,
+                'draft_id' => 100,
+            ],
         ];
         $update = (new ObjectFactory())->create($data, null, Update::class);
 
@@ -406,6 +415,9 @@ final class UpdateTest extends TestCase
         assertSame(321, $update->subscription?->user->id);
         assertSame('sub_payload', $update->subscription?->invoicePayload);
         assertSame('canceled', $update->subscription?->state);
+        assertSame(654, $update->stoppedMessageGeneration?->chat->id);
+        assertSame(12, $update->stoppedMessageGeneration?->messageThreadId);
+        assertSame(100, $update->stoppedMessageGeneration?->draftId);
         assertNull($update->getRaw());
         assertNull($update->getRaw(true));
     }
