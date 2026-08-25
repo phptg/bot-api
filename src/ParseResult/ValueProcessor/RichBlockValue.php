@@ -13,6 +13,7 @@ use Phptg\BotApi\Type\RichBlockButtons;
 use Phptg\BotApi\Type\RichBlockCollage;
 use Phptg\BotApi\Type\RichBlockSlideshow;
 use Phptg\BotApi\Type\RichBlockDetails;
+use Phptg\BotApi\Type\RichBlockDocument;
 use Phptg\BotApi\Type\RichBlockExpandableBlockQuotation;
 use Phptg\BotApi\Type\RichBlockAnimation;
 use Phptg\BotApi\Type\RichBlockAudio;
@@ -65,6 +66,7 @@ final readonly class RichBlockValue extends InterfaceValue
             'thinking' => RichBlockThinking::class,
             'buttons' => RichBlockButtons::class,
             'expandable_blockquote' => RichBlockExpandableBlockQuotation::class,
+            'document' => RichBlockDocument::class,
         ];
     }
 
