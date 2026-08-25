@@ -9,6 +9,7 @@ use Phptg\BotApi\Type\RichBlockParagraph;
 use Phptg\BotApi\Type\RichBlockDivider;
 use Phptg\BotApi\Type\RichBlockAnchor;
 use Phptg\BotApi\Type\RichBlockBlockQuotation;
+use Phptg\BotApi\Type\RichBlockButtons;
 use Phptg\BotApi\Type\RichBlockCollage;
 use Phptg\BotApi\Type\RichBlockSlideshow;
 use Phptg\BotApi\Type\RichBlockDetails;
@@ -61,6 +62,7 @@ final readonly class RichBlockValue extends InterfaceValue
             'video' => RichBlockVideo::class,
             'voice_note' => RichBlockVoiceNote::class,
             'thinking' => RichBlockThinking::class,
+            'buttons' => RichBlockButtons::class,
         ];
     }
 
