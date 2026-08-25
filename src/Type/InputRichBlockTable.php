@@ -22,6 +22,7 @@ final readonly class InputRichBlockTable implements InputRichBlock
         public ?true $isBordered = null,
         public ?true $isStriped = null,
         public string|array|RichText|null $caption = null,
+        public ?true $isCompact = null,
     ) {}
 
     public function getType(): string
@@ -46,6 +47,7 @@ final readonly class InputRichBlockTable implements InputRichBlock
                 ),
                 'is_bordered' => $this->isBordered,
                 'is_striped' => $this->isStriped,
+                'is_compact' => $this->isCompact,
                 'caption' => RichTextConverter::toRequestArray($this->caption),
             ],
             static fn(mixed $value): bool => $value !== null,

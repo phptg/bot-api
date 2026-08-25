@@ -27,7 +27,7 @@ final class InputRichBlockTableTest extends TestCase
     public function testFull(): void
     {
         $cell = new RichBlockTableCell('left', 'top', 'hello');
-        $table = new InputRichBlockTable([[$cell]], true, true, 'caption');
+        $table = new InputRichBlockTable([[$cell]], true, true, 'caption', true);
 
         assertSame(
             [
@@ -35,6 +35,7 @@ final class InputRichBlockTableTest extends TestCase
                 'cells' => [[['align' => 'left', 'valign' => 'top', 'text' => 'hello']]],
                 'is_bordered' => true,
                 'is_striped' => true,
+                'is_compact' => true,
                 'caption' => 'caption',
             ],
             $table->toRequestArray(),
