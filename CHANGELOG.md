@@ -23,8 +23,8 @@
 - Chg #217: Remove `receiverUserId` and `callbackQueryId` parameters from `SendMessage`, `SendAnimation`,
   `SendAudio`, `SendDocument`, `SendPhoto`, `SendSticker`, `SendVideo`, `SendVideoNote`, `SendVoice`,
   `SendContact`, `SendLocation` and `SendVenue` methods, use `ephemeralMessageParameters` parameter instead.
-- Enh #217: Make `text` parameter of `EditEphemeralMessageText` method optional.
 - Enh #214: Rework `.gitattributes` to explicitly allow only distribution files for export.
+- Enh #217: Make `text` parameter of `EditEphemeralMessageText` method optional.
 - Bug #218: Register `PaidMediaLivePhoto` type in `PaidMediaValue` parse result value processor, without it
   parsing of paid media with `live_photo` type failed.
 
