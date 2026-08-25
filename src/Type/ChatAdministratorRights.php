@@ -29,6 +29,7 @@ final readonly class ChatAdministratorRights
         public ?bool $canManageTopics = null,
         public ?bool $canManageDirectMessages = null,
         public ?bool $canManageTags = null,
+        public ?bool $canSendWelcomeMessages = null,
     ) {}
 
     public function toRequestArray(): array
@@ -52,6 +53,7 @@ final readonly class ChatAdministratorRights
                 'can_manage_topics' => $this->canManageTopics,
                 'can_manage_direct_messages' => $this->canManageDirectMessages,
                 'can_manage_tags' => $this->canManageTags,
+                'can_send_welcome_messages' => $this->canSendWelcomeMessages,
             ],
             static fn(mixed $value): bool => $value !== null,
         );

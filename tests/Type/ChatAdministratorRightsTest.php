@@ -36,6 +36,7 @@ final class ChatAdministratorRightsTest extends TestCase
         assertNull($rights->canManageTopics);
         assertNull($rights->canManageDirectMessages);
         assertNull($rights->canManageTags);
+        assertNull($rights->canSendWelcomeMessages);
 
         assertSame(
             [
@@ -75,6 +76,7 @@ final class ChatAdministratorRightsTest extends TestCase
             'can_manage_topics' => true,
             'can_manage_direct_messages' => false,
             'can_manage_tags' => true,
+            'can_send_welcome_messages' => true,
         ], null, ChatAdministratorRights::class);
 
         assertTrue($type->isAnonymous);
@@ -94,6 +96,7 @@ final class ChatAdministratorRightsTest extends TestCase
         assertTrue($type->canManageTopics);
         assertFalse($type->canManageDirectMessages);
         assertTrue($type->canManageTags);
+        assertTrue($type->canSendWelcomeMessages);
         assertSame(
             [
                 'is_anonymous' => true,
@@ -113,6 +116,7 @@ final class ChatAdministratorRightsTest extends TestCase
                 'can_manage_topics' => true,
                 'can_manage_direct_messages' => false,
                 'can_manage_tags' => true,
+                'can_send_welcome_messages' => true,
             ],
             $type->toRequestArray(),
         );
