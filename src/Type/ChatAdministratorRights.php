@@ -29,7 +29,7 @@ final readonly class ChatAdministratorRights
         public ?bool $canManageTopics = null,
         public ?bool $canManageDirectMessages = null,
         public ?bool $canManageTags = null,
-        public ?bool $canSendWelcomeMessages = null,
+        public bool $canSendWelcomeMessages = false,
     ) {}
 
     public function toRequestArray(): array

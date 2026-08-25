@@ -1412,6 +1412,7 @@ final class TelegramBotApiTest extends TestCase
             'can_edit_messages' => true,
             'can_pin_messages' => false,
             'can_manage_topics' => true,
+            'can_send_welcome_messages' => true,
         ]);
 
         $result = $api->getMyDefaultAdministratorRights();
@@ -1431,6 +1432,7 @@ final class TelegramBotApiTest extends TestCase
         assertTrue($result->canEditMessages);
         assertFalse($result->canPinMessages);
         assertTrue($result->canManageTopics);
+        assertTrue($result->canSendWelcomeMessages);
     }
 
     public function testGetMyDescription(): void

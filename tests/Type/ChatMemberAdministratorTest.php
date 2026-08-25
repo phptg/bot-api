@@ -57,7 +57,7 @@ final class ChatMemberAdministratorTest extends TestCase
         assertNull($member->customTitle);
         assertNull($member->canManageDirectMessages);
         assertNull($member->canManageTags);
-        assertNull($member->canSendWelcomeMessages);
+        assertFalse($member->canSendWelcomeMessages);
     }
 
     public function testFromTelegramResult(): void
