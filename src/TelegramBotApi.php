@@ -3114,6 +3114,7 @@ final class TelegramBotApi
         ?SuggestedPostParameters $suggestedPostParameters = null,
         ?ReplyParameters $replyParameters = null,
         InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup = null,
+        ?EphemeralMessageParameters $ephemeralMessageParameters = null,
     ): FailResult|Message {
         return $this->call(
             new SendRichMessage(
@@ -3129,6 +3130,7 @@ final class TelegramBotApi
                 $suggestedPostParameters,
                 $replyParameters,
                 $replyMarkup,
+                $ephemeralMessageParameters,
             ),
         );
     }

@@ -8,6 +8,7 @@ use Phptg\BotApi\FileCollector;
 use Phptg\BotApi\MethodInterface;
 use Phptg\BotApi\ParseResult\ValueProcessor\ObjectValue;
 use Phptg\BotApi\Transport\HttpMethod;
+use Phptg\BotApi\Type\EphemeralMessageParameters;
 use Phptg\BotApi\Type\ForceReply;
 use Phptg\BotApi\Type\InlineKeyboardMarkup;
 use Phptg\BotApi\Type\InputRichMessage;
@@ -37,6 +38,7 @@ final readonly class SendRichMessage implements MethodInterface
         private ?SuggestedPostParameters $suggestedPostParameters = null,
         private ?ReplyParameters $replyParameters = null,
         private InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup = null,
+        private ?EphemeralMessageParameters $ephemeralMessageParameters = null,
     ) {}
 
     public function getHttpMethod(): HttpMethod
@@ -59,6 +61,7 @@ final readonly class SendRichMessage implements MethodInterface
                 'chat_id' => $this->chatId,
                 'message_thread_id' => $this->messageThreadId,
                 'direct_messages_topic_id' => $this->directMessagesTopicId,
+                'ephemeral_message_parameters' => $this->ephemeralMessageParameters?->toRequestArray(),
                 'rich_message' => $this->richMessage->toRequestArray($fileCollector),
                 'disable_notification' => $this->disableNotification,
                 'protect_content' => $this->protectContent,

@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\SendRichMessage;
 use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Transport\HttpMethod;
+use Phptg\BotApi\Type\EphemeralMessageParameters;
 use Phptg\BotApi\Type\ForceReply;
 use Phptg\BotApi\Type\InputRichMessage;
 use Phptg\BotApi\Type\ReplyParameters;
@@ -52,6 +53,7 @@ final class SendRichMessageTest extends TestCase
             $suggestedPostParameters,
             $replyParameters,
             $replyMarkup,
+            new EphemeralMessageParameters(789, 'cbq1', true),
         );
 
         assertSame(
@@ -60,6 +62,11 @@ final class SendRichMessageTest extends TestCase
                 'chat_id' => 12,
                 'message_thread_id' => 99,
                 'direct_messages_topic_id' => 123,
+                'ephemeral_message_parameters' => [
+                    'receiver_user_id' => 789,
+                    'callback_query_id' => 'cbq1',
+                    'replace_callback_query_message' => true,
+                ],
                 'rich_message' => ['html' => '<b>Hello</b>', 'is_rtl' => true],
                 'disable_notification' => true,
                 'protect_content' => false,
