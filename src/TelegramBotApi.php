@@ -2657,6 +2657,8 @@ final class TelegramBotApi
         ?int $messageThreadId = null,
         ?string $parseMode = null,
         ?array $entities = null,
+        ?bool $canStop = null,
+        ?bool $keepOnStop = null,
     ): FailResult|true {
         return $this->call(
             new SendMessageDraft(
@@ -2666,6 +2668,8 @@ final class TelegramBotApi
                 $messageThreadId,
                 $parseMode,
                 $entities,
+                $canStop,
+                $keepOnStop,
             ),
         );
     }

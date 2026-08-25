@@ -26,6 +26,8 @@ final readonly class SendMessageDraft implements MethodInterface
         private ?int $messageThreadId = null,
         private ?string $parseMode = null,
         private ?array $entities = null,
+        private ?bool $canStop = null,
+        private ?bool $keepOnStop = null,
     ) {}
 
     public function getHttpMethod(): HttpMethod
@@ -51,6 +53,8 @@ final readonly class SendMessageDraft implements MethodInterface
                     static fn(MessageEntity $entity) => $entity->toRequestArray(),
                     $this->entities,
                 ),
+                'can_stop' => $this->canStop,
+                'keep_on_stop' => $this->keepOnStop,
             ],
             static fn(mixed $value): bool => $value !== null,
         );

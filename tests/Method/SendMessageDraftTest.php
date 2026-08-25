@@ -40,6 +40,8 @@ final class SendMessageDraftTest extends TestCase
             99,
             'HTML',
             [$entity],
+            true,
+            false,
         );
 
         assertSame(
@@ -50,6 +52,8 @@ final class SendMessageDraftTest extends TestCase
                 'text' => 'hello',
                 'parse_mode' => 'HTML',
                 'entities' => [$entity->toRequestArray()],
+                'can_stop' => true,
+                'keep_on_stop' => false,
             ],
             $method->getData(),
         );
