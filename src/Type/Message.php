@@ -154,5 +154,6 @@ final readonly class Message
         public ?int $ephemeralMessageId = null,
         public ?CommunityChatAdded $communityChatAdded = null,
         public ?CommunityChatRemoved $communityChatRemoved = null,
+        public ?CommunityChatJoined $communityChatJoined = null,
     ) {}
 }

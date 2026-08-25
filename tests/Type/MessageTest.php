@@ -160,6 +160,7 @@ final class MessageTest extends TestCase
         assertNull($message->ephemeralMessageId);
         assertNull($message->communityChatAdded);
         assertNull($message->communityChatRemoved);
+        assertNull($message->communityChatJoined);
     }
 
     public function testFromTelegramResult(): void
@@ -718,6 +719,12 @@ final class MessageTest extends TestCase
                 ],
             ],
             'community_chat_removed' => [],
+            'community_chat_joined' => [
+                'community' => [
+                    'id' => 654,
+                    'name' => 'Joined Community',
+                ],
+            ],
         ], null, Message::class);
 
         assertSame(7, $message->messageId);
@@ -879,5 +886,7 @@ final class MessageTest extends TestCase
         assertSame(987, $message->communityChatAdded?->community->id);
         assertSame('My Community', $message->communityChatAdded?->community->name);
         assertInstanceOf(CommunityChatRemoved::class, $message->communityChatRemoved);
+        assertSame(654, $message->communityChatJoined?->community->id);
+        assertSame('Joined Community', $message->communityChatJoined?->community->name);
     }
 }
