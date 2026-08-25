@@ -22,7 +22,7 @@ final class EditEphemeralMessageTextTest extends TestCase
 {
     public function testBase(): void
     {
-        $method = new EditEphemeralMessageText(23, 45, 34, 'hello');
+        $method = new EditEphemeralMessageText(23, 45, 34);
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('editEphemeralMessageText', $method->getApiMethod());
@@ -31,7 +31,6 @@ final class EditEphemeralMessageTextTest extends TestCase
                 'chat_id' => 23,
                 'receiver_user_id' => 45,
                 'ephemeral_message_id' => 34,
-                'text' => 'hello',
             ],
             $method->getData(),
         );
