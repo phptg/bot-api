@@ -7,6 +7,7 @@ namespace Phptg\BotApi\Tests\Type;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\ParseResult\ObjectFactory;
 use Phptg\BotApi\Type\CopyTextButton;
+use Phptg\BotApi\Type\DisabledButton;
 use Phptg\BotApi\Type\Game\CallbackGame;
 use Phptg\BotApi\Type\InlineKeyboardButton;
 use Phptg\BotApi\Type\LoginUrl;
@@ -37,6 +38,7 @@ final class InlineKeyboardButtonTest extends TestCase
         assertNull($button->copyText);
         assertNull($button->callbackGame);
         assertNull($button->pay);
+        assertNull($button->disabled);
 
         assertSame(
             [
@@ -53,6 +55,7 @@ final class InlineKeyboardButtonTest extends TestCase
         $switchInlineQueryChosenChat  = new SwitchInlineQueryChosenChat('dg');
         $callbackGame = new CallbackGame();
         $copyText = new CopyTextButton('Copy it!');
+        $disabled = new DisabledButton();
         $button = new InlineKeyboardButton(
             'test',
             'https://example.com',
@@ -67,6 +70,7 @@ final class InlineKeyboardButtonTest extends TestCase
             $copyText,
             '5368324170671202286',
             'primary',
+            $disabled,
         );
 
         assertSame('test', $button->text);
@@ -82,6 +86,7 @@ final class InlineKeyboardButtonTest extends TestCase
         assertSame($copyText, $button->copyText);
         assertSame($callbackGame, $button->callbackGame);
         assertTrue($button->pay);
+        assertSame($disabled, $button->disabled);
 
         assertSame(
             [
@@ -98,6 +103,7 @@ final class InlineKeyboardButtonTest extends TestCase
                 'copy_text' => $copyText->toRequestArray(),
                 'callback_game' => $callbackGame->toRequestArray(),
                 'pay' => true,
+                'disabled' => [],
             ],
             $button->toRequestArray(),
         );
@@ -119,6 +125,7 @@ final class InlineKeyboardButtonTest extends TestCase
             'copy_text' => ['text' => 'Copy it!'],
             'callback_game' => [],
             'pay' => true,
+            'disabled' => [],
         ], null, InlineKeyboardButton::class);
 
         assertSame('test', $button->text);
@@ -134,5 +141,6 @@ final class InlineKeyboardButtonTest extends TestCase
         assertSame('Copy it!', $button->copyText->text);
         assertInstanceOf(CallbackGame::class, $button->callbackGame);
         assertTrue($button->pay);
+        assertInstanceOf(DisabledButton::class, $button->disabled);
     }
 }
