@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phptg\BotApi\ParseResult\ValueProcessor;
 
 use Phptg\BotApi\Type\PaidMedia;
+use Phptg\BotApi\Type\PaidMediaLivePhoto;
 use Phptg\BotApi\Type\PaidMediaPhoto;
 use Phptg\BotApi\Type\PaidMediaPreview;
 use Phptg\BotApi\Type\PaidMediaVideo;
@@ -25,6 +26,7 @@ final readonly class PaidMediaValue extends InterfaceValue
             'preview' => PaidMediaPreview::class,
             'photo' => PaidMediaPhoto::class,
             'video' => PaidMediaVideo::class,
+            'live_photo' => PaidMediaLivePhoto::class,
         ];
     }
 

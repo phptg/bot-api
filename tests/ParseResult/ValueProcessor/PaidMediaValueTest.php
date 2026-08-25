@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\ParseResult\ObjectFactory;
 use Phptg\BotApi\ParseResult\TelegramParseResultException;
 use Phptg\BotApi\ParseResult\ValueProcessor\PaidMediaValue;
+use Phptg\BotApi\Type\PaidMediaLivePhoto;
 use Phptg\BotApi\Type\PaidMediaPhoto;
 use Phptg\BotApi\Type\PaidMediaPreview;
 use Phptg\BotApi\Type\PaidMediaVideo;
@@ -41,6 +42,19 @@ final class PaidMediaValueTest extends TestCase
                 [
                     'type' => 'video',
                     'video' => [
+                        'file_id' => 'f12',
+                        'file_unique_id' => 'fu12',
+                        'width' => 100,
+                        'height' => 200,
+                        'duration' => 23,
+                    ],
+                ],
+            ],
+            [
+                PaidMediaLivePhoto::class,
+                [
+                    'type' => 'live_photo',
+                    'live_photo' => [
                         'file_id' => 'f12',
                         'file_unique_id' => 'fu12',
                         'width' => 100,
