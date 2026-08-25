@@ -1017,6 +1017,7 @@ final class TelegramBotApi
         ?string $parseMode = null,
         ?array $captionEntities = null,
         ?InlineKeyboardMarkup $replyMarkup = null,
+        ?bool $showCaptionAboveMedia = null,
     ): FailResult|true {
         return $this->call(
             new EditEphemeralMessageCaption(
@@ -1027,6 +1028,7 @@ final class TelegramBotApi
                 $parseMode,
                 $captionEntities,
                 $replyMarkup,
+                $showCaptionAboveMedia,
             ),
         );
     }

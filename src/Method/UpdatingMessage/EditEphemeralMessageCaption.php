@@ -28,6 +28,7 @@ final readonly class EditEphemeralMessageCaption implements MethodInterface
         private ?string $parseMode = null,
         private ?array $captionEntities = null,
         private ?InlineKeyboardMarkup $replyMarkup = null,
+        private ?bool $showCaptionAboveMedia = null,
     ) {}
 
     public function getHttpMethod(): HttpMethod
@@ -53,6 +54,7 @@ final readonly class EditEphemeralMessageCaption implements MethodInterface
                     static fn(MessageEntity $entity) => $entity->toRequestArray(),
                     $this->captionEntities,
                 ),
+                'show_caption_above_media' => $this->showCaptionAboveMedia,
                 'reply_markup' => $this->replyMarkup?->toRequestArray(),
             ],
             static fn(mixed $value): bool => $value !== null,
