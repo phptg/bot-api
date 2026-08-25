@@ -35,7 +35,7 @@ final class SendRichMessageDraftTest extends TestCase
     public function testFull(): void
     {
         $richMessage = new InputRichMessage(html: '<b>Hello</b>', isRtl: true);
-        $method = new SendRichMessageDraft(12, 1, $richMessage, 99);
+        $method = new SendRichMessageDraft(12, 1, $richMessage, 99, true, false);
 
         assertSame(
             [
@@ -43,6 +43,8 @@ final class SendRichMessageDraftTest extends TestCase
                 'message_thread_id' => 99,
                 'draft_id' => 1,
                 'rich_message' => $richMessage->toRequestArray(),
+                'can_stop' => true,
+                'keep_on_stop' => false,
             ],
             $method->getData(),
         );

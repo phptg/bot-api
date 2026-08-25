@@ -3153,6 +3153,8 @@ final class TelegramBotApi
         int $draftId,
         InputRichMessage $richMessage,
         ?int $messageThreadId = null,
+        ?bool $canStop = null,
+        ?bool $keepOnStop = null,
     ): FailResult|true {
         return $this->call(
             new SendRichMessageDraft(
@@ -3160,6 +3162,8 @@ final class TelegramBotApi
                 $draftId,
                 $richMessage,
                 $messageThreadId,
+                $canStop,
+                $keepOnStop,
             ),
         );
     }
