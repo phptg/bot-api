@@ -1861,6 +1861,7 @@ final class TelegramBotApi
         ?bool $canManageTopics = null,
         ?bool $canManageDirectMessages = null,
         ?bool $canManageTags = null,
+        ?bool $canSendWelcomeMessages = null,
     ): FailResult|true {
         return $this->call(
             new PromoteChatMember(
@@ -1883,6 +1884,7 @@ final class TelegramBotApi
                 $canManageTopics,
                 $canManageDirectMessages,
                 $canManageTags,
+                $canSendWelcomeMessages,
             ),
         );
     }

@@ -51,6 +51,7 @@ final class PromoteChatMemberTest extends TestCase
             true,
             false,
             true,
+            false,
         );
 
         assertSame(
@@ -74,6 +75,7 @@ final class PromoteChatMemberTest extends TestCase
                 'can_manage_topics' => true,
                 'can_manage_direct_messages' => false,
                 'can_manage_tags' => true,
+                'can_send_welcome_messages' => false,
             ],
             $method->getData(),
         );
