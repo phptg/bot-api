@@ -8,6 +8,7 @@ use Phptg\BotApi\FileCollector;
 use Phptg\BotApi\ParseResult\ValueProcessor\ObjectValue;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\MethodInterface;
+use Phptg\BotApi\Type\EphemeralMessageParameters;
 use Phptg\BotApi\Type\ForceReply;
 use Phptg\BotApi\Type\InputFile;
 use Phptg\BotApi\Type\InlineKeyboardMarkup;
@@ -47,6 +48,7 @@ final readonly class SendLivePhoto implements MethodInterface
         private ?SuggestedPostParameters $suggestedPostParameters = null,
         private ?ReplyParameters $replyParameters = null,
         private InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup = null,
+        private ?EphemeralMessageParameters $ephemeralMessageParameters = null,
     ) {}
 
     public function getHttpMethod(): HttpMethod
@@ -75,6 +77,7 @@ final readonly class SendLivePhoto implements MethodInterface
                 'chat_id' => $this->chatId,
                 'message_thread_id' => $this->messageThreadId,
                 'direct_messages_topic_id' => $this->directMessagesTopicId,
+                'ephemeral_message_parameters' => $this->ephemeralMessageParameters?->toRequestArray(),
                 'live_photo' => $livePhoto,
                 'photo' => $photo,
                 'caption' => $this->caption,

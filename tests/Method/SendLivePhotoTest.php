@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\SendLivePhoto;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\EphemeralMessageParameters;
 use Phptg\BotApi\Type\ForceReply;
 use Phptg\BotApi\Type\InputFile;
 use Phptg\BotApi\Type\MessageEntity;
@@ -67,6 +68,7 @@ final class SendLivePhotoTest extends TestCase
             ),
             $replyParameters,
             $replyMarkup,
+            new EphemeralMessageParameters(789, 'cbq1', true),
         );
 
         assertSame(
@@ -75,6 +77,11 @@ final class SendLivePhotoTest extends TestCase
                 'chat_id' => 12,
                 'message_thread_id' => 99,
                 'direct_messages_topic_id' => 123,
+                'ephemeral_message_parameters' => [
+                    'receiver_user_id' => 789,
+                    'callback_query_id' => 'cbq1',
+                    'replace_callback_query_message' => true,
+                ],
                 'live_photo' => 'attach://file0',
                 'photo' => 'attach://file1',
                 'caption' => 'Caption',
