@@ -200,7 +200,18 @@ The return type is `FailResult|<result type>`.
   and `testFull()` is the same object with **every** optional argument passed. Do not invent other
   names; a handful of old tests use `testFilled()` or `testFromTelegramResultMinimal()`, they are
   not the convention.
-- Result types — `tests/Type/<Name>Test.php`. Without optional fields, two cases:
+- **`testFromTelegramResult()` / `testFromTelegramResultFull()` belong only to types the API can
+  actually return.** Living in `src/Type` and being parseable by `ObjectFactory` is not the
+  criterion: a type the bot only ever *sends* never arrives as a result, so an `ObjectFactory` case
+  for it asserts behaviour the library never performs. Decide the role from the Bot API reference:
+
+  | The type appears … | Test cases |
+  | --- | --- |
+  | only as a field of returned objects | properties are asserted; `FromTelegramResult` cases present |
+  | only as a method parameter, or as a field of another sent-only type | `toRequestArray()` is asserted; **no** `FromTelegramResult` case |
+  | in both roles | both — properties *and* `toRequestArray()`, plus the `FromTelegramResult` cases |
+
+- Returned types — `tests/Type/<Name>Test.php`. Without optional fields, two cases:
   ```php
   final class CommunityTest extends TestCase
   {
@@ -235,10 +246,14 @@ The return type is `FailResult|<result type>`.
 
   In the `FromTelegramResult` cases nested objects are checked with `assertInstanceOf()` plus a
   couple of their fields — see `tests/Type/RichBlockAnimationTest.php`.
-- Input types — same `testBase()`/`testFull()` split, but each case asserts the exact
-  `toRequestArray()` array instead of the properties. A type that accepts an `InputFile` gets one
+- Sent-only types — same `testBase()`/`testFull()` split, but each case asserts the exact
+  `toRequestArray()` array instead of the properties, and there is no `FromTelegramResult` case at
+  all — see `tests/Type/SuggestedPostParametersTest.php`. A type that accepts an `InputFile` gets one
   more case, `testFileCollectorIsPropagated()`, which passes a `FileCollector`, expects
   `attach://file0` in the array and asserts `$fileCollector->get()`.
+- Dual types — the four cases of a returned type, with `testBase()` and `testFull()` additionally
+  asserting `toRequestArray()`; no extra case is added for the serialization. See
+  `tests/Type/RichMessageButtonTest.php`.
 - Methods — `tests/Method/<Name>Test.php`: `testBase()` asserts `getHttpMethod()`, `getApiMethod()`
   and the exact `getData()` array; `testFull()` repeats it with every optional parameter passed
   (keys in `getData()` order, not in constructor order); `testPrepareResult()` runs the method
@@ -247,8 +262,9 @@ The return type is `FailResult|<result type>`.
   placed, using `TestHelper::createSuccessStubApi(...)`: build the stub, call the method, assert the
   result. Optional parameters are not repeated here — they are already covered by the method test.
 - New fields on existing types extend the existing test of that type rather than adding a new file:
-  the new field goes into `testFull()` and `testFromTelegramResultFull()`, and into `testBase()` /
-  `testFromTelegramResult()` as a `null` assertion.
+  the new field goes into `testFull()` and, if the type has them, `testFromTelegramResultFull()`, and
+  into `testBase()` / `testFromTelegramResult()` as a `null` assertion. Do not add a
+  `FromTelegramResult` case to a sent-only type just because it gained a field.
 
 ## Preserving Backward Compatibility
 

@@ -6,7 +6,6 @@ namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\ParseResult\ObjectFactory;
-use Phptg\BotApi\Type\RichBlockParagraph;
 use Phptg\BotApi\Type\RichMessageButton;
 use Phptg\BotApi\Type\RichTextButton;
 
@@ -48,18 +47,5 @@ final class RichTextButtonTest extends TestCase
         assertInstanceOf(RichMessageButton::class, $richText->button);
         assertSame('test', $richText->button->text);
         assertSame('data', $richText->button->callbackData);
-    }
-
-    public function testFromTelegramResultViaRichTextValue(): void
-    {
-        $block = (new ObjectFactory())->create([
-            'type' => 'paragraph',
-            'text' => [
-                'type' => 'button',
-                'button' => ['text' => 'test'],
-            ],
-        ], null, RichBlockParagraph::class);
-
-        assertInstanceOf(RichTextButton::class, $block->text);
     }
 }
