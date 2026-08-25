@@ -20,18 +20,23 @@ final readonly class InlineKeyboardMarkup
     public function __construct(
         #[ArrayOfArraysOfObjectsValue(InlineKeyboardButton::class)]
         public array $inlineKeyboard,
+        public ?bool $forceReply = null,
     ) {}
 
     public function toRequestArray(): array
     {
-        return [
-            'inline_keyboard' => array_map(
-                static fn(array $buttons) => array_map(
-                    static fn(InlineKeyboardButton $button) => $button->toRequestArray(),
-                    $buttons,
+        return array_filter(
+            [
+                'inline_keyboard' => array_map(
+                    static fn(array $buttons) => array_map(
+                        static fn(InlineKeyboardButton $button) => $button->toRequestArray(),
+                        $buttons,
+                    ),
+                    $this->inlineKeyboard,
                 ),
-                $this->inlineKeyboard,
-            ),
-        ];
+                'force_reply' => $this->forceReply,
+            ],
+            static fn(mixed $value): bool => $value !== null,
+        );
     }
 }
