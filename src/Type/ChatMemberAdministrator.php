@@ -25,6 +25,7 @@ final readonly class ChatMemberAdministrator implements ChatMember
         public bool $canPostStories,
         public bool $canEditStories,
         public bool $canDeleteStories,
+        public bool $canSendWelcomeMessages,
         public ?bool $canPostMessages = null,
         public ?bool $canEditMessages = null,
         public ?bool $canPinMessages = null,
@@ -32,7 +33,6 @@ final readonly class ChatMemberAdministrator implements ChatMember
         public ?string $customTitle = null,
         public ?bool $canManageDirectMessages = null,
         public ?bool $canManageTags = null,
-        public bool $canSendWelcomeMessages = false,
     ) {}
 
     public function getStatus(): string

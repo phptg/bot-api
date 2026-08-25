@@ -23,13 +23,13 @@ final readonly class ChatAdministratorRights
         public bool $canPostStories,
         public bool $canEditStories,
         public bool $canDeleteStories,
+        public bool $canSendWelcomeMessages,
         public ?bool $canPostMessages = null,
         public ?bool $canEditMessages = null,
         public ?bool $canPinMessages = null,
         public ?bool $canManageTopics = null,
         public ?bool $canManageDirectMessages = null,
         public ?bool $canManageTags = null,
-        public bool $canSendWelcomeMessages = false,
     ) {}
 
     public function toRequestArray(): array

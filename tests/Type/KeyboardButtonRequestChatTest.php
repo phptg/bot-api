@@ -54,6 +54,7 @@ final class KeyboardButtonRequestChatTest extends TestCase
             true,
             true,
             true,
+            true,
         );
         $botAdministratorRights = new ChatAdministratorRights(
             true,
@@ -64,6 +65,7 @@ final class KeyboardButtonRequestChatTest extends TestCase
             false,
             true,
             false,
+            true,
             true,
             true,
             true,

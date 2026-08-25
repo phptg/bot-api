@@ -33,6 +33,7 @@ final class ChatMemberAdministratorTest extends TestCase
             true,
             true,
             true,
+            true,
         );
 
         assertSame('administrator', $member->getStatus());
@@ -57,7 +58,7 @@ final class ChatMemberAdministratorTest extends TestCase
         assertNull($member->customTitle);
         assertNull($member->canManageDirectMessages);
         assertNull($member->canManageTags);
-        assertFalse($member->canSendWelcomeMessages);
+        assertTrue($member->canSendWelcomeMessages);
     }
 
     public function testFromTelegramResult(): void

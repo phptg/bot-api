@@ -26,7 +26,7 @@ final class SetMyDefaultAdministratorRightsTest extends TestCase
 
     public function testFull(): void
     {
-        $rights = new ChatAdministratorRights(true, false, true, true, true, true, true, true, true, true, true);
+        $rights = new ChatAdministratorRights(true, false, true, true, true, true, true, true, true, true, true, false);
         $method = new SetMyDefaultAdministratorRights($rights, false);
 
         assertSame(

@@ -20,6 +20,8 @@
 - New #217: Add `richMessage` parameter to `EditEphemeralMessageText` method.
 - New #217: Add `canSendWelcomeMessages` parameter to `PromoteChatMember` method.
 - New #217: Add `canStop` and `keepOnStop` parameters to `SendMessageDraft` and `SendRichMessageDraft` methods.
+- Chg #217: Add required `canSendWelcomeMessages` constructor parameter to `ChatAdministratorRights` and
+  `ChatMemberAdministrator` types, placed after `canDeleteStories`.
 - Chg #217: Remove `receiverUserId` and `callbackQueryId` parameters from `SendMessage`, `SendAnimation`,
   `SendAudio`, `SendDocument`, `SendPhoto`, `SendSticker`, `SendVideo`, `SendVideoNote`, `SendVoice`,
   `SendContact`, `SendLocation` and `SendVenue` methods, use `ephemeralMessageParameters` parameter instead.
