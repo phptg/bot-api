@@ -158,25 +158,23 @@ final class ObjectFactory
      */
     private function getTypeMap(): array
     {
-        if ($this->typeMap === null) {
-            $this->typeMap = [
-                'string' => new StringValue(),
-                'int' => new IntegerValue(),
-                'float' => new FloatValue(),
-                'true' => new TrueValue(),
-                'bool' => new BooleanValue(),
-                DateTimeImmutable::class => new DateValue(),
-                ChatBoostSource::class => new ChatBoostSourceValue(),
-                RichBlock::class => new RichBlockValue(),
-                BackgroundFill::class => new BackgroundFillValue(),
-                BackgroundType::class => new BackgroundTypeValue(),
-                ChatMember::class => new ChatMemberValue(),
-                MessageOrigin::class => new MessageOriginValue(),
-                ReactionType::class => new ReactionTypeValue(),
-                RevenueWithdrawalState::class => new RevenueWithdrawalStateValue(),
-                TransactionPartner::class => new TransactionPartnerValue(),
-            ];
-        }
+        $this->typeMap ??= [
+            'string' => new StringValue(),
+            'int' => new IntegerValue(),
+            'float' => new FloatValue(),
+            'true' => new TrueValue(),
+            'bool' => new BooleanValue(),
+            DateTimeImmutable::class => new DateValue(),
+            ChatBoostSource::class => new ChatBoostSourceValue(),
+            RichBlock::class => new RichBlockValue(),
+            BackgroundFill::class => new BackgroundFillValue(),
+            BackgroundType::class => new BackgroundTypeValue(),
+            ChatMember::class => new ChatMemberValue(),
+            MessageOrigin::class => new MessageOriginValue(),
+            ReactionType::class => new ReactionTypeValue(),
+            RevenueWithdrawalState::class => new RevenueWithdrawalStateValue(),
+            TransactionPartner::class => new TransactionPartnerValue(),
+        ];
         return $this->typeMap;
     }
 }
