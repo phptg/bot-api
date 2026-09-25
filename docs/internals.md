@@ -49,18 +49,26 @@ The code is statically analyzed with [Psalm](https://psalm.dev/). To run static 
 
 ## Code style
 
-Package used [PHP CS Fixer](https://cs.symfony.com/) to maintain [PER CS 2.0](https://www.php-fig.org/per/coding-style/)
+Package used [PHP CS Fixer](https://cs.symfony.com/) to maintain [PER CS 3.0](https://www.php-fig.org/per/coding-style/)
 code style. To check and fix code style:
 
 ```shell
 composer cs-fix
 ```
 
-## Dependencies
+## Refactoring
 
-Use [ComposerRequireChecker](https://github.com/maglnet/ComposerRequireChecker) to detect transitive
-[Composer](https://getcomposer.org) dependencies:
+The code is refactored with [Rector](https://getrector.com/). To apply it:
 
 ```shell
-./vendor/bin/composer-require-checker
+composer rector
+```
+
+## Dependencies
+
+Use [Composer Dependency Analyser](https://github.com/shipmonk-rnd/composer-dependency-analyser) to detect unused,
+shadow and misplaced [Composer](https://getcomposer.org) dependencies:
+
+```shell
+composer dependency-analyser
 ```
