@@ -176,9 +176,18 @@ final readonly class NativeTransport implements TransportInterface
     private function readFile(mixed $pathOrResource): string
     {
         if (is_string($pathOrResource)) {
-            $contents = file_get_contents($pathOrResource);
-            if ($contents === false) {
-                throw new RuntimeException("Failed to read the file $pathOrResource.");
+            set_error_handler(
+                static function (int $errorNumber, string $errorString) use ($pathOrResource): bool {
+                    throw new RuntimeException("Failed to read the file $pathOrResource. $errorString");
+                },
+            );
+            try {
+                /**
+                 * @var string $contents We throw an exception on error, so `file_get_contents()` returns the string.
+                 */
+                $contents = file_get_contents($pathOrResource);
+            } finally {
+                restore_error_handler();
             }
             return $contents;
         }

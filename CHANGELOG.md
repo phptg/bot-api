@@ -1,5 +1,10 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.22.1 under development
+
+- Enh #223: Convert the PHP warning raised on failure to read a local file in `NativeTransport` into an exception with
+  the original error message.
+
 ## 0.22 August 25, 2026
 
 - New #217: Add `DisabledButton`, `RichMessageButton`, `RichTextButton`, `RichBlockButtons`,
