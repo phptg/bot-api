@@ -3736,7 +3736,6 @@ final class TelegramBotApi
     }
 
     /**
-     * @infection-ignore-all
      * @codeCoverageIgnore
      */
     private function createDefaultTransport(): TransportInterface

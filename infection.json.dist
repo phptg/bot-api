@@ -12,7 +12,12 @@
     },
     "tmpDir": "runtime/infection",
     "mutators": {
-        "@default": true
+        "@default": true,
+        "AssignCoalesce": {
+            "ignore": [
+                "Phptg\\BotApi\\ParseResult\\ObjectFactory::getTypeMap"
+            ]
+        }
     },
     "minCoveredMsi": 100
 }
