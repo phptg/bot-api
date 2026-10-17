@@ -231,18 +231,14 @@ final class NativeTransportTest extends TestCase
         $inputFile = new InputFile($nonExistentPath);
 
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage("Failed to read the file $nonExistentPath.");
-
-        set_error_handler(static fn() => true, E_WARNING);
-        try {
-            $transport->postWithFiles(
-                'http://url/method',
-                [],
-                ['file' => $inputFile],
-            );
-        } finally {
-            restore_error_handler();
-        }
+        $this->expectExceptionMessage(
+            "Failed to read the file $nonExistentPath. file_get_contents($nonExistentPath): Failed to open stream: No such file or directory",
+        );
+        $transport->postWithFiles(
+            'http://url/method',
+            [],
+            ['file' => $inputFile],
+        );
     }
 
     public function testPostWithSeekableStreamResource(): void
