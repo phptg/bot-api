@@ -111,6 +111,7 @@ final class Update
             );
             throw $exception;
         }
+        /** @var array<mixed> $decodedJson `ObjectFactory` accepts only arrays, so it's an array here. */
 
         $update->raw = $json;
         $update->rawDecoded = $decodedJson;
