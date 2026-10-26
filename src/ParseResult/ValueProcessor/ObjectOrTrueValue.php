@@ -7,7 +7,7 @@ namespace Phptg\BotApi\ParseResult\ValueProcessor;
 use Phptg\BotApi\ParseResult\ObjectFactory;
 
 /**
- * @template T
+ * @template T of object
  * @template-implements ValueProcessorInterface<T|true>
  */
 final readonly class ObjectOrTrueValue implements ValueProcessorInterface

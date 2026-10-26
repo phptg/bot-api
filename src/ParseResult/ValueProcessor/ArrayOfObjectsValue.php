@@ -11,7 +11,7 @@ use Phptg\BotApi\ParseResult\ObjectFactory;
 use function is_array;
 
 /**
- * @template T
+ * @template T of object
  * @template-implements ValueProcessorInterface<array<array-key,T>>
  */
 #[Attribute(Attribute::TARGET_PARAMETER)]

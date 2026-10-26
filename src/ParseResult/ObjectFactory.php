@@ -51,7 +51,7 @@ final class ObjectFactory
     /**
      * @throws TelegramParseResultException
      *
-     * @template T
+     * @template T of object
      * @param class-string<T> $className
      * @return T
      */
