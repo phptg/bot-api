@@ -115,7 +115,9 @@ final class ObjectFactory
         foreach ($constructorParameters as $parameter) {
             $name = $parameter->getName();
             if (in_array($name, $propertyNames, true)) {
-                $key = strtolower(preg_replace('/[A-Z]/', '_$0', $name));
+                /** @var string $snakeCaseName In this case `preg_replace()` always returns string */
+                $snakeCaseName = preg_replace('/[A-Z]/', '_$0', $name);
+                $key = strtolower($snakeCaseName);
                 $result[$name] = new Param(
                     $key,
                     $this->getParamType($parameter),
