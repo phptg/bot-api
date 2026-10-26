@@ -40,6 +40,9 @@ final readonly class GetMyDefaultAdministratorRights implements MethodInterface
         );
     }
 
+    /**
+     * @return ObjectValue<ChatAdministratorRights>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(ChatAdministratorRights::class);

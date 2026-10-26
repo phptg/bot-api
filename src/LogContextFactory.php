@@ -12,10 +12,12 @@ use Phptg\BotApi\Transport\ApiResponse;
 final class LogContextFactory
 {
     /**
+     * @template TResult
+     * @param MethodInterface<TResult> $method
      * @return array{
      *     type: LogType::SEND_REQUEST,
      *     payload: array<string, mixed>,
-     *     method: MethodInterface,
+     *     method: MethodInterface<TResult>,
      * }
      */
     public static function sendRequest(MethodInterface $method): array
@@ -28,13 +30,16 @@ final class LogContextFactory
     }
 
     /**
-     * @param array<mixed> $decodedResponse
+     * @template TResult
+     * @template TDecodedResponse of array<mixed>
+     * @param MethodInterface<TResult> $method
+     * @param TDecodedResponse $decodedResponse
      * @return array{
      *     type: LogType::SUCCESS_RESULT,
-     *     payload: array<mixed>,
-     *     method: MethodInterface,
+     *     payload: TDecodedResponse,
+     *     method: MethodInterface<TResult>,
      *     response: ApiResponse,
-     *     decodedResponse: array<mixed>,
+     *     decodedResponse: TDecodedResponse,
      * }
      */
     public static function successResult(
@@ -52,13 +57,16 @@ final class LogContextFactory
     }
 
     /**
-     * @param array<mixed> $decodedResponse
+     * @template TResult
+     * @template TDecodedResponse of array<mixed>
+     * @param MethodInterface<TResult> $method
+     * @param TDecodedResponse $decodedResponse
      * @return array{
      *     type: LogType::FAIL_RESULT,
      *     payload: string,
-     *     method: MethodInterface,
+     *     method: MethodInterface<TResult>,
      *     response: ApiResponse,
-     *     decodedResponse: array<mixed>,
+     *     decodedResponse: TDecodedResponse,
      * }
      */
     public static function failResult(

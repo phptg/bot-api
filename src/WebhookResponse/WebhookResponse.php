@@ -29,7 +29,7 @@ final readonly class WebhookResponse
     private array $apiData;
 
     /**
-     * @param MethodInterface $method The Telegram Bot API method to be sent as webhook response.
+     * @param MethodInterface<mixed> $method The Telegram Bot API method to be sent as webhook response.
      */
     public function __construct(MethodInterface $method)
     {

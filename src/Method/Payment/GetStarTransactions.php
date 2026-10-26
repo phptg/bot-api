@@ -42,6 +42,9 @@ final readonly class GetStarTransactions implements MethodInterface
         );
     }
 
+    /**
+     * @return ObjectValue<StarTransactions>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(StarTransactions::class);

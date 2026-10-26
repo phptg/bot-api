@@ -40,6 +40,9 @@ final readonly class GetMyShortDescription implements MethodInterface
         );
     }
 
+    /**
+     * @return ObjectValue<BotShortDescription>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(BotShortDescription::class);

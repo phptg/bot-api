@@ -44,7 +44,7 @@ use function is_string;
 final class ObjectFactory
 {
     /**
-     * @var array<string,ValueProcessorInterface>|null
+     * @var array<string,ValueProcessorInterface<mixed>>|null
      */
     private ?array $typeMap = null;
 
@@ -127,7 +127,7 @@ final class ObjectFactory
     }
 
     /**
-     * @return class-string|ValueProcessorInterface
+     * @return class-string|ValueProcessorInterface<mixed>
      */
     private function getParamType(ReflectionParameter $parameter): string|ValueProcessorInterface
     {
@@ -151,7 +151,7 @@ final class ObjectFactory
     }
 
     /**
-     * @return array<string, ValueProcessorInterface>
+     * @return array<string, ValueProcessorInterface<mixed>>
      */
     private function getTypeMap(): array
     {

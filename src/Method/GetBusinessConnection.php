@@ -37,6 +37,9 @@ final readonly class GetBusinessConnection implements MethodInterface
         ];
     }
 
+    /**
+     * @return ObjectValue<BusinessConnection>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(BusinessConnection::class);

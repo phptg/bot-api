@@ -39,6 +39,9 @@ final readonly class GetUserChatBoosts implements MethodInterface
         ];
     }
 
+    /**
+     * @return ObjectValue<UserChatBoosts>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(UserChatBoosts::class);

@@ -40,6 +40,9 @@ final readonly class AnswerWebAppQuery implements MethodInterface
         ];
     }
 
+    /**
+     * @return ObjectValue<SentWebAppMessage>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(SentWebAppMessage::class);

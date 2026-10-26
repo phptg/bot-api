@@ -37,6 +37,9 @@ final readonly class GetChat implements MethodInterface
         ];
     }
 
+    /**
+     * @return ObjectValue<ChatFullInfo>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(ChatFullInfo::class);

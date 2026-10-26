@@ -40,6 +40,9 @@ final readonly class SavePreparedKeyboardButton implements MethodInterface
         ];
     }
 
+    /**
+     * @return ObjectValue<PreparedKeyboardButton>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(PreparedKeyboardButton::class);

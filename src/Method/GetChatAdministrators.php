@@ -43,6 +43,9 @@ final readonly class GetChatAdministrators implements MethodInterface
         );
     }
 
+    /**
+     * @return ArrayMap<ChatMember>
+     */
     public function getResultType(): ArrayMap
     {
         return new ArrayMap(ChatMemberValue::class);

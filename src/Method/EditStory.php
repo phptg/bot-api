@@ -72,6 +72,9 @@ final readonly class EditStory implements MethodInterface
         );
     }
 
+    /**
+     * @return ObjectValue<Story>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(Story::class);

@@ -35,6 +35,9 @@ final readonly class GetStickerSet implements MethodInterface
         return ['name' => $this->name];
     }
 
+    /**
+     * @return ObjectValue<StickerSet>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(StickerSet::class);

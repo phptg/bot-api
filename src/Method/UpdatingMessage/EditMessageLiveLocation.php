@@ -61,6 +61,9 @@ final readonly class EditMessageLiveLocation implements MethodInterface
         );
     }
 
+    /**
+     * @return ObjectOrTrueValue<Message>
+     */
     public function getResultType(): ObjectOrTrueValue
     {
         return new ObjectOrTrueValue(Message::class);

@@ -49,6 +49,9 @@ final readonly class GetUpdates implements MethodInterface
         );
     }
 
+    /**
+     * @return ArrayOfObjectsValue<Update>
+     */
     public function getResultType(): ArrayOfObjectsValue
     {
         return new ArrayOfObjectsValue(Update::class);

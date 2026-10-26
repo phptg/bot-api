@@ -86,6 +86,9 @@ final readonly class CopyMessage implements MethodInterface
         );
     }
 
+    /**
+     * @return ObjectValue<MessageId>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(MessageId::class);

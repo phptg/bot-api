@@ -37,6 +37,9 @@ final readonly class GetFile implements MethodInterface
         ];
     }
 
+    /**
+     * @return ObjectValue<File>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(File::class);

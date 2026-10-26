@@ -40,6 +40,9 @@ final readonly class GetCustomEmojiStickers implements MethodInterface
         ];
     }
 
+    /**
+     * @return ArrayOfObjectsValue<Sticker>
+     */
     public function getResultType(): ArrayOfObjectsValue
     {
         return new ArrayOfObjectsValue(Sticker::class);

@@ -103,6 +103,9 @@ final readonly class SendVideo implements MethodInterface
         );
     }
 
+    /**
+     * @return ObjectValue<Message>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(Message::class);

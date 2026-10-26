@@ -196,6 +196,7 @@ final readonly class Api
     }
 
     /**
+     * @param MethodInterface<mixed> $method
      * @param array<mixed> $decodedBody
      */
     private function prepareFailResult(

@@ -49,6 +49,9 @@ final readonly class RepostStory implements MethodInterface
         ], static fn($value) => $value !== null);
     }
 
+    /**
+     * @return ObjectValue<Story>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(Story::class);

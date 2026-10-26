@@ -55,6 +55,9 @@ final readonly class ForwardMessages implements MethodInterface
         );
     }
 
+    /**
+     * @return ArrayOfObjectsValue<MessageId>
+     */
     public function getResultType(): ArrayOfObjectsValue
     {
         return new ArrayOfObjectsValue(MessageId::class);

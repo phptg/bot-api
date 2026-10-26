@@ -39,6 +39,9 @@ final readonly class GetBusinessAccountStarBalance implements MethodInterface
         ];
     }
 
+    /**
+     * @return ObjectValue<StarAmount>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(StarAmount::class);

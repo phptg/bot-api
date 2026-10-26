@@ -31,6 +31,9 @@ final readonly class GetWebhookInfo implements MethodInterface
         return [];
     }
 
+    /**
+     * @return ObjectValue<WebhookInfo>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(WebhookInfo::class);

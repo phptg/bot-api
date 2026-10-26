@@ -31,6 +31,9 @@ final readonly class GetAvailableGifts implements MethodInterface
         return [];
     }
 
+    /**
+     * @return ObjectValue<Gifts>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(Gifts::class);

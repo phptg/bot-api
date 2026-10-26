@@ -46,6 +46,9 @@ final readonly class CreateForumTopic implements MethodInterface
         );
     }
 
+    /**
+     * @return ObjectValue<ForumTopic>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(ForumTopic::class);
