@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
+use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Type\InputFile;
 
 use function PHPUnit\Framework\assertNull;
@@ -51,6 +52,18 @@ final class InputFileTest extends TestCase
         assertNull($file->extension());
 
         fclose($resource);
+    }
+
+    public function testFromResourceWithoutUri(): void
+    {
+        [$resource, $pair] = TestHelper::createSocketPair();
+        $file = new InputFile($resource);
+
+        assertNull($file->filename());
+        assertNull($file->extension());
+
+        fclose($resource);
+        fclose($pair);
     }
 
     public function testFromResourceWithFilename(): void

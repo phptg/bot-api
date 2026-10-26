@@ -35,7 +35,11 @@ final readonly class InputFile
             return basename($this->pathOrResource);
         }
 
-        $uri = stream_get_meta_data($this->pathOrResource)['uri'];
+        $uri = stream_get_meta_data($this->pathOrResource)['uri'] ?? null;
+        if ($uri === null) {
+            return null;
+        }
+
         return str_contains($uri, '://') ? null : basename($uri);
     }
 
