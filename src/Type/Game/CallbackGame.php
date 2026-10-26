@@ -11,6 +11,9 @@ namespace Phptg\BotApi\Type\Game;
  */
 final readonly class CallbackGame
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return [];

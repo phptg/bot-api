@@ -88,6 +88,9 @@ final readonly class NativeTransport implements TransportInterface
         return $stream;
     }
 
+    /**
+     * @param array<string, mixed> $options
+     */
     private function send(string $url, array $options): ApiResponse
     {
         global $http_response_header;

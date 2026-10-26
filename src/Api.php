@@ -163,6 +163,7 @@ final readonly class Api
     /**
      * @template TValue
      * @param MethodInterface<TValue> $method
+     * @param array<mixed> $decodedBody
      * @return TValue
      */
     private function prepareSuccessResult(
@@ -194,6 +195,9 @@ final readonly class Api
         }
     }
 
+    /**
+     * @param array<mixed> $decodedBody
+     */
     private function prepareFailResult(
         MethodInterface $method,
         ApiResponse $response,

@@ -14,6 +14,9 @@ use Phptg\BotApi\RichTextConverter;
  */
 final readonly class RichBlockTableCell
 {
+    /**
+     * @param string|array<string|array<mixed>|RichText>|RichText|null $text
+     */
     public function __construct(
         public string $align,
         public string $valign,

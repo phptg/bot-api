@@ -15,6 +15,9 @@ final readonly class CopyTextButton
         public string $text,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return [

@@ -26,6 +26,9 @@ final readonly class InputSticker
         private ?array $keywords = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(?FileCollector $fileCollector = null): array
     {
         if ($fileCollector !== null) {

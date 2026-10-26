@@ -16,6 +16,9 @@ final readonly class ForceReply
         public ?bool $selective = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return array_filter(

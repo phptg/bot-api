@@ -16,6 +16,9 @@ final readonly class SuggestedPostPrice
         public int $amount,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return [

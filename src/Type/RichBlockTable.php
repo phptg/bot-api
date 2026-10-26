@@ -16,6 +16,7 @@ final readonly class RichBlockTable implements RichBlock
 {
     /**
      * @param list<list<RichBlockTableCell>> $cells
+     * @param string|array<string|array<mixed>|RichText>|RichText|null $caption
      */
     public function __construct(
         #[ArrayOfArraysOfObjectsValue(RichBlockTableCell::class)]

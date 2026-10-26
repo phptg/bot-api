@@ -24,6 +24,9 @@ final readonly class ReplyKeyboardMarkup
         public ?bool $forceReply = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return array_filter(

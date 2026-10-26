@@ -14,6 +14,9 @@ use Phptg\BotApi\RichTextConverter;
  */
 final readonly class InputRichBlockParagraph implements InputRichBlock
 {
+    /**
+     * @param string|array<string|array<mixed>|RichText>|RichText $text
+     */
     public function __construct(
         public string|array|RichText $text,
     ) {}

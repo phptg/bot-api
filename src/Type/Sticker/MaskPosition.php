@@ -18,6 +18,9 @@ final readonly class MaskPosition
         public float $scale,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return [

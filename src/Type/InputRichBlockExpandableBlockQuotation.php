@@ -14,6 +14,10 @@ use Phptg\BotApi\RichTextConverter;
  */
 final readonly class InputRichBlockExpandableBlockQuotation implements InputRichBlock
 {
+    /**
+     * @param string|array<string|array<mixed>|RichText>|RichText $text
+     * @param string|array<string|array<mixed>|RichText>|RichText|null $credit
+     */
     public function __construct(
         public string|array|RichText $text,
         public string|array|RichText|null $credit = null,

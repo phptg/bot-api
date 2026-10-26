@@ -13,6 +13,9 @@ use Phptg\BotApi\ParseResult\ValueProcessor\RichTextValue;
  */
 final readonly class RichBlockSectionHeading implements RichBlock
 {
+    /**
+     * @param string|array<string|array<mixed>|RichText>|RichText $text
+     */
     public function __construct(
         #[RichTextValue]
         public string|array|RichText $text,

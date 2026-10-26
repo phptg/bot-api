@@ -14,6 +14,9 @@ use Phptg\BotApi\RichTextConverter;
  */
 final readonly class RichTextTextMention implements RichText
 {
+    /**
+     * @param string|array<string|array<mixed>|RichText>|RichText $text
+     */
     public function __construct(
         #[RichTextValue]
         public string|array|RichText $text,

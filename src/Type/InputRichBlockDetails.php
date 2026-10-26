@@ -16,6 +16,7 @@ final readonly class InputRichBlockDetails implements InputRichBlock
 {
     /**
      * @param InputRichBlock[] $blocks
+     * @param string|array<string|array<mixed>|RichText>|RichText $summary
      */
     public function __construct(
         public string|array|RichText $summary,

@@ -13,5 +13,8 @@ interface MenuButton
 {
     public function getType(): string;
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array;
 }

@@ -19,6 +19,9 @@ final readonly class InlineQueryResultsButton
         public ?string $startParameter = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return array_filter(

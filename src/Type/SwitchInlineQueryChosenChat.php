@@ -19,6 +19,9 @@ final readonly class SwitchInlineQueryChosenChat
         public ?bool $allowChannelChats = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return array_filter(

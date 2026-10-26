@@ -21,6 +21,9 @@ final readonly class InputChecklistTask
         public ?array $textEntities = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return array_filter(

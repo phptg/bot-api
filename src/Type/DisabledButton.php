@@ -11,6 +11,9 @@ namespace Phptg\BotApi\Type;
  */
 final readonly class DisabledButton
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return [];

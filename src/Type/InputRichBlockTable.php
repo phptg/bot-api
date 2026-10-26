@@ -16,6 +16,7 @@ final readonly class InputRichBlockTable implements InputRichBlock
 {
     /**
      * @param list<list<RichBlockTableCell>> $cells
+     * @param string|array<string|array<mixed>|RichText>|RichText|null $caption
      */
     public function __construct(
         public array $cells,

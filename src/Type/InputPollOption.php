@@ -23,6 +23,9 @@ final readonly class InputPollOption
         public ?InputPollOptionMedia $media = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(?FileCollector $fileCollector = null): array
     {
         return array_filter(

@@ -17,6 +17,7 @@ final readonly class RichBlockDetails implements RichBlock
 {
     /**
      * @param list<RichBlock> $blocks
+     * @param string|array<string|array<mixed>|RichText>|RichText $summary
      */
     public function __construct(
         #[RichTextValue]

@@ -134,6 +134,9 @@ final readonly class CurlTransport implements TransportInterface
         return $stream;
     }
 
+    /**
+     * @param array<int, mixed> $options
+     */
     private function send(array $options): ApiResponse
     {
         $options[CURLOPT_RETURNTRANSFER] = true;

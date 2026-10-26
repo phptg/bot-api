@@ -71,6 +71,9 @@ final class ObjectFactory
         return new $className(...$arguments);
     }
 
+    /**
+     * @param array<mixed> $result
+     */
     private function handleParam(array $result, Param $param): mixed
     {
         if (!isset($result[$param->key])) {

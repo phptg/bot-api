@@ -23,6 +23,9 @@ use Phptg\BotApi\Type\InputFile;
 final readonly class WebhookResponse
 {
     private string $apiMethod;
+    /**
+     * @var array<string, mixed>
+     */
     private array $apiData;
 
     /**
@@ -38,7 +41,7 @@ final readonly class WebhookResponse
      * Returns the data array for the webhook response.
      * The returned array contains the method name and all method parameters.
      *
-     * @return array The webhook response data.
+     * @return array<string, mixed> The webhook response data.
      *
      * @throws MethodNotSupportedException If method doesn't support sending via a webhook response.
      */

@@ -32,6 +32,9 @@ final readonly class User
         public ?bool $supportsJoinRequestQueries = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return array_filter(

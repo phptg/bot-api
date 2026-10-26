@@ -16,6 +16,9 @@ final readonly class StoryArea
         public StoryAreaType $type,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return [

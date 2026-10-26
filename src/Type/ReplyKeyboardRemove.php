@@ -15,6 +15,9 @@ final readonly class ReplyKeyboardRemove
         public ?bool $selective = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return array_filter(

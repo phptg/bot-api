@@ -18,6 +18,9 @@ final readonly class LocationAddress
         public ?string $street = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return array_filter(

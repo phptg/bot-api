@@ -17,6 +17,9 @@ use Phptg\BotApi\MethodInterface;
  */
 final readonly class SetWebhook implements MethodInterface
 {
+    /**
+     * @param string[]|null $allowUpdates
+     */
     public function __construct(
         private string $url,
         private ?string $ipAddress = null,

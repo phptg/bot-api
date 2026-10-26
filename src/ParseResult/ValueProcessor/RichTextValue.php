@@ -79,6 +79,9 @@ final readonly class RichTextValue implements ValueProcessorInterface
         'button' => RichTextButton::class,
     ];
 
+    /**
+     * @return string|array<string|array<mixed>|RichText>|RichText
+     */
     public function process(mixed $value, ?string $key, ObjectFactory $objectFactory): string|array|RichText
     {
         if (is_string($value)) {
@@ -98,6 +101,9 @@ final readonly class RichTextValue implements ValueProcessorInterface
         throw new InvalidTypeOfValueInResultException($key, $value, 'string or array');
     }
 
+    /**
+     * @param array<mixed> $value
+     */
     private function createObject(array $value, ?string $key, ObjectFactory $objectFactory): RichText
     {
         if (!isset($value['type'])) {

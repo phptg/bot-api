@@ -16,6 +16,7 @@ final readonly class InputRichBlockBlockQuotation implements InputRichBlock
 {
     /**
      * @param InputRichBlock[] $blocks
+     * @param string|array<string|array<mixed>|RichText>|RichText|null $credit
      */
     public function __construct(
         public array $blocks,

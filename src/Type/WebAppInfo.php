@@ -15,6 +15,9 @@ final readonly class WebAppInfo
         public string $url,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return [

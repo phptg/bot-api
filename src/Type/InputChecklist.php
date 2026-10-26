@@ -24,6 +24,9 @@ final readonly class InputChecklist
         public ?true $othersCanMarkTasksAsDone = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return array_filter(

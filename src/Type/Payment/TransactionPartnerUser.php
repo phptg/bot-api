@@ -6,6 +6,7 @@ namespace Phptg\BotApi\Type\Payment;
 
 use Phptg\BotApi\ParseResult\ValueProcessor\ArrayMap;
 use Phptg\BotApi\ParseResult\ValueProcessor\PaidMediaValue;
+use Phptg\BotApi\Type\PaidMedia;
 use Phptg\BotApi\Type\User;
 
 /**
@@ -15,6 +16,9 @@ use Phptg\BotApi\Type\User;
  */
 final readonly class TransactionPartnerUser implements TransactionPartner
 {
+    /**
+     * @param PaidMedia[]|null $paidMedia
+     */
     public function __construct(
         public string $transactionType,
         public User $user,

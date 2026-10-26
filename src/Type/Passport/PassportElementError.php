@@ -13,5 +13,8 @@ interface PassportElementError
 {
     public function getSource(): string;
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array;
 }

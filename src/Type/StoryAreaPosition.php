@@ -20,6 +20,9 @@ final readonly class StoryAreaPosition
         public float $cornerRadiusPercentage,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return [

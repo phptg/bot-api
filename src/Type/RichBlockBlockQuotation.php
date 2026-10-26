@@ -17,6 +17,7 @@ final readonly class RichBlockBlockQuotation implements RichBlock
 {
     /**
      * @param list<RichBlock> $blocks
+     * @param string|array<string|array<mixed>|RichText>|RichText|null $credit
      */
     public function __construct(
         #[ArrayMap(RichBlockValue::class)]

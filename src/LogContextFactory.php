@@ -28,12 +28,13 @@ final class LogContextFactory
     }
 
     /**
+     * @param array<mixed> $decodedResponse
      * @return array{
      *     type: LogType::SUCCESS_RESULT,
-     *     payload: array,
+     *     payload: array<mixed>,
      *     method: MethodInterface,
      *     response: ApiResponse,
-     *     decodedResponse: array,
+     *     decodedResponse: array<mixed>,
      * }
      */
     public static function successResult(
@@ -51,12 +52,13 @@ final class LogContextFactory
     }
 
     /**
+     * @param array<mixed> $decodedResponse
      * @return array{
      *     type: LogType::FAIL_RESULT,
      *     payload: string,
      *     method: MethodInterface,
      *     response: ApiResponse,
-     *     decodedResponse: array,
+     *     decodedResponse: array<mixed>,
      * }
      */
     public static function failResult(

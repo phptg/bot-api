@@ -15,6 +15,7 @@ use function is_string;
 final class RichTextConverter
 {
     /**
+     * @param array<mixed>|string|RichText|null $value
      * @return string|array<array-key, mixed>|null
      */
     public static function toRequestArray(array|string|RichText|null $value): string|array|null

@@ -18,6 +18,9 @@ final readonly class LoginUrl
         public ?bool $requestWriteAccess = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return array_filter(
