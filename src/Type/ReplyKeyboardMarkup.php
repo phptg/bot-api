@@ -12,8 +12,7 @@ namespace Phptg\BotApi\Type;
 final readonly class ReplyKeyboardMarkup
 {
     /**
-     * @param KeyboardButton[][] $keyboard
-     * @psalm-param array<array-key, array<array-key, KeyboardButton>> $keyboard
+     * @param array<array-key, array<array-key, KeyboardButton>> $keyboard
      */
     public function __construct(
         public array $keyboard,

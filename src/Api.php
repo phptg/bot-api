@@ -43,9 +43,9 @@ final readonly class Api
     /**
      * @see https://core.telegram.org/bots/api#making-requests
      *
-     * @psalm-template TValue
-     * @psalm-param MethodInterface<TValue> $method
-     * @psalm-return TValue|FailResult
+     * @template TValue
+     * @param MethodInterface<TValue> $method
+     * @return TValue|FailResult
      */
     public function call(MethodInterface $method, ?LoggerInterface $logger): mixed
     {
@@ -111,7 +111,7 @@ final readonly class Api
     }
 
     /**
-     * @psalm-param array<string, mixed> $data
+     * @param array<string, mixed> $data
      */
     private function sendGetRequest(string $url, array $data): ApiResponse
     {
@@ -128,7 +128,7 @@ final readonly class Api
     }
 
     /**
-     * @psalm-param array<string, mixed> $data
+     * @param array<string, mixed> $data
      */
     private function sendPostRequest(string $url, array $data): ApiResponse
     {
@@ -161,9 +161,9 @@ final readonly class Api
     }
 
     /**
-     * @psalm-template TValue
-     * @psalm-param MethodInterface<TValue> $method
-     * @psalm-return TValue
+     * @template TValue
+     * @param MethodInterface<TValue> $method
+     * @return TValue
      */
     private function prepareSuccessResult(
         MethodInterface $method,

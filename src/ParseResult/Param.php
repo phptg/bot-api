@@ -12,7 +12,7 @@ use Phptg\BotApi\ParseResult\ValueProcessor\ValueProcessorInterface;
 final readonly class Param
 {
     /**
-     * @psalm-param class-string|ValueProcessorInterface $type
+     * @param class-string|ValueProcessorInterface $type
      */
     public function __construct(
         public string $key,

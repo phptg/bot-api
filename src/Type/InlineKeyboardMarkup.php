@@ -14,8 +14,7 @@ use Phptg\BotApi\ParseResult\ValueProcessor\ArrayOfArraysOfObjectsValue;
 final readonly class InlineKeyboardMarkup
 {
     /**
-     * @param array[] $inlineKeyboard
-     * @psalm-param array<array-key, array<array-key, InlineKeyboardButton>> $inlineKeyboard
+     * @param array<array-key, array<array-key, InlineKeyboardButton>> $inlineKeyboard
      */
     public function __construct(
         #[ArrayOfArraysOfObjectsValue(InlineKeyboardButton::class)]

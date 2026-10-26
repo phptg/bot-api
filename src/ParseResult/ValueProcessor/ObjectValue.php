@@ -13,7 +13,7 @@ use Phptg\BotApi\ParseResult\ObjectFactory;
 final readonly class ObjectValue implements ValueProcessorInterface
 {
     /**
-     * @psalm-param class-string<T> $className
+     * @param class-string<T> $className
      */
     public function __construct(
         private string $className,

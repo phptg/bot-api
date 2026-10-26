@@ -18,14 +18,14 @@ use function is_array;
 final readonly class ArrayOfObjectsValue implements ValueProcessorInterface
 {
     /**
-     * @psalm-param class-string<T> $className
+     * @param class-string<T> $className
      */
     public function __construct(
         private string $className,
     ) {}
 
     /**
-     * @psalm-return array<array-key,T>
+     * @return array<array-key,T>
      */
     public function process(mixed $value, ?string $key, ObjectFactory $objectFactory): mixed
     {

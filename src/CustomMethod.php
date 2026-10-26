@@ -17,8 +17,8 @@ use Phptg\BotApi\Transport\HttpMethod;
 final readonly class CustomMethod implements MethodInterface
 {
     /**
-     * @psalm-param array<string, mixed> $data
-     * @psalm-param ValueProcessorInterface<TResult> $resultType
+     * @param array<string, mixed> $data
+     * @param ValueProcessorInterface<TResult> $resultType
      */
     public function __construct(
         private string $apiMethod,

@@ -4,6 +4,7 @@
 
 - Enh #223: Convert the PHP warning raised on failure to read a local file in `NativeTransport` into an exception with
   the original error message.
+- Enh #227: Replace Psalm with PHPStan for static analysis.
 
 ## 0.22 August 25, 2026
 

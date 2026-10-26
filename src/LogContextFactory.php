@@ -12,7 +12,7 @@ use Phptg\BotApi\Transport\ApiResponse;
 final class LogContextFactory
 {
     /**
-     * @psalm-return array{
+     * @return array{
      *     type: LogType::SEND_REQUEST,
      *     payload: array<string, mixed>,
      *     method: MethodInterface,
@@ -28,7 +28,7 @@ final class LogContextFactory
     }
 
     /**
-     * @psalm-return array{
+     * @return array{
      *     type: LogType::SUCCESS_RESULT,
      *     payload: array,
      *     method: MethodInterface,
@@ -51,7 +51,7 @@ final class LogContextFactory
     }
 
     /**
-     * @psalm-return array{
+     * @return array{
      *     type: LogType::FAIL_RESULT,
      *     payload: string,
      *     method: MethodInterface,
@@ -74,7 +74,7 @@ final class LogContextFactory
     }
 
     /**
-     * @psalm-return array{
+     * @return array{
      *     type: LogType::PARSE_RESULT_ERROR,
      *     payload: string,
      * }

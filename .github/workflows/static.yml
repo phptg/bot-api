@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  psalm:
+  phpstan:
     name: PHP ${{ matrix.php }}-${{ matrix.os }}
 
     runs-on: ${{ matrix.os }}
@@ -46,6 +46,4 @@ jobs:
         uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
 
       - name: Static analysis
-        env:
-          PHP_VERSION: ${{ matrix.php }}
-        run: vendor/bin/psalm --shepherd --stats --output-format=checkstyle --php-version=$PHP_VERSION | cs2pr --graceful-warnings --colorize
+        run: vendor/bin/phpstan analyse --error-format=checkstyle --no-progress | cs2pr --graceful-warnings --colorize

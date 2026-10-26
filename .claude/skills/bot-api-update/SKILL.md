@@ -190,7 +190,7 @@ Report all four results to the user, honestly, with the actual output of anythin
    (Coveralls) gives the authoritative number.
 4. **Static analysis — must be clean.**
    ```bash
-   composer psalm
+   composer phpstan
    composer dependency-analyser
    ```
 

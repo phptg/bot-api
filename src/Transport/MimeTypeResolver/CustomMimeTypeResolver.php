@@ -12,7 +12,7 @@ use Phptg\BotApi\Type\InputFile;
 final readonly class CustomMimeTypeResolver implements MimeTypeResolverInterface
 {
     /**
-     * @psalm-param array<lowercase-string, string> $map
+     * @param array<lowercase-string, string> $map
      */
     public function __construct(
         private array $map,

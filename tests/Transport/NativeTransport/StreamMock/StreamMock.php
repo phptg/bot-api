@@ -12,7 +12,7 @@ final class StreamMock
     private const REQUEST_FILE = __DIR__ . '/stream-mock-result.data';
 
     /**
-     * @psalm-var array{
+     * @var array{
      *     responseHeaders: list<string>,
      *     responseBody: string,
      * }
@@ -37,7 +37,7 @@ final class StreamMock
     }
 
     /**
-     * @psalm-param list<string> $responseHeaders
+     * @param list<string> $responseHeaders
      */
     public static function enable(array $responseHeaders = [], string $responseBody = ''): void
     {

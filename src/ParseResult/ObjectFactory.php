@@ -44,16 +44,16 @@ use function is_string;
 final class ObjectFactory
 {
     /**
-     * @psalm-var array<string,ValueProcessorInterface>|null
+     * @var array<string,ValueProcessorInterface>|null
      */
     private ?array $typeMap = null;
 
     /**
      * @throws TelegramParseResultException
      *
-     * @psalm-template T
-     * @psalm-param class-string<T> $className
-     * @psalm-return T
+     * @template T
+     * @param class-string<T> $className
+     * @return T
      */
     public function create(mixed $value, ?string $key, string $className): object
     {
@@ -68,7 +68,6 @@ final class ObjectFactory
             $arguments[$name] = $this->handleParam($value, $param);
         }
 
-        /** @psalm-suppress MixedMethodCall */
         return new $className(...$arguments);
     }
 
@@ -88,14 +87,14 @@ final class ObjectFactory
     }
 
     /**
-     * @psalm-param class-string $className
-     * @psalm-return array<string,Param>
+     * @param class-string $className
+     * @return array<string,Param>
      */
     private function getConstructorParameters(string $className): array
     {
         $classReflection = new ReflectionClass($className);
 
-        /** @psalm-var list<non-empty-string> $propertyNames */
+        /** @var list<non-empty-string> $propertyNames */
         $propertyNames = [];
         foreach ($classReflection->getProperties(ReflectionProperty::IS_PUBLIC) as $propertyReflection) {
             if ($propertyReflection->isReadOnly()) {
@@ -105,10 +104,6 @@ final class ObjectFactory
 
         $constructorParameters = $classReflection->getConstructor()?->getParameters();
 
-        /**
-         * @psalm-suppress RiskyTruthyFalsyComparison We check whether constructor exists (not null) and has parameters
-         * (non-empty array). If not - return empty array. If yes - continue.
-         */
         if (empty($constructorParameters)) {
             return [];
         }
@@ -117,7 +112,6 @@ final class ObjectFactory
         foreach ($constructorParameters as $parameter) {
             $name = $parameter->getName();
             if (in_array($name, $propertyNames, true)) {
-                /** @psalm-suppress PossiblyNullArgument In this case `preg_replace()` always returns string */
                 $key = strtolower(preg_replace('/[A-Z]/', '_$0', $name));
                 $result[$name] = new Param(
                     $key,
@@ -130,7 +124,7 @@ final class ObjectFactory
     }
 
     /**
-     * @psalm-return class-string|ValueProcessorInterface
+     * @return class-string|ValueProcessorInterface
      */
     private function getParamType(ReflectionParameter $parameter): string|ValueProcessorInterface
     {
@@ -154,7 +148,7 @@ final class ObjectFactory
     }
 
     /**
-     * @psalm-return array<string, ValueProcessorInterface>
+     * @return array<string, ValueProcessorInterface>
      */
     private function getTypeMap(): array
     {

@@ -14,8 +14,7 @@ use Phptg\BotApi\ParseResult\ValueProcessor\ArrayOfArraysOfObjectsValue;
 final readonly class UserProfilePhotos
 {
     /**
-     * @param array[] $photos
-     * @psalm-param array<array-key, array<array-key, PhotoSize>> $photos
+     * @param array<array-key, array<array-key, PhotoSize>> $photos
      */
     public function __construct(
         public int $totalCount,

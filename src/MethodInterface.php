@@ -20,12 +20,12 @@ interface MethodInterface
     public function getApiMethod(): string;
 
     /**
-     * @psalm-return array<string, mixed>
+     * @return array<string, mixed>
      */
     public function getData(): array;
 
     /**
-     * @psalm-return ValueProcessorInterface<TResult>
+     * @return ValueProcessorInterface<TResult>
      */
     public function getResultType(): ValueProcessorInterface;
 

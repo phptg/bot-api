@@ -301,9 +301,9 @@ final class TelegramBotApi
     /**
      * @see https://core.telegram.org/bots/api#making-requests
      *
-     * @psalm-template TValue
-     * @psalm-param MethodInterface<TValue> $method
-     * @psalm-return TValue|FailResult
+     * @template TValue
+     * @param MethodInterface<TValue> $method
+     * @return TValue|FailResult
      */
     public function call(MethodInterface $method): mixed
     {

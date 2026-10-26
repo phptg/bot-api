@@ -16,9 +16,9 @@ final readonly class ResultFactory
     }
 
     /**
-     * @psalm-template T
-     * @psalm-param ValueProcessorInterface<T> $type
-     * @psalm-return T
+     * @template T
+     * @param ValueProcessorInterface<T> $type
+     * @return T
      */
     public function create(mixed $result, ValueProcessorInterface $type): mixed
     {

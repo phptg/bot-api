@@ -18,7 +18,7 @@ use function is_array;
 final readonly class ArrayMap implements ValueProcessorInterface
 {
     /**
-     * @psalm-param class-string<ValueProcessorInterface<T>> $className
+     * @param class-string<ValueProcessorInterface<T>> $className
      */
     public function __construct(
         private string $className,
