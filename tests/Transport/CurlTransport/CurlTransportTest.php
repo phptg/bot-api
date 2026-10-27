@@ -10,6 +10,7 @@ use CURLStringFile;
 use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Tests\Curl\CurlMock;
+use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Transport\CurlTransport;
 use Phptg\BotApi\Type\InputFile;
 
@@ -153,6 +154,29 @@ final class CurlTransportTest extends TestCase
         assertSame('stream content', $postFields['file']->data);
         assertSame($filename ?? '', $postFields['file']->postname);
         assertSame($mimeType, $postFields['file']->mime);
+    }
+
+    public function testPostWithResourceWithoutUri(): void
+    {
+        $curl = new CurlMock();
+        $transport = new CurlTransport(curl: $curl);
+
+        [$resource, $pair] = TestHelper::createSocketPair();
+        fwrite($pair, 'socket content');
+        fclose($pair);
+
+        $transport->postWithFiles(
+            '//url/method',
+            [],
+            ['file' => new InputFile($resource)],
+        );
+
+        fclose($resource);
+
+        $postFields = $curl->getOptions()[CURLOPT_POSTFIELDS];
+        assertInstanceOf(CURLStringFile::class, $postFields['file']);
+        assertSame('socket content', $postFields['file']->data);
+        assertSame('', $postFields['file']->postname);
     }
 
     public function testSeekableResource(): void
