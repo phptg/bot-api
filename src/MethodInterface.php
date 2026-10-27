@@ -8,7 +8,7 @@ use Phptg\BotApi\ParseResult\ValueProcessor\ValueProcessorInterface;
 use Phptg\BotApi\Transport\HttpMethod;
 
 /**
- * @template TResult
+ * @template-covariant TResult
  *
  * @api
  */
