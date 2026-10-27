@@ -15,5 +15,8 @@ interface InputPaidMedia
 {
     public function getType(): string;
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(?FileCollector $fileCollector = null): array;
 }

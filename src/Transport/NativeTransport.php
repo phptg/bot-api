@@ -88,6 +88,9 @@ final readonly class NativeTransport implements TransportInterface
         return $stream;
     }
 
+    /**
+     * @param array<string, mixed> $options
+     */
     private function send(string $url, array $options): ApiResponse
     {
         global $http_response_header;
@@ -111,7 +114,7 @@ final readonly class NativeTransport implements TransportInterface
         }
 
         /**
-         * @psalm-var non-empty-list<string> $http_response_header
+         * @var non-empty-list<string> $http_response_header
          * @see https://www.php.net/manual/reserved.variables.httpresponseheader.php
          */
 
@@ -122,8 +125,8 @@ final readonly class NativeTransport implements TransportInterface
     }
 
     /**
-     * @psalm-param array<string, string> $data
-     * @psalm-param array<string, InputFile> $files
+     * @param array<string, string> $data
+     * @param array<string, InputFile> $files
      */
     private function buildMultipartFormData(array $data, array $files, string $boundary): string
     {
@@ -161,7 +164,7 @@ final readonly class NativeTransport implements TransportInterface
     }
 
     /**
-     * @psalm-param non-empty-list<string> $headers
+     * @param non-empty-list<string> $headers
      */
     private function parseStatusCode(array $headers): int
     {

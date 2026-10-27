@@ -39,7 +39,7 @@ final class WebhookResponseTest extends TestCase
     {
         $method = new SendPhoto(
             chatId: 'x1',
-            photo: new InputFile(null),
+            photo: new InputFile('/path/to/file'),
         );
 
         $webhookResponse = new WebhookResponse($method);

@@ -15,7 +15,7 @@ use Phptg\BotApi\ParseResult\ObjectFactory;
 final readonly class RawValue implements ValueProcessorInterface
 {
     /**
-     * @psalm-param TValue $value
+     * @param TValue $value
      */
     public function process(mixed $value, ?string $key, ObjectFactory $objectFactory): mixed
     {

@@ -15,6 +15,7 @@ use Phptg\BotApi\Type\PhotoSize;
 use Phptg\BotApi\Type\User;
 
 use function PHPUnit\Framework\assertEquals;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 
@@ -118,6 +119,7 @@ final class TransactionPartnerUserTest extends TestCase
             $object->paidMedia,
         );
         assertSame('test-payload', $object->paidMediaPayload);
+        assertNotNull($object->affiliate);
         assertSame(100, $object->affiliate->commissionPerMille);
         assertSame(192, $object->premiumSubscriptionDuration);
     }

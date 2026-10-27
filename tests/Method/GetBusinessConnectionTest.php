@@ -8,7 +8,9 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\GetBusinessConnection;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\BusinessConnection;
 
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class GetBusinessConnectionTest extends TestCase
@@ -39,6 +41,7 @@ final class GetBusinessConnectionTest extends TestCase
             'is_enabled' => false,
         ])->call($method);
 
+        assertInstanceOf(BusinessConnection::class, $preparedResult);
         assertSame('id1', $preparedResult->id);
     }
 }

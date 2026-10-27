@@ -30,6 +30,9 @@ final readonly class ChatPermissions
         public ?bool $canManageTopics = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return array_filter(

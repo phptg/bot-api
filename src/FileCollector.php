@@ -14,7 +14,7 @@ final class FileCollector
     private int $counter;
 
     /**
-     * @psalm-var array<string,InputFile>
+     * @var array<string,InputFile>
      */
     private array $files = [];
 
@@ -33,7 +33,7 @@ final class FileCollector
     }
 
     /**
-     * @psalm-return array<string,InputFile>
+     * @return array<string,InputFile>
      */
     public function get(): array
     {

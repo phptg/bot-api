@@ -48,7 +48,7 @@ final class InputRichBlockDocumentTest extends TestCase
 
     public function testFileCollectorIsPropagated(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $document = new InputRichBlockDocument(new InputMediaDocument($file));
 
         $fileCollector = new FileCollector();

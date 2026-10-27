@@ -9,7 +9,9 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\CreateChatInviteLink;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\ChatInviteLink;
 
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class CreateChatInviteLinkTest extends TestCase
@@ -58,6 +60,7 @@ final class CreateChatInviteLinkTest extends TestCase
             'is_revoked' => false,
         ])->call($method);
 
+        assertInstanceOf(ChatInviteLink::class, $preparedResult);
         assertSame(23, $preparedResult->creator->id);
     }
 }

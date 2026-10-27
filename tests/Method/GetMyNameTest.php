@@ -8,7 +8,9 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\GetMyName;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\BotName;
 
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class GetMyNameTest extends TestCase
@@ -42,6 +44,7 @@ final class GetMyNameTest extends TestCase
             'name' => 'test',
         ])->call($method);
 
+        assertInstanceOf(BotName::class, $preparedResult);
         assertSame('test', $preparedResult->name);
     }
 }

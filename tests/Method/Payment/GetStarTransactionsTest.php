@@ -8,7 +8,9 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\Payment\GetStarTransactions;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\Payment\StarTransactions;
 
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class GetStarTransactionsTest extends TestCase
@@ -42,6 +44,7 @@ final class GetStarTransactionsTest extends TestCase
             'transactions' => [],
         ])->call($method);
 
+        assertInstanceOf(StarTransactions::class, $preparedResult);
         assertSame([], $preparedResult->transactions);
     }
 }

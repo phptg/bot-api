@@ -168,7 +168,7 @@ final class ChatFullInfoTest extends TestCase
             'permissions' => [
                 'can_send_messages' => true,
             ],
-            'accepted_gift_types' =>  [
+            'accepted_gift_types' => [
                 'unlimited_gifts' => true,
                 'limited_gifts' => false,
                 'unique_gifts' => true,
@@ -331,6 +331,6 @@ final class ChatFullInfoTest extends TestCase
         assertSame(42, $info->guardBot->id);
         assertSame('GuardBot', $info->guardBot->firstName);
         assertSame(987, $info->community?->id);
-        assertSame('My Community', $info->community?->name);
+        assertSame('My Community', $info->community->name);
     }
 }

@@ -10,6 +10,7 @@ use Phptg\BotApi\ParseResult\TelegramParseResultException;
 use Phptg\BotApi\Type\Payment\TransactionPartnerAffiliateProgram;
 use Phptg\BotApi\Type\User;
 
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 
@@ -55,6 +56,7 @@ final class TransactionPartnerAffiliateProgramTest extends TestCase
 
         assertSame('affiliate_program', $object->getType());
         assertSame(203, $object->commissionPerMille);
+        assertNotNull($object->sponsorUser);
         assertSame(123, $object->sponsorUser->id);
     }
 

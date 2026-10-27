@@ -8,7 +8,9 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\Sticker\GetStickerSet;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\Sticker\StickerSet;
 
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class GetStickerSetTest extends TestCase
@@ -48,6 +50,7 @@ final class GetStickerSetTest extends TestCase
             ],
         ])->call($method);
 
+        assertInstanceOf(StickerSet::class, $preparedResult);
         assertSame('test name', $preparedResult->title);
     }
 }

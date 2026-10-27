@@ -20,6 +20,9 @@ final readonly class ShippingOption
         public array $prices,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return [

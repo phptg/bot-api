@@ -40,6 +40,9 @@ final readonly class GetMyName implements MethodInterface
         );
     }
 
+    /**
+     * @return ObjectValue<BotName>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(BotName::class);

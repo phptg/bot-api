@@ -14,7 +14,7 @@ interface StoryAreaType
     public function getType(): string;
 
     /**
-     * @psalm-return array<string, mixed>
+     * @return array<string, mixed>
      */
     public function toRequestArray(): array;
 }

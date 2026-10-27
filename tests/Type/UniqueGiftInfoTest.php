@@ -18,6 +18,7 @@ use Phptg\BotApi\Type\UniqueGiftSymbol;
 use function PHPUnit\Framework\assertContainsOnlyInstancesOf;
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;
@@ -80,7 +81,7 @@ final class UniqueGiftInfoTest extends TestCase
     public function testFromTelegramResult(): void
     {
         $type = (new ObjectFactory())->create([
-            'gift' =>  [
+            'gift' => [
                 'gift_id' => 'gift-unique-789',
                 'base_name' => 'BaseName',
                 'name' => 'uniqueName',
@@ -136,7 +137,6 @@ final class UniqueGiftInfoTest extends TestCase
         ], null, UniqueGiftInfo::class);
 
         assertInstanceOf(UniqueGiftInfo::class, $type);
-        assertInstanceOf(UniqueGift::class, $type->gift);
         assertSame('transfer', $type->origin);
         assertSame('owned-id1', $type->ownedGiftId);
         assertSame(15, $type->transferStarCount);
@@ -144,6 +144,7 @@ final class UniqueGiftInfoTest extends TestCase
         assertSame(99, $type->lastResaleAmount);
         assertSame(1700000000, $type->nextTransferDate?->getTimestamp());
         assertSame('Happy birthday!', $type->text);
+        assertNotNull($type->entities);
         assertContainsOnlyInstancesOf(MessageEntity::class, $type->entities);
         assertCount(1, $type->entities);
         assertSame('bold', $type->entities[0]->type);

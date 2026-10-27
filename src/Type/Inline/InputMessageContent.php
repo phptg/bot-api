@@ -11,5 +11,8 @@ namespace Phptg\BotApi\Type\Inline;
  */
 interface InputMessageContent
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array;
 }

@@ -23,10 +23,13 @@ use Phptg\BotApi\Type\InputFile;
 final readonly class WebhookResponse
 {
     private string $apiMethod;
+    /**
+     * @var array<string, mixed>
+     */
     private array $apiData;
 
     /**
-     * @param MethodInterface $method The Telegram Bot API method to be sent as webhook response.
+     * @param MethodInterface<mixed> $method The Telegram Bot API method to be sent as webhook response.
      */
     public function __construct(MethodInterface $method)
     {
@@ -38,7 +41,7 @@ final readonly class WebhookResponse
      * Returns the data array for the webhook response.
      * The returned array contains the method name and all method parameters.
      *
-     * @return array The webhook response data.
+     * @return array<string, mixed> The webhook response data.
      *
      * @throws MethodNotSupportedException If method doesn't support sending via a webhook response.
      */

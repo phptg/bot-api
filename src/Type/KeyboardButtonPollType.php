@@ -15,6 +15,9 @@ final readonly class KeyboardButtonPollType
         public ?string $type = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return array_filter(

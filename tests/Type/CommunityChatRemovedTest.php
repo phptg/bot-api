@@ -8,12 +8,13 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\ParseResult\ObjectFactory;
 use Phptg\BotApi\Type\CommunityChatRemoved;
 
+use function PHPUnit\Framework\assertSame;
+
 final class CommunityChatRemovedTest extends TestCase
 {
     public function testBase(): void
     {
-        new CommunityChatRemoved();
-        $this->expectNotToPerformAssertions();
+        assertSame([], get_object_vars(new CommunityChatRemoved()));
     }
 
     public function testFromTelegramResult(): void

@@ -8,8 +8,10 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\GetUserProfilePhotos;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\UserProfilePhotos;
 
 use function PHPUnit\Framework\assertCount;
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class GetUserProfilePhotosTest extends TestCase
@@ -65,6 +67,7 @@ final class GetUserProfilePhotosTest extends TestCase
             ],
         ])->call($method);
 
+        assertInstanceOf(UserProfilePhotos::class, $preparedResult);
         assertSame(1, $preparedResult->totalCount);
         assertCount(1, $preparedResult->photos);
         assertCount(1, $preparedResult->photos[0]);

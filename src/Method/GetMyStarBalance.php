@@ -31,6 +31,9 @@ final readonly class GetMyStarBalance implements MethodInterface
         return [];
     }
 
+    /**
+     * @return ObjectValue<StarAmount>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(StarAmount::class);

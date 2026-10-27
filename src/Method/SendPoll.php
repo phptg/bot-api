@@ -148,6 +148,9 @@ final readonly class SendPoll implements MethodInterface
         );
     }
 
+    /**
+     * @return ObjectValue<Message>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(Message::class);

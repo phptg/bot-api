@@ -46,6 +46,9 @@ final readonly class GetGameHighScores implements MethodInterface
         );
     }
 
+    /**
+     * @return ArrayOfObjectsValue<GameHighScore>
+     */
     public function getResultType(): ArrayOfObjectsValue
     {
         return new ArrayOfObjectsValue(GameHighScore::class);

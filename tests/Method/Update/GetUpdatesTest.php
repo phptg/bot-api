@@ -10,6 +10,7 @@ use Phptg\BotApi\Method\Update\GetUpdates;
 use Phptg\BotApi\Tests\Support\TestHelper;
 
 use function PHPUnit\Framework\assertCount;
+use function PHPUnit\Framework\assertIsArray;
 use function PHPUnit\Framework\assertSame;
 
 final class GetUpdatesTest extends TestCase
@@ -52,6 +53,7 @@ final class GetUpdatesTest extends TestCase
             ['update_id' => 2],
         ])->call($method);
 
+        assertIsArray($preparedResult);
         assertCount(2, $preparedResult);
         assertSame(1, $preparedResult[0]->updateId);
         assertSame(2, $preparedResult[1]->updateId);

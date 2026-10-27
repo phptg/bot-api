@@ -8,7 +8,9 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Method\Update\GetWebhookInfo;
 use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\Update\WebhookInfo;
 
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class GetWebhookInfoTest extends TestCase
@@ -32,6 +34,7 @@ final class GetWebhookInfoTest extends TestCase
             'pending_update_count' => 12,
         ])->call($method);
 
+        assertInstanceOf(WebhookInfo::class, $preparedResult);
         assertSame('https://example.com/', $preparedResult->url);
     }
 }

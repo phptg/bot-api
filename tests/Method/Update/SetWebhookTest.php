@@ -31,7 +31,7 @@ final class SetWebhookTest extends TestCase
 
     public function testFull(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $method = new SetWebhook(
             'https://example.com/hook',
             '127.0.0.1',

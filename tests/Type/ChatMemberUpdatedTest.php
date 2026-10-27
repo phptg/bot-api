@@ -88,7 +88,9 @@ final class ChatMemberUpdatedTest extends TestCase
         assertSame(123, $chatMemberUpdated->chat->id);
         assertSame(5, $chatMemberUpdated->from->id);
         assertEquals(new DateTimeImmutable('@123456779'), $chatMemberUpdated->date);
+        assertInstanceOf(ChatMemberMember::class, $chatMemberUpdated->oldChatMember);
         assertSame(7, $chatMemberUpdated->oldChatMember->user->id);
+        assertInstanceOf(ChatMemberMember::class, $chatMemberUpdated->newChatMember);
         assertSame(8, $chatMemberUpdated->newChatMember->user->id);
 
         assertInstanceOf(ChatInviteLink::class, $chatMemberUpdated->inviteLink);

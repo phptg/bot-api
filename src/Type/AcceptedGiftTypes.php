@@ -19,6 +19,9 @@ final readonly class AcceptedGiftTypes
         public bool $giftsFromChannels,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return [

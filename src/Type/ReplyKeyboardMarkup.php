@@ -12,8 +12,7 @@ namespace Phptg\BotApi\Type;
 final readonly class ReplyKeyboardMarkup
 {
     /**
-     * @param KeyboardButton[][] $keyboard
-     * @psalm-param array<array-key, array<array-key, KeyboardButton>> $keyboard
+     * @param array<array-key, array<array-key, KeyboardButton>> $keyboard
      */
     public function __construct(
         public array $keyboard,
@@ -25,6 +24,9 @@ final readonly class ReplyKeyboardMarkup
         public ?bool $forceReply = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return array_filter(

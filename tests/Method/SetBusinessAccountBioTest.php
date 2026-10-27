@@ -6,11 +6,9 @@ namespace Phptg\BotApi\Tests\Method;
 
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\SetBusinessAccountBio;
-use Phptg\BotApi\ParseResult\ValueProcessor\TrueValue;
 use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Transport\HttpMethod;
 
-use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;
 
@@ -23,7 +21,6 @@ final class SetBusinessAccountBioTest extends TestCase
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('setBusinessAccountBio', $method->getApiMethod());
         assertSame(['business_connection_id' => 'connection1'], $method->getData());
-        assertInstanceOf(TrueValue::class, $method->getResultType());
     }
 
     public function testFull(): void

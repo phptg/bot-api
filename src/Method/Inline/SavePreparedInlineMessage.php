@@ -51,6 +51,9 @@ final readonly class SavePreparedInlineMessage implements MethodInterface
         );
     }
 
+    /**
+     * @return ObjectValue<PreparedInlineMessage>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(PreparedInlineMessage::class);

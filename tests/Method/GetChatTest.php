@@ -8,7 +8,9 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\GetChat;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\ChatFullInfo;
 
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class GetChatTest extends TestCase
@@ -33,6 +35,7 @@ final class GetChatTest extends TestCase
             'max_reaction_count' => 5,
         ])->call($method);
 
+        assertInstanceOf(ChatFullInfo::class, $preparedResult);
         assertSame(23, $preparedResult->id);
     }
 }

@@ -16,6 +16,9 @@ final readonly class SuggestedPostParameters
         public ?int $sendDate = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return array_filter(

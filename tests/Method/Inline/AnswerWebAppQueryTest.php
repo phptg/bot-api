@@ -9,7 +9,9 @@ use Phptg\BotApi\Method\Inline\AnswerWebAppQuery;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Type\Inline\InlineQueryResultContact;
+use Phptg\BotApi\Type\Inline\SentWebAppMessage;
 
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class AnswerWebAppQueryTest extends TestCase
@@ -38,6 +40,7 @@ final class AnswerWebAppQueryTest extends TestCase
             'inline_message_id' => 'idMessage',
         ])->call($method);
 
+        assertInstanceOf(SentWebAppMessage::class, $preparedResult);
         assertSame('idMessage', $preparedResult->inlineMessageId);
     }
 }

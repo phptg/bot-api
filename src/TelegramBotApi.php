@@ -301,9 +301,9 @@ final class TelegramBotApi
     /**
      * @see https://core.telegram.org/bots/api#making-requests
      *
-     * @psalm-template TValue
-     * @psalm-param MethodInterface<TValue> $method
-     * @psalm-return TValue|FailResult
+     * @template TValue
+     * @param MethodInterface<TValue> $method
+     * @return TValue|FailResult
      */
     public function call(MethodInterface $method): mixed
     {
@@ -1553,6 +1553,8 @@ final class TelegramBotApi
 
     /**
      * @see https://core.telegram.org/bots/api#getmycommands
+     *
+     * @return FailResult|BotCommand[]
      */
     public function getMyCommands(?BotCommandScope $scope = null, ?string $languageCode = null): FailResult|array
     {
@@ -1675,6 +1677,8 @@ final class TelegramBotApi
 
     /**
      * @see https://core.telegram.org/bots/api#getuserpersonalchatmessages
+     *
+     * @return FailResult|Message[]
      */
     public function getUserPersonalChatMessages(int $userId, int $limit): FailResult|array
     {
@@ -3528,6 +3532,8 @@ final class TelegramBotApi
 
     /**
      * @see https://core.telegram.org/bots/api#setwebhook
+     *
+     * @param string[]|null $allowUpdates
      */
     public function setWebhook(
         string $url,

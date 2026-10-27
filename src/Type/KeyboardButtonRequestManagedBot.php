@@ -17,6 +17,9 @@ final readonly class KeyboardButtonRequestManagedBot
         public ?string $suggestedUsername = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return array_filter(

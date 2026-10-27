@@ -9,6 +9,7 @@ use Phptg\BotApi\ParseResult\ObjectFactory;
 use Phptg\BotApi\Type\TextQuote;
 
 use function PHPUnit\Framework\assertCount;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;
@@ -43,6 +44,7 @@ final class TextQuoteTest extends TestCase
         assertSame('test', $textQuote->text);
         assertSame(23, $textQuote->position);
 
+        assertNotNull($textQuote->entities);
         assertCount(1, $textQuote->entities);
         assertSame('bold', $textQuote->entities[0]->type);
         assertSame(0, $textQuote->entities[0]->offset);

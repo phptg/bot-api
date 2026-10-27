@@ -74,6 +74,9 @@ final readonly class SendSticker implements MethodInterface
         );
     }
 
+    /**
+     * @return ObjectValue<Message>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(Message::class);

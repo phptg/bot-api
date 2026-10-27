@@ -31,6 +31,9 @@ final readonly class GetMe implements MethodInterface
         return [];
     }
 
+    /**
+     * @return ObjectValue<User>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(User::class);

@@ -10,8 +10,10 @@ use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Type\InlineKeyboardButton;
 use Phptg\BotApi\Type\InlineKeyboardMarkup;
+use Phptg\BotApi\Type\Message;
 use Phptg\BotApi\Type\ReplyParameters;
 
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class SendGameTest extends TestCase
@@ -78,6 +80,7 @@ final class SendGameTest extends TestCase
             ],
         ])->call($method);
 
+        assertInstanceOf(Message::class, $preparedResult);
         assertSame(7, $preparedResult->messageId);
     }
 }

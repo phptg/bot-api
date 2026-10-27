@@ -11,8 +11,10 @@ use Phptg\BotApi\Type\Chat;
 use Phptg\BotApi\Type\MessageReactionCountUpdated;
 use Phptg\BotApi\Type\ReactionCount;
 use Phptg\BotApi\Type\ReactionTypeCustomEmoji;
+use Phptg\BotApi\Type\ReactionTypeEmoji;
 
 use function PHPUnit\Framework\assertCount;
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class MessageReactionCountUpdatedTest extends TestCase
@@ -55,6 +57,7 @@ final class MessageReactionCountUpdatedTest extends TestCase
         assertSame(1623150080, $messageReactionCountUpdated->date->getTimestamp());
 
         assertCount(1, $messageReactionCountUpdated->reactions);
+        assertInstanceOf(ReactionTypeEmoji::class, $messageReactionCountUpdated->reactions[0]->type);
         assertSame('🤯', $messageReactionCountUpdated->reactions[0]->type->emoji);
     }
 }

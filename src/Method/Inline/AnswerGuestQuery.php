@@ -40,6 +40,9 @@ final readonly class AnswerGuestQuery implements MethodInterface
         ];
     }
 
+    /**
+     * @return ObjectValue<SentGuestMessage>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(SentGuestMessage::class);

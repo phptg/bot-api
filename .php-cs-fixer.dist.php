@@ -16,6 +16,7 @@ return (new Config())
     ->setCacheFile(__DIR__ . '/runtime/.php-cs-fixer.cache')
     ->setRules([
         '@PER-CS3.0' => true,
+        'binary_operator_spaces' => ['default' => 'single_space'],
         'no_unused_imports' => true,
     ])
     ->setFinder($finder);

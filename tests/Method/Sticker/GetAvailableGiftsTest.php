@@ -8,8 +8,10 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\Sticker\GetAvailableGifts;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\Sticker\Gifts;
 
 use function PHPUnit\Framework\assertCount;
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class GetAvailableGiftsTest extends TestCase
@@ -58,6 +60,7 @@ final class GetAvailableGiftsTest extends TestCase
             ],
         ])->call($method);
 
+        assertInstanceOf(Gifts::class, $preparedResult);
         assertCount(2, $preparedResult->gifts);
     }
 }

@@ -9,7 +9,9 @@ use Phptg\BotApi\Method\Inline\AnswerGuestQuery;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Type\Inline\InlineQueryResultContact;
+use Phptg\BotApi\Type\SentGuestMessage;
 
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class AnswerGuestQueryTest extends TestCase
@@ -38,6 +40,7 @@ final class AnswerGuestQueryTest extends TestCase
             'inline_message_id' => 'guest_msg_789',
         ])->call($method);
 
+        assertInstanceOf(SentGuestMessage::class, $preparedResult);
         assertSame('guest_msg_789', $preparedResult->inlineMessageId);
     }
 }

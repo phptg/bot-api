@@ -47,7 +47,7 @@ final class InputStickerTest extends TestCase
 
     public function testFull(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $maskPosition = new MaskPosition('forehead', 0.5, 0.6, 0.7);
         $inputSticker = new InputSticker(
             $file,

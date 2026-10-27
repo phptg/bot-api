@@ -24,6 +24,9 @@ final readonly class KeyboardButton
         public ?KeyboardButtonRequestManagedBot $requestManagedBot = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return array_filter(

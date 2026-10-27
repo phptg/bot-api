@@ -44,6 +44,9 @@ final readonly class GetUserProfilePhotos implements MethodInterface
         );
     }
 
+    /**
+     * @return ObjectValue<UserProfilePhotos>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(UserProfilePhotos::class);

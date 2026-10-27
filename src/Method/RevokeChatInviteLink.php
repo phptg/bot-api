@@ -39,6 +39,9 @@ final readonly class RevokeChatInviteLink implements MethodInterface
         ];
     }
 
+    /**
+     * @return ObjectValue<ChatInviteLink>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(ChatInviteLink::class);

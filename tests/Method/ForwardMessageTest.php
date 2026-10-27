@@ -8,9 +8,11 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\ForwardMessage;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\Message;
 use Phptg\BotApi\Type\SuggestedPostParameters;
 use Phptg\BotApi\Type\SuggestedPostPrice;
 
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class ForwardMessageTest extends TestCase
@@ -83,6 +85,7 @@ final class ForwardMessageTest extends TestCase
             ],
         ])->call($method);
 
+        assertInstanceOf(Message::class, $preparedResult);
         assertSame(7, $preparedResult->messageId);
     }
 }

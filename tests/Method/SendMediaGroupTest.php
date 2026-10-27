@@ -38,7 +38,7 @@ final class SendMediaGroupTest extends TestCase
 
     public function testFull(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $inputMedia = new InputMediaPhoto($file);
         $replyParameters = new ReplyParameters(23);
         $method = new SendMediaGroup(

@@ -8,15 +8,17 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\Sticker\UploadStickerFile;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\File;
 use Phptg\BotApi\Type\InputFile;
 
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class UploadStickerFileTest extends TestCase
 {
     public function testBase(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $method = new UploadStickerFile(1, $file, 'static');
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
@@ -33,7 +35,7 @@ final class UploadStickerFileTest extends TestCase
 
     public function testPrepareResult(): void
     {
-        $method = new UploadStickerFile(1, new InputFile(null), 'static');
+        $method = new UploadStickerFile(1, new InputFile('/path/to/file'), 'static');
 
         $preparedResult = TestHelper::createSuccessStubApi([
             'file_id' => 'f1',
@@ -42,6 +44,7 @@ final class UploadStickerFileTest extends TestCase
             'file_path' => 'path/to/file',
         ])->call($method);
 
+        assertInstanceOf(File::class, $preparedResult);
         assertSame('f1', $preparedResult->fileId);
     }
 }

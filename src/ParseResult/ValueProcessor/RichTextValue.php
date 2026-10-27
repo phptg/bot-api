@@ -42,7 +42,7 @@ use function is_array;
 use function is_string;
 
 /**
- * @psalm-import-type RichTextContent from RichText
+ * @phpstan-import-type RichTextContent from RichText
  * @template-implements ValueProcessorInterface<RichTextContent>
  */
 #[Attribute(Attribute::TARGET_PARAMETER)]
@@ -102,6 +102,9 @@ final readonly class RichTextValue implements ValueProcessorInterface
         throw new InvalidTypeOfValueInResultException($key, $value, 'string or array');
     }
 
+    /**
+     * @param array<mixed> $value
+     */
     private function createObject(array $value, ?string $key, ObjectFactory $objectFactory): RichText
     {
         if (!isset($value['type'])) {

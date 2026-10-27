@@ -72,6 +72,9 @@ final readonly class EditMessageText implements MethodInterface
         );
     }
 
+    /**
+     * @return ObjectOrTrueValue<Message>
+     */
     public function getResultType(): ObjectOrTrueValue
     {
         return new ObjectOrTrueValue(Message::class);

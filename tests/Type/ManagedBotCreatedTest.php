@@ -34,7 +34,6 @@ final class ManagedBotCreatedTest extends TestCase
         ], null, ManagedBotCreated::class);
 
         assertInstanceOf(ManagedBotCreated::class, $managedBotCreated);
-        assertInstanceOf(User::class, $managedBotCreated->bot);
         assertSame(1, $managedBotCreated->bot->id);
         assertSame(true, $managedBotCreated->bot->isBot);
         assertSame('TestBot', $managedBotCreated->bot->firstName);

@@ -45,7 +45,7 @@ final class InputRichBlockVideoTest extends TestCase
 
     public function testFileCollectorIsPropagated(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $video = new InputRichBlockVideo(new InputMediaVideo($file));
 
         $fileCollector = new FileCollector();

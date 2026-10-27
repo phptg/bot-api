@@ -32,6 +32,9 @@ final readonly class ChatAdministratorRights
         public ?bool $canManageTags = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return array_filter(

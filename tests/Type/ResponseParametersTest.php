@@ -7,6 +7,7 @@ namespace Phptg\BotApi\Tests\Type;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Type\ResponseParameters;
 
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 
@@ -20,7 +21,7 @@ final class ResponseParametersTest extends TestCase
         assertNull($parameters->retryAfter);
     }
 
-    public function testFromDecodedBody()
+    public function testFromDecodedBody(): void
     {
         $parameters = ResponseParameters::fromDecodedBody([
             'parameters' => [
@@ -29,6 +30,7 @@ final class ResponseParametersTest extends TestCase
             ],
         ]);
 
+        assertNotNull($parameters);
         assertSame(42, $parameters->migrateToChatId);
         assertSame(43, $parameters->retryAfter);
     }

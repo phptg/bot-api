@@ -6,12 +6,10 @@ namespace Phptg\BotApi\Tests\Method;
 
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\SetBusinessAccountGiftSettings;
-use Phptg\BotApi\ParseResult\ValueProcessor\TrueValue;
 use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Type\AcceptedGiftTypes;
 
-use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;
 
@@ -36,7 +34,6 @@ final class SetBusinessAccountGiftSettingsTest extends TestCase
             ],
             $method->getData(),
         );
-        assertInstanceOf(TrueValue::class, $method->getResultType());
     }
 
     public function testPrepareResult(): void

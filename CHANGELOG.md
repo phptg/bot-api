@@ -10,6 +10,7 @@
 - Bug #227: Discard keys of rich text arrays on serialization, so they are always sent as JSON arrays, not objects.
 - Bug #228: Fix "Undefined array key" error in `InputFile::filename()` and `CurlTransport` when a stream resource has
   no URI.
+- Enh #229: Replace Psalm with PHPStan for static analysis.
 
 ## 0.22 August 25, 2026
 

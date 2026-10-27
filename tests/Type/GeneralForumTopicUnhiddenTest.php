@@ -8,12 +8,13 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\ParseResult\ObjectFactory;
 use Phptg\BotApi\Type\GeneralForumTopicUnhidden;
 
+use function PHPUnit\Framework\assertSame;
+
 final class GeneralForumTopicUnhiddenTest extends TestCase
 {
     public function testBase(): void
     {
-        new GeneralForumTopicUnhidden();
-        $this->expectNotToPerformAssertions();
+        assertSame([], get_object_vars(new GeneralForumTopicUnhidden()));
     }
 
     public function testFromTelegramResult(): void

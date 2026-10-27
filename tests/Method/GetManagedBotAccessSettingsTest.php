@@ -11,6 +11,7 @@ use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Type\BotAccessSettings;
 
 use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertSame;
 
 final class GetManagedBotAccessSettingsTest extends TestCase
@@ -42,6 +43,7 @@ final class GetManagedBotAccessSettingsTest extends TestCase
 
         assertInstanceOf(BotAccessSettings::class, $preparedResult);
         assertSame(true, $preparedResult->isAccessRestricted);
+        assertNotNull($preparedResult->addedUsers);
         assertSame(1, $preparedResult->addedUsers[0]->id);
         assertSame('Alice', $preparedResult->addedUsers[0]->firstName);
     }

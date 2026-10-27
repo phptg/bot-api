@@ -33,6 +33,9 @@ final readonly class GetForumTopicIconStickers implements MethodInterface
         return [];
     }
 
+    /**
+     * @return ArrayOfObjectsValue<Sticker>
+     */
     public function getResultType(): ArrayOfObjectsValue
     {
         return new ArrayOfObjectsValue(Sticker::class);

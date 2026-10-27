@@ -16,6 +16,9 @@ final readonly class ResponseParameters
         public ?int $retryAfter = null,
     ) {}
 
+    /**
+     * @param array<mixed> $body
+     */
     public static function fromDecodedBody(array $body): ?self
     {
         if (!isset($body['parameters']) || !is_array($body['parameters'])) {

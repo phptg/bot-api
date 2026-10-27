@@ -11,11 +11,13 @@ use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Type\ForceReply;
 use Phptg\BotApi\Type\InputFile;
 use Phptg\BotApi\Type\InputPaidMediaPhoto;
+use Phptg\BotApi\Type\Message;
 use Phptg\BotApi\Type\MessageEntity;
 use Phptg\BotApi\Type\ReplyParameters;
 use Phptg\BotApi\Type\SuggestedPostParameters;
 use Phptg\BotApi\Type\SuggestedPostPrice;
 
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class SendPaidMediaTest extends TestCase
@@ -39,7 +41,7 @@ final class SendPaidMediaTest extends TestCase
 
     public function testFull(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $inputMedia = new InputPaidMediaPhoto($file);
         $entity = new MessageEntity('bold', 0, 4);
         $replyParameters = new ReplyParameters(23);
@@ -114,6 +116,7 @@ final class SendPaidMediaTest extends TestCase
             ],
         ])->call($method);
 
+        assertInstanceOf(Message::class, $preparedResult);
         assertSame(7, $preparedResult->messageId);
     }
 }

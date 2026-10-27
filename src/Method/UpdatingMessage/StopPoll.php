@@ -47,6 +47,9 @@ final readonly class StopPoll implements MethodInterface
         );
     }
 
+    /**
+     * @return ObjectValue<Poll>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(Poll::class);

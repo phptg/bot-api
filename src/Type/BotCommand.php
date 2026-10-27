@@ -17,6 +17,9 @@ final readonly class BotCommand
         public ?bool $isEphemeral = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return array_filter(

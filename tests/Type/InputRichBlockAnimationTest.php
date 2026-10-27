@@ -45,7 +45,7 @@ final class InputRichBlockAnimationTest extends TestCase
 
     public function testFileCollectorIsPropagated(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $animation = new InputRichBlockAnimation(new InputMediaAnimation($file));
 
         $fileCollector = new FileCollector();

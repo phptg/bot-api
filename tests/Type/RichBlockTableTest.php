@@ -62,9 +62,9 @@ final class RichBlockTableTest extends TestCase
         ], null, RichBlockTable::class);
 
         assertSame('table', $table->getType());
+        assertInstanceOf(RichBlockTableCell::class, $table->cells[0][0]);
         assertCount(1, $table->cells);
         assertCount(1, $table->cells[0]);
-        assertInstanceOf(RichBlockTableCell::class, $table->cells[0][0]);
         assertSame('left', $table->cells[0][0]->align);
         assertSame('top', $table->cells[0][0]->valign);
         assertNull($table->isBordered);
@@ -89,9 +89,9 @@ final class RichBlockTableTest extends TestCase
         ], null, RichBlockTable::class);
 
         assertSame('table', $table->getType());
+        assertInstanceOf(RichBlockTableCell::class, $table->cells[0][0]);
         assertCount(1, $table->cells);
         assertCount(1, $table->cells[0]);
-        assertInstanceOf(RichBlockTableCell::class, $table->cells[0][0]);
         assertSame('center', $table->cells[0][0]->align);
         assertSame('middle', $table->cells[0][0]->valign);
         assertTrue($table->isBordered);

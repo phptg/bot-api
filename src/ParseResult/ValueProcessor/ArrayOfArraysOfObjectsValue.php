@@ -11,21 +11,21 @@ use Phptg\BotApi\ParseResult\ObjectFactory;
 use function is_array;
 
 /**
- * @template T
+ * @template T of object
  * @template-implements ValueProcessorInterface<array<array-key,array<array-key,T>>>
  */
 #[Attribute(Attribute::TARGET_PARAMETER)]
 final readonly class ArrayOfArraysOfObjectsValue implements ValueProcessorInterface
 {
     /**
-     * @psalm-param class-string<T> $className
+     * @param class-string<T> $className
      */
     public function __construct(
         private string $className,
     ) {}
 
     /**
-     * @psalm-return array<array-key,array<array-key,T>>
+     * @return array<array-key,array<array-key,T>>
      */
     public function process(mixed $value, ?string $key, ObjectFactory $objectFactory): mixed
     {

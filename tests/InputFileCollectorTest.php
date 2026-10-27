@@ -14,8 +14,8 @@ final class InputFileCollectorTest extends TestCase
 {
     public function testBase(): void
     {
-        $file1 = new InputFile(null);
-        $file2 = new InputFile(null);
+        $file1 = new InputFile('/path/to/file');
+        $file2 = new InputFile('/path/to/file');
 
         $collector = new FileCollector();
         $collector->add($file1);
@@ -31,8 +31,8 @@ final class InputFileCollectorTest extends TestCase
     }
     public function testCustomParameters(): void
     {
-        $file1 = new InputFile(null);
-        $file2 = new InputFile(null);
+        $file1 = new InputFile('/path/to/file');
+        $file2 = new InputFile('/path/to/file');
 
         $collector = new FileCollector('test', 23);
         $collector->add($file1);

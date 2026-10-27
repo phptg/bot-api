@@ -8,8 +8,10 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\GetUserProfileAudios;
 use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Transport\HttpMethod;
+use Phptg\BotApi\Type\UserProfileAudios;
 
 use function PHPUnit\Framework\assertCount;
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class GetUserProfileAudiosTest extends TestCase
@@ -63,6 +65,7 @@ final class GetUserProfileAudiosTest extends TestCase
             ],
         ])->call($method);
 
+        assertInstanceOf(UserProfileAudios::class, $preparedResult);
         assertSame(1, $preparedResult->totalCount);
         assertCount(1, $preparedResult->audios);
         assertSame('file_id', $preparedResult->audios[0]->fileId);

@@ -25,6 +25,9 @@ final readonly class KeyboardButtonRequestChat
         public ?bool $requestPhoto = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return array_filter(

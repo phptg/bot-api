@@ -9,6 +9,7 @@ use Phptg\BotApi\ParseResult\ObjectFactory;
 use Phptg\BotApi\Type\SharedUser;
 
 use function PHPUnit\Framework\assertCount;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 
@@ -47,6 +48,7 @@ final class SharedUserTest extends TestCase
         assertSame('Doe', $sharedUser->lastName);
         assertSame('bat', $sharedUser->username);
 
+        assertNotNull($sharedUser->photo);
         assertCount(1, $sharedUser->photo);
         assertSame('file_id-124', $sharedUser->photo[0]->fileId);
     }

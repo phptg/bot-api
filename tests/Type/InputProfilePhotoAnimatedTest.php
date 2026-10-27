@@ -7,20 +7,17 @@ namespace Phptg\BotApi\Tests\Type;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\FileCollector;
 use Phptg\BotApi\Type\InputFile;
-use Phptg\BotApi\Type\InputProfilePhoto;
 use Phptg\BotApi\Type\InputProfilePhotoAnimated;
 
-use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class InputProfilePhotoAnimatedTest extends TestCase
 {
     public function testBase(): void
     {
-        $animation = new InputFile(null);
+        $animation = new InputFile('/path/to/file');
         $type = new InputProfilePhotoAnimated($animation);
 
-        assertInstanceOf(InputProfilePhoto::class, $type);
         assertSame('animated', $type->getType());
         assertSame($animation, $type->animation);
 
@@ -42,10 +39,9 @@ final class InputProfilePhotoAnimatedTest extends TestCase
 
     public function testFull(): void
     {
-        $animation = new InputFile(null);
+        $animation = new InputFile('/path/to/file');
         $type = new InputProfilePhotoAnimated($animation, 2.5);
 
-        assertInstanceOf(InputProfilePhoto::class, $type);
         assertSame('animated', $type->getType());
         assertSame($animation, $type->animation);
 

@@ -12,6 +12,7 @@ use Phptg\BotApi\Type\ChatMemberMember;
 
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertIsArray;
 use function PHPUnit\Framework\assertSame;
 
 final class GetChatAdministratorsTest extends TestCase
@@ -56,6 +57,7 @@ final class GetChatAdministratorsTest extends TestCase
             ],
         ])->call($method);
 
+        assertIsArray($preparedResult);
         assertCount(1, $preparedResult);
         assertInstanceOf(ChatMemberMember::class, $preparedResult[0]);
         assertSame(23, $preparedResult[0]->user->id);

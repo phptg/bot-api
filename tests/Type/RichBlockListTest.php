@@ -34,8 +34,8 @@ final class RichBlockListTest extends TestCase
         ], null, RichBlockList::class);
 
         assertSame('list', $list->getType());
-        assertCount(2, $list->items);
         assertInstanceOf(RichBlockListItem::class, $list->items[0]);
+        assertCount(2, $list->items);
         assertSame('1.', $list->items[0]->label);
         assertSame('2.', $list->items[1]->label);
     }

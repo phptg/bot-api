@@ -7,6 +7,7 @@ namespace Phptg\BotApi\Tests\Type;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\ParseResult\ObjectFactory;
+use Phptg\BotApi\Type\BackgroundTypeChatTheme;
 use Phptg\BotApi\Type\Chat;
 use Phptg\BotApi\Type\Checklist;
 use Phptg\BotApi\Type\ChecklistTask;
@@ -31,6 +32,7 @@ use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;
@@ -740,14 +742,15 @@ final class MessageTest extends TestCase
         assertSame('guest_query_123', $message->guestQueryId);
 
         assertInstanceOf(MessageOriginHiddenUser::class, $message->forwardOrigin);
-        assertSame('bat', $message->forwardOrigin?->senderUserName);
+        assertSame('bat', $message->forwardOrigin->senderUserName);
 
         assertTrue($message->isTopicMessage);
         assertTrue($message->isAutomaticForward);
         assertSame(17, $message->replyToMessage?->messageId);
 
         assertInstanceOf(ExternalReplyInfo::class, $message->externalReply);
-        assertSame('cat', $message->externalReply->origin?->senderUserName);
+        assertInstanceOf(MessageOriginHiddenUser::class, $message->externalReply->origin);
+        assertSame('cat', $message->externalReply->origin->senderUserName);
 
         assertSame('test93', $message->quote?->text);
         assertSame(8863, $message->replyToStory?->id);
@@ -763,6 +766,7 @@ final class MessageTest extends TestCase
         assertSame(22943, $message->paidStarCount);
         assertSame('Hello, World!', $message->text);
 
+        assertNotNull($message->entities);
         assertCount(1, $message->entities);
         assertSame(53, $message->entities[0]->length);
 
@@ -773,10 +777,11 @@ final class MessageTest extends TestCase
         assertSame('f2', $message->audio?->fileId);
         assertSame('f3', $message->document?->fileId);
         assertSame('f3lp', $message->livePhoto?->fileId);
-        assertSame(640, $message->livePhoto?->width);
-        assertSame(480, $message->livePhoto?->height);
-        assertSame(3, $message->livePhoto?->duration);
+        assertSame(640, $message->livePhoto->width);
+        assertSame(480, $message->livePhoto->height);
+        assertSame(3, $message->livePhoto->duration);
 
+        assertNotNull($message->photo);
         assertCount(1, $message->photo);
         assertSame('f4', $message->photo[0]->fileId);
 
@@ -787,6 +792,7 @@ final class MessageTest extends TestCase
         assertSame('f8', $message->voice?->fileId);
         assertSame('Hello!', $message->caption);
 
+        assertNotNull($message->captionEntities);
         assertCount(1, $message->captionEntities);
         assertSame(124, $message->captionEntities[0]->length);
 
@@ -799,12 +805,14 @@ final class MessageTest extends TestCase
         assertSame('Venue1', $message->venue?->title);
         assertSame(55.7558, $message->location?->latitude);
 
+        assertNotNull($message->newChatMembers);
         assertCount(1, $message->newChatMembers);
         assertSame(798, $message->newChatMembers[0]->id);
 
         assertSame(799, $message->leftChatMember?->id);
         assertSame('My Chat!', $message->newChatTitle);
 
+        assertNotNull($message->newChatPhoto);
         assertCount(1, $message->newChatPhoto);
         assertSame('newp1', $message->newChatPhoto[0]->fileId);
 
@@ -828,7 +836,8 @@ final class MessageTest extends TestCase
         assertSame('asdg23GWEH', $message->passportData?->credentials->hash);
         assertSame(7128, $message->proximityAlertTriggered?->traveler->id);
         assertSame(555, $message->boostAdded?->boostCount);
-        assertSame('dark', $message->chatBackgroundSet?->type->themeName);
+        assertInstanceOf(BackgroundTypeChatTheme::class, $message->chatBackgroundSet?->type);
+        assertSame('dark', $message->chatBackgroundSet->type->themeName);
         assertSame('CreateName', $message->forumTopicCreated?->name);
         assertSame('EditName', $message->forumTopicEdited?->name);
         assertInstanceOf(ForumTopicClosed::class, $message->forumTopicClosed);
@@ -843,14 +852,16 @@ final class MessageTest extends TestCase
         assertSame(1620000012, $message->videoChatScheduled?->startDate->getTimestamp());
         assertInstanceOf(VideoChatStarted::class, $message->videoChatStarted);
         assertSame(313, $message->videoChatEnded?->duration);
+        assertNotNull($message->videoChatParticipantsInvited);
         assertSame(17313, $message->videoChatParticipantsInvited->users[0]->id);
         assertSame('important', $message->webAppData?->data);
+        assertNotNull($message->replyMarkup);
         assertSame('Button1241', $message->replyMarkup->inlineKeyboard[0][0]->text);
         assertSame(1, $message->paidMedia?->starCount);
-        assertEquals([new PaidMediaPhoto([])], $message->paidMedia?->paidMedia);
+        assertEquals([new PaidMediaPhoto([])], $message->paidMedia->paidMedia);
         assertEquals(new RefundedPayment('XTR', 12, 'ip', 'tpid'), $message->refundedPayment);
         assertInstanceOf(DirectMessagePriceChanged::class, $message->directMessagePriceChanged);
-        assertFalse($message->directMessagePriceChanged?->areDirectMessagesEnabled);
+        assertFalse($message->directMessagePriceChanged->areDirectMessagesEnabled);
         assertEquals(
             new Checklist(
                 'My Checklist',
@@ -865,9 +876,9 @@ final class MessageTest extends TestCase
         assertSame('pid1', $message->replyToPollOptionId);
         assertSame(12345, $message->directMessagesTopic?->topicId);
         assertSame('pending', $message->suggestedPostInfo?->state);
-        assertSame('XTR', $message->suggestedPostInfo?->price?->currency);
-        assertSame(100, $message->suggestedPostInfo?->price?->amount);
-        assertSame(1640995200, $message->suggestedPostInfo?->sendDate);
+        assertSame('XTR', $message->suggestedPostInfo->price?->currency);
+        assertSame(100, $message->suggestedPostInfo->price->amount);
+        assertSame(1640995200, $message->suggestedPostInfo->sendDate);
         assertSame(1672531200, $message->suggestedPostApproved?->sendDate);
         assertSame(100, $message->suggestedPostApprovalFailed?->price?->amount);
         assertSame('insufficient_funds', $message->suggestedPostDeclined?->comment);
@@ -876,17 +887,17 @@ final class MessageTest extends TestCase
         assertSame(800, $message->chatOwnerLeft?->newOwner?->id);
         assertSame(801, $message->chatOwnerChanged?->newOwner->id);
         assertSame(802, $message->managedBotCreated?->bot->id);
-        assertSame('ManagedBot', $message->managedBotCreated?->bot->firstName);
+        assertSame('ManagedBot', $message->managedBotCreated->bot->firstName);
         assertSame('pid1', $message->pollOptionAdded?->optionPersistentId);
-        assertSame('New option', $message->pollOptionAdded?->optionText);
+        assertSame('New option', $message->pollOptionAdded->optionText);
         assertSame('pid2', $message->pollOptionDeleted?->optionPersistentId);
-        assertSame('Deleted option', $message->pollOptionDeleted?->optionText);
+        assertSame('Deleted option', $message->pollOptionDeleted->optionText);
         assertSame(130, $message->receiverUser?->id);
         assertSame(43, $message->ephemeralMessageId);
         assertSame(987, $message->communityChatAdded?->community->id);
-        assertSame('My Community', $message->communityChatAdded?->community->name);
+        assertSame('My Community', $message->communityChatAdded->community->name);
         assertInstanceOf(CommunityChatRemoved::class, $message->communityChatRemoved);
         assertSame(654, $message->communityChatJoined?->community->id);
-        assertSame('Joined Community', $message->communityChatJoined?->community->name);
+        assertSame('Joined Community', $message->communityChatJoined->community->name);
     }
 }

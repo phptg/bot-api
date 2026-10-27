@@ -57,6 +57,9 @@ final readonly class CopyMessages implements MethodInterface
         );
     }
 
+    /**
+     * @return ArrayOfObjectsValue<MessageId>
+     */
     public function getResultType(): ArrayOfObjectsValue
     {
         return new ArrayOfObjectsValue(MessageId::class);

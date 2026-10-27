@@ -1,0 +1,19 @@
+includes:
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/phpstan/phpstan-phpunit/rules.neon
+    - vendor/shipmonk/dead-code-detector/rules.neon
+
+parameters:
+    level: max
+    treatPhpDocTypesAsCertain: false
+    paths:
+        - src
+        - tests
+    excludePaths:
+        # Manual sandbox for experiments with the real Telegram Bot API.
+        - tests/RealTelegramApi
+    shipmonkDeadCode:
+        usageExcluders:
+            tests:
+                enabled: true

@@ -49,6 +49,9 @@ final readonly class EditMessageReplyMarkup implements MethodInterface
         );
     }
 
+    /**
+     * @return ObjectOrTrueValue<Message>
+     */
     public function getResultType(): ObjectOrTrueValue
     {
         return new ObjectOrTrueValue(Message::class);

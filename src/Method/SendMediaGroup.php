@@ -79,6 +79,9 @@ final readonly class SendMediaGroup implements MethodInterface
         );
     }
 
+    /**
+     * @return ArrayOfObjectsValue<Message>
+     */
     public function getResultType(): ArrayOfObjectsValue
     {
         return new ArrayOfObjectsValue(Message::class);

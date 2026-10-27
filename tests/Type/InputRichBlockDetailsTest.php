@@ -48,7 +48,7 @@ final class InputRichBlockDetailsTest extends TestCase
 
     public function testFileCollectorIsPropagatedToBlocks(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $details = new InputRichBlockDetails('summary', [new InputRichBlockPhoto(new InputMediaPhoto($file))]);
 
         $fileCollector = new FileCollector();

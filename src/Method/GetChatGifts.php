@@ -59,6 +59,9 @@ final readonly class GetChatGifts implements MethodInterface
         ], static fn($value) => $value !== null);
     }
 
+    /**
+     * @return ObjectValue<OwnedGifts>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(OwnedGifts::class);

@@ -12,7 +12,7 @@ use Phptg\BotApi\Type\InputFile;
 final readonly class CompositeMimeTypeResolver implements MimeTypeResolverInterface
 {
     /**
-     * @psalm-var list<MimeTypeResolverInterface>
+     * @var list<MimeTypeResolverInterface>
      */
     private array $resolvers;
 

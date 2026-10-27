@@ -17,6 +17,8 @@ use Phptg\BotApi\Type\InputFile;
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertIsArray;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;
 
@@ -36,6 +38,7 @@ final class CurlTransportTest extends TestCase
         assertSame('{"ok":true,"result":[]}', $response->body);
 
         $options = $curl->getOptions();
+        assertNotNull($options);
         assertCount(4, $options);
         assertTrue($options[CURLOPT_HTTPGET]);
         assertSame('//url/getMe?key=value&array=%5B1%2C%22test%22%5D', $options[CURLOPT_URL]);
@@ -64,6 +67,7 @@ final class CurlTransportTest extends TestCase
         assertSame('{"ok":true,"result":[]}', $response->body);
 
         $options = $curl->getOptions();
+        assertNotNull($options);
         assertCount(6, $options);
         assertTrue($options[CURLOPT_POST]);
         assertSame('//url/logOut', $options[CURLOPT_URL]);
@@ -113,6 +117,7 @@ final class CurlTransportTest extends TestCase
         assertSame('{"ok":true,"result":[]}', $response->body);
 
         $options = $curl->getOptions();
+        assertNotNull($options);
         assertCount(5, $options);
         assertTrue($options[CURLOPT_POST]);
         assertSame('//url/sendPhoto', $options[CURLOPT_URL]);
@@ -138,7 +143,7 @@ final class CurlTransportTest extends TestCase
         );
         $transport = new CurlTransport(curl: $curl);
 
-        $resource = fopen('php://memory', 'r+');
+        $resource = TestHelper::openFile('php://memory', 'r+');
         fwrite($resource, 'stream content');
 
         $transport->postWithFiles(
@@ -149,7 +154,8 @@ final class CurlTransportTest extends TestCase
 
         fclose($resource);
 
-        $postFields = $curl->getOptions()[CURLOPT_POSTFIELDS];
+        $postFields = $curl->getOptions()[CURLOPT_POSTFIELDS] ?? null;
+        assertIsArray($postFields);
         assertInstanceOf(CURLStringFile::class, $postFields['file']);
         assertSame('stream content', $postFields['file']->data);
         assertSame($filename ?? '', $postFields['file']->postname);
@@ -173,7 +179,8 @@ final class CurlTransportTest extends TestCase
 
         fclose($resource);
 
-        $postFields = $curl->getOptions()[CURLOPT_POSTFIELDS];
+        $postFields = $curl->getOptions()[CURLOPT_POSTFIELDS] ?? null;
+        assertIsArray($postFields);
         assertInstanceOf(CURLStringFile::class, $postFields['file']);
         assertSame('socket content', $postFields['file']->data);
         assertSame('', $postFields['file']->postname);
@@ -184,7 +191,7 @@ final class CurlTransportTest extends TestCase
         $curl = new CurlMock();
         $transport = new CurlTransport(curl: $curl);
 
-        $resource = fopen(__DIR__ . '/photo.png', 'r');
+        $resource = TestHelper::openFile(__DIR__ . '/photo.png', 'r');
         stream_get_contents($resource);
         $transport->postWithFiles(
             'sendPhoto',

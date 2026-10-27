@@ -9,6 +9,7 @@ use Phptg\BotApi\ParseResult\ObjectFactory;
 use Phptg\BotApi\Type\Sticker\StickerSet;
 
 use function PHPUnit\Framework\assertCount;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertSame;
 
 final class StickerSetTest extends TestCase
@@ -53,6 +54,7 @@ final class StickerSetTest extends TestCase
         assertSame('regular', $set->stickerType);
         assertCount(1, $set->stickers);
         assertSame('fid1', $set->stickers[0]->fileId);
+        assertNotNull($set->thumbnail);
         assertSame('tf1', $set->thumbnail->fileId);
     }
 }

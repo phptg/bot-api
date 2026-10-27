@@ -8,12 +8,13 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\ParseResult\ObjectFactory;
 use Phptg\BotApi\Type\ForumTopicClosed;
 
+use function PHPUnit\Framework\assertSame;
+
 final class ForumTopicClosedTest extends TestCase
 {
     public function testBase(): void
     {
-        new ForumTopicClosed();
-        $this->expectNotToPerformAssertions();
+        assertSame([], get_object_vars(new ForumTopicClosed()));
     }
 
     public function testFromTelegramResult(): void

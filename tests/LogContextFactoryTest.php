@@ -12,6 +12,7 @@ use Phptg\BotApi\LogContextFactory;
 use Phptg\BotApi\MethodInterface;
 use Phptg\BotApi\Transport\ApiResponse;
 use Phptg\BotApi\LogType;
+use Phptg\BotApi\Tests\Support\TestHelper;
 
 use function PHPUnit\Framework\assertSame;
 
@@ -32,7 +33,7 @@ final class LogContextFactoryTest extends TestCase
             $method,
         ];
 
-        $handle = fopen('php://temp', 'r+');
+        $handle = TestHelper::openFile('php://temp', 'r+');
         $method = new CustomMethod(
             'getMe',
             ['param1' => $handle],
@@ -47,6 +48,10 @@ final class LogContextFactoryTest extends TestCase
         ];
     }
 
+    /**
+     * @param array<string, mixed> $expected
+     * @param MethodInterface<mixed> $request
+     */
     #[DataProvider('dataSendRequest')]
     public function testSendRequest(
         array $expected,
@@ -75,6 +80,11 @@ final class LogContextFactoryTest extends TestCase
         ];
     }
 
+    /**
+     * @param array<string, mixed> $expected
+     * @param MethodInterface<mixed> $request
+     * @param array<string, mixed> $decodedResponse
+     */
     #[DataProvider('dataSuccessResult')]
     public function testSuccessResult(
         array $expected,

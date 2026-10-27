@@ -8,7 +8,9 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\GetMyShortDescription;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\BotShortDescription;
 
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class GetMyShortDescriptionTest extends TestCase
@@ -42,6 +44,7 @@ final class GetMyShortDescriptionTest extends TestCase
             'short_description' => 'test',
         ])->call($method);
 
+        assertInstanceOf(BotShortDescription::class, $preparedResult);
         assertSame('test', $preparedResult->shortDescription);
     }
 }

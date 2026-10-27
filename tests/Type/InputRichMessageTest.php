@@ -33,9 +33,9 @@ final class InputRichMessageTest extends TestCase
 
     public function testFull(): void
     {
-        $mediaFile = new InputFile(null);
+        $mediaFile = new InputFile('/path/to/file');
         $media = new InputRichMessageMedia('photo1', new InputMediaPhoto($mediaFile));
-        $blockFile = new InputFile(null);
+        $blockFile = new InputFile('/path/to/file');
         $block = new InputRichBlockPhoto(new InputMediaPhoto($blockFile));
         $message = new InputRichMessage(
             html: '<b>Hello</b>',

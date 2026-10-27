@@ -9,6 +9,7 @@ use Phptg\BotApi\ParseResult\ObjectFactory;
 use Phptg\BotApi\Type\Video;
 
 use function PHPUnit\Framework\assertCount;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 
@@ -92,10 +93,12 @@ final class VideoTest extends TestCase
         assertSame('face.png', $video->fileName);
         assertSame('image/png', $video->mimeType);
         assertSame(123, $video->fileSize);
+        assertNotNull($video->cover);
         assertCount(2, $video->cover);
         assertSame('file_id-3', $video->cover[0]->fileId);
         assertSame('file_id-4', $video->cover[1]->fileId);
         assertSame(17, $video->startTimestamp);
+        assertNotNull($video->qualities);
         assertCount(2, $video->qualities);
         assertSame('fq1', $video->qualities[0]->fileId);
         assertSame('fq2', $video->qualities[1]->fileId);

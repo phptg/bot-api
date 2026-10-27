@@ -13,6 +13,7 @@ use Phptg\BotApi\Type\BotCommandScopeDefault;
 
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertIsArray;
 use function PHPUnit\Framework\assertSame;
 
 final class GetMyCommandsTest extends TestCase
@@ -51,6 +52,7 @@ final class GetMyCommandsTest extends TestCase
             ],
         ])->call($method);
 
+        assertIsArray($preparedResult);
         assertCount(1, $preparedResult);
         assertInstanceOf(BotCommand::class, $preparedResult[0]);
         assertSame('start', $preparedResult[0]->command);

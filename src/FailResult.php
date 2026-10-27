@@ -12,6 +12,9 @@ use Phptg\BotApi\Type\ResponseParameters;
  */
 final readonly class FailResult
 {
+    /**
+     * @param MethodInterface<mixed> $method
+     */
     public function __construct(
         public MethodInterface $method,
         public ApiResponse $response,

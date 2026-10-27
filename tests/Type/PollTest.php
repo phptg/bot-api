@@ -11,6 +11,7 @@ use Phptg\BotApi\Type\PollOption;
 
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertFalse;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;
@@ -133,12 +134,14 @@ final class PollTest extends TestCase
         assertTrue($poll->membersOnly);
         assertSame(['US', 'GB', 'DE'], $poll->countryCodes);
 
+        assertNotNull($poll->questionEntities);
         assertCount(1, $poll->questionEntities);
         assertSame(35, $poll->questionEntities[0]->length);
 
         assertSame([0, 2], $poll->correctOptionIds);
         assertSame('Because', $poll->explanation);
 
+        assertNotNull($poll->explanationEntities);
         assertCount(1, $poll->explanationEntities);
         assertSame(31, $poll->explanationEntities[0]->length);
 
@@ -147,6 +150,7 @@ final class PollTest extends TestCase
         assertSame(123, $poll->openPeriod);
         assertSame(456, $poll->closeDate);
         assertSame('Poll description', $poll->description);
+        assertNotNull($poll->descriptionEntities);
         assertCount(1, $poll->descriptionEntities);
         assertSame(4, $poll->descriptionEntities[0]->length);
 

@@ -44,6 +44,9 @@ final readonly class GetUserProfileAudios implements MethodInterface
         );
     }
 
+    /**
+     * @return ObjectValue<UserProfileAudios>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(UserProfileAudios::class);

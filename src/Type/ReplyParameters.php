@@ -27,6 +27,9 @@ final readonly class ReplyParameters
         public ?int $ephemeralMessageId = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return array_filter(

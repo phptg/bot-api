@@ -11,6 +11,7 @@ use Phptg\BotApi\Type\PollOptionAdded;
 
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 
@@ -50,6 +51,7 @@ final class PollOptionAddedTest extends TestCase
         assertSame('Option text', $pollOptionAdded->optionText);
         assertInstanceOf(Message::class, $pollOptionAdded->pollMessage);
         assertSame(1, $pollOptionAdded->pollMessage->messageId);
+        assertNotNull($pollOptionAdded->optionTextEntities);
         assertCount(1, $pollOptionAdded->optionTextEntities);
         assertSame('bold', $pollOptionAdded->optionTextEntities[0]->type);
     }

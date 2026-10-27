@@ -8,8 +8,10 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\GetMyDefaultAdministratorRights;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\ChatAdministratorRights;
 
 use function PHPUnit\Framework\assertFalse;
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;
 
@@ -59,6 +61,7 @@ final class GetMyDefaultAdministratorRightsTest extends TestCase
             'can_send_welcome_messages' => true,
         ])->call($method);
 
+        assertInstanceOf(ChatAdministratorRights::class, $preparedResult);
         assertTrue($preparedResult->isAnonymous);
         assertFalse($preparedResult->canManageChat);
         assertTrue($preparedResult->canDeleteMessages);

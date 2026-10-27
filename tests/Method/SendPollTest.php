@@ -13,9 +13,11 @@ use Phptg\BotApi\Type\ForceReply;
 use Phptg\BotApi\Type\InputFile;
 use Phptg\BotApi\Type\InputMediaPhoto;
 use Phptg\BotApi\Type\InputPollOption;
+use Phptg\BotApi\Type\Message;
 use Phptg\BotApi\Type\MessageEntity;
 use Phptg\BotApi\Type\ReplyParameters;
 
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class SendPollTest extends TestCase
@@ -43,9 +45,9 @@ final class SendPollTest extends TestCase
 
     public function testFull(): void
     {
-        $optionFile = new InputFile(null);
-        $explanationFile = new InputFile(null);
-        $pollFile = new InputFile(null);
+        $optionFile = new InputFile('/path/to/file');
+        $explanationFile = new InputFile('/path/to/file');
+        $pollFile = new InputFile('/path/to/file');
         $option1 = new InputPollOption('OK', media: new InputMediaPhoto($optionFile));
         $option2 = new InputPollOption('Bad');
         $messageEntity1 = new MessageEntity('bold', 0, 5);
@@ -155,6 +157,7 @@ final class SendPollTest extends TestCase
             ],
         ])->call($method);
 
+        assertInstanceOf(Message::class, $preparedResult);
         assertSame(7, $preparedResult->messageId);
     }
 }

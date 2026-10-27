@@ -45,7 +45,7 @@ final class InputRichBlockAudioTest extends TestCase
 
     public function testFileCollectorIsPropagated(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $audio = new InputRichBlockAudio(new InputMediaAudio($file));
 
         $fileCollector = new FileCollector();

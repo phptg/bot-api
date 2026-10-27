@@ -26,6 +26,8 @@ interface CurlInterface
 
     /**
      * @throws CurlException
+     *
+     * @param array<int, mixed> $options
      */
     public function setopt_array(CurlHandle $handle, array $options): void;
 

@@ -8,7 +8,9 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\GetUserChatBoosts;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\UserChatBoosts;
 
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class GetUserChatBoostsTest extends TestCase
@@ -36,6 +38,7 @@ final class GetUserChatBoostsTest extends TestCase
             'boosts' => [],
         ])->call($method);
 
+        assertInstanceOf(UserChatBoosts::class, $preparedResult);
         assertSame([], $preparedResult->boosts);
     }
 }

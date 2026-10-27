@@ -18,7 +18,7 @@ final class ReplaceStickerInSetTest extends TestCase
 {
     public function testBase(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $inputSticker = new InputSticker($file, 'static', ['😀']);
         $method = new ReplaceStickerInSet(1, 'test', 'oldid', $inputSticker);
 

@@ -8,12 +8,13 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\ParseResult\ObjectFactory;
 use Phptg\BotApi\Type\VideoChatStarted;
 
+use function PHPUnit\Framework\assertSame;
+
 final class VideoChatStartedTest extends TestCase
 {
     public function testBase(): void
     {
-        new VideoChatStarted();
-        $this->expectNotToPerformAssertions();
+        assertSame([], get_object_vars(new VideoChatStarted()));
     }
 
     public function testFromTelegramResult(): void

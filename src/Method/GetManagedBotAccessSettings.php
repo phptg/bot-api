@@ -35,6 +35,9 @@ final readonly class GetManagedBotAccessSettings implements MethodInterface
         return ['user_id' => $this->userId];
     }
 
+    /**
+     * @return ObjectValue<BotAccessSettings>
+     */
     public function getResultType(): ObjectValue
     {
         return new ObjectValue(BotAccessSettings::class);

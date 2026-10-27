@@ -19,6 +19,9 @@ final readonly class LinkPreviewOptions
         public ?bool $showAboveText = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toRequestArray(): array
     {
         return array_filter(

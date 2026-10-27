@@ -12,7 +12,9 @@ use Phptg\BotApi\Transport\MimeTypeResolver\MimeTypeResolverInterface;
 use Phptg\BotApi\Transport\NativeTransport;
 use Phptg\BotApi\Type\InputFile;
 
+use function PHPUnit\Framework\assertIsString;
 use function PHPUnit\Framework\assertMatchesRegularExpression;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertStringContainsString;
 use function PHPUnit\Framework\assertTrue;
@@ -110,8 +112,7 @@ final class NativeTransportTest extends TestCase
         $response = $transport->postWithFiles(
             'http://url/sendPhoto',
             [
-
-                'age' => 19,
+                'age' => '19',
             ],
             [
                 'photo1' => new InputFile(__DIR__ . '/photo.png'),
@@ -123,15 +124,18 @@ final class NativeTransportTest extends TestCase
 
         assertSame(200, $response->statusCode);
         assertSame('{"ok":true,"result":[]}', $response->body);
+        assertNotNull($request);
         assertSame('http://url/sendPhoto', $request['path']);
         assertSame(['http'], array_keys($request['options']));
         assertSame(['method', 'header', 'content', 'ignore_errors'], array_keys($request['options']['http']));
         assertSame('POST', $request['options']['http']['method']);
+        assertIsString($request['options']['http']['header']);
+        assertIsString($request['options']['http']['content']);
         assertMatchesRegularExpression(
             '~^Content-type: multipart/form-data; boundary=[\da-f]+\.[\da-f]+; charset=utf-8$~',
             $request['options']['http']['header'],
         );
-        assertStringContainsString(file_get_contents(__DIR__ . '/photo.png'), $request['options']['http']['content']);
+        assertStringContainsString(TestHelper::readFile(__DIR__ . '/photo.png'), $request['options']['http']['content']);
         assertStringContainsString(
             'Content-Disposition: form-data; name="photo1"; filename="photo.png"',
             $request['options']['http']['content'],
@@ -167,7 +171,8 @@ final class NativeTransportTest extends TestCase
 
         $request = StreamMock::disable();
 
-        assertTrue(isset($request['options']['http']['content']));
+        assertNotNull($request);
+        assertIsString($request['options']['http']['content']);
         assertStringContainsString(
             "Content-Disposition: form-data; name=\"ages\"\r\n"
             . "\r\n"
@@ -188,7 +193,7 @@ final class NativeTransportTest extends TestCase
     {
         $transport = new NativeTransport(
             new class implements MimeTypeResolverInterface {
-                public function resolve(InputFile $inputFile): ?string
+                public function resolve(InputFile $inputFile): string
                 {
                     return 'text/custom';
                 }
@@ -213,7 +218,8 @@ final class NativeTransportTest extends TestCase
 
         $request = StreamMock::disable();
 
-        assertTrue(isset($request['options']['http']['content']));
+        assertNotNull($request);
+        assertIsString($request['options']['http']['content']);
         assertStringContainsString(
             "Content-Disposition: form-data; name=\"file1\"; filename=\"test.txt\"\r\n"
             . "Content-Type: text/custom\r\n"
@@ -254,7 +260,7 @@ final class NativeTransportTest extends TestCase
             responseBody: '{"ok":true,"result":[]}',
         );
 
-        $resource = fopen('php://temp', 'r+');
+        $resource = TestHelper::openFile('php://temp', 'r+');
         fwrite($resource, 'stream content');
 
         $transport->postWithFiles(
@@ -267,6 +273,8 @@ final class NativeTransportTest extends TestCase
 
         $request = StreamMock::disable();
 
+        assertNotNull($request);
+        assertIsString($request['options']['http']['content']);
         assertStringContainsString('stream content', $request['options']['http']['content']);
     }
 
@@ -296,6 +304,8 @@ final class NativeTransportTest extends TestCase
 
         $request = StreamMock::disable();
 
+        assertNotNull($request);
+        assertIsString($request['options']['http']['content']);
         assertStringContainsString(
             "Content-Disposition: form-data; name=\"file\"\r\n"
             . "\r\n"

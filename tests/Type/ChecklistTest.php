@@ -10,6 +10,7 @@ use Phptg\BotApi\Type\Checklist;
 use Phptg\BotApi\Type\ChecklistTask;
 
 use function PHPUnit\Framework\assertCount;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;
@@ -56,6 +57,7 @@ final class ChecklistTest extends TestCase
         assertSame(2, $checklist->tasks[1]->id);
         assertSame('Task 2', $checklist->tasks[1]->text);
 
+        assertNotNull($checklist->titleEntities);
         assertCount(1, $checklist->titleEntities);
         assertSame('bold', $checklist->titleEntities[0]->type);
         assertSame(0, $checklist->titleEntities[0]->offset);

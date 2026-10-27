@@ -8,7 +8,7 @@ use Phptg\BotApi\ParseResult\ValueProcessor\ValueProcessorInterface;
 use Phptg\BotApi\Transport\HttpMethod;
 
 /**
- * @template TResult
+ * @template-covariant TResult
  *
  * @api
  */
@@ -20,12 +20,12 @@ interface MethodInterface
     public function getApiMethod(): string;
 
     /**
-     * @psalm-return array<string, mixed>
+     * @return array<string, mixed>
      */
     public function getData(): array;
 
     /**
-     * @psalm-return ValueProcessorInterface<TResult>
+     * @return ValueProcessorInterface<TResult>
      */
     public function getResultType(): ValueProcessorInterface;
 

@@ -7,13 +7,13 @@ namespace Phptg\BotApi\ParseResult\ValueProcessor;
 use Phptg\BotApi\ParseResult\ObjectFactory;
 
 /**
- * @template T
+ * @template T of object
  * @template-implements ValueProcessorInterface<T|true>
  */
 final readonly class ObjectOrTrueValue implements ValueProcessorInterface
 {
     /**
-     * @psalm-param class-string<T> $className
+     * @param class-string<T> $className
      */
     public function __construct(
         private string $className,

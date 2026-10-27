@@ -39,6 +39,9 @@ use Phptg\BotApi\Type\PollAnswer;
 final class Update
 {
     private ?string $raw = null;
+    /**
+     * @var array<mixed>|null
+     */
     private ?array $rawDecoded = null;
 
     public function __construct(
@@ -73,9 +76,9 @@ final class Update
     ) {}
 
     /**
-     * @psalm-template T as bool
-     * @psalm-param T $decoded
-     * @psalm-return (T is true ? array|null : string|null)
+     * @template T of bool
+     * @param T $decoded
+     * @return (T is true ? array<mixed>|null : string|null)
      */
     public function getRaw(bool $decoded = false): array|string|null
     {
@@ -108,6 +111,7 @@ final class Update
             );
             throw $exception;
         }
+        /** @var array<mixed> $decodedJson `ObjectFactory` accepts only arrays, so it's an array here. */
 
         $update->raw = $json;
         $update->rawDecoded = $decodedJson;

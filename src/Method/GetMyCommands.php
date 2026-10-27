@@ -43,6 +43,9 @@ final readonly class GetMyCommands implements MethodInterface
         );
     }
 
+    /**
+     * @return ArrayOfObjectsValue<BotCommand>
+     */
     public function getResultType(): ArrayOfObjectsValue
     {
         return new ArrayOfObjectsValue(BotCommand::class);

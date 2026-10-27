@@ -6,6 +6,7 @@ namespace Phptg\BotApi\Tests\DownloadedFile;
 
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\DownloadedFile;
+use Phptg\BotApi\Tests\Support\TestHelper;
 
 use function PHPUnit\Framework\assertSame;
 
@@ -13,7 +14,7 @@ final class DownloadedFileTest extends TestCase
 {
     public function testGetStream(): void
     {
-        $stream = fopen('php://temp', 'r+b');
+        $stream = TestHelper::openFile('php://temp', 'r+b');
         fwrite($stream, 'hello');
         rewind($stream);
 
@@ -24,7 +25,7 @@ final class DownloadedFileTest extends TestCase
 
     public function testGetBody(): void
     {
-        $stream = fopen('php://temp', 'r+b');
+        $stream = TestHelper::openFile('php://temp', 'r+b');
         fwrite($stream, 'hello-content');
         rewind($stream);
 
