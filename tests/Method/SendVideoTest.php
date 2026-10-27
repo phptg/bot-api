@@ -11,11 +11,13 @@ use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Type\EphemeralMessageParameters;
 use Phptg\BotApi\Type\ForceReply;
 use Phptg\BotApi\Type\InputFile;
+use Phptg\BotApi\Type\Message;
 use Phptg\BotApi\Type\MessageEntity;
 use Phptg\BotApi\Type\ReplyParameters;
 use Phptg\BotApi\Type\SuggestedPostParameters;
 use Phptg\BotApi\Type\SuggestedPostPrice;
 
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class SendVideoTest extends TestCase
@@ -37,8 +39,8 @@ final class SendVideoTest extends TestCase
 
     public function testFull(): void
     {
-        $video = new InputFile(null, 'test.mp4');
-        $thumbnail = new InputFile(null, 'test.jpg');
+        $video = new InputFile('/path/to/file', 'test.mp4');
+        $thumbnail = new InputFile('/path/to/file', 'test.jpg');
         $entity = new MessageEntity('bold', 0, 5);
         $replyParameters = new ReplyParameters(23);
         $replyMarkup = new ForceReply();
@@ -126,6 +128,7 @@ final class SendVideoTest extends TestCase
             ],
         ])->call($method);
 
+        assertInstanceOf(Message::class, $preparedResult);
         assertSame(7, $preparedResult->messageId);
     }
 }

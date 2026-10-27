@@ -19,7 +19,7 @@ final class SetMyProfilePhotoTest extends TestCase
 {
     public function testBase(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $photo = new InputProfilePhotoStatic($file);
         $method = new SetMyProfilePhoto($photo);
 
@@ -36,7 +36,7 @@ final class SetMyProfilePhotoTest extends TestCase
 
     public function testPrepareResult(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $photo = new InputProfilePhotoStatic($file);
         $method = new SetMyProfilePhoto($photo);
 

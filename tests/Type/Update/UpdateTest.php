@@ -13,6 +13,7 @@ use Phptg\BotApi\Type\Update\Update;
 use Yiisoft\Test\Support\Log\SimpleLogger;
 
 use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 
@@ -394,7 +395,7 @@ final class UpdateTest extends TestCase
         assertSame(6, $update->editedBusinessMessage?->messageId);
         assertSame('bcid2', $update->deletedBusinessMessages?->businessConnectionId);
         assertSame(9, $update->guestMessage?->messageId);
-        assertSame('guest_123', $update->guestMessage?->guestQueryId);
+        assertSame('guest_123', $update->guestMessage->guestQueryId);
         assertSame(79, $update->messageReaction?->messageId);
         assertSame(80, $update->messageReactionCount?->messageId);
         assertSame('iqid1', $update->inlineQuery?->id);
@@ -409,15 +410,16 @@ final class UpdateTest extends TestCase
         assertSame(71326, $update->chatJoinRequest?->chat->id);
         assertSame(23682, $update->chatBoost?->chat->id);
         assertSame(1735, $update->removedChatBoost?->chat->id);
+        assertNotNull($update->purchasedPaidMedia);
         assertSame(1235, $update->purchasedPaidMedia->from->id);
         assertSame(123, $update->managedBot?->user->id);
-        assertSame(456, $update->managedBot?->bot->id);
+        assertSame(456, $update->managedBot->bot->id);
         assertSame(321, $update->subscription?->user->id);
-        assertSame('sub_payload', $update->subscription?->invoicePayload);
-        assertSame('canceled', $update->subscription?->state);
+        assertSame('sub_payload', $update->subscription->invoicePayload);
+        assertSame('canceled', $update->subscription->state);
         assertSame(654, $update->stoppedMessageGeneration?->chat->id);
-        assertSame(12, $update->stoppedMessageGeneration?->messageThreadId);
-        assertSame(100, $update->stoppedMessageGeneration?->draftId);
+        assertSame(12, $update->stoppedMessageGeneration->messageThreadId);
+        assertSame(100, $update->stoppedMessageGeneration->draftId);
         assertNull($update->getRaw());
         assertNull($update->getRaw(true));
     }
@@ -476,7 +478,7 @@ final class UpdateTest extends TestCase
         assertInstanceOf(TelegramParseResultException::class, $exception);
         assertSame('Invalid type of value. Expected type is "array", but got "int".', $exception->getMessage());
 
-        if ($useLogger) {
+        if ($logger !== null) {
             assertSame(
                 [
                     [

@@ -12,6 +12,7 @@ use Phptg\BotApi\Type\Sticker\Gift;
 use Phptg\BotApi\Type\Sticker\Sticker;
 
 use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;
@@ -81,13 +82,13 @@ final class GiftInfoTest extends TestCase
         ], null, GiftInfo::class);
 
         assertInstanceOf(GiftInfo::class, $type);
-        assertInstanceOf(Gift::class, $type->gift);
         assertSame('ogid1', $type->ownedGiftId);
         assertSame(10, $type->convertStarCount);
         assertSame(5, $type->prepaidUpgradeStarCount);
         assertTrue($type->isUpgradeSeparate);
         assertTrue($type->canBeUpgraded);
         assertSame('Happy Birthday!', $type->text);
+        assertNotNull($type->entities);
         assertInstanceOf(MessageEntity::class, $type->entities[0]);
         assertSame('bold', $type->entities[0]->type);
         assertSame(0, $type->entities[0]->offset);

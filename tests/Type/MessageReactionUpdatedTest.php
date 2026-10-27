@@ -10,8 +10,10 @@ use Phptg\BotApi\ParseResult\ObjectFactory;
 use Phptg\BotApi\Type\Chat;
 use Phptg\BotApi\Type\MessageReactionUpdated;
 use Phptg\BotApi\Type\ReactionTypeCustomEmoji;
+use Phptg\BotApi\Type\ReactionTypeEmoji;
 
 use function PHPUnit\Framework\assertCount;
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class MessageReactionUpdatedTest extends TestCase
@@ -70,9 +72,11 @@ final class MessageReactionUpdatedTest extends TestCase
         assertSame(2, $messageReactionUpdated->actorChat?->id);
 
         assertCount(1, $messageReactionUpdated->oldReaction);
+        assertInstanceOf(ReactionTypeEmoji::class, $messageReactionUpdated->oldReaction[0]);
         assertSame('=)', $messageReactionUpdated->oldReaction[0]->emoji);
 
         assertCount(1, $messageReactionUpdated->newReaction);
+        assertInstanceOf(ReactionTypeEmoji::class, $messageReactionUpdated->newReaction[0]);
         assertSame(';)', $messageReactionUpdated->newReaction[0]->emoji);
     }
 }

@@ -14,6 +14,7 @@ use Phptg\BotApi\Type\User;
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 
@@ -64,6 +65,7 @@ final class ChecklistTaskTest extends TestCase
         assertSame(19, $checklistTask->id);
         assertSame('Test task', $checklistTask->text);
 
+        assertNotNull($checklistTask->textEntities);
         assertCount(1, $checklistTask->textEntities);
         assertInstanceOf(MessageEntity::class, $checklistTask->textEntities[0]);
         assertSame('bold', $checklistTask->textEntities[0]->type);

@@ -9,6 +9,7 @@ use Phptg\BotApi\ParseResult\ObjectFactory;
 use Phptg\BotApi\Type\PollOption;
 
 use function PHPUnit\Framework\assertCount;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 
@@ -66,12 +67,15 @@ final class PollOptionTest extends TestCase
         assertSame('A', $option->text);
         assertSame(25, $option->voterCount);
 
+        assertNotNull($option->textEntities);
         assertCount(1, $option->textEntities);
         assertSame(23, $option->textEntities[0]->offset);
 
         assertSame('video_file_id', $option->media?->video?->fileId);
 
+        assertNotNull($option->addedByUser);
         assertSame(42, $option->addedByUser->id);
+        assertNotNull($option->addedByChat);
         assertSame(100, $option->addedByChat->id);
         assertSame(1700000000, $option->additionDate);
     }

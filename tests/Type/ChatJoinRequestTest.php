@@ -72,7 +72,7 @@ final class ChatJoinRequestTest extends TestCase
         assertSame(2, $chatJoinRequest->from->id);
 
         assertSame(12, $chatJoinRequest->userChatId);
-        assertSame(1631840400, $chatJoinRequest->date?->getTimestamp());
+        assertSame(1631840400, $chatJoinRequest->date->getTimestamp());
         assertSame('Test', $chatJoinRequest->bio);
 
         assertInstanceOf(ChatInviteLink::class, $chatJoinRequest->inviteLink);

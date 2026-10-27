@@ -11,6 +11,7 @@ use Phptg\BotApi\Type\PollMedia;
 
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 
@@ -110,6 +111,7 @@ final class PollMediaTest extends TestCase
         assertSame('document_file_id', $pollMedia->document?->fileId);
         assertSame('live_photo_file_id', $pollMedia->livePhoto?->fileId);
         assertSame(55.7558, $pollMedia->location?->latitude);
+        assertNotNull($pollMedia->photo);
         assertCount(2, $pollMedia->photo);
         assertSame('photo_file_id_1', $pollMedia->photo[0]->fileId);
         assertSame('photo_file_id_2', $pollMedia->photo[1]->fileId);

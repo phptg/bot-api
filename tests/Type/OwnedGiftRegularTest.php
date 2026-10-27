@@ -16,6 +16,7 @@ use Phptg\BotApi\Type\User;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;
@@ -151,7 +152,6 @@ final class OwnedGiftRegularTest extends TestCase
 
         assertInstanceOf(OwnedGiftRegular::class, $ownedGift);
 
-        assertInstanceOf(Gift::class, $ownedGift->gift);
 
         assertEquals(new DateTimeImmutable('@1619040000'), $ownedGift->sendDate);
         assertSame('ownedGiftId1', $ownedGift->ownedGiftId);
@@ -162,6 +162,7 @@ final class OwnedGiftRegularTest extends TestCase
         assertSame('John', $ownedGift->senderUser->firstName);
 
         assertSame('Hello', $ownedGift->text);
+        assertNotNull($ownedGift->entities);
         assertInstanceOf(MessageEntity::class, $ownedGift->entities[0]);
         assertSame('bold', $ownedGift->entities[0]->type);
         assertSame(0, $ownedGift->entities[0]->offset);

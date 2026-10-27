@@ -20,6 +20,7 @@ use Phptg\BotApi\Type\BotDescription;
 use Phptg\BotApi\Type\BotName;
 use Phptg\BotApi\Type\BotShortDescription;
 use Phptg\BotApi\Type\BusinessConnection;
+use Phptg\BotApi\Type\ChatAdministratorRights;
 use Phptg\BotApi\Type\ChatFullInfo;
 use Phptg\BotApi\Type\ChatInviteLink;
 use Phptg\BotApi\Type\ChatMemberMember;
@@ -45,11 +46,13 @@ use Phptg\BotApi\Type\MessageEntity;
 use Phptg\BotApi\Type\MessageId;
 use Phptg\BotApi\Type\OwnedGifts;
 use Phptg\BotApi\Type\Payment\StarTransactions;
+use Phptg\BotApi\Type\Poll;
 use Phptg\BotApi\Type\PreparedKeyboardButton;
 use Phptg\BotApi\Type\StarAmount;
 use Phptg\BotApi\Type\Sticker\Gifts;
 use Phptg\BotApi\Type\Sticker\InputSticker;
 use Phptg\BotApi\Type\Sticker\Sticker;
+use Phptg\BotApi\Type\Sticker\StickerSet;
 use Phptg\BotApi\Type\Story;
 use Phptg\BotApi\Type\Update\Update;
 use Phptg\BotApi\Type\Update\WebhookInfo;
@@ -69,6 +72,7 @@ use function PHPUnit\Framework\assertEmpty;
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertIsArray;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNotSame;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
@@ -182,7 +186,7 @@ final class TelegramBotApiTest extends TestCase
         assertSame('test error', $result->description);
         assertSame(400, $result->errorCode);
 
-        if ($useLogger) {
+        if ($logger !== null) {
             assertSame(
                 [
                     [
@@ -244,7 +248,7 @@ final class TelegramBotApiTest extends TestCase
     public function testSuccessResponseWithoutResult(): void
     {
         $api = TestHelper::createSuccessStubApi(
-            new ApiResponse(200, json_encode(['ok' => true])),
+            new ApiResponse(200, json_encode(['ok' => true], JSON_THROW_ON_ERROR)),
         );
 
         $exception = null;
@@ -260,7 +264,7 @@ final class TelegramBotApiTest extends TestCase
     {
         $logger = new SimpleLogger();
         $api = TestHelper::createSuccessStubApi(
-            new ApiResponse(200, json_encode(['ok' => true])),
+            new ApiResponse(200, json_encode(['ok' => true], JSON_THROW_ON_ERROR)),
             $logger,
         );
 
@@ -335,7 +339,7 @@ final class TelegramBotApiTest extends TestCase
         assertInstanceOf(TelegramParseResultException::class, $exception);
         assertSame('Not found key "id" in result object.', $exception->getMessage());
 
-        if ($useLogger) {
+        if ($logger !== null) {
             assertSame(
                 [
                     [
@@ -404,7 +408,7 @@ final class TelegramBotApiTest extends TestCase
     public function testResponseWithNotBooleanOk(): void
     {
         $api = TestHelper::createSuccessStubApi(
-            new ApiResponse(200, json_encode(['ok' => 'true'])),
+            new ApiResponse(200, json_encode(['ok' => 'true'], JSON_THROW_ON_ERROR)),
         );
 
         $exception = null;
@@ -465,7 +469,7 @@ final class TelegramBotApiTest extends TestCase
     public function testDownloadFileReturnsSameStreamForPhpTemp(): void
     {
         /** @var resource $stream */
-        $stream = fopen('php://temp', 'r+b');
+        $stream = TestHelper::openFile('php://temp', 'r+b');
         fwrite($stream, 'test-content');
         rewind($stream);
 
@@ -1040,7 +1044,7 @@ final class TelegramBotApiTest extends TestCase
             'business_connection_id',
             456,
             new InputStoryContentPhoto(
-                new InputFile(null),
+                new InputFile('/path/to/file'),
             ),
         );
 
@@ -1373,6 +1377,7 @@ final class TelegramBotApiTest extends TestCase
 
         assertInstanceOf(BotAccessSettings::class, $result);
         assertSame(true, $result->isAccessRestricted);
+        assertNotNull($result->addedUsers);
         assertSame(1, $result->addedUsers[0]->id);
         assertSame('Alice', $result->addedUsers[0]->firstName);
     }
@@ -1417,6 +1422,7 @@ final class TelegramBotApiTest extends TestCase
 
         $result = $api->getMyDefaultAdministratorRights();
 
+        assertInstanceOf(ChatAdministratorRights::class, $result);
         assertTrue($result->isAnonymous);
         assertFalse($result->canManageChat);
         assertTrue($result->canDeleteMessages);
@@ -1515,6 +1521,7 @@ final class TelegramBotApiTest extends TestCase
 
         $result = $api->getStickerSet('test_by_bot');
 
+        assertInstanceOf(StickerSet::class, $result);
         assertSame('test name', $result->title);
     }
 
@@ -1591,7 +1598,7 @@ final class TelegramBotApiTest extends TestCase
         ]);
         $api = new TelegramBotApi('stub-token', transport: $transport);
 
-        $file =  new InputFile(null);
+        $file =  new InputFile('/path/to/file');
         $api->sendDocument(
             'id1',
             $file,
@@ -1764,7 +1771,7 @@ final class TelegramBotApiTest extends TestCase
         $result = $api->postStory(
             'business_connection_id',
             new InputStoryContentPhoto(
-                new InputFile(null),
+                new InputFile('/path/to/file'),
             ),
             86400,
         );
@@ -1989,7 +1996,7 @@ final class TelegramBotApiTest extends TestCase
         $result = $api->setBusinessAccountProfilePhoto(
             'biz123',
             new InputProfilePhotoStatic(
-                new InputFile(null),
+                new InputFile('/path/to/file'),
             ),
         );
 
@@ -2468,7 +2475,7 @@ final class TelegramBotApiTest extends TestCase
     {
         $api = TestHelper::createSuccessStubApi(true);
 
-        $result = $api->setChatPhoto(12, new InputFile(null));
+        $result = $api->setChatPhoto(12, new InputFile('/path/to/file'));
 
         assertTrue($result);
     }
@@ -2571,7 +2578,7 @@ final class TelegramBotApiTest extends TestCase
 
         $result = $api->setMyProfilePhoto(
             new InputProfilePhotoStatic(
-                new InputFile(null),
+                new InputFile('/path/to/file'),
             ),
         );
 
@@ -2696,6 +2703,7 @@ final class TelegramBotApiTest extends TestCase
 
         $result = $api->stopPoll(1, 2);
 
+        assertInstanceOf(Poll::class, $result);
         assertSame('12', $result->id);
     }
 
@@ -2802,7 +2810,7 @@ final class TelegramBotApiTest extends TestCase
             'file_path' => 'path/to/file',
         ]);
 
-        $result = $api->uploadStickerFile(1, new InputFile(null), 'static');
+        $result = $api->uploadStickerFile(1, new InputFile('/path/to/file'), 'static');
 
         assertInstanceOf(File::class, $result);
         assertSame('f1', $result->fileId);

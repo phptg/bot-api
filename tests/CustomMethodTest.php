@@ -17,7 +17,7 @@ final class CustomMethodTest extends TestCase
 {
     public function testBase(): void
     {
-        $photo = new InputFile(null);
+        $photo = new InputFile('/path/to/file');
         $method = new CustomMethod(
             'getMe',
             ['param1' => 'value1', 'photo' => $photo],

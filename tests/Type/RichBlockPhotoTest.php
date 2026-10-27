@@ -51,9 +51,9 @@ final class RichBlockPhotoTest extends TestCase
         ], null, RichBlockPhoto::class);
 
         assertSame('photo', $block->getType());
-        assertCount(2, $block->photo);
         assertInstanceOf(PhotoSize::class, $block->photo[0]);
         assertInstanceOf(PhotoSize::class, $block->photo[1]);
+        assertCount(2, $block->photo);
         assertNull($block->hasSpoiler);
         assertNull($block->caption);
     }

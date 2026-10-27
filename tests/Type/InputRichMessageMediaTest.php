@@ -35,7 +35,7 @@ final class InputRichMessageMediaTest extends TestCase
 
     public function testWithFileCollector(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $media = new InputRichMessageMedia(
             'photo1',
             new InputMediaPhoto($file),

@@ -46,8 +46,8 @@ final class InputMediaLivePhotoTest extends TestCase
 
     public function testFull(): void
     {
-        $mediaFile = new InputFile(null);
-        $photoFile = new InputFile(null);
+        $mediaFile = new InputFile('/path/to/file');
+        $photoFile = new InputFile('/path/to/file');
         $entity = new MessageEntity('bold', 0, 4);
         $inputMedia = new InputMediaLivePhoto(
             $mediaFile,

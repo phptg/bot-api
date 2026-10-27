@@ -39,7 +39,7 @@ final class EditMessageMediaTest extends TestCase
 
     public function testFull(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $media = new InputMediaPhoto($file);
         $replyMarkup = new InlineKeyboardMarkup([[new InlineKeyboardButton('hello')]]);
         $method = new EditMessageMedia(

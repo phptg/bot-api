@@ -6,15 +6,27 @@ namespace Phptg\BotApi\Tests\Support;
 
 use Phptg\BotApi\Transport\TransportInterface;
 use Phptg\BotApi\Transport\ApiResponse;
+use Phptg\BotApi\Type\InputFile;
 
 final class TransportMock implements TransportInterface
 {
     private ?string $url = null;
 
     private ?string $sentBody = null;
+
+    /**
+     * @var array<string, string>|null
+     */
     private ?array $sentHeaders = null;
 
+    /**
+     * @var array<string, string>|null
+     */
     private ?array $sentData = null;
+
+    /**
+     * @var array<string, InputFile>|null
+     */
     private ?array $sentFiles = null;
 
     /**
@@ -75,6 +87,9 @@ final class TransportMock implements TransportInterface
         return $this->url;
     }
 
+    /**
+     * @return array<string, string>|null
+     */
     public function sentHeaders(): ?array
     {
         return $this->sentHeaders;
@@ -85,11 +100,17 @@ final class TransportMock implements TransportInterface
         return $this->sentBody;
     }
 
+    /**
+     * @return array<string, string>|null
+     */
     public function sentData(): ?array
     {
         return $this->sentData;
     }
 
+    /**
+     * @return array<string, InputFile>|null
+     */
     public function sentFiles(): ?array
     {
         return $this->sentFiles;

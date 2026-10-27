@@ -12,6 +12,7 @@ use Phptg\BotApi\Type\MessageId;
 
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertIsArray;
 use function PHPUnit\Framework\assertSame;
 
 final class ForwardMessagesTest extends TestCase
@@ -65,6 +66,7 @@ final class ForwardMessagesTest extends TestCase
             ],
         ])->call($method);
 
+        assertIsArray($preparedResult);
         assertCount(2, $preparedResult);
         assertInstanceOf(MessageId::class, $preparedResult[0]);
         assertInstanceOf(MessageId::class, $preparedResult[1]);

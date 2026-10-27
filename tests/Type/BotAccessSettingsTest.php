@@ -10,6 +10,7 @@ use Phptg\BotApi\Type\BotAccessSettings;
 use Phptg\BotApi\Type\User;
 
 use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 
@@ -45,6 +46,7 @@ final class BotAccessSettingsTest extends TestCase
 
         assertInstanceOf(BotAccessSettings::class, $settings);
         assertSame(true, $settings->isAccessRestricted);
+        assertNotNull($settings->addedUsers);
         assertInstanceOf(User::class, $settings->addedUsers[0]);
         assertSame(1, $settings->addedUsers[0]->id);
         assertSame('Alice', $settings->addedUsers[0]->firstName);

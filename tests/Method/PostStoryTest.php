@@ -24,7 +24,7 @@ final class PostStoryTest extends TestCase
 {
     public function testBase(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $content = new InputStoryContentPhoto($file);
         $method = new PostStory('bcid1', $content, 86400);
 
@@ -43,7 +43,7 @@ final class PostStoryTest extends TestCase
 
     public function testFull(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $content = new InputStoryContentPhoto($file);
         $captionEntities = [new MessageEntity('bold', 0, 4)];
         $storyArea = new StoryArea(
@@ -90,7 +90,7 @@ final class PostStoryTest extends TestCase
     {
         $method = new PostStory(
             'bcid1',
-            new InputStoryContentPhoto(new InputFile(null)),
+            new InputStoryContentPhoto(new InputFile('/path/to/file')),
             86400,
         );
 

@@ -7,20 +7,17 @@ namespace Phptg\BotApi\Tests\Type;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\FileCollector;
 use Phptg\BotApi\Type\InputFile;
-use Phptg\BotApi\Type\InputProfilePhoto;
 use Phptg\BotApi\Type\InputProfilePhotoStatic;
 
-use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class InputProfilePhotoStaticTest extends TestCase
 {
     public function testBase(): void
     {
-        $photo = new InputFile(null);
+        $photo = new InputFile('/path/to/file');
         $type = new InputProfilePhotoStatic($photo);
 
-        assertInstanceOf(InputProfilePhoto::class, $type);
         assertSame('static', $type->getType());
         assertSame($photo, $type->photo);
 

@@ -6,6 +6,7 @@ namespace Phptg\BotApi\Tests\DownloadedFile\SaveTo;
 
 use Phptg\BotApi\DownloadedFile;
 use Phptg\BotApi\SaveFileException;
+use Phptg\BotApi\Tests\Support\TestHelper;
 use PHPUnit\Framework\TestCase;
 
 use function PHPUnit\Framework\assertFileExists;
@@ -21,7 +22,7 @@ final class SaveToTest extends TestCase
             unlink(self::FILE);
         }
 
-        $stream = fopen('php://temp', 'r+b');
+        $stream = TestHelper::openFile('php://temp', 'r+b');
         fwrite($stream, 'hello-content');
         rewind($stream);
 
@@ -35,7 +36,7 @@ final class SaveToTest extends TestCase
 
     public function testFileAlreadyExists(): void
     {
-        $stream = fopen('php://temp', 'r+b');
+        $stream = TestHelper::openFile('php://temp', 'r+b');
         $file = new DownloadedFile($stream);
 
         touch(self::FILE);
@@ -47,7 +48,7 @@ final class SaveToTest extends TestCase
 
     public function testError(): void
     {
-        $stream = fopen('php://temp', 'r+b');
+        $stream = TestHelper::openFile('php://temp', 'r+b');
         $file = new DownloadedFile($stream);
 
         $this->expectException(SaveFileException::class);

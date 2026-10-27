@@ -41,8 +41,8 @@ final class InputPaidMediaLivePhotoTest extends TestCase
 
     public function testFull(): void
     {
-        $mediaFile = new InputFile(null);
-        $photoFile = new InputFile(null);
+        $mediaFile = new InputFile('/path/to/file');
+        $photoFile = new InputFile('/path/to/file');
         $inputMedia = new InputPaidMediaLivePhoto($mediaFile, $photoFile);
 
         assertSame('live_photo', $inputMedia->getType());

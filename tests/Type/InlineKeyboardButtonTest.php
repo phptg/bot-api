@@ -15,6 +15,7 @@ use Phptg\BotApi\Type\SwitchInlineQueryChosenChat;
 use Phptg\BotApi\Type\WebAppInfo;
 
 use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;
@@ -137,7 +138,9 @@ final class InlineKeyboardButtonTest extends TestCase
         assertSame('https://example.com/login', $button->loginUrl?->url);
         assertSame('switch-inline-query', $button->switchInlineQuery);
         assertSame('switch-inline-query-current-chat', $button->switchInlineQueryCurrentChat);
+        assertNotNull($button->switchInlineQueryChosenChat);
         assertSame('dg', $button->switchInlineQueryChosenChat->query);
+        assertNotNull($button->copyText);
         assertSame('Copy it!', $button->copyText->text);
         assertInstanceOf(CallbackGame::class, $button->callbackGame);
         assertTrue($button->pay);

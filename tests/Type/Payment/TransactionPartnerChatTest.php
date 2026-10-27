@@ -12,6 +12,7 @@ use Phptg\BotApi\Type\Payment\TransactionPartnerChat;
 use Phptg\BotApi\Type\Sticker\Gift;
 use Phptg\BotApi\Type\Sticker\Sticker;
 
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 
@@ -79,6 +80,7 @@ final class TransactionPartnerChatTest extends TestCase
 
         assertSame('chat', $object->getType());
         assertSame(123, $object->chat->id);
+        assertNotNull($object->gift);
         assertSame('test-id1', $object->gift->id);
     }
 

@@ -18,7 +18,7 @@ final class AddStickerToSetTest extends TestCase
 {
     public function testBase(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $inputSticker = new InputSticker($file, 'static', ['😀']);
         $method = new AddStickerToSet(1, 'test', $inputSticker);
 

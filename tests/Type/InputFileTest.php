@@ -33,7 +33,7 @@ final class InputFileTest extends TestCase
 
     public function testFromResource(): void
     {
-        $resource = fopen(__FILE__, 'rb');
+        $resource = TestHelper::openFile(__FILE__, 'rb');
         $file = new InputFile($resource);
 
         assertSame($resource, $file->pathOrResource);
@@ -45,7 +45,7 @@ final class InputFileTest extends TestCase
 
     public function testFromVirtualResource(): void
     {
-        $resource = fopen('php://temp', 'r+b');
+        $resource = TestHelper::openFile('php://temp', 'r+b');
         $file = new InputFile($resource);
 
         assertNull($file->filename());
@@ -68,7 +68,7 @@ final class InputFileTest extends TestCase
 
     public function testFromResourceWithFilename(): void
     {
-        $resource = fopen('php://temp', 'r+b');
+        $resource = TestHelper::openFile('php://temp', 'r+b');
         $file = new InputFile($resource, 'document.pdf');
 
         assertSame('document.pdf', $file->filename());

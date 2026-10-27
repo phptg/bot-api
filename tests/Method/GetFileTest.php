@@ -8,7 +8,9 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\GetFile;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\File;
 
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class GetFileTest extends TestCase
@@ -33,6 +35,7 @@ final class GetFileTest extends TestCase
             'file_path' => 'path/to/file',
         ])->call($method);
 
+        assertInstanceOf(File::class, $preparedResult);
         assertSame('x1', $preparedResult->fileId);
     }
 }

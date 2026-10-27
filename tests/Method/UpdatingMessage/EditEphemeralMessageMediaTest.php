@@ -56,7 +56,7 @@ final class EditEphemeralMessageMediaTest extends TestCase
 
     public function testFileCollectorIsUsedForMedia(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $media = new InputMediaPhoto($file);
         $method = new EditEphemeralMessageMedia(23, 45, 34, $media);
 

@@ -47,7 +47,7 @@ final class InputRichBlockSlideshowTest extends TestCase
 
     public function testFileCollectorIsPropagatedToBlocks(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $slideshow = new InputRichBlockSlideshow([new InputRichBlockPhoto(new InputMediaPhoto($file))]);
 
         $fileCollector = new FileCollector();

@@ -11,12 +11,23 @@ use Phptg\BotApi\Curl\CurlInterface;
 
 use function curl_init;
 use function is_array;
+use function is_resource;
 
 final class CurlMock implements CurlInterface
 {
+    /**
+     * @var array<int, mixed>|null
+     */
     private ?array $options = null;
+
+    /**
+     * @var list<array{int, mixed}>
+     */
     private array $shareOptions = [];
 
+    /**
+     * @param array<int, mixed> $getinfoResult
+     */
     public function __construct(
         private readonly string|Throwable $execResult = '',
         private readonly array $getinfoResult = [],
@@ -29,7 +40,7 @@ final class CurlMock implements CurlInterface
             throw $this->execResult;
         }
 
-        if (is_array($this->options) && isset($this->options[CURLOPT_FILE])) {
+        if (is_array($this->options) && is_resource($this->options[CURLOPT_FILE] ?? null)) {
             fwrite($this->options[CURLOPT_FILE], $this->execResult);
         }
 
@@ -59,11 +70,17 @@ final class CurlMock implements CurlInterface
         $this->shareOptions[] = [$option, $value];
     }
 
+    /**
+     * @return array<int, mixed>|null
+     */
     public function getOptions(): ?array
     {
         return $this->options;
     }
 
+    /**
+     * @return list<array{int, mixed}>
+     */
     public function getShareOptions(): array
     {
         return $this->shareOptions;

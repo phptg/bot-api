@@ -24,7 +24,7 @@ final class EditStoryTest extends TestCase
 {
     public function testBase(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $content = new InputStoryContentPhoto($file);
         $method = new EditStory('bcid1', 123, $content);
 
@@ -43,7 +43,7 @@ final class EditStoryTest extends TestCase
 
     public function testFull(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $content = new InputStoryContentPhoto($file);
         $captionEntities = [new MessageEntity('bold', 0, 4)];
         $storyArea = new StoryArea(
@@ -87,7 +87,7 @@ final class EditStoryTest extends TestCase
         $method = new EditStory(
             'bcid1',
             123,
-            new InputStoryContentPhoto(new InputFile(null)),
+            new InputStoryContentPhoto(new InputFile('/path/to/file')),
         );
 
         $result = TestHelper::createSuccessStubApi([

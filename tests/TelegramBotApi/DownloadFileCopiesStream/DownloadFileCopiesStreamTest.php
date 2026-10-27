@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phptg\BotApi\Tests\TelegramBotApi\DownloadFileCopiesStream;
 
 use Phptg\BotApi\TelegramBotApi;
+use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Tests\Support\TransportMock;
 use PHPUnit\Framework\TestCase;
 
@@ -17,7 +18,7 @@ final class DownloadFileCopiesStreamTest extends TestCase
     public function testBase(): void
     {
         $transport = new TransportMock(
-            downloadFileResource: fopen(self::FILE, 'rb'),
+            downloadFileResource: TestHelper::openFile(self::FILE, 'rb'),
         );
 
         $api = new TelegramBotApi('xyz', transport: $transport);
@@ -28,6 +29,6 @@ final class DownloadFileCopiesStreamTest extends TestCase
             file_get_contents(self::FILE),
             $result->getBody(),
         );
-        assertSame('php://temp', stream_get_meta_data($result->getStream())['uri']);
+        assertSame('php://temp', stream_get_meta_data($result->getStream())['uri'] ?? null);
     }
 }

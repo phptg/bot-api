@@ -11,7 +11,9 @@ use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Type\InlineKeyboardMarkup;
 use Phptg\BotApi\Type\InputChecklist;
 use Phptg\BotApi\Type\InputChecklistTask;
+use Phptg\BotApi\Type\Message;
 
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class EditMessageChecklistTest extends TestCase
@@ -98,6 +100,7 @@ final class EditMessageChecklistTest extends TestCase
             ],
         ])->call($method);
 
+        assertInstanceOf(Message::class, $preparedResult);
         assertSame(7, $preparedResult->messageId);
     }
 }

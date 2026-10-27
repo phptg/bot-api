@@ -47,7 +47,7 @@ final class InputRichBlockCollageTest extends TestCase
 
     public function testFileCollectorIsPropagatedToBlocks(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $collage = new InputRichBlockCollage([new InputRichBlockPhoto(new InputMediaPhoto($file))]);
 
         $fileCollector = new FileCollector();

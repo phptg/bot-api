@@ -33,7 +33,7 @@ final class SetStickerSetThumbnailTest extends TestCase
 
     public function testFull(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $method = new SetStickerSetThumbnail('animals_by_my_bot', 123, 'static', $file);
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());

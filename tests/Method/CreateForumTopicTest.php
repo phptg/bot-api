@@ -8,7 +8,9 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\CreateForumTopic;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\ForumTopic;
 
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class CreateForumTopicTest extends TestCase
@@ -56,6 +58,7 @@ final class CreateForumTopicTest extends TestCase
             'icon_custom_emoji_id' => '2351346235143',
         ])->call($method);
 
+        assertInstanceOf(ForumTopic::class, $preparedResult);
         assertSame(19, $preparedResult->messageThreadId);
     }
 }

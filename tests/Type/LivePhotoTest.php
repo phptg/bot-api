@@ -9,6 +9,7 @@ use Phptg\BotApi\ParseResult\ObjectFactory;
 use Phptg\BotApi\Type\LivePhoto;
 
 use function PHPUnit\Framework\assertCount;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 
@@ -65,6 +66,7 @@ final class LivePhotoTest extends TestCase
         assertSame(1920, $livePhoto->width);
         assertSame(1080, $livePhoto->height);
         assertSame(10, $livePhoto->duration);
+        assertNotNull($livePhoto->photo);
         assertCount(2, $livePhoto->photo);
         assertSame('photo_file_id_1', $livePhoto->photo[0]->fileId);
         assertSame('photo_file_id_2', $livePhoto->photo[1]->fileId);

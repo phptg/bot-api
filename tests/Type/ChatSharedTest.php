@@ -9,6 +9,7 @@ use Phptg\BotApi\ParseResult\ObjectFactory;
 use Phptg\BotApi\Type\ChatShared;
 
 use function PHPUnit\Framework\assertCount;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 
@@ -43,6 +44,7 @@ final class ChatSharedTest extends TestCase
         assertSame('Title', $chatShared->title);
         assertSame('Vjik', $chatShared->username);
 
+        assertNotNull($chatShared->photo);
         assertCount(2, $chatShared->photo);
         assertSame('file_id1', $chatShared->photo[0]->fileId);
         assertSame('file_id2', $chatShared->photo[1]->fileId);

@@ -17,6 +17,7 @@ use Phptg\BotApi\Type\User;
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;
@@ -229,10 +230,11 @@ final class ExternalReplyInfoTest extends TestCase
         assertSame('f2', $externalReplyInfo->audio?->fileId);
         assertSame('f3', $externalReplyInfo->document?->fileId);
         assertSame('f3lp', $externalReplyInfo->livePhoto?->fileId);
-        assertSame(640, $externalReplyInfo->livePhoto?->width);
-        assertSame(480, $externalReplyInfo->livePhoto?->height);
-        assertSame(3, $externalReplyInfo->livePhoto?->duration);
+        assertSame(640, $externalReplyInfo->livePhoto->width);
+        assertSame(480, $externalReplyInfo->livePhoto->height);
+        assertSame(3, $externalReplyInfo->livePhoto->duration);
 
+        assertNotNull($externalReplyInfo->photo);
         assertCount(1, $externalReplyInfo->photo);
         assertSame('f4', $externalReplyInfo->photo[0]->fileId);
 
@@ -252,7 +254,7 @@ final class ExternalReplyInfoTest extends TestCase
         assertSame('pid2354', $externalReplyInfo->poll?->id);
         assertSame('Venue1', $externalReplyInfo->venue?->title);
         assertSame(1, $externalReplyInfo->paidMedia?->starCount);
-        assertEquals([new PaidMediaPhoto([])], $externalReplyInfo->paidMedia?->paidMedia);
+        assertEquals([new PaidMediaPhoto([])], $externalReplyInfo->paidMedia->paidMedia);
         assertEquals(
             new Checklist(
                 'My Checklist',

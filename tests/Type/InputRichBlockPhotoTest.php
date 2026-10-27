@@ -45,7 +45,7 @@ final class InputRichBlockPhotoTest extends TestCase
 
     public function testFileCollectorIsPropagated(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $photo = new InputRichBlockPhoto(new InputMediaPhoto($file));
 
         $fileCollector = new FileCollector();

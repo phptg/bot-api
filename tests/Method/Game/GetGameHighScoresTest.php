@@ -12,6 +12,7 @@ use Phptg\BotApi\Type\Game\GameHighScore;
 
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertIsArray;
 use function PHPUnit\Framework\assertSame;
 
 final class GetGameHighScoresTest extends TestCase
@@ -61,6 +62,7 @@ final class GetGameHighScoresTest extends TestCase
             ],
         ])->call($method);
 
+        assertIsArray($preparedResult);
         assertCount(1, $preparedResult);
         assertInstanceOf(GameHighScore::class, $preparedResult[0]);
         assertSame(2, $preparedResult[0]->position);

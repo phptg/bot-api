@@ -10,10 +10,12 @@ use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Type\ForceReply;
 use Phptg\BotApi\Type\MessageEntity;
+use Phptg\BotApi\Type\MessageId;
 use Phptg\BotApi\Type\ReplyParameters;
 use Phptg\BotApi\Type\SuggestedPostParameters;
 use Phptg\BotApi\Type\SuggestedPostPrice;
 
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class CopyMessageTest extends TestCase
@@ -98,6 +100,7 @@ final class CopyMessageTest extends TestCase
             'message_id' => 7,
         ])->call($method);
 
+        assertInstanceOf(MessageId::class, $preparedResult);
         assertSame(7, $preparedResult->messageId);
     }
 }

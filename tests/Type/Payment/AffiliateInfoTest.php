@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\ParseResult\ObjectFactory;
 use Phptg\BotApi\Type\Payment\AffiliateInfo;
 
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 
@@ -44,7 +45,9 @@ final class AffiliateInfoTest extends TestCase
         assertSame(100, $type->commissionPerMille);
         assertSame(200, $type->amount);
         assertSame(300, $type->nanostarAmount);
+        assertNotNull($type->affiliateUser);
         assertSame(123, $type->affiliateUser->id);
+        assertNotNull($type->affiliateChat);
         assertSame(456, $type->affiliateChat->id);
     }
 }

@@ -48,7 +48,7 @@ final class InputRichBlockVoiceNoteTest extends TestCase
 
     public function testFileCollectorIsPropagated(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $voiceNote = new InputRichBlockVoiceNote(new InputMediaVoiceNote($file));
 
         $fileCollector = new FileCollector();

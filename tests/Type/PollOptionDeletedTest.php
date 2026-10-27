@@ -11,6 +11,7 @@ use Phptg\BotApi\Type\PollOptionDeleted;
 
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertInstanceOf;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 
@@ -50,6 +51,7 @@ final class PollOptionDeletedTest extends TestCase
         assertSame('Option text', $pollOptionDeleted->optionText);
         assertInstanceOf(Message::class, $pollOptionDeleted->pollMessage);
         assertSame(1, $pollOptionDeleted->pollMessage->messageId);
+        assertNotNull($pollOptionDeleted->optionTextEntities);
         assertCount(1, $pollOptionDeleted->optionTextEntities);
         assertSame('bold', $pollOptionDeleted->optionTextEntities[0]->type);
     }

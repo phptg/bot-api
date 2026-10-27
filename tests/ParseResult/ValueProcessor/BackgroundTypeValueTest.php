@@ -68,6 +68,10 @@ final class BackgroundTypeValueTest extends TestCase
         ];
     }
 
+    /**
+     * @param class-string $expectedClass
+     * @param array<string, mixed> $data
+     */
     #[DataProvider('dataBase')]
     public function testBase(string $expectedClass, array $data): void
     {

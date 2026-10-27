@@ -41,9 +41,9 @@ final class InputMediaVideoTest extends TestCase
 
     public function testFull(): void
     {
-        $media = new InputFile(null);
-        $thumbnail = new InputFile(null);
-        $cover = new InputFile(null);
+        $media = new InputFile('/path/to/file');
+        $thumbnail = new InputFile('/path/to/file');
+        $cover = new InputFile('/path/to/file');
         $entity = new MessageEntity('bold', 0, 4);
         $inputMedia = new InputMediaVideo(
             $media,

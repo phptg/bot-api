@@ -29,6 +29,27 @@ final readonly class TestHelper
     }
 
     /**
+     * @return resource
+     */
+    public static function openFile(string $filename, string $mode)
+    {
+        $resource = fopen($filename, $mode);
+        if ($resource === false) {
+            throw new RuntimeException('Failed to open "' . $filename . '".');
+        }
+        return $resource;
+    }
+
+    public static function readFile(string $filename): string
+    {
+        $content = file_get_contents($filename);
+        if ($content === false) {
+            throw new RuntimeException('Failed to read "' . $filename . '".');
+        }
+        return $content;
+    }
+
+    /**
      * Creates a pair of connected sockets. Such stream resources have no URI in their metadata.
      *
      * @return array{resource, resource}
@@ -43,6 +64,6 @@ final readonly class TestHelper
         if ($pair === false) {
             throw new RuntimeException('Failed to create a socket pair.');
         }
-        return $pair;
+        return [$pair[0], $pair[1]];
     }
 }

@@ -36,7 +36,7 @@ final class InputRichBlockListTest extends TestCase
 
     public function testFileCollectorIsPropagatedToItems(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $item = new InputRichBlockListItem([new InputRichBlockPhoto(new InputMediaPhoto($file))]);
         $list = new InputRichBlockList([$item]);
 

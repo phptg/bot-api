@@ -59,9 +59,14 @@ final class InputRichBlockParagraphTest extends TestCase
         ];
     }
 
+    /**
+     * @param array<mixed>|string $expected
+     * @param array<mixed>|RichTextBold $text
+     */
     #[DataProvider('dataText')]
     public function testText(array|string $expected, array|RichTextBold $text): void
     {
+        // @phpstan-ignore argument.type (arrays with keys are passed on purpose)
         $paragraph = new InputRichBlockParagraph($text);
 
         assertSame(
@@ -80,9 +85,13 @@ final class InputRichBlockParagraphTest extends TestCase
         yield 'deeply nested float' => [[[[[1.5]]]], 'float'];
     }
 
+    /**
+     * @param array<mixed> $text
+     */
     #[DataProvider('dataInvalidText')]
     public function testInvalidText(array $text, string $givenType): void
     {
+        // @phpstan-ignore argument.type (invalid rich text is passed on purpose)
         $paragraph = new InputRichBlockParagraph($text);
 
         $this->expectException(InvalidArgumentException::class);

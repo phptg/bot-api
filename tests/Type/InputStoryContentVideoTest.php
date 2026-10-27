@@ -7,10 +7,8 @@ namespace Phptg\BotApi\Tests\Type;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\FileCollector;
 use Phptg\BotApi\Type\InputFile;
-use Phptg\BotApi\Type\InputStoryContent;
 use Phptg\BotApi\Type\InputStoryContentVideo;
 
-use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;
 
@@ -18,10 +16,9 @@ final class InputStoryContentVideoTest extends TestCase
 {
     public function testBase(): void
     {
-        $video = new InputFile(null);
+        $video = new InputFile('/path/to/file');
         $type = new InputStoryContentVideo($video);
 
-        assertInstanceOf(InputStoryContent::class, $type);
         assertSame('video', $type->getType());
         assertSame($video, $type->video);
 
@@ -43,10 +40,9 @@ final class InputStoryContentVideoTest extends TestCase
 
     public function testFull(): void
     {
-        $video = new InputFile(null);
+        $video = new InputFile('/path/to/file');
         $type = new InputStoryContentVideo($video, 10.5, 2.5, true);
 
-        assertInstanceOf(InputStoryContent::class, $type);
         assertSame('video', $type->getType());
         assertSame($video, $type->video);
         assertSame(10.5, $type->duration);

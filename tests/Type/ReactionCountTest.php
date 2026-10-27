@@ -9,6 +9,7 @@ use Phptg\BotApi\ParseResult\ObjectFactory;
 use Phptg\BotApi\Type\ReactionCount;
 use Phptg\BotApi\Type\ReactionTypeEmoji;
 
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class ReactionCountTest extends TestCase
@@ -32,6 +33,7 @@ final class ReactionCountTest extends TestCase
             'total_count' => 23,
         ], null, ReactionCount::class);
 
+        assertInstanceOf(ReactionTypeEmoji::class, $count->type);
         assertSame('👍', $count->type->emoji);
         assertSame(23, $count->totalCount);
     }

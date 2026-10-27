@@ -19,7 +19,7 @@ final class SetBusinessAccountProfilePhotoTest extends TestCase
 {
     public function testBase(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $photo = new InputProfilePhotoStatic($file);
         $method = new SetBusinessAccountProfilePhoto('bcid1', $photo);
 
@@ -37,7 +37,7 @@ final class SetBusinessAccountProfilePhotoTest extends TestCase
 
     public function testFull(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $photo = new InputProfilePhotoStatic($file);
         $method = new SetBusinessAccountProfilePhoto('bcid1', $photo, true);
 
@@ -54,7 +54,7 @@ final class SetBusinessAccountProfilePhotoTest extends TestCase
 
     public function testPrepareResult(): void
     {
-        $file = new InputFile(null);
+        $file = new InputFile('/path/to/file');
         $photo = new InputProfilePhotoStatic($file);
         $method = new SetBusinessAccountProfilePhoto('bcid1', $photo);
 

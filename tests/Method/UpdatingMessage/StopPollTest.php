@@ -10,7 +10,9 @@ use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Type\InlineKeyboardButton;
 use Phptg\BotApi\Type\InlineKeyboardMarkup;
+use Phptg\BotApi\Type\Poll;
 
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertSame;
 
 final class StopPollTest extends TestCase
@@ -65,6 +67,7 @@ final class StopPollTest extends TestCase
             'members_only' => true,
         ])->call($method);
 
+        assertInstanceOf(Poll::class, $preparedResult);
         assertSame('12', $preparedResult->id);
     }
 }
