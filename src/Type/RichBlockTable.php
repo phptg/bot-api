@@ -12,7 +12,7 @@ use Phptg\BotApi\ParseResult\ValueProcessor\RichTextValue;
  *
  * @api
  *
- * @psalm-import-type RichTextContent from RichText
+ * @phpstan-import-type RichTextContent from RichText
  */
 final readonly class RichBlockTable implements RichBlock
 {

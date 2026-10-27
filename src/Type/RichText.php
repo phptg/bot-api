@@ -9,7 +9,7 @@ namespace Phptg\BotApi\Type;
  *
  * @api
  *
- * @psalm-type RichTextContent = string|RichText|list<string|RichText|list<string|RichText|list<mixed>>>
+ * @phpstan-type RichTextContent = string|RichText|list<string|RichText|list<string|RichText|list<mixed>>>
  */
 interface RichText
 {

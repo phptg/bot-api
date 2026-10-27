@@ -12,7 +12,7 @@ use Phptg\BotApi\RichTextConverter;
  *
  * @api
  *
- * @psalm-import-type RichTextContent from RichText
+ * @phpstan-import-type RichTextContent from RichText
  */
 final readonly class RichTextUnderline implements RichText
 {

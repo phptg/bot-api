@@ -16,7 +16,7 @@ use function is_string;
 /**
  * @internal
  *
- * @psalm-import-type RichTextContent from RichText
+ * @phpstan-import-type RichTextContent from RichText
  */
 final class RichTextConverter
 {

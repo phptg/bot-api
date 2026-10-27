@@ -42,7 +42,7 @@ use function is_array;
 use function is_string;
 
 /**
- * @psalm-import-type RichTextContent from RichText
+ * @phpstan-import-type RichTextContent from RichText
  * @template-implements ValueProcessorInterface<RichTextContent>
  */
 #[Attribute(Attribute::TARGET_PARAMETER)]
