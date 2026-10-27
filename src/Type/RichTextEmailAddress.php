@@ -11,9 +11,14 @@ use Phptg\BotApi\RichTextConverter;
  * @see https://core.telegram.org/bots/api#richtextemailaddress
  *
  * @api
+ *
+ * @psalm-import-type RichTextContent from RichText
  */
 final readonly class RichTextEmailAddress implements RichText
 {
+    /**
+     * @param RichTextContent $text
+     */
     public function __construct(
         #[RichTextValue]
         public string|array|RichText $text,

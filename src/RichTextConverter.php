@@ -8,16 +8,21 @@ use InvalidArgumentException;
 use Phptg\BotApi\Type\RichText;
 
 use function array_map;
+use function array_values;
 use function get_debug_type;
 use function is_array;
 use function is_string;
 
 /**
  * @internal
+ *
+ * @psalm-import-type RichTextContent from RichText
  */
 final class RichTextConverter
 {
     /**
+     * @param RichTextContent|null $value
+     *
      * @return string|array<array-key, mixed>|null
      *
      * @throws InvalidArgumentException If the value contains an element that is not a string, a `RichText` object or
@@ -46,7 +51,7 @@ final class RichTextConverter
         }
 
         if (is_array($value)) {
-            return array_map(self::convert(...), $value);
+            return array_map(self::convert(...), array_values($value));
         }
 
         throw new InvalidArgumentException(

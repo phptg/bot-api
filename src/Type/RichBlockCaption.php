@@ -11,9 +11,15 @@ use Phptg\BotApi\RichTextConverter;
  * @see https://core.telegram.org/bots/api#richblockcaption
  *
  * @api
+ *
+ * @psalm-import-type RichTextContent from RichText
  */
 final readonly class RichBlockCaption
 {
+    /**
+     * @param RichTextContent $text
+     * @param RichTextContent|null $credit
+     */
     public function __construct(
         #[RichTextValue]
         public string|array|RichText $text,

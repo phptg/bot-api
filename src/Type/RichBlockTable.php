@@ -11,11 +11,14 @@ use Phptg\BotApi\ParseResult\ValueProcessor\RichTextValue;
  * @see https://core.telegram.org/bots/api#richblocktable
  *
  * @api
+ *
+ * @psalm-import-type RichTextContent from RichText
  */
 final readonly class RichBlockTable implements RichBlock
 {
     /**
      * @param list<list<RichBlockTableCell>> $cells
+     * @param RichTextContent|null $caption
      */
     public function __construct(
         #[ArrayOfArraysOfObjectsValue(RichBlockTableCell::class)]

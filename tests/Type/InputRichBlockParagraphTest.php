@@ -53,6 +53,10 @@ final class InputRichBlockParagraphTest extends TestCase
                 ],
             ],
         ];
+        yield 'array with keys' => [
+            ['a', ['b', 'c']],
+            [3 => 'a', 'x' => [1 => 'b', 'y' => 'c']],
+        ];
     }
 
     #[DataProvider('dataText')]

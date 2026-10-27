@@ -11,9 +11,14 @@ use Phptg\BotApi\RichTextConverter;
  * @see https://core.telegram.org/bots/api#inputrichblockthinking
  *
  * @api
+ *
+ * @psalm-import-type RichTextContent from RichText
  */
 final readonly class InputRichBlockThinking implements InputRichBlock
 {
+    /**
+     * @param RichTextContent $text
+     */
     public function __construct(
         public string|array|RichText $text,
     ) {}

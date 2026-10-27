@@ -42,7 +42,8 @@ use function is_array;
 use function is_string;
 
 /**
- * @template-implements ValueProcessorInterface<string|array|RichText>
+ * @psalm-import-type RichTextContent from RichText
+ * @template-implements ValueProcessorInterface<RichTextContent>
  */
 #[Attribute(Attribute::TARGET_PARAMETER)]
 final readonly class RichTextValue implements ValueProcessorInterface
@@ -79,6 +80,9 @@ final readonly class RichTextValue implements ValueProcessorInterface
         'button' => RichTextButton::class,
     ];
 
+    /**
+     * @return RichTextContent
+     */
     public function process(mixed $value, ?string $key, ObjectFactory $objectFactory): string|array|RichText
     {
         if (is_string($value)) {
