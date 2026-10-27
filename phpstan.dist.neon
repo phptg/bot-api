@@ -1,3 +1,6 @@
+includes:
+    - vendor/shipmonk/dead-code-detector/rules.neon
+
 parameters:
     level: max
     paths:

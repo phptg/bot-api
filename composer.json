@@ -39,6 +39,7 @@
         "phpstan/phpstan": "^2.3.2",
         "phpunit/phpunit": "^11.5.55",
         "psr/log": "^3.0.2",
+        "shipmonk/dead-code-detector": "^1.4.2",
         "yiisoft/files": "^2.1",
         "yiisoft/test-support": "^3.2.0"
     },
