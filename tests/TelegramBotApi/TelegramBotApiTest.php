@@ -1598,7 +1598,7 @@ final class TelegramBotApiTest extends TestCase
         ]);
         $api = new TelegramBotApi('stub-token', transport: $transport);
 
-        $file =  new InputFile('/path/to/file');
+        $file = new InputFile('/path/to/file');
         $api->sendDocument(
             'id1',
             $file,

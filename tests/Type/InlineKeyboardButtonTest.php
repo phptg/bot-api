@@ -53,7 +53,7 @@ final class InlineKeyboardButtonTest extends TestCase
     {
         $webApp = new WebAppInfo('https://example.com/test');
         $loginUrl = new LoginUrl('https://example.com/login');
-        $switchInlineQueryChosenChat  = new SwitchInlineQueryChosenChat('dg');
+        $switchInlineQueryChosenChat = new SwitchInlineQueryChosenChat('dg');
         $callbackGame = new CallbackGame();
         $copyText = new CopyTextButton('Copy it!');
         $disabled = new DisabledButton();

@@ -81,7 +81,7 @@ final class UniqueGiftInfoTest extends TestCase
     public function testFromTelegramResult(): void
     {
         $type = (new ObjectFactory())->create([
-            'gift' =>  [
+            'gift' => [
                 'gift_id' => 'gift-unique-789',
                 'base_name' => 'BaseName',
                 'name' => 'uniqueName',

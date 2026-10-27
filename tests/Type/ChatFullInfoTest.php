@@ -168,7 +168,7 @@ final class ChatFullInfoTest extends TestCase
             'permissions' => [
                 'can_send_messages' => true,
             ],
-            'accepted_gift_types' =>  [
+            'accepted_gift_types' => [
                 'unlimited_gifts' => true,
                 'limited_gifts' => false,
                 'unique_gifts' => true,
