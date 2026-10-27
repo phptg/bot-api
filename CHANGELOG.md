@@ -4,6 +4,10 @@
 
 - Enh #223: Convert the PHP warning raised on failure to read a local file in `NativeTransport` into an exception with
   the original error message.
+- Bug #227: Throw `InvalidArgumentException` on serialization of rich text that contains an element other than
+  a string, a `RichText` object or an array of them, instead of failing with `TypeError` or silently casting scalars
+  to strings.
+- Bug #227: Discard keys of rich text arrays on serialization, so they are always sent as JSON arrays, not objects.
 
 ## 0.22 August 25, 2026
 

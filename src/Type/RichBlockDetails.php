@@ -12,10 +12,13 @@ use Phptg\BotApi\ParseResult\ValueProcessor\RichTextValue;
  * @see https://core.telegram.org/bots/api#richblockdetails
  *
  * @api
+ *
+ * @psalm-import-type RichTextContent from RichText
  */
 final readonly class RichBlockDetails implements RichBlock
 {
     /**
+     * @param RichTextContent $summary
      * @param list<RichBlock> $blocks
      */
     public function __construct(
