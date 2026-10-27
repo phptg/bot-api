@@ -11,11 +11,13 @@ use Phptg\BotApi\RichTextConverter;
  * @see https://core.telegram.org/bots/api#richtextmention
  *
  * @api
+ *
+ * @psalm-import-type RichTextContent from RichText
  */
 final readonly class RichTextMention implements RichText
 {
     /**
-     * @param string|array<string|array<mixed>|RichText>|RichText $text
+     * @param RichTextContent $text
      */
     public function __construct(
         #[RichTextValue]

@@ -6,6 +6,7 @@ namespace Phptg\BotApi\Tests\Transport\NativeTransport;
 
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
+use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Tests\Transport\NativeTransport\StreamMock\StreamMock;
 use Phptg\BotApi\Transport\MimeTypeResolver\MimeTypeResolverInterface;
 use Phptg\BotApi\Transport\NativeTransport;
@@ -267,6 +268,40 @@ final class NativeTransportTest extends TestCase
         $request = StreamMock::disable();
 
         assertStringContainsString('stream content', $request['options']['http']['content']);
+    }
+
+    public function testPostWithResourceWithoutUri(): void
+    {
+        $transport = new NativeTransport();
+
+        StreamMock::enable(
+            responseHeaders: [
+                'HTTP/1.1 200 OK',
+                'Content-Type: text/json',
+            ],
+            responseBody: '{"ok":true,"result":[]}',
+        );
+
+        [$resource, $pair] = TestHelper::createSocketPair();
+        fwrite($pair, 'socket content');
+        fclose($pair);
+
+        $transport->postWithFiles(
+            'http://url/method',
+            [],
+            ['file' => new InputFile($resource)],
+        );
+
+        fclose($resource);
+
+        $request = StreamMock::disable();
+
+        assertStringContainsString(
+            "Content-Disposition: form-data; name=\"file\"\r\n"
+            . "\r\n"
+            . "socket content\r\n",
+            $request['options']['http']['content'],
+        );
     }
 
     public function testErrorOnSend(): void

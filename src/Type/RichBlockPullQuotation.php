@@ -10,12 +10,14 @@ use Phptg\BotApi\ParseResult\ValueProcessor\RichTextValue;
  * @see https://core.telegram.org/bots/api#richblockpullquotation
  *
  * @api
+ *
+ * @psalm-import-type RichTextContent from RichText
  */
 final readonly class RichBlockPullQuotation implements RichBlock
 {
     /**
-     * @param string|array<string|array<mixed>|RichText>|RichText $text
-     * @param string|array<string|array<mixed>|RichText>|RichText|null $credit
+     * @param RichTextContent $text
+     * @param RichTextContent|null $credit
      */
     public function __construct(
         #[RichTextValue]

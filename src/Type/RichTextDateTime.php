@@ -11,11 +11,13 @@ use Phptg\BotApi\RichTextConverter;
  * @see https://core.telegram.org/bots/api#richtextdatetime
  *
  * @api
+ *
+ * @psalm-import-type RichTextContent from RichText
  */
 final readonly class RichTextDateTime implements RichText
 {
     /**
-     * @param string|array<string|array<mixed>|RichText>|RichText $text
+     * @param RichTextContent $text
      */
     public function __construct(
         #[RichTextValue]

@@ -10,11 +10,13 @@ use Phptg\BotApi\ParseResult\ValueProcessor\RichTextValue;
  * @see https://core.telegram.org/bots/api#richblocksectionheading
  *
  * @api
+ *
+ * @psalm-import-type RichTextContent from RichText
  */
 final readonly class RichBlockSectionHeading implements RichBlock
 {
     /**
-     * @param string|array<string|array<mixed>|RichText>|RichText $text
+     * @param RichTextContent $text
      */
     public function __construct(
         #[RichTextValue]

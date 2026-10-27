@@ -11,11 +11,13 @@ use Phptg\BotApi\RichTextConverter;
  * @see https://core.telegram.org/bots/api#richtextphonenumber
  *
  * @api
+ *
+ * @psalm-import-type RichTextContent from RichText
  */
 final readonly class RichTextPhoneNumber implements RichText
 {
     /**
-     * @param string|array<string|array<mixed>|RichText>|RichText $text
+     * @param RichTextContent $text
      */
     public function __construct(
         #[RichTextValue]

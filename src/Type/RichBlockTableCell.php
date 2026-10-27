@@ -11,11 +11,13 @@ use Phptg\BotApi\RichTextConverter;
  * @see https://core.telegram.org/bots/api#richblocktablecell
  *
  * @api
+ *
+ * @psalm-import-type RichTextContent from RichText
  */
 final readonly class RichBlockTableCell
 {
     /**
-     * @param string|array<string|array<mixed>|RichText>|RichText|null $text
+     * @param RichTextContent|null $text
      */
     public function __construct(
         public string $align,
