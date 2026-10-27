@@ -85,7 +85,7 @@ final readonly class CurlTransport implements TransportInterface
         }
 
         $metadata = stream_get_meta_data($file->pathOrResource);
-        if (!str_contains($metadata['uri'], '://')) {
+        if (isset($metadata['uri']) && !str_contains($metadata['uri'], '://')) {
             return new CURLFile($metadata['uri'], $mimeType, $file->filename());
         }
 
