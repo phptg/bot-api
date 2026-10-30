@@ -4,13 +4,14 @@
 
 - Enh #223: Convert the PHP warning raised on failure to read a local file in `NativeTransport` into an exception with
   the original error message.
+- Enh #229: Replace Psalm with PHPStan for static analysis.
+- Enh #230: Add PHP 8.6 support.
 - Bug #227: Throw `InvalidArgumentException` on serialization of rich text that contains an element other than
   a string, a `RichText` object or an array of them, instead of failing with `TypeError` or silently casting scalars
   to strings.
 - Bug #227: Discard keys of rich text arrays on serialization, so they are always sent as JSON arrays, not objects.
 - Bug #228: Fix "Undefined array key" error in `InputFile::filename()` and `CurlTransport` when a stream resource has
   no URI.
-- Enh #229: Replace Psalm with PHPStan for static analysis.
 
 ## 0.22 August 25, 2026
 
