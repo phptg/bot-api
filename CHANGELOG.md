@@ -6,6 +6,7 @@
   the original error message.
 - Enh #229: Replace Psalm with PHPStan for static analysis.
 - Enh #230: Add PHP 8.6 support.
+- Enh #231: Use `http_get_last_response_headers()` in `NativeTransport` on PHP 8.4+.
 - Bug #227: Throw `InvalidArgumentException` on serialization of rich text that contains an element other than
   a string, a `RichText` object or an array of them, instead of failing with `TypeError` or silently casting scalars
   to strings.

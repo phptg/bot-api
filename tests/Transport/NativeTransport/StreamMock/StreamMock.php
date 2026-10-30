@@ -26,6 +26,11 @@ final class StreamMock
     private int $position = 0;
 
     /**
+     * @var list<string>|null
+     */
+    private static ?array $lastResponseHeaders = null;
+
+    /**
      * @var resource
      */
     // @phpstan-ignore shipmonk.deadProperty.neverWritten (the property is set by PHP when the class is used as a stream wrapper)
@@ -73,6 +78,7 @@ final class StreamMock
         if (file_exists(self::REQUEST_FILE)) {
             unlink(self::REQUEST_FILE);
         }
+        self::$lastResponseHeaders = null;
 
         stream_wrapper_unregister('http');
         stream_wrapper_register('http', self::class, STREAM_IS_URL);
@@ -84,6 +90,7 @@ final class StreamMock
     public static function disable(): ?array
     {
         stream_wrapper_restore('http');
+        self::$lastResponseHeaders = null;
 
         if (!file_exists(self::REQUEST_FILE)) {
             return null;
@@ -143,10 +150,18 @@ final class StreamMock
         return [];
     }
 
+    /**
+     * @return list<string>|null
+     */
+    public static function getLastResponseHeaders(): ?array
+    {
+        return self::$lastResponseHeaders;
+    }
+
     public function stream_close(): void
     {
-        global $http_response_header;
-        $http_response_header = $this->config['responseHeaders'];
+        self::$lastResponseHeaders = $this->config['responseHeaders'];
+        $GLOBALS['http_response_header'] = $this->config['responseHeaders'];
     }
 
     private static function readFile(string $path): string
