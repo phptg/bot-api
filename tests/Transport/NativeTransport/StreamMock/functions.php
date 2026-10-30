@@ -14,5 +14,5 @@ use Phptg\BotApi\Tests\Transport\NativeTransport\StreamMock\StreamMock;
  */
 function http_get_last_response_headers(): ?array
 {
-    return StreamMock::getLastResponseHeaders() ?? \http_get_last_response_headers();
+    return StreamMock::getLastResponseHeaders();
 }
