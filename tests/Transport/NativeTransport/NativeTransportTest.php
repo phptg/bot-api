@@ -243,7 +243,7 @@ final class NativeTransportTest extends TestCase
             sprintf(
                 'Failed to read the file %s. %s: Failed to open stream: No such file or directory',
                 $nonExistentPath,
-                PHP_VERSION_ID >= 80600 ? 'file_get_contents()' : "file_get_contents()",
+                PHP_VERSION_ID >= 80600 ? 'file_get_contents()' : "file_get_contents($nonExistentPath)",
             ),
         );
         $transport->postWithFiles(
