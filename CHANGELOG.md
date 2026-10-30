@@ -1,6 +1,6 @@
 # Telegram Bot API for PHP Change Log
 
-## 0.22.1 under development
+## 0.22.1 October 30, 2026
 
 - Enh #223: Convert the PHP warning raised on failure to read a local file in `NativeTransport` into an exception with
   the original error message.
