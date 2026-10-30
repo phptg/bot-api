@@ -10,7 +10,7 @@ For questions and discussion, use the author's [Telegram chat](https://t.me/pred
 
 ## Development setup
 
-Requirements: 64-bit PHP 8.2–8.5 and [Composer](https://getcomposer.org/download/).
+Requirements: 64-bit PHP 8.2–8.6 and [Composer](https://getcomposer.org/download/).
 
 Fork the repository, clone it and run `composer install`.
 

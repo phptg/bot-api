@@ -30,7 +30,7 @@
         }
     ],
     "require": {
-        "php-64bit": "8.2 - 8.5"
+        "php-64bit": "8.2 - 8.6"
     },
     "require-dev": {
         "ext-curl": "*",
