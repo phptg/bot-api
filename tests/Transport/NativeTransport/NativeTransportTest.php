@@ -20,6 +20,8 @@ use function PHPUnit\Framework\assertStringContainsString;
 use function PHPUnit\Framework\assertTrue;
 use function sprintf;
 
+require_once __DIR__ . '/StreamMock/functions.php';
+
 final class NativeTransportTest extends TestCase
 {
     public function testGet(): void

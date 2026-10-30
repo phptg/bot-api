@@ -93,7 +93,11 @@ final readonly class NativeTransport implements TransportInterface
      */
     private function send(string $url, array $options): ApiResponse
     {
-        global $http_response_header;
+        if (PHP_VERSION_ID < 80400) {
+            // The variable name is dynamic to avoid the deprecation of `$http_response_header` in PHP 8.5+.
+            $headersVariableName = 'http_response_header';
+            global ${$headersVariableName};
+        }
 
         $options['ignore_errors'] = true;
 
@@ -114,12 +118,17 @@ final readonly class NativeTransport implements TransportInterface
         }
 
         /**
-         * @var non-empty-list<string> $http_response_header
+         * @var non-empty-list<string> $headers We throw an exception on error, so the response is received and headers
+         * contain at least the status line.
+         * @see https://www.php.net/manual/function.http-get-last-response-headers.php
          * @see https://www.php.net/manual/reserved.variables.httpresponseheader.php
          */
+        $headers = PHP_VERSION_ID < 80400
+            ? ${$headersVariableName}
+            : http_get_last_response_headers();
 
         return new ApiResponse(
-            $this->parseStatusCode($http_response_header),
+            $this->parseStatusCode($headers),
             $body,
         );
     }
