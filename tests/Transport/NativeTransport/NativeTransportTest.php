@@ -18,6 +18,7 @@ use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertStringContainsString;
 use function PHPUnit\Framework\assertTrue;
+use function sprintf;
 
 final class NativeTransportTest extends TestCase
 {
@@ -239,7 +240,11 @@ final class NativeTransportTest extends TestCase
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(
-            "Failed to read the file $nonExistentPath. file_get_contents($nonExistentPath): Failed to open stream: No such file or directory",
+            sprintf(
+                'Failed to read the file %s. %s: Failed to open stream: No such file or directory',
+                $nonExistentPath,
+                PHP_VERSION_ID >= 80600 ? 'file_get_contents()' : "file_get_contents()",
+            ),
         );
         $transport->postWithFiles(
             'http://url/method',
