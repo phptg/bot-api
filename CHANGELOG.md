@@ -2,7 +2,7 @@
 
 ## 0.23.0 under development
 
-- New #233: Add `Widget` type.
+- New #233: Add `Widget` and `TonNftAttribute` types.
 - New #233: Add `widget` field to `Message` and `ExternalReplyInfo` types.
 - New #233: Add `SendWidget` and `SendSharedWidget` methods.
 
