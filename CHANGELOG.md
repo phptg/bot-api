@@ -11,6 +11,7 @@
 - New #233: Add `widgetQuery` and `sharedWidgetQuery` fields to `Update` type.
 - New #233: Add `SendWidget`, `SendSharedWidget`, `AnswerWidgetQuery`, `EditMessageWidgetData` and
   `EditSharedWidgetData` methods.
+- New #233: Add `richTexts` field to `TextQuote` type.
 - Chg #233: Rename `StoryAreaPosition` type to `AreaPosition`.
 - Chg #233: Make `receiverUserId` field of `EphemeralMessageParameters` type optional.
 - Chg #233: Make `chatId` parameter of `SendMessage`, `SendRichMessage`, `SendAnimation`, `SendAudio`,
