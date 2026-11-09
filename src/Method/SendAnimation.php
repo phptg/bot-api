@@ -29,8 +29,8 @@ final readonly class SendAnimation implements MethodInterface
      * @param MessageEntity[]|null $captionEntities
      */
     public function __construct(
-        private int|string $chatId,
         private InputFile|string $animation,
+        private int|string|null $chatId = null,
         private ?string $businessConnectionId = null,
         private ?int $messageThreadId = null,
         private ?int $duration = null,

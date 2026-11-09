@@ -2106,8 +2106,8 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendanimation
      */
     public function sendAnimation(
-        int|string $chatId,
         InputFile|string $animation,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?int $duration = null,
@@ -2131,8 +2131,8 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendAnimation(
-                $chatId,
                 $animation,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $duration,
@@ -2163,8 +2163,8 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendaudio
      */
     public function sendAudio(
-        int|string $chatId,
         string|InputFile $audio,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?string $caption = null,
@@ -2186,8 +2186,8 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendAudio(
-                $chatId,
                 $audio,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $caption,
@@ -2233,9 +2233,9 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendcontact
      */
     public function sendContact(
-        int|string $chatId,
         string $phoneNumber,
         string $firstName,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?string $lastName = null,
@@ -2252,9 +2252,9 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendContact(
-                $chatId,
                 $phoneNumber,
                 $firstName,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $lastName,
@@ -2340,8 +2340,8 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#senddocument
      */
     public function sendDocument(
-        int|string $chatId,
         string|InputFile $document,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         string|InputFile|null $thumbnail = null,
@@ -2361,8 +2361,8 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendDocument(
-                $chatId,
                 $document,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $thumbnail,
@@ -2522,9 +2522,9 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendlocation
      */
     public function sendLocation(
-        int|string $chatId,
         float $latitude,
         float $longitude,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?float $horizontalAccuracy = null,
@@ -2543,9 +2543,9 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendLocation(
-                $chatId,
                 $latitude,
                 $longitude,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $horizontalAccuracy,
@@ -2605,9 +2605,9 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendlivephoto
      */
     public function sendLivePhoto(
-        int|string $chatId,
         string|InputFile $livePhoto,
         string|InputFile $photo,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?int $directMessagesTopicId = null,
@@ -2627,9 +2627,9 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendLivePhoto(
-                $chatId,
                 $livePhoto,
                 $photo,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $directMessagesTopicId,
@@ -2656,8 +2656,8 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendmessage
      */
     public function sendMessage(
-        int|string $chatId,
         string $text,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?string $parseMode = null,
@@ -2675,8 +2675,8 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendMessage(
-                $chatId,
                 $text,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $parseMode,
@@ -2778,8 +2778,8 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendphoto
      */
     public function sendPhoto(
-        int|string $chatId,
         string|InputFile $photo,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?string $caption = null,
@@ -2799,8 +2799,8 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendPhoto(
-                $chatId,
                 $photo,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $caption,
@@ -2911,8 +2911,8 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendsticker
      */
     public function sendSticker(
-        int|string $chatId,
         InputFile|string $sticker,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?string $emoji = null,
@@ -2928,8 +2928,8 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendSticker(
-                $chatId,
                 $sticker,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $emoji,
@@ -2950,11 +2950,11 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendvenue
      */
     public function sendVenue(
-        int|string $chatId,
         float $latitude,
         float $longitude,
         string $title,
         string $address,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?string $foursquareId = null,
@@ -2973,11 +2973,11 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendVenue(
-                $chatId,
                 $latitude,
                 $longitude,
                 $title,
                 $address,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $foursquareId,
@@ -3003,8 +3003,8 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendvideo
      */
     public function sendVideo(
-        int|string $chatId,
         string|InputFile $video,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?int $duration = null,
@@ -3031,8 +3031,8 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendVideo(
-                $chatId,
                 $video,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $duration,
@@ -3064,8 +3064,8 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendvideonote
      */
     public function sendVideoNote(
-        int|string $chatId,
         string|InputFile $videoNote,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?int $duration = null,
@@ -3083,8 +3083,8 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendVideoNote(
-                $chatId,
                 $videoNote,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $duration,
@@ -3109,8 +3109,8 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendvoice
      */
     public function sendVoice(
-        int|string $chatId,
         string|InputFile $voice,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?string $caption = null,
@@ -3129,8 +3129,8 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendVoice(
-                $chatId,
                 $voice,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $caption,
@@ -3162,8 +3162,8 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendrichmessage
      */
     public function sendRichMessage(
-        int|string $chatId,
         InputRichMessage $richMessage,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?int $directMessagesTopicId = null,
@@ -3178,8 +3178,8 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendRichMessage(
-                $chatId,
                 $richMessage,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $directMessagesTopicId,

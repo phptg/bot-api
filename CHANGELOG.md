@@ -13,6 +13,9 @@
   `EditSharedWidgetData` methods.
 - Chg #233: Rename `StoryAreaPosition` type to `AreaPosition`.
 - Chg #233: Make `receiverUserId` field of `EphemeralMessageParameters` type optional.
+- Chg #233: Make `chatId` parameter of `SendMessage`, `SendRichMessage`, `SendAnimation`, `SendAudio`,
+  `SendContact`, `SendDocument`, `SendLivePhoto`, `SendLocation`, `SendPhoto`, `SendSticker`, `SendVenue`,
+  `SendVideo`, `SendVideoNote` and `SendVoice` methods optional and move it after the required parameters.
 
 ## 0.22.1 October 30, 2026
 

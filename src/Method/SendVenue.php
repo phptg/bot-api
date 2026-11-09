@@ -24,11 +24,11 @@ use Phptg\BotApi\Type\SuggestedPostParameters;
 final readonly class SendVenue implements MethodInterface
 {
     public function __construct(
-        private int|string $chatId,
         private float $latitude,
         private float $longitude,
         private string $title,
         private string $address,
+        private int|string|null $chatId = null,
         private ?string $businessConnectionId = null,
         private ?int $messageThreadId = null,
         private ?string $foursquareId = null,

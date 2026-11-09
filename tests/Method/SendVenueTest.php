@@ -22,7 +22,7 @@ final class SendVenueTest extends TestCase
 {
     public function testBase(): void
     {
-        $method = new SendVenue(12, 1.1, 2.2, 'Moscow', 'Kremlin');
+        $method = new SendVenue(1.1, 2.2, 'Moscow', 'Kremlin', 12);
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('sendVenue', $method->getApiMethod());
@@ -43,11 +43,11 @@ final class SendVenueTest extends TestCase
         $replyParameters = new ReplyParameters(23);
         $replyMarkup = new ForceReply();
         $method = new SendVenue(
-            12,
             1.1,
             2.2,
             'Moscow',
             'Kremlin',
+            12,
             'bcid1',
             99,
             'fs1',
@@ -105,7 +105,7 @@ final class SendVenueTest extends TestCase
 
     public function testPrepareResult(): void
     {
-        $method = new SendVenue(12, 1.1, 2.2, 'Moscow', 'Kremlin');
+        $method = new SendVenue(1.1, 2.2, 'Moscow', 'Kremlin', 12);
 
         $preparedResult = TestHelper::createSuccessStubApi([
             'message_id' => 7,

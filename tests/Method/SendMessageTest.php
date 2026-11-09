@@ -24,7 +24,7 @@ final class SendMessageTest extends TestCase
 {
     public function testBase(): void
     {
-        $method = new SendMessage(12, 'hello');
+        $method = new SendMessage('hello', 12);
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('sendMessage', $method->getApiMethod());
@@ -44,8 +44,8 @@ final class SendMessageTest extends TestCase
         $replyParameters = new ReplyParameters(23);
         $replyMarkup = new ForceReply();
         $method = new SendMessage(
-            12,
             'hello',
+            12,
             'bcid1',
             99,
             'parse',
@@ -98,7 +98,7 @@ final class SendMessageTest extends TestCase
 
     public function testPrepareResult(): void
     {
-        $method = new SendMessage(12, 'hello');
+        $method = new SendMessage('hello', 12);
 
         $preparedResult = TestHelper::createSuccessStubApi([
             'message_id' => 7,

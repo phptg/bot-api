@@ -1594,7 +1594,7 @@ final class TelegramBotApiTest extends TestCase
         ]);
         $api = new TelegramBotApi('stub-token', transport: $transport);
 
-        $api->sendMessage('id1', 'hello');
+        $api->sendMessage('hello', 'id1');
 
         assertSame(
             'https://api.telegram.org/botstub-token/sendMessage',
@@ -1627,8 +1627,8 @@ final class TelegramBotApiTest extends TestCase
 
         $file = new InputFile('/path/to/file');
         $api->sendDocument(
-            'id1',
             $file,
+            'id1',
             captionEntities: [new MessageEntity('bold', 0, 4)],
         );
 
@@ -2050,7 +2050,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendAnimation(12, 'https://example.com/anime.gif');
+        $result = $api->sendAnimation('https://example.com/anime.gif', 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2067,7 +2067,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendAudio(12, 'https://example.com/audio.mp3');
+        $result = $api->sendAudio('https://example.com/audio.mp3', 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2093,7 +2093,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendContact(12, '1234567890', 'John');
+        $result = $api->sendContact('1234567890', 'John', 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2144,7 +2144,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendDocument(12, 'https://example.com/file.doc');
+        $result = $api->sendDocument('https://example.com/file.doc', 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2211,7 +2211,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendLocation(12, 1.1, 2.2);
+        $result = $api->sendLocation(1.1, 2.2, 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2228,7 +2228,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendLivePhoto(12, 'fid1', 'fid2');
+        $result = $api->sendLivePhoto('fid1', 'fid2', 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2266,7 +2266,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendMessage(12, 'hello');
+        $result = $api->sendMessage('hello', 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2309,7 +2309,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendPhoto(12, 'https://example.com/i.png');
+        $result = $api->sendPhoto('https://example.com/i.png', 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2343,7 +2343,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendSticker(12, 'https://example.com/sticker.webp');
+        $result = $api->sendSticker('https://example.com/sticker.webp', 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2360,7 +2360,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendVenue(12, 1.1, 2.2, 'title', 'address');
+        $result = $api->sendVenue(1.1, 2.2, 'title', 'address', 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2377,7 +2377,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendVideo(12, 'https://example.com/wow.mp4');
+        $result = $api->sendVideo('https://example.com/wow.mp4', 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2395,7 +2395,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendVideoNote(12, 'https://example.com/wow.mp4');
+        $result = $api->sendVideoNote('https://example.com/wow.mp4', 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2412,7 +2412,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendVoice(12, 'https://example.com/wow.mp3');
+        $result = $api->sendVoice('https://example.com/wow.mp3', 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2438,7 +2438,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendRichMessage(12, new InputRichMessage(html: '<b>Hello</b>'));
+        $result = $api->sendRichMessage(new InputRichMessage(html: '<b>Hello</b>'), 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);

@@ -24,9 +24,9 @@ use Phptg\BotApi\Type\SuggestedPostParameters;
 final readonly class SendContact implements MethodInterface
 {
     public function __construct(
-        private int|string $chatId,
         private string $phoneNumber,
         private string $firstName,
+        private int|string|null $chatId = null,
         private ?string $businessConnectionId = null,
         private ?int $messageThreadId = null,
         private ?string $lastName = null,

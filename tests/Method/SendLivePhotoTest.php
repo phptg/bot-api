@@ -25,9 +25,9 @@ final class SendLivePhotoTest extends TestCase
     public function testBase(): void
     {
         $method = new SendLivePhoto(
-            12,
             'fid1',
             'fid2',
+            12,
         );
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
@@ -50,9 +50,9 @@ final class SendLivePhotoTest extends TestCase
         $replyParameters = new ReplyParameters(23);
         $replyMarkup = new ForceReply();
         $method = new SendLivePhoto(
-            12,
             $livePhotoFile,
             $photoFile,
+            12,
             'bcid1',
             99,
             123,
@@ -110,9 +110,9 @@ final class SendLivePhotoTest extends TestCase
     public function testPrepareResult(): void
     {
         $method = new SendLivePhoto(
-            12,
             'fid1',
             'fid2',
+            12,
         );
 
         $preparedResult = TestHelper::createSuccessStubApi([

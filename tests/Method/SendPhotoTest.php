@@ -24,7 +24,7 @@ final class SendPhotoTest extends TestCase
 {
     public function testBase(): void
     {
-        $method = new SendPhoto(12, 'https://example.com/i.png');
+        $method = new SendPhoto('https://example.com/i.png', 12);
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('sendPhoto', $method->getApiMethod());
@@ -44,8 +44,8 @@ final class SendPhotoTest extends TestCase
         $replyParameters = new ReplyParameters(23);
         $replyMarkup = new ForceReply();
         $method = new SendPhoto(
-            12,
             $photo,
+            12,
             'bcid1',
             99,
             'Caption',
@@ -102,7 +102,7 @@ final class SendPhotoTest extends TestCase
 
     public function testPrepareResult(): void
     {
-        $method = new SendPhoto(12, 'https://example.com/i.png');
+        $method = new SendPhoto('https://example.com/i.png', 12);
 
         $preparedResult = TestHelper::createSuccessStubApi([
             'message_id' => 7,

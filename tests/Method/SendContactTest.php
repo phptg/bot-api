@@ -22,7 +22,7 @@ final class SendContactTest extends TestCase
 {
     public function testBase(): void
     {
-        $method = new SendContact(12, '1234567890', 'John');
+        $method = new SendContact('1234567890', 'John', 12);
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('sendContact', $method->getApiMethod());
@@ -41,9 +41,9 @@ final class SendContactTest extends TestCase
         $replyParameters = new ReplyParameters(23);
         $replyMarkup = new ForceReply();
         $method = new SendContact(
-            12,
             '1234567890',
             'John',
+            12,
             'bcid1',
             99,
             'Doe',
@@ -95,7 +95,7 @@ final class SendContactTest extends TestCase
 
     public function testPrepareResult(): void
     {
-        $method = new SendContact(12, '1234567890', 'John');
+        $method = new SendContact('1234567890', 'John', 12);
 
         $preparedResult = TestHelper::createSuccessStubApi([
             'message_id' => 7,

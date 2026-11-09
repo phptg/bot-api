@@ -24,7 +24,7 @@ final class SendDocumentTest extends TestCase
 {
     public function testBase(): void
     {
-        $method = new SendDocument(12, 'https://example.com/file.doc');
+        $method = new SendDocument('https://example.com/file.doc', 12);
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('sendDocument', $method->getApiMethod());
@@ -45,8 +45,8 @@ final class SendDocumentTest extends TestCase
         $replyParameters = new ReplyParameters(23);
         $replyMarkup = new ForceReply();
         $method = new SendDocument(
-            12,
             $document,
+            12,
             'bcid1',
             99,
             $thumbnail,
@@ -103,7 +103,7 @@ final class SendDocumentTest extends TestCase
 
     public function testPrepareResult(): void
     {
-        $method = new SendDocument(12, 'https://example.com/file.doc');
+        $method = new SendDocument('https://example.com/file.doc', 12);
 
         $preparedResult = TestHelper::createSuccessStubApi([
             'message_id' => 7,
