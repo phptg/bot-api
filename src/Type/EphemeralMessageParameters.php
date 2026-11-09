@@ -12,7 +12,7 @@ namespace Phptg\BotApi\Type;
 final readonly class EphemeralMessageParameters
 {
     public function __construct(
-        public int $receiverUserId,
+        public ?int $receiverUserId = null,
         public ?string $callbackQueryId = null,
         public ?bool $replaceCallbackQueryMessage = null,
     ) {}

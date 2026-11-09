@@ -15,18 +15,13 @@ final class EphemeralMessageParametersTest extends TestCase
 {
     public function testBase(): void
     {
-        $parameters = new EphemeralMessageParameters(1);
+        $parameters = new EphemeralMessageParameters();
 
-        assertSame(1, $parameters->receiverUserId);
+        assertNull($parameters->receiverUserId);
         assertNull($parameters->callbackQueryId);
         assertNull($parameters->replaceCallbackQueryMessage);
 
-        assertSame(
-            [
-                'receiver_user_id' => 1,
-            ],
-            $parameters->toRequestArray(),
-        );
+        assertSame([], $parameters->toRequestArray());
     }
 
     public function testFull(): void

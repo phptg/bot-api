@@ -12,6 +12,7 @@
 - New #233: Add `SendWidget`, `SendSharedWidget`, `AnswerWidgetQuery`, `EditMessageWidgetData` and
   `EditSharedWidgetData` methods.
 - Chg #233: Rename `StoryAreaPosition` type to `AreaPosition`.
+- Chg #233: Make `receiverUserId` field of `EphemeralMessageParameters` type optional.
 
 ## 0.22.1 October 30, 2026
 
