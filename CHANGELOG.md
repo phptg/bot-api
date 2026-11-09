@@ -7,7 +7,7 @@
 - New #233: Add `WidgetQueryType` interface and widget query types: `WidgetQueryTypeData`, `WidgetQueryTypeSignData`
   and `WidgetQueryTypeSentTransaction`.
 - New #233: Add `widget` field to `Message` and `ExternalReplyInfo` types.
-- New #233: Add `widgetQuery` field to `Update` type.
+- New #233: Add `widgetQuery` and `sharedWidgetQuery` fields to `Update` type.
 - New #233: Add `SendWidget` and `SendSharedWidget` methods.
 - Chg #233: Rename `StoryAreaPosition` type to `AreaPosition`.
 

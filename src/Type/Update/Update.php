@@ -30,6 +30,7 @@ use Phptg\BotApi\Type\Payment\PreCheckoutQuery;
 use Phptg\BotApi\Type\Payment\ShippingQuery;
 use Phptg\BotApi\Type\Poll;
 use Phptg\BotApi\Type\PollAnswer;
+use Phptg\BotApi\Type\SharedWidgetQuery;
 use Phptg\BotApi\Type\WidgetQuery;
 
 /**
@@ -75,6 +76,7 @@ final class Update
         public readonly ?BotSubscriptionUpdated $subscription = null,
         public readonly ?MessageGenerationStopped $stoppedMessageGeneration = null,
         public readonly ?WidgetQuery $widgetQuery = null,
+        public readonly ?SharedWidgetQuery $sharedWidgetQuery = null,
     ) {}
 
     /**
