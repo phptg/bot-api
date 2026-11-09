@@ -121,6 +121,7 @@ use Phptg\BotApi\Method\SendChatJoinRequestWebApp;
 use Phptg\BotApi\Method\SendRichMessage;
 use Phptg\BotApi\Method\SendRichMessageDraft;
 use Phptg\BotApi\Method\SendVoice;
+use Phptg\BotApi\Method\SendWidget;
 use Phptg\BotApi\Method\SetBusinessAccountBio;
 use Phptg\BotApi\Method\SetBusinessAccountGiftSettings;
 use Phptg\BotApi\Method\SetBusinessAccountName;
@@ -3168,6 +3169,57 @@ final class TelegramBotApi
                 $messageThreadId,
                 $canStop,
                 $keepOnStop,
+            ),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#sendwidget
+     *
+     * @param MessageEntity[]|null $captionEntities
+     */
+    public function sendWidget(
+        int|string $chatId,
+        string $html,
+        ?int $messageThreadId = null,
+        ?int $width = null,
+        ?int $height = null,
+        ?string $publicData = null,
+        ?string $chatData = null,
+        ?string $caption = null,
+        ?string $parseMode = null,
+        ?array $captionEntities = null,
+        ?bool $showCaptionAboveMedia = null,
+        ?bool $allowQueries = null,
+        ?bool $isShared = null,
+        ?bool $disableNotification = null,
+        ?bool $protectContent = null,
+        ?bool $allowPaidBroadcast = null,
+        ?string $messageEffectId = null,
+        ?ReplyParameters $replyParameters = null,
+        InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup = null,
+    ): FailResult|Message {
+        return $this->call(
+            new SendWidget(
+                $chatId,
+                $html,
+                $messageThreadId,
+                $width,
+                $height,
+                $publicData,
+                $chatData,
+                $caption,
+                $parseMode,
+                $captionEntities,
+                $showCaptionAboveMedia,
+                $allowQueries,
+                $isShared,
+                $disableNotification,
+                $protectContent,
+                $allowPaidBroadcast,
+                $messageEffectId,
+                $replyParameters,
+                $replyMarkup,
             ),
         );
     }

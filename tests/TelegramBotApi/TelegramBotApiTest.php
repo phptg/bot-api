@@ -2426,6 +2426,23 @@ final class TelegramBotApiTest extends TestCase
         assertTrue($result);
     }
 
+    public function testSendWidget(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            'message_id' => 7,
+            'date' => 1620000000,
+            'chat' => [
+                'id' => 1,
+                'type' => 'private',
+            ],
+        ]);
+
+        $result = $api->sendWidget(12, '<b>Hello</b>');
+
+        assertInstanceOf(Message::class, $result);
+        assertSame(7, $result->messageId);
+    }
+
     public function testSetChatAdministratorCustomTitle(): void
     {
         $api = TestHelper::createSuccessStubApi(true);
