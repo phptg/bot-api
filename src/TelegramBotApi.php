@@ -11,6 +11,7 @@ use Psr\Log\LoggerInterface;
 use SensitiveParameter;
 use Phptg\BotApi\Method\AnswerCallbackQuery;
 use Phptg\BotApi\Method\AnswerChatJoinRequestQuery;
+use Phptg\BotApi\Method\AnswerWidgetQuery;
 use Phptg\BotApi\Method\ApproveChatJoinRequest;
 use Phptg\BotApi\Method\ApproveSuggestedPost;
 use Phptg\BotApi\Method\BanChatMember;
@@ -37,6 +38,8 @@ use Phptg\BotApi\Method\EditChatInviteLink;
 use Phptg\BotApi\Method\EditChatSubscriptionInviteLink;
 use Phptg\BotApi\Method\EditForumTopic;
 use Phptg\BotApi\Method\EditGeneralForumTopic;
+use Phptg\BotApi\Method\EditMessageWidgetData;
+use Phptg\BotApi\Method\EditSharedWidgetData;
 use Phptg\BotApi\Method\EditStory;
 use Phptg\BotApi\Method\ExportChatInviteLink;
 use Phptg\BotApi\Method\ForwardMessage;
@@ -479,6 +482,16 @@ final class TelegramBotApi
     {
         return $this->call(
             new AnswerWebAppQuery($webAppQueryId, $result),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#answerwidgetquery
+     */
+    public function answerWidgetQuery(string $widgetQueryId, ?string $data = null): FailResult|true
+    {
+        return $this->call(
+            new AnswerWidgetQuery($widgetQueryId, $data),
         );
     }
 
@@ -1215,6 +1228,37 @@ final class TelegramBotApi
                 $replyMarkup,
                 $richMessage,
             ),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#editmessagewidgetdata
+     */
+    public function editMessageWidgetData(
+        int|string|null $chatId = null,
+        ?int $messageId = null,
+        ?string $inlineMessageId = null,
+        ?string $publicData = null,
+        ?string $chatData = null,
+    ): FailResult|true {
+        return $this->call(
+            new EditMessageWidgetData(
+                $chatId,
+                $messageId,
+                $inlineMessageId,
+                $publicData,
+                $chatData,
+            ),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#editsharedwidgetdata
+     */
+    public function editSharedWidgetData(string $widgetId, string $publicData, ?int $cacheTime = null): FailResult|true
+    {
+        return $this->call(
+            new EditSharedWidgetData($widgetId, $publicData, $cacheTime),
         );
     }
 

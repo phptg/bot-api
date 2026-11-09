@@ -563,6 +563,15 @@ final class TelegramBotApiTest extends TestCase
         assertSame('idMessage', $result->inlineMessageId);
     }
 
+    public function testAnswerWidgetQuery(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->answerWidgetQuery('id', 'data');
+
+        assertTrue($result);
+    }
+
     public function testApproveChatJoinRequest(): void
     {
         $api = TestHelper::createSuccessStubApi(true);
@@ -1026,6 +1035,24 @@ final class TelegramBotApiTest extends TestCase
         $api = TestHelper::createSuccessStubApi(true);
 
         $result = $api->editMessageText('test');
+
+        assertTrue($result);
+    }
+
+    public function testEditMessageWidgetData(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->editMessageWidgetData(chatId: 42, messageId: 1, publicData: 'data');
+
+        assertTrue($result);
+    }
+
+    public function testEditSharedWidgetData(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->editSharedWidgetData('widgetId', 'data', 60);
 
         assertTrue($result);
     }

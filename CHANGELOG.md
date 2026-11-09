@@ -8,7 +8,8 @@
   and `WidgetQueryTypeSentTransaction`.
 - New #233: Add `widget` field to `Message` and `ExternalReplyInfo` types.
 - New #233: Add `widgetQuery` and `sharedWidgetQuery` fields to `Update` type.
-- New #233: Add `SendWidget` and `SendSharedWidget` methods.
+- New #233: Add `SendWidget`, `SendSharedWidget`, `AnswerWidgetQuery`, `EditMessageWidgetData` and
+  `EditSharedWidgetData` methods.
 - Chg #233: Rename `StoryAreaPosition` type to `AreaPosition`.
 
 ## 0.22.1 October 30, 2026
