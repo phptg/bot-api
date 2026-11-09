@@ -3,6 +3,7 @@
 ## 0.23.0 under development
 
 - New #233: Add `Widget` type.
+- New #233: Add `widget` field to `Message` and `ExternalReplyInfo` types.
 
 ## 0.22.1 October 30, 2026
 

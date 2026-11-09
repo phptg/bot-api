@@ -27,6 +27,7 @@ use Phptg\BotApi\Type\MessageOriginHiddenUser;
 use Phptg\BotApi\Type\PaidMediaPhoto;
 use Phptg\BotApi\Type\Payment\RefundedPayment;
 use Phptg\BotApi\Type\VideoChatStarted;
+use Phptg\BotApi\Type\Widget;
 
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertEquals;
@@ -163,6 +164,7 @@ final class MessageTest extends TestCase
         assertNull($message->communityChatAdded);
         assertNull($message->communityChatRemoved);
         assertNull($message->communityChatJoined);
+        assertNull($message->widget);
     }
 
     public function testFromTelegramResult(): void
@@ -347,6 +349,12 @@ final class MessageTest extends TestCase
                 'file_id' => 'f8',
                 'file_unique_id' => 'fu8',
                 'duration' => 15,
+            ],
+            'widget' => [
+                'id' => 'widget123',
+                'width' => 320,
+                'height' => 240,
+                'html' => '<b>Hello!</b>',
             ],
             'caption' => 'Hello!',
             'caption_entities' => [
@@ -790,6 +798,12 @@ final class MessageTest extends TestCase
         assertSame('f6', $message->video?->fileId);
         assertSame('f7', $message->videoNote?->fileId);
         assertSame('f8', $message->voice?->fileId);
+
+        assertInstanceOf(Widget::class, $message->widget);
+        assertSame('widget123', $message->widget->id);
+        assertSame('<b>Hello!</b>', $message->widget->html);
+        assertSame(320, $message->widget->width);
+        assertSame(240, $message->widget->height);
         assertSame('Hello!', $message->caption);
 
         assertNotNull($message->captionEntities);
