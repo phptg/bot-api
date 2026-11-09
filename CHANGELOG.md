@@ -3,7 +3,8 @@
 ## 0.23.0 under development
 
 - New #233: Add `Widget`, `WidgetQuery`, `SharedWidgetQuery`, `WidgetQueryWallet`, `TonNft`,
-  `TonNftAttribute`, `TonWalletCardSticker` and `TonWalletCard` types.
+  `TonNftAttribute`, `TonWalletCardSticker`, `TonWalletCard`, `InputWidgetMessageContent` and
+  `InputSharedWidgetMessageContent` types.
 - New #233: Add `WidgetQueryType` interface and widget query types: `WidgetQueryTypeData`, `WidgetQueryTypeSignData`
   and `WidgetQueryTypeSentTransaction`.
 - New #233: Add `widget` field to `Message` and `ExternalReplyInfo` types.
