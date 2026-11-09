@@ -2,7 +2,8 @@
 
 ## 0.23.0 under development
 
-- New #233: Add `Widget`, `TonNft`, `TonNftAttribute`, `TonWalletCardSticker` and `TonWalletCard` types.
+- New #233: Add `Widget`, `WidgetQueryWallet`, `TonNft`, `TonNftAttribute`, `TonWalletCardSticker` and
+  `TonWalletCard` types.
 - New #233: Add `widget` field to `Message` and `ExternalReplyInfo` types.
 - New #233: Add `SendWidget` and `SendSharedWidget` methods.
 - Chg #233: Rename `StoryAreaPosition` type to `AreaPosition`.
