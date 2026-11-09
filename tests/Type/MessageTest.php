@@ -26,6 +26,7 @@ use Phptg\BotApi\Type\RichMessage;
 use Phptg\BotApi\Type\MessageOriginHiddenUser;
 use Phptg\BotApi\Type\PaidMediaPhoto;
 use Phptg\BotApi\Type\Payment\RefundedPayment;
+use Phptg\BotApi\Type\TonWalletTransfer;
 use Phptg\BotApi\Type\VideoChatStarted;
 use Phptg\BotApi\Type\Widget;
 
@@ -165,6 +166,7 @@ final class MessageTest extends TestCase
         assertNull($message->communityChatRemoved);
         assertNull($message->communityChatJoined);
         assertNull($message->widget);
+        assertNull($message->tonWalletTransfer);
     }
 
     public function testFromTelegramResult(): void
@@ -631,6 +633,12 @@ final class MessageTest extends TestCase
             'suggested_post_refunded' => [
                 'reason' => 'refund_reason',
             ],
+            'ton_wallet_transfer' => [
+                'transaction_id' => 'EQABtransaction',
+                'peer_address' => 'EQCDwallet',
+                'amount' => '-100500',
+                'comment' => 'Coffee payment',
+            ],
             'video_chat_scheduled' => [
                 'start_date' => 1620000012,
             ],
@@ -898,6 +906,11 @@ final class MessageTest extends TestCase
         assertSame('insufficient_funds', $message->suggestedPostDeclined?->comment);
         assertSame('RUB', $message->suggestedPostPaid?->currency);
         assertSame('refund_reason', $message->suggestedPostRefunded?->reason);
+        assertInstanceOf(TonWalletTransfer::class, $message->tonWalletTransfer);
+        assertSame('EQABtransaction', $message->tonWalletTransfer->transactionId);
+        assertSame('EQCDwallet', $message->tonWalletTransfer->peerAddress);
+        assertSame('-100500', $message->tonWalletTransfer->amount);
+        assertSame('Coffee payment', $message->tonWalletTransfer->comment);
         assertSame(800, $message->chatOwnerLeft?->newOwner?->id);
         assertSame(801, $message->chatOwnerChanged?->newOwner->id);
         assertSame(802, $message->managedBotCreated?->bot->id);

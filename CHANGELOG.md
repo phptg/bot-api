@@ -14,6 +14,7 @@
 - New #233: Add `richTexts` field to `TextQuote` type.
 - New #233: Add `quoteRichTexts` field to `ReplyParameters` type.
 - New #233: Add `tonWalletCard` field to `ChatFullInfo` type.
+- New #233: Add `tonWalletTransfer` field to `Message` type.
 - Chg #233: Rename `StoryAreaPosition` type to `AreaPosition`.
 - Chg #233: Make `receiverUserId` field of `EphemeralMessageParameters` type optional.
 - Chg #233: Make `chatId` parameter of `SendMessage`, `SendRichMessage`, `SendAnimation`, `SendAudio`,

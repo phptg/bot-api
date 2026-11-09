@@ -156,5 +156,6 @@ final readonly class Message
         public ?CommunityChatRemoved $communityChatRemoved = null,
         public ?CommunityChatJoined $communityChatJoined = null,
         public ?Widget $widget = null,
+        public ?TonWalletTransfer $tonWalletTransfer = null,
     ) {}
 }
