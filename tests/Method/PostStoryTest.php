@@ -9,12 +9,12 @@ use Phptg\BotApi\FileCollector;
 use Phptg\BotApi\Method\PostStory;
 use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Transport\HttpMethod;
+use Phptg\BotApi\Type\AreaPosition;
 use Phptg\BotApi\Type\InputFile;
 use Phptg\BotApi\Type\InputStoryContentPhoto;
 use Phptg\BotApi\Type\MessageEntity;
 use Phptg\BotApi\Type\StoryArea;
 use Phptg\BotApi\Type\Story;
-use Phptg\BotApi\Type\StoryAreaPosition;
 use Phptg\BotApi\Type\StoryAreaTypeUniqueGift;
 
 use function PHPUnit\Framework\assertInstanceOf;
@@ -47,7 +47,7 @@ final class PostStoryTest extends TestCase
         $content = new InputStoryContentPhoto($file);
         $captionEntities = [new MessageEntity('bold', 0, 4)];
         $storyArea = new StoryArea(
-            new StoryAreaPosition(1, 2, 3, 4, 5, 6),
+            new AreaPosition(1, 2, 3, 4, 5, 6),
             new StoryAreaTypeUniqueGift('gift_id'),
         );
         $areas = [$storyArea];

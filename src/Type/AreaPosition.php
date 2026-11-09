@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Phptg\BotApi\Type;
 
 /**
- * @see https://core.telegram.org/bots/api#storyareaposition
+ * @see https://core.telegram.org/bots/api#areaposition
  *
  * @api
  */
-final readonly class StoryAreaPosition
+final readonly class AreaPosition
 {
     public function __construct(
         public float $xPercentage,

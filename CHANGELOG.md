@@ -5,6 +5,7 @@
 - New #233: Add `Widget` and `TonNftAttribute` types.
 - New #233: Add `widget` field to `Message` and `ExternalReplyInfo` types.
 - New #233: Add `SendWidget` and `SendSharedWidget` methods.
+- Chg #233: Rename `StoryAreaPosition` type to `AreaPosition`.
 
 ## 0.22.1 October 30, 2026
 

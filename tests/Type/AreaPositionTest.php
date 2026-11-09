@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace Phptg\BotApi\Tests\Type;
 
 use PHPUnit\Framework\TestCase;
-use Phptg\BotApi\Type\StoryAreaPosition;
+use Phptg\BotApi\Type\AreaPosition;
 
 use function PHPUnit\Framework\assertSame;
 
-final class StoryAreaPositionTest extends TestCase
+final class AreaPositionTest extends TestCase
 {
     public function testBase(): void
     {
-        $position = new StoryAreaPosition(
+        $position = new AreaPosition(
             xPercentage: 50.0,
             yPercentage: 25.0,
             widthPercentage: 30.0,
@@ -32,7 +32,7 @@ final class StoryAreaPositionTest extends TestCase
 
     public function testToRequestArray(): void
     {
-        $position = new StoryAreaPosition(
+        $position = new AreaPosition(
             xPercentage: 50.0,
             yPercentage: 25.0,
             widthPercentage: 30.0,
