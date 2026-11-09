@@ -3,7 +3,7 @@
 ## 0.23.0 under development
 
 - New #233: Add `Widget`, `WidgetQuery`, `SharedWidgetQuery`, `WidgetQueryWallet`, `TonNft`,
-  `TonNftAttribute`, `TonWalletCardSticker`, `TonWalletCard`, `InputWidgetMessageContent` and
+  `TonNftAttribute`, `TonWalletCardSticker`, `TonWalletCard`, `TonWalletTransfer`, `InputWidgetMessageContent` and
   `InputSharedWidgetMessageContent` types.
 - New #233: Add `WidgetQueryType` interface and widget query types: `WidgetQueryTypeData`, `WidgetQueryTypeSignData`
   and `WidgetQueryTypeSentTransaction`.
