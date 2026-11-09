@@ -4,7 +4,7 @@
 
 - New #233: Add `Widget` type.
 - New #233: Add `widget` field to `Message` and `ExternalReplyInfo` types.
-- New #233: Add `SendWidget` method.
+- New #233: Add `SendWidget` and `SendSharedWidget` methods.
 
 ## 0.22.1 October 30, 2026
 

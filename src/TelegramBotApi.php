@@ -120,6 +120,7 @@ use Phptg\BotApi\Method\SendVideoNote;
 use Phptg\BotApi\Method\SendChatJoinRequestWebApp;
 use Phptg\BotApi\Method\SendRichMessage;
 use Phptg\BotApi\Method\SendRichMessageDraft;
+use Phptg\BotApi\Method\SendSharedWidget;
 use Phptg\BotApi\Method\SendVoice;
 use Phptg\BotApi\Method\SendWidget;
 use Phptg\BotApi\Method\SetBusinessAccountBio;
@@ -3169,6 +3170,47 @@ final class TelegramBotApi
                 $messageThreadId,
                 $canStop,
                 $keepOnStop,
+            ),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#sendsharedwidget
+     *
+     * @param MessageEntity[]|null $captionEntities
+     */
+    public function sendSharedWidget(
+        int|string $chatId,
+        string $widgetId,
+        ?int $messageThreadId = null,
+        ?string $chatData = null,
+        ?string $caption = null,
+        ?string $parseMode = null,
+        ?array $captionEntities = null,
+        ?bool $showCaptionAboveMedia = null,
+        ?bool $disableNotification = null,
+        ?bool $protectContent = null,
+        ?bool $allowPaidBroadcast = null,
+        ?string $messageEffectId = null,
+        ?ReplyParameters $replyParameters = null,
+        InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup = null,
+    ): FailResult|Message {
+        return $this->call(
+            new SendSharedWidget(
+                $chatId,
+                $widgetId,
+                $messageThreadId,
+                $chatData,
+                $caption,
+                $parseMode,
+                $captionEntities,
+                $showCaptionAboveMedia,
+                $disableNotification,
+                $protectContent,
+                $allowPaidBroadcast,
+                $messageEffectId,
+                $replyParameters,
+                $replyMarkup,
             ),
         );
     }
