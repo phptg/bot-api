@@ -51,6 +51,7 @@ final class UpdateTest extends TestCase
         assertNull($update->managedBot);
         assertNull($update->subscription);
         assertNull($update->stoppedMessageGeneration);
+        assertNull($update->widgetQuery);
         assertNull($update->getRaw());
         assertNull($update->getRaw(true));
     }
@@ -191,6 +192,19 @@ final class UpdateTest extends TestCase
                     'first_name' => 'John',
                 ],
                 'chat_instance' => 'chat12',
+            ],
+            'widget_query' => [
+                'id' => 'wqid1',
+                'from' => [
+                    'id' => 23,
+                    'is_bot' => false,
+                    'first_name' => 'John',
+                ],
+                'chat_instance' => 'chat12',
+                'type' => [
+                    'type' => 'data',
+                ],
+                'data' => 'data1',
             ],
             'shipping_query' => [
                 'id' => 'sqid1',
@@ -401,6 +415,8 @@ final class UpdateTest extends TestCase
         assertSame('iqid1', $update->inlineQuery?->id);
         assertSame('ri1', $update->chosenInlineResult?->resultId);
         assertSame('cbid1', $update->callbackQuery?->id);
+        assertSame('wqid1', $update->widgetQuery?->id);
+        assertSame('data', $update->widgetQuery?->type->getType());
         assertSame('sqid1', $update->shippingQuery?->id);
         assertSame('pcqid1', $update->preCheckoutQuery?->id);
         assertSame('poll1', $update->poll?->id);

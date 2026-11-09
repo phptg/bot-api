@@ -30,6 +30,7 @@ use Phptg\BotApi\Type\Payment\PreCheckoutQuery;
 use Phptg\BotApi\Type\Payment\ShippingQuery;
 use Phptg\BotApi\Type\Poll;
 use Phptg\BotApi\Type\PollAnswer;
+use Phptg\BotApi\Type\WidgetQuery;
 
 /**
  * @see https://core.telegram.org/bots/api#update
@@ -73,6 +74,7 @@ final class Update
         public readonly ?ManagedBotUpdated $managedBot = null,
         public readonly ?BotSubscriptionUpdated $subscription = null,
         public readonly ?MessageGenerationStopped $stoppedMessageGeneration = null,
+        public readonly ?WidgetQuery $widgetQuery = null,
     ) {}
 
     /**
