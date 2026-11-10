@@ -27,14 +27,12 @@ final class SendLivePhotoTest extends TestCase
         $method = new SendLivePhoto(
             'fid1',
             'fid2',
-            12,
         );
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('sendLivePhoto', $method->getApiMethod());
         assertSame(
             [
-                'chat_id' => 12,
                 'live_photo' => 'fid1',
                 'photo' => 'fid2',
             ],

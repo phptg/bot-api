@@ -23,14 +23,13 @@ final class SendVideoNoteTest extends TestCase
 {
     public function testBase(): void
     {
-        $method = new SendVideoNote('https://example.com/wow.mp4', 12);
+        $method = new SendVideoNote('fid1');
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('sendVideoNote', $method->getApiMethod());
         assertSame(
             [
-                'chat_id' => 12,
-                'video_note' => 'https://example.com/wow.mp4',
+                'video_note' => 'fid1',
             ],
             $method->getData(),
         );
@@ -97,7 +96,7 @@ final class SendVideoNoteTest extends TestCase
 
     public function testPrepareResult(): void
     {
-        $method = new SendVideoNote('https://example.com/wow.mp4', 12);
+        $method = new SendVideoNote('fid1', 12);
 
         $preparedResult = TestHelper::createSuccessStubApi([
             'message_id' => 7,

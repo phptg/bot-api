@@ -22,13 +22,12 @@ final class SendContactTest extends TestCase
 {
     public function testBase(): void
     {
-        $method = new SendContact('1234567890', 'John', 12);
+        $method = new SendContact('1234567890', 'John');
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('sendContact', $method->getApiMethod());
         assertSame(
             [
-                'chat_id' => 12,
                 'phone_number' => '1234567890',
                 'first_name' => 'John',
             ],

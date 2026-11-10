@@ -22,13 +22,12 @@ final class SendLocationTest extends TestCase
 {
     public function testBase(): void
     {
-        $method = new SendLocation(1.1, 2.2, 12);
+        $method = new SendLocation(1.1, 2.2);
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('sendLocation', $method->getApiMethod());
         assertSame(
             [
-                'chat_id' => 12,
                 'latitude' => 1.1,
                 'longitude' => 2.2,
             ],

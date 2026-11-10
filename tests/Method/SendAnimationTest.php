@@ -24,14 +24,13 @@ final class SendAnimationTest extends TestCase
 {
     public function testBase(): void
     {
-        $method = new SendAnimation('https://example.com/anime.gif', 12);
+        $method = new SendAnimation('fid1');
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('sendAnimation', $method->getApiMethod());
         assertSame(
             [
-                'chat_id' => 12,
-                'animation' => 'https://example.com/anime.gif',
+                'animation' => 'fid1',
             ],
             $method->getData(),
         );
@@ -111,7 +110,7 @@ final class SendAnimationTest extends TestCase
 
     public function testPrepareResult(): void
     {
-        $method = new SendAnimation('https://example.com/anime.gif', 12);
+        $method = new SendAnimation('fid1', 12);
 
         $preparedResult = TestHelper::createSuccessStubApi([
             'message_id' => 7,

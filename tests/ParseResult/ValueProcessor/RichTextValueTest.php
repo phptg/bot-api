@@ -11,9 +11,12 @@ use Phptg\BotApi\ParseResult\ObjectFactory;
 use Phptg\BotApi\ParseResult\TelegramParseResultException;
 use Phptg\BotApi\ParseResult\ValueProcessor\RichTextValue;
 use Phptg\BotApi\Type\RichTextBold;
+use Phptg\BotApi\Type\RichTextTonAddress;
 
 use function PHPUnit\Framework\assertEquals;
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertIsString;
+use function PHPUnit\Framework\assertSame;
 
 final class RichTextValueTest extends TestCase
 {
@@ -47,6 +50,19 @@ final class RichTextValueTest extends TestCase
         );
 
         assertEquals(new RichTextBold('hello'), $result);
+    }
+
+    public function testTonAddress(): void
+    {
+        $result = (new RichTextValue())->process(
+            ['type' => 'ton_address', 'text' => 'hello', 'address' => 'EQABnft'],
+            null,
+            new ObjectFactory(),
+        );
+
+        assertInstanceOf(RichTextTonAddress::class, $result);
+        assertSame('hello', $result->text);
+        assertSame('EQABnft', $result->address);
     }
 
     public function testInvalidType(): void

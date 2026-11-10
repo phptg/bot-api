@@ -24,13 +24,12 @@ final class SendMessageTest extends TestCase
 {
     public function testBase(): void
     {
-        $method = new SendMessage('hello', 12);
+        $method = new SendMessage('hello');
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('sendMessage', $method->getApiMethod());
         assertSame(
             [
-                'chat_id' => 12,
                 'text' => 'hello',
             ],
             $method->getData(),

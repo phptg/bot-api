@@ -24,14 +24,13 @@ final class SendVideoTest extends TestCase
 {
     public function testBase(): void
     {
-        $method = new SendVideo('https://example.com/wow.mp4', 12);
+        $method = new SendVideo('fid1');
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('sendVideo', $method->getApiMethod());
         assertSame(
             [
-                'chat_id' => 12,
-                'video' => 'https://example.com/wow.mp4',
+                'video' => 'fid1',
             ],
             $method->getData(),
         );
@@ -117,7 +116,7 @@ final class SendVideoTest extends TestCase
 
     public function testPrepareResult(): void
     {
-        $method = new SendVideo('https://example.com/wow.mp4', 12);
+        $method = new SendVideo('fid1', 12);
 
         $preparedResult = TestHelper::createSuccessStubApi([
             'message_id' => 7,

@@ -24,14 +24,13 @@ final class SendPhotoTest extends TestCase
 {
     public function testBase(): void
     {
-        $method = new SendPhoto('https://example.com/i.png', 12);
+        $method = new SendPhoto('fid1');
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('sendPhoto', $method->getApiMethod());
         assertSame(
             [
-                'chat_id' => 12,
-                'photo' => 'https://example.com/i.png',
+                'photo' => 'fid1',
             ],
             $method->getData(),
         );
@@ -102,7 +101,7 @@ final class SendPhotoTest extends TestCase
 
     public function testPrepareResult(): void
     {
-        $method = new SendPhoto('https://example.com/i.png', 12);
+        $method = new SendPhoto('fid1', 12);
 
         $preparedResult = TestHelper::createSuccessStubApi([
             'message_id' => 7,

@@ -23,13 +23,12 @@ final class SendRichMessageTest extends TestCase
 {
     public function testBase(): void
     {
-        $method = new SendRichMessage(new InputRichMessage(html: '<b>Hello</b>'), 12);
+        $method = new SendRichMessage(new InputRichMessage(html: '<b>Hello</b>'));
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('sendRichMessage', $method->getApiMethod());
         assertSame(
             [
-                'chat_id' => 12,
                 'rich_message' => ['html' => '<b>Hello</b>'],
             ],
             $method->getData(),
