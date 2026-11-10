@@ -26,6 +26,7 @@ use Phptg\BotApi\Type\RichTextCashtag;
 use Phptg\BotApi\Type\RichTextHashtag;
 use Phptg\BotApi\Type\RichTextMention;
 use Phptg\BotApi\Type\RichTextBankCardNumber;
+use Phptg\BotApi\Type\RichTextTonAddress;
 use Phptg\BotApi\Type\RichTextEmailAddress;
 use Phptg\BotApi\Type\RichTextPhoneNumber;
 use Phptg\BotApi\Type\RichTextUrl;
@@ -69,6 +70,7 @@ final readonly class RichTextValue implements ValueProcessorInterface
         'email_address' => RichTextEmailAddress::class,
         'phone_number' => RichTextPhoneNumber::class,
         'bank_card_number' => RichTextBankCardNumber::class,
+        'ton_address' => RichTextTonAddress::class,
         'mention' => RichTextMention::class,
         'hashtag' => RichTextHashtag::class,
         'cashtag' => RichTextCashtag::class,
