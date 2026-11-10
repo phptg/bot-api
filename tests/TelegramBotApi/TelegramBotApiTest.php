@@ -55,6 +55,7 @@ use Phptg\BotApi\Type\Sticker\InputSticker;
 use Phptg\BotApi\Type\Sticker\Sticker;
 use Phptg\BotApi\Type\Sticker\StickerSet;
 use Phptg\BotApi\Type\Story;
+use Phptg\BotApi\Type\UniqueGift;
 use Phptg\BotApi\Type\Update\Update;
 use Phptg\BotApi\Type\Update\WebhookInfo;
 use Phptg\BotApi\Type\User;
@@ -1592,6 +1593,57 @@ final class TelegramBotApiTest extends TestCase
         assertInstanceOf(Update::class, $result[1]);
         assertSame(1, $result[0]->updateId);
         assertSame(2, $result[1]->updateId);
+    }
+
+    public function testGetUniqueGift(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            'gift_id' => 'gift-abc-123',
+            'base_name' => 'BaseName',
+            'name' => 'uniqueName',
+            'number' => 1,
+            'model' => [
+                'name' => 'modelId',
+                'sticker' => [
+                    'file_id' => 'stickerId',
+                    'file_unique_id' => 'uniqueStickerId',
+                    'type' => 'unique',
+                    'width' => 100,
+                    'height' => 120,
+                    'is_animated' => false,
+                    'is_video' => true,
+                ],
+                'rarity_per_mille' => 500,
+            ],
+            'symbol' => [
+                'name' => 'symbolId',
+                'sticker' => [
+                    'file_id' => 'stickerId',
+                    'file_unique_id' => 'uniqueStickerId',
+                    'type' => 'unique',
+                    'width' => 100,
+                    'height' => 120,
+                    'is_animated' => false,
+                    'is_video' => true,
+                ],
+                'rarity_per_mille' => 300,
+            ],
+            'backdrop' => [
+                'name' => 'backdropId',
+                'colors' => [
+                    'center_color' => 1,
+                    'edge_color' => 2,
+                    'symbol_color' => 3,
+                    'text_color' => 4,
+                ],
+                'rarity_per_mille' => 200,
+            ],
+        ]);
+
+        $result = $api->getUniqueGift('uniqueName');
+
+        assertInstanceOf(UniqueGift::class, $result);
+        assertSame('uniqueName', $result->name);
     }
 
     public function testGetMethodWithParams(): void

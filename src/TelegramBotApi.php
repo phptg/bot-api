@@ -68,6 +68,7 @@ use Phptg\BotApi\Method\GetMyDescription;
 use Phptg\BotApi\Method\GetMyName;
 use Phptg\BotApi\Method\GetMyShortDescription;
 use Phptg\BotApi\Method\GetMyStarBalance;
+use Phptg\BotApi\Method\GetUniqueGift;
 use Phptg\BotApi\Method\GetUserChatBoosts;
 use Phptg\BotApi\Method\GetUserGifts;
 use Phptg\BotApi\Method\GetUserPersonalChatMessages;
@@ -269,6 +270,7 @@ use Phptg\BotApi\Type\Story;
 use Phptg\BotApi\Type\SentGuestMessage;
 use Phptg\BotApi\Type\SuggestedPostParameters;
 use Phptg\BotApi\Type\StoryArea;
+use Phptg\BotApi\Type\UniqueGift;
 use Phptg\BotApi\Type\Update\Update;
 use Phptg\BotApi\Type\Update\WebhookInfo;
 use Phptg\BotApi\Type\User;
@@ -1690,6 +1692,16 @@ final class TelegramBotApi
         ?array $allowedUpdates = null,
     ): FailResult|array {
         return $this->call(new GetUpdates($offset, $limit, $timeout, $allowedUpdates));
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#getuniquegift
+     */
+    public function getUniqueGift(string $name): FailResult|UniqueGift
+    {
+        return $this->call(
+            new GetUniqueGift($name),
+        );
     }
 
     /**
