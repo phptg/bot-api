@@ -4,7 +4,8 @@
 
 - New #233: Add `Widget`, `WidgetQuery`, `SharedWidgetQuery`, `WidgetQueryWallet`, `TonNft`,
   `TonNftAttribute`, `TonWalletCardSticker`, `TonWalletCard`, `TonWalletTransfer`, `InputWidgetMessageContent`,
-  `InputSharedWidgetMessageContent`, `ChatShareThemeBackdrops`, `ChatShareThemeBackdrop` and `RichTextTonAddress` types.
+  `InputSharedWidgetMessageContent`, `ChatShareThemeBackdrops`, `ChatShareThemeBackdrop`, `RichTextTonAddress`
+  and `PaidMessagesWaived` types.
 - New #233: Add `WidgetQueryType` interface and widget query types: `WidgetQueryTypeData`, `WidgetQueryTypeSignData`
   and `WidgetQueryTypeSentTransaction`.
 - New #233: Add `EmojiType` interface and emoji types: `EmojiTypeEmoji` and `EmojiTypeCustomEmoji`.
@@ -17,7 +18,7 @@
 - New #233: Add `richTexts` field to `TextQuote` type.
 - New #233: Add `quoteRichTexts` field to `ReplyParameters` type.
 - New #233: Add `tonWalletCard` field to `ChatFullInfo` type.
-- New #233: Add `tonWalletTransfer` field to `Message` type.
+- New #233: Add `tonWalletTransfer` and `paidMessagesWaived` fields to `Message` type.
 - New #233: Add `shareTheme` field to `ChatFullInfo` type.
 - New #233: Add `BANK_CARD_NUMBER` and `TON_ADDRESS` constants to `MessageEntityType`.
 - New #233: Add `customDescriptionParseMode` and `customDescriptionEntities` parameters to `VerifyUser` and

@@ -25,6 +25,7 @@ use Phptg\BotApi\Type\Message;
 use Phptg\BotApi\Type\RichMessage;
 use Phptg\BotApi\Type\MessageOriginHiddenUser;
 use Phptg\BotApi\Type\PaidMediaPhoto;
+use Phptg\BotApi\Type\PaidMessagesWaived;
 use Phptg\BotApi\Type\Payment\RefundedPayment;
 use Phptg\BotApi\Type\TonWalletTransfer;
 use Phptg\BotApi\Type\VideoChatStarted;
@@ -167,6 +168,7 @@ final class MessageTest extends TestCase
         assertNull($message->communityChatJoined);
         assertNull($message->widget);
         assertNull($message->tonWalletTransfer);
+        assertNull($message->paidMessagesWaived);
     }
 
     public function testFromTelegramResult(): void
@@ -722,6 +724,7 @@ final class MessageTest extends TestCase
                     'first_name' => 'ManagedBot',
                 ],
             ],
+            'paid_messages_waived' => [],
             'poll_option_added' => [
                 'option_persistent_id' => 'pid1',
                 'option_text' => 'New option',
@@ -926,5 +929,6 @@ final class MessageTest extends TestCase
         assertInstanceOf(CommunityChatRemoved::class, $message->communityChatRemoved);
         assertSame(654, $message->communityChatJoined?->community->id);
         assertSame('Joined Community', $message->communityChatJoined->community->name);
+        assertInstanceOf(PaidMessagesWaived::class, $message->paidMessagesWaived);
     }
 }

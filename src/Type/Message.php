@@ -157,5 +157,6 @@ final readonly class Message
         public ?CommunityChatJoined $communityChatJoined = null,
         public ?Widget $widget = null,
         public ?TonWalletTransfer $tonWalletTransfer = null,
+        public ?PaidMessagesWaived $paidMessagesWaived = null,
     ) {}
 }
