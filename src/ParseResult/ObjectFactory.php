@@ -17,6 +17,7 @@ use Phptg\BotApi\ParseResult\ValueProcessor\RichBlockValue;
 use Phptg\BotApi\ParseResult\ValueProcessor\BooleanValue;
 use Phptg\BotApi\ParseResult\ValueProcessor\ChatBoostSourceValue;
 use Phptg\BotApi\ParseResult\ValueProcessor\ChatMemberValue;
+use Phptg\BotApi\ParseResult\ValueProcessor\ChatShareThemeValue;
 use Phptg\BotApi\ParseResult\ValueProcessor\DateValue;
 use Phptg\BotApi\ParseResult\ValueProcessor\FloatValue;
 use Phptg\BotApi\ParseResult\ValueProcessor\IntegerValue;
@@ -33,6 +34,7 @@ use Phptg\BotApi\Type\BackgroundType;
 use Phptg\BotApi\Type\RichBlock;
 use Phptg\BotApi\Type\ChatBoostSource;
 use Phptg\BotApi\Type\ChatMember;
+use Phptg\BotApi\Type\ChatShareTheme;
 use Phptg\BotApi\Type\MessageOrigin;
 use Phptg\BotApi\Type\Payment\RevenueWithdrawalState;
 use Phptg\BotApi\Type\Payment\TransactionPartner;
@@ -171,6 +173,7 @@ final class ObjectFactory
             BackgroundFill::class => new BackgroundFillValue(),
             BackgroundType::class => new BackgroundTypeValue(),
             ChatMember::class => new ChatMemberValue(),
+            ChatShareTheme::class => new ChatShareThemeValue(),
             MessageOrigin::class => new MessageOriginValue(),
             ReactionType::class => new ReactionTypeValue(),
             RevenueWithdrawalState::class => new RevenueWithdrawalStateValue(),

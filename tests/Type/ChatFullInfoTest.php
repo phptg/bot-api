@@ -16,6 +16,8 @@ use Phptg\BotApi\Type\ChatFullInfo;
 use Phptg\BotApi\Type\ChatLocation;
 use Phptg\BotApi\Type\ChatPermissions;
 use Phptg\BotApi\Type\ChatPhoto;
+use Phptg\BotApi\Type\ChatShareThemeEmoji;
+use Phptg\BotApi\Type\EmojiTypeEmoji;
 use Phptg\BotApi\Type\Message;
 use Phptg\BotApi\Type\ReactionTypeCustomEmoji;
 use Phptg\BotApi\Type\Audio;
@@ -92,6 +94,7 @@ final class ChatFullInfoTest extends TestCase
         assertNull($info->guardBot);
         assertNull($info->community);
         assertNull($info->tonWalletCard);
+        assertNull($info->shareTheme);
     }
 
     public function testFromTelegramResult(): void
@@ -250,6 +253,13 @@ final class ChatFullInfoTest extends TestCase
                 ],
                 'background_nft_address' => 'EQABnft',
             ],
+            'share_theme' => [
+                'type' => 'emoji',
+                'emojis' => [
+                    ['type' => 'emoji', 'emoji' => '🎁'],
+                ],
+                'background_backdrop_id' => 123,
+            ],
         ], null, ChatFullInfo::class);
 
         assertSame(23, $info->id);
@@ -362,5 +372,10 @@ final class ChatFullInfoTest extends TestCase
         assertSame('EQCDwallet', $info->tonWalletCard->address);
         assertSame('100500', $info->tonWalletCard->amount);
         assertSame('EQABnft', $info->tonWalletCard->backgroundNftAddress);
+
+        assertInstanceOf(ChatShareThemeEmoji::class, $info->shareTheme);
+        assertInstanceOf(EmojiTypeEmoji::class, $info->shareTheme->emojis[0]);
+        assertSame('🎁', $info->shareTheme->emojis[0]->emoji);
+        assertSame(123, $info->shareTheme->backgroundBackdropId);
     }
 }

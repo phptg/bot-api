@@ -77,5 +77,6 @@ final readonly class ChatFullInfo
         public ?User $guardBot = null,
         public ?Community $community = null,
         public ?TonWalletCard $tonWalletCard = null,
+        public ?ChatShareTheme $shareTheme = null,
     ) {}
 }
