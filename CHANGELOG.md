@@ -3,8 +3,8 @@
 ## 0.23.0 under development
 
 - New #233: Add `Widget`, `WidgetQuery`, `SharedWidgetQuery`, `WidgetQueryWallet`, `TonNft`,
-  `TonNftAttribute`, `TonWalletCardSticker`, `TonWalletCard`, `TonWalletTransfer`, `InputWidgetMessageContent` and
-  `InputSharedWidgetMessageContent` types.
+  `TonNftAttribute`, `TonWalletCardSticker`, `TonWalletCard`, `TonWalletTransfer`, `InputWidgetMessageContent`,
+  `InputSharedWidgetMessageContent`, `ChatShareThemeBackdrops` and `ChatShareThemeBackdrop` types.
 - New #233: Add `WidgetQueryType` interface and widget query types: `WidgetQueryTypeData`, `WidgetQueryTypeSignData`
   and `WidgetQueryTypeSentTransaction`.
 - New #233: Add `EmojiType` interface and emoji types: `EmojiTypeEmoji` and `EmojiTypeCustomEmoji`.
