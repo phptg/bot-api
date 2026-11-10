@@ -7,6 +7,7 @@
   `InputSharedWidgetMessageContent` types.
 - New #233: Add `WidgetQueryType` interface and widget query types: `WidgetQueryTypeData`, `WidgetQueryTypeSignData`
   and `WidgetQueryTypeSentTransaction`.
+- New #233: Add `EmojiType` interface and emoji types: `EmojiTypeEmoji` and `EmojiTypeCustomEmoji`.
 - New #233: Add `widget` field to `Message` and `ExternalReplyInfo` types.
 - New #233: Add `widgetQuery` and `sharedWidgetQuery` fields to `Update` type.
 - New #233: Add `SendWidget`, `SendSharedWidget`, `AnswerWidgetQuery`, `EditMessageWidgetData` and
