@@ -2,8 +2,10 @@
 
 ## 0.23.0 under development
 
-- New #233: Add `Widget`, `WidgetQuery`, `SharedWidgetQuery`, `WidgetQueryWallet`, `TonNft`,
-  `TonNftAttribute`, `TonWalletCardSticker`, `TonWalletCard`, `TonWalletTransfer`, `InputWidgetMessageContent`,
+- New #233: Add `SendWidget`, `SendSharedWidget`, `AnswerWidgetQuery`, `EditMessageWidgetData`, `EditSharedWidgetData`,
+  `GetChatShareThemeBackdrops`, `GetUniqueGift` and `DeleteBusinessAccountGift` methods.
+- New #233: Add `Widget`, `WidgetQuery`, `SharedWidgetQuery`, `WidgetQueryWallet`, `TonNft`, `TonNftAttribute`,
+  `TonWalletCardSticker`, `TonWalletCard`, `TonWalletTransfer`, `InputWidgetMessageContent`,
   `InputSharedWidgetMessageContent`, `ChatShareThemeBackdrops`, `ChatShareThemeBackdrop`, `RichTextTonAddress`
   and `PaidMessagesWaived` types.
 - New #233: Add `WidgetQueryType` interface and widget query types: `WidgetQueryTypeData`, `WidgetQueryTypeSignData`
@@ -13,8 +15,6 @@
   `ChatShareThemeUniqueGift`.
 - New #233: Add `widget` field to `Message` and `ExternalReplyInfo` types.
 - New #233: Add `widgetQuery` and `sharedWidgetQuery` fields to `Update` type.
-- New #233: Add `SendWidget`, `SendSharedWidget`, `AnswerWidgetQuery`, `EditMessageWidgetData`, `EditSharedWidgetData`, 
-  `GetChatShareThemeBackdrops`, `GetUniqueGift` and `DeleteBusinessAccountGift` methods.
 - New #233: Add `richTexts` field to `TextQuote` type.
 - New #233: Add `quoteRichTexts` field to `ReplyParameters` type.
 - New #233: Add `tonWalletCard` field to `ChatFullInfo` type.
