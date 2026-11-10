@@ -25,6 +25,7 @@ use Phptg\BotApi\Type\ChatFullInfo;
 use Phptg\BotApi\Type\ChatInviteLink;
 use Phptg\BotApi\Type\ChatMemberMember;
 use Phptg\BotApi\Type\ChatPermissions;
+use Phptg\BotApi\Type\ChatShareThemeBackdrops;
 use Phptg\BotApi\Type\File;
 use Phptg\BotApi\Type\ForumTopic;
 use Phptg\BotApi\Type\KeyboardButton;
@@ -1285,6 +1286,30 @@ final class TelegramBotApiTest extends TestCase
         $result = $api->getChatMenuButton();
 
         assertInstanceOf(MenuButtonDefault::class, $result);
+    }
+
+    public function testGetChatShareThemeBackdrops(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            'backdrops' => [
+                [
+                    'id' => 7,
+                    'name' => 'Patterned Blue',
+                    'colors' => [
+                        'center_color' => 1114112,
+                        'edge_color' => 11206655,
+                        'symbol_color' => 11316351,
+                        'text_color' => 11316351,
+                    ],
+                ],
+            ],
+        ]);
+
+        $result = $api->getChatShareThemeBackdrops();
+
+        assertInstanceOf(ChatShareThemeBackdrops::class, $result);
+        assertCount(1, $result->backdrops);
+        assertSame(7, $result->backdrops[0]->id);
     }
 
     public function testGetFile(): void

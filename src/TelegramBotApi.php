@@ -56,6 +56,7 @@ use Phptg\BotApi\Method\GetChatAdministrators;
 use Phptg\BotApi\Method\GetChatMember;
 use Phptg\BotApi\Method\GetChatMemberCount;
 use Phptg\BotApi\Method\GetChatMenuButton;
+use Phptg\BotApi\Method\GetChatShareThemeBackdrops;
 use Phptg\BotApi\Method\GetFile;
 use Phptg\BotApi\Method\GetForumTopicIconStickers;
 use Phptg\BotApi\Method\GetManagedBotAccessSettings;
@@ -216,6 +217,7 @@ use Phptg\BotApi\Type\ChatFullInfo;
 use Phptg\BotApi\Type\ChatInviteLink;
 use Phptg\BotApi\Type\ChatMember;
 use Phptg\BotApi\Type\ChatPermissions;
+use Phptg\BotApi\Type\ChatShareThemeBackdrops;
 use Phptg\BotApi\Type\EphemeralMessageParameters;
 use Phptg\BotApi\Type\File;
 use Phptg\BotApi\Type\ForceReply;
@@ -1526,6 +1528,14 @@ final class TelegramBotApi
     public function getChatMenuButton(?int $chatId = null): FailResult|MenuButton
     {
         return $this->call(new GetChatMenuButton($chatId));
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#getchatsharethemebackdrops
+     */
+    public function getChatShareThemeBackdrops(): FailResult|ChatShareThemeBackdrops
+    {
+        return $this->call(new GetChatShareThemeBackdrops());
     }
 
     /**
