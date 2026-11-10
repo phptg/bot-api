@@ -28,6 +28,7 @@ use Phptg\BotApi\Method\CreateForumTopic;
 use Phptg\BotApi\Method\DeclineChatJoinRequest;
 use Phptg\BotApi\Method\DeclineSuggestedPost;
 use Phptg\BotApi\Method\DeleteAllMessageReactions;
+use Phptg\BotApi\Method\DeleteBusinessAccountGift;
 use Phptg\BotApi\Method\DeleteChatPhoto;
 use Phptg\BotApi\Method\DeleteChatStickerSet;
 use Phptg\BotApi\Method\DeleteForumTopic;
@@ -806,6 +807,18 @@ final class TelegramBotApi
     ): FailResult|true {
         return $this->call(
             new DeleteAllMessageReactions($chatId, $userId, $actorChatId),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#deletebusinessaccountgift
+     */
+    public function deleteBusinessAccountGift(
+        string $businessConnectionId,
+        string $ownedGiftId,
+    ): FailResult|true {
+        return $this->call(
+            new DeleteBusinessAccountGift($businessConnectionId, $ownedGiftId),
         );
     }
 

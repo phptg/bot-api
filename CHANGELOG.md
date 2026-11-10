@@ -13,7 +13,7 @@
 - New #233: Add `widget` field to `Message` and `ExternalReplyInfo` types.
 - New #233: Add `widgetQuery` and `sharedWidgetQuery` fields to `Update` type.
 - New #233: Add `SendWidget`, `SendSharedWidget`, `AnswerWidgetQuery`, `EditMessageWidgetData`, `EditSharedWidgetData`, 
-  `GetChatShareThemeBackdrops` and `GetUniqueGift` methods.
+  `GetChatShareThemeBackdrops`, `GetUniqueGift` and `DeleteBusinessAccountGift` methods.
 - New #233: Add `richTexts` field to `TextQuote` type.
 - New #233: Add `quoteRichTexts` field to `ReplyParameters` type.
 - New #233: Add `tonWalletCard` field to `ChatFullInfo` type.
