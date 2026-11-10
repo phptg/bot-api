@@ -20,6 +20,8 @@
 - New #233: Add `tonWalletTransfer` field to `Message` type.
 - New #233: Add `shareTheme` field to `ChatFullInfo` type.
 - New #233: Add `BANK_CARD_NUMBER` and `TON_ADDRESS` constants to `MessageEntityType`.
+- New #233: Add `customDescriptionParseMode` and `customDescriptionEntities` parameters to `VerifyUser` and
+  `VerifyChat` methods.
 - Chg #233: Rename `StoryAreaPosition` type to `AreaPosition`.
 - Chg #233: Make `receiverUserId` field of `EphemeralMessageParameters` type optional.
 - Chg #233: Make `chatId` parameter of `SendMessage`, `SendRichMessage`, `SendAnimation`, `SendAudio`,

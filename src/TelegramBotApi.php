@@ -3895,22 +3895,34 @@ final class TelegramBotApi
     }
 
     /**
+     * @param MessageEntity[]|null $customDescriptionEntities
+     *
      * @see https://core.telegram.org/bots/api#verifychat
      */
-    public function verifyChat(int|string $chatId, ?string $customDescription = null): FailResult|true
-    {
+    public function verifyChat(
+        int|string $chatId,
+        ?string $customDescription = null,
+        ?string $customDescriptionParseMode = null,
+        ?array $customDescriptionEntities = null,
+    ): FailResult|true {
         return $this->call(
-            new VerifyChat($chatId, $customDescription),
+            new VerifyChat($chatId, $customDescription, $customDescriptionParseMode, $customDescriptionEntities),
         );
     }
 
     /**
+     * @param MessageEntity[]|null $customDescriptionEntities
+     *
      * @see https://core.telegram.org/bots/api#verifyuser
      */
-    public function verifyUser(int $userId, ?string $customDescription = null): FailResult|true
-    {
+    public function verifyUser(
+        int $userId,
+        ?string $customDescription = null,
+        ?string $customDescriptionParseMode = null,
+        ?array $customDescriptionEntities = null,
+    ): FailResult|true {
         return $this->call(
-            new VerifyUser($userId, $customDescription),
+            new VerifyUser($userId, $customDescription, $customDescriptionParseMode, $customDescriptionEntities),
         );
     }
 
