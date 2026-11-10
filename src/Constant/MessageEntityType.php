@@ -19,6 +19,7 @@ final class MessageEntityType
     public const URL = 'url';
     public const EMAIL = 'email';
     public const PHONE_NUMBER = 'phone_number';
+    public const TON_ADDRESS = 'ton_address';
     public const BOLD = 'bold';
     public const ITALIC = 'italic';
     public const UNDERLINE = 'underline';
