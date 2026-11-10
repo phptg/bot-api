@@ -1,6 +1,6 @@
 # Telegram Bot API for PHP Change Log
 
-## 0.23.0 November 10, 2026
+## 0.23 November 10, 2026
 
 - New #233: Add `SendWidget`, `SendSharedWidget`, `AnswerWidgetQuery`, `EditMessageWidgetData`, `EditSharedWidgetData`,
   `GetChatShareThemeBackdrops`, `GetUniqueGift` and `DeleteBusinessAccountGift` methods.
