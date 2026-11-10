@@ -25,8 +25,11 @@ use Phptg\BotApi\Type\Message;
 use Phptg\BotApi\Type\RichMessage;
 use Phptg\BotApi\Type\MessageOriginHiddenUser;
 use Phptg\BotApi\Type\PaidMediaPhoto;
+use Phptg\BotApi\Type\PaidMessagesWaived;
 use Phptg\BotApi\Type\Payment\RefundedPayment;
+use Phptg\BotApi\Type\TonWalletTransfer;
 use Phptg\BotApi\Type\VideoChatStarted;
+use Phptg\BotApi\Type\Widget;
 
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertEquals;
@@ -163,6 +166,9 @@ final class MessageTest extends TestCase
         assertNull($message->communityChatAdded);
         assertNull($message->communityChatRemoved);
         assertNull($message->communityChatJoined);
+        assertNull($message->widget);
+        assertNull($message->tonWalletTransfer);
+        assertNull($message->paidMessagesWaived);
     }
 
     public function testFromTelegramResult(): void
@@ -347,6 +353,12 @@ final class MessageTest extends TestCase
                 'file_id' => 'f8',
                 'file_unique_id' => 'fu8',
                 'duration' => 15,
+            ],
+            'widget' => [
+                'id' => 'widget123',
+                'width' => 320,
+                'height' => 240,
+                'html' => '<b>Hello!</b>',
             ],
             'caption' => 'Hello!',
             'caption_entities' => [
@@ -623,6 +635,12 @@ final class MessageTest extends TestCase
             'suggested_post_refunded' => [
                 'reason' => 'refund_reason',
             ],
+            'ton_wallet_transfer' => [
+                'transaction_id' => 'EQABtransaction',
+                'peer_address' => 'EQCDwallet',
+                'amount' => '-100500',
+                'comment' => 'Coffee payment',
+            ],
             'video_chat_scheduled' => [
                 'start_date' => 1620000012,
             ],
@@ -706,6 +724,7 @@ final class MessageTest extends TestCase
                     'first_name' => 'ManagedBot',
                 ],
             ],
+            'paid_messages_waived' => [],
             'poll_option_added' => [
                 'option_persistent_id' => 'pid1',
                 'option_text' => 'New option',
@@ -790,6 +809,12 @@ final class MessageTest extends TestCase
         assertSame('f6', $message->video?->fileId);
         assertSame('f7', $message->videoNote?->fileId);
         assertSame('f8', $message->voice?->fileId);
+
+        assertInstanceOf(Widget::class, $message->widget);
+        assertSame('widget123', $message->widget->id);
+        assertSame('<b>Hello!</b>', $message->widget->html);
+        assertSame(320, $message->widget->width);
+        assertSame(240, $message->widget->height);
         assertSame('Hello!', $message->caption);
 
         assertNotNull($message->captionEntities);
@@ -884,6 +909,11 @@ final class MessageTest extends TestCase
         assertSame('insufficient_funds', $message->suggestedPostDeclined?->comment);
         assertSame('RUB', $message->suggestedPostPaid?->currency);
         assertSame('refund_reason', $message->suggestedPostRefunded?->reason);
+        assertInstanceOf(TonWalletTransfer::class, $message->tonWalletTransfer);
+        assertSame('EQABtransaction', $message->tonWalletTransfer->transactionId);
+        assertSame('EQCDwallet', $message->tonWalletTransfer->peerAddress);
+        assertSame('-100500', $message->tonWalletTransfer->amount);
+        assertSame('Coffee payment', $message->tonWalletTransfer->comment);
         assertSame(800, $message->chatOwnerLeft?->newOwner?->id);
         assertSame(801, $message->chatOwnerChanged?->newOwner->id);
         assertSame(802, $message->managedBotCreated?->bot->id);
@@ -899,5 +929,6 @@ final class MessageTest extends TestCase
         assertInstanceOf(CommunityChatRemoved::class, $message->communityChatRemoved);
         assertSame(654, $message->communityChatJoined?->community->id);
         assertSame('Joined Community', $message->communityChatJoined->community->name);
+        assertInstanceOf(PaidMessagesWaived::class, $message->paidMessagesWaived);
     }
 }

@@ -25,6 +25,7 @@ use Phptg\BotApi\Type\ChatFullInfo;
 use Phptg\BotApi\Type\ChatInviteLink;
 use Phptg\BotApi\Type\ChatMemberMember;
 use Phptg\BotApi\Type\ChatPermissions;
+use Phptg\BotApi\Type\ChatShareThemeBackdrops;
 use Phptg\BotApi\Type\File;
 use Phptg\BotApi\Type\ForumTopic;
 use Phptg\BotApi\Type\KeyboardButton;
@@ -54,6 +55,7 @@ use Phptg\BotApi\Type\Sticker\InputSticker;
 use Phptg\BotApi\Type\Sticker\Sticker;
 use Phptg\BotApi\Type\Sticker\StickerSet;
 use Phptg\BotApi\Type\Story;
+use Phptg\BotApi\Type\UniqueGift;
 use Phptg\BotApi\Type\Update\Update;
 use Phptg\BotApi\Type\Update\WebhookInfo;
 use Phptg\BotApi\Type\User;
@@ -563,6 +565,15 @@ final class TelegramBotApiTest extends TestCase
         assertSame('idMessage', $result->inlineMessageId);
     }
 
+    public function testAnswerWidgetQuery(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->answerWidgetQuery('id', 'data');
+
+        assertTrue($result);
+    }
+
     public function testApproveChatJoinRequest(): void
     {
         $api = TestHelper::createSuccessStubApi(true);
@@ -764,6 +775,15 @@ final class TelegramBotApiTest extends TestCase
         $api = TestHelper::createSuccessStubApi(true);
 
         $result = $api->deleteAllMessageReactions(1);
+
+        assertTrue($result);
+    }
+
+    public function testDeleteBusinessAccountGift(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->deleteBusinessAccountGift('connection1', 'gift1');
 
         assertTrue($result);
     }
@@ -1030,6 +1050,24 @@ final class TelegramBotApiTest extends TestCase
         assertTrue($result);
     }
 
+    public function testEditMessageWidgetData(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->editMessageWidgetData(chatId: 42, messageId: 1, publicData: 'data');
+
+        assertTrue($result);
+    }
+
+    public function testEditSharedWidgetData(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->editSharedWidgetData('widgetId', 'data', 60);
+
+        assertTrue($result);
+    }
+
     public function testEditStory(): void
     {
         $api = TestHelper::createSuccessStubApi([
@@ -1258,6 +1296,30 @@ final class TelegramBotApiTest extends TestCase
         $result = $api->getChatMenuButton();
 
         assertInstanceOf(MenuButtonDefault::class, $result);
+    }
+
+    public function testGetChatShareThemeBackdrops(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            'backdrops' => [
+                [
+                    'id' => 7,
+                    'name' => 'Patterned Blue',
+                    'colors' => [
+                        'center_color' => 1114112,
+                        'edge_color' => 11206655,
+                        'symbol_color' => 11316351,
+                        'text_color' => 11316351,
+                    ],
+                ],
+            ],
+        ]);
+
+        $result = $api->getChatShareThemeBackdrops();
+
+        assertInstanceOf(ChatShareThemeBackdrops::class, $result);
+        assertCount(1, $result->backdrops);
+        assertSame(7, $result->backdrops[0]->id);
     }
 
     public function testGetFile(): void
@@ -1542,6 +1604,57 @@ final class TelegramBotApiTest extends TestCase
         assertSame(2, $result[1]->updateId);
     }
 
+    public function testGetUniqueGift(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            'gift_id' => 'gift-abc-123',
+            'base_name' => 'BaseName',
+            'name' => 'uniqueName',
+            'number' => 1,
+            'model' => [
+                'name' => 'modelId',
+                'sticker' => [
+                    'file_id' => 'stickerId',
+                    'file_unique_id' => 'uniqueStickerId',
+                    'type' => 'unique',
+                    'width' => 100,
+                    'height' => 120,
+                    'is_animated' => false,
+                    'is_video' => true,
+                ],
+                'rarity_per_mille' => 500,
+            ],
+            'symbol' => [
+                'name' => 'symbolId',
+                'sticker' => [
+                    'file_id' => 'stickerId',
+                    'file_unique_id' => 'uniqueStickerId',
+                    'type' => 'unique',
+                    'width' => 100,
+                    'height' => 120,
+                    'is_animated' => false,
+                    'is_video' => true,
+                ],
+                'rarity_per_mille' => 300,
+            ],
+            'backdrop' => [
+                'name' => 'backdropId',
+                'colors' => [
+                    'center_color' => 1,
+                    'edge_color' => 2,
+                    'symbol_color' => 3,
+                    'text_color' => 4,
+                ],
+                'rarity_per_mille' => 200,
+            ],
+        ]);
+
+        $result = $api->getUniqueGift('uniqueName');
+
+        assertInstanceOf(UniqueGift::class, $result);
+        assertSame('uniqueName', $result->name);
+    }
+
     public function testGetMethodWithParams(): void
     {
         $transport = TransportMock::successResult([]);
@@ -1567,7 +1680,7 @@ final class TelegramBotApiTest extends TestCase
         ]);
         $api = new TelegramBotApi('stub-token', transport: $transport);
 
-        $api->sendMessage('id1', 'hello');
+        $api->sendMessage('hello', 'id1');
 
         assertSame(
             'https://api.telegram.org/botstub-token/sendMessage',
@@ -1600,8 +1713,8 @@ final class TelegramBotApiTest extends TestCase
 
         $file = new InputFile('/path/to/file');
         $api->sendDocument(
-            'id1',
             $file,
+            'id1',
             captionEntities: [new MessageEntity('bold', 0, 4)],
         );
 
@@ -2023,7 +2136,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendAnimation(12, 'https://example.com/anime.gif');
+        $result = $api->sendAnimation('https://example.com/anime.gif', 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2040,7 +2153,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendAudio(12, 'https://example.com/audio.mp3');
+        $result = $api->sendAudio('https://example.com/audio.mp3', 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2066,7 +2179,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendContact(12, '1234567890', 'John');
+        $result = $api->sendContact('1234567890', 'John', 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2117,7 +2230,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendDocument(12, 'https://example.com/file.doc');
+        $result = $api->sendDocument('https://example.com/file.doc', 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2184,7 +2297,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendLocation(12, 1.1, 2.2);
+        $result = $api->sendLocation(1.1, 2.2, 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2201,7 +2314,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendLivePhoto(12, 'fid1', 'fid2');
+        $result = $api->sendLivePhoto('fid1', 'fid2', 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2239,7 +2352,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendMessage(12, 'hello');
+        $result = $api->sendMessage('hello', 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2282,7 +2395,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendPhoto(12, 'https://example.com/i.png');
+        $result = $api->sendPhoto('https://example.com/i.png', 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2316,7 +2429,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendSticker(12, 'https://example.com/sticker.webp');
+        $result = $api->sendSticker('https://example.com/sticker.webp', 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2333,7 +2446,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendVenue(12, 1.1, 2.2, 'title', 'address');
+        $result = $api->sendVenue(1.1, 2.2, 'title', 'address', 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2350,7 +2463,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendVideo(12, 'https://example.com/wow.mp4');
+        $result = $api->sendVideo('https://example.com/wow.mp4', 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2368,7 +2481,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendVideoNote(12, 'https://example.com/wow.mp4');
+        $result = $api->sendVideoNote('https://example.com/wow.mp4', 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2385,7 +2498,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendVoice(12, 'https://example.com/wow.mp3');
+        $result = $api->sendVoice('https://example.com/wow.mp3', 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2411,7 +2524,7 @@ final class TelegramBotApiTest extends TestCase
             ],
         ]);
 
-        $result = $api->sendRichMessage(12, new InputRichMessage(html: '<b>Hello</b>'));
+        $result = $api->sendRichMessage(new InputRichMessage(html: '<b>Hello</b>'), 12);
 
         assertInstanceOf(Message::class, $result);
         assertSame(7, $result->messageId);
@@ -2424,6 +2537,40 @@ final class TelegramBotApiTest extends TestCase
         $result = $api->sendRichMessageDraft(12, 1, new InputRichMessage(html: '<b>Hello</b>'));
 
         assertTrue($result);
+    }
+
+    public function testSendSharedWidget(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            'message_id' => 7,
+            'date' => 1620000000,
+            'chat' => [
+                'id' => 1,
+                'type' => 'private',
+            ],
+        ]);
+
+        $result = $api->sendSharedWidget(12, 'widget123');
+
+        assertInstanceOf(Message::class, $result);
+        assertSame(7, $result->messageId);
+    }
+
+    public function testSendWidget(): void
+    {
+        $api = TestHelper::createSuccessStubApi([
+            'message_id' => 7,
+            'date' => 1620000000,
+            'chat' => [
+                'id' => 1,
+                'type' => 'private',
+            ],
+        ]);
+
+        $result = $api->sendWidget(12, '<b>Hello</b>');
+
+        assertInstanceOf(Message::class, $result);
+        assertSame(7, $result->messageId);
     }
 
     public function testSetChatAdministratorCustomTitle(): void

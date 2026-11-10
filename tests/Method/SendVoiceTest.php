@@ -24,14 +24,13 @@ final class SendVoiceTest extends TestCase
 {
     public function testBase(): void
     {
-        $method = new SendVoice(12, 'https://example.com/audio.mp3');
+        $method = new SendVoice('fid1');
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('sendVoice', $method->getApiMethod());
         assertSame(
             [
-                'chat_id' => 12,
-                'voice' => 'https://example.com/audio.mp3',
+                'voice' => 'fid1',
             ],
             $method->getData(),
         );
@@ -44,8 +43,8 @@ final class SendVoiceTest extends TestCase
         $replyParameters = new ReplyParameters(23);
         $replyMarkup = new ForceReply();
         $method = new SendVoice(
-            12,
             $voice,
+            12,
             'bcid1',
             99,
             'Caption',
@@ -100,7 +99,7 @@ final class SendVoiceTest extends TestCase
 
     public function testPrepareResult(): void
     {
-        $method = new SendVoice(12, 'https://example.com/audio.mp3');
+        $method = new SendVoice('fid1', 12);
 
         $preparedResult = TestHelper::createSuccessStubApi([
             'message_id' => 7,

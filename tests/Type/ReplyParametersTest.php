@@ -7,6 +7,7 @@ namespace Phptg\BotApi\Tests\Type;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Type\MessageEntity;
 use Phptg\BotApi\Type\ReplyParameters;
+use Phptg\BotApi\Type\RichTextBold;
 
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
@@ -28,6 +29,7 @@ final class ReplyParametersTest extends TestCase
         assertNull($replyParameters->checklistTaskId);
         assertNull($replyParameters->pollOptionId);
         assertNull($replyParameters->ephemeralMessageId);
+        assertNull($replyParameters->quoteRichTexts);
 
         assertSame([], $replyParameters->toRequestArray());
     }
@@ -35,6 +37,7 @@ final class ReplyParametersTest extends TestCase
     public function testFull(): void
     {
         $quoteEntity = new MessageEntity('bold', 0, 4);
+        $richText = new RichTextBold('quoted');
         $replyParameters = new ReplyParameters(
             99,
             102,
@@ -46,6 +49,7 @@ final class ReplyParametersTest extends TestCase
             456,
             'pid1',
             789,
+            [$richText, 'plain'],
         );
 
         assertSame(99, $replyParameters->messageId);
@@ -58,6 +62,7 @@ final class ReplyParametersTest extends TestCase
         assertSame(456, $replyParameters->checklistTaskId);
         assertSame('pid1', $replyParameters->pollOptionId);
         assertSame(789, $replyParameters->ephemeralMessageId);
+        assertSame([$richText, 'plain'], $replyParameters->quoteRichTexts);
 
         assertSame(
             [
@@ -68,6 +73,7 @@ final class ReplyParametersTest extends TestCase
                 'quote' => 'text',
                 'quote_parse_mode' => 'best',
                 'quote_entities' => [$quoteEntity->toRequestArray()],
+                'quote_rich_texts' => [$richText->toRequestArray(), 'plain'],
                 'quote_position' => 23,
                 'checklist_task_id' => 456,
                 'poll_option_id' => 'pid1',

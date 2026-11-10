@@ -29,8 +29,8 @@ final readonly class SendMessage implements MethodInterface
      * @param MessageEntity[]|null $entities
      */
     public function __construct(
-        private int|string $chatId,
         private string $text,
+        private int|string|null $chatId = null,
         private ?string $businessConnectionId = null,
         private ?int $messageThreadId = null,
         private ?string $parseMode = null,

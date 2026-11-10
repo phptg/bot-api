@@ -25,8 +25,8 @@ use Phptg\BotApi\Type\SuggestedPostParameters;
 final readonly class SendSticker implements MethodInterface
 {
     public function __construct(
-        private int|string $chatId,
         private InputFile|string $sticker,
+        private int|string|null $chatId = null,
         private ?string $businessConnectionId = null,
         private ?int $messageThreadId = null,
         private ?string $emoji = null,

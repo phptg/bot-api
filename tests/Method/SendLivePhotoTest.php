@@ -25,7 +25,6 @@ final class SendLivePhotoTest extends TestCase
     public function testBase(): void
     {
         $method = new SendLivePhoto(
-            12,
             'fid1',
             'fid2',
         );
@@ -34,7 +33,6 @@ final class SendLivePhotoTest extends TestCase
         assertSame('sendLivePhoto', $method->getApiMethod());
         assertSame(
             [
-                'chat_id' => 12,
                 'live_photo' => 'fid1',
                 'photo' => 'fid2',
             ],
@@ -50,9 +48,9 @@ final class SendLivePhotoTest extends TestCase
         $replyParameters = new ReplyParameters(23);
         $replyMarkup = new ForceReply();
         $method = new SendLivePhoto(
-            12,
             $livePhotoFile,
             $photoFile,
+            12,
             'bcid1',
             99,
             123,
@@ -110,9 +108,9 @@ final class SendLivePhotoTest extends TestCase
     public function testPrepareResult(): void
     {
         $method = new SendLivePhoto(
-            12,
             'fid1',
             'fid2',
+            12,
         );
 
         $preparedResult = TestHelper::createSuccessStubApi([

@@ -4,15 +4,20 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Type;
 
+use Phptg\BotApi\RichTextConverter;
+
 /**
  * @see https://core.telegram.org/bots/api#replyparameters
  *
  * @api
+ *
+ * @phpstan-import-type RichTextContent from RichText
  */
 final readonly class ReplyParameters
 {
     /**
      * @param MessageEntity[]|null $quoteEntities
+     * @param RichTextContent[]|null $quoteRichTexts
      */
     public function __construct(
         public ?int $messageId = null,
@@ -25,6 +30,7 @@ final readonly class ReplyParameters
         public ?int $checklistTaskId = null,
         public ?string $pollOptionId = null,
         public ?int $ephemeralMessageId = null,
+        public ?array $quoteRichTexts = null,
     ) {}
 
     /**
@@ -43,6 +49,10 @@ final readonly class ReplyParameters
                 'quote_entities' => $this->quoteEntities === null ? null : array_map(
                     static fn(MessageEntity $entity) => $entity->toRequestArray(),
                     $this->quoteEntities,
+                ),
+                'quote_rich_texts' => $this->quoteRichTexts === null ? null : array_map(
+                    RichTextConverter::toRequestArray(...),
+                    $this->quoteRichTexts,
                 ),
                 'quote_position' => $this->quotePosition,
                 'checklist_task_id' => $this->checklistTaskId,

@@ -23,13 +23,12 @@ final class SendRichMessageTest extends TestCase
 {
     public function testBase(): void
     {
-        $method = new SendRichMessage(12, new InputRichMessage(html: '<b>Hello</b>'));
+        $method = new SendRichMessage(new InputRichMessage(html: '<b>Hello</b>'));
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('sendRichMessage', $method->getApiMethod());
         assertSame(
             [
-                'chat_id' => 12,
                 'rich_message' => ['html' => '<b>Hello</b>'],
             ],
             $method->getData(),
@@ -43,8 +42,8 @@ final class SendRichMessageTest extends TestCase
         $replyMarkup = new ForceReply();
         $suggestedPostParameters = new SuggestedPostParameters(new SuggestedPostPrice('USD', 10));
         $method = new SendRichMessage(
-            12,
             $richMessage,
+            12,
             'bcid1',
             99,
             123,
@@ -84,7 +83,7 @@ final class SendRichMessageTest extends TestCase
 
     public function testPrepareResult(): void
     {
-        $method = new SendRichMessage(12, new InputRichMessage(html: '<b>Hello</b>'));
+        $method = new SendRichMessage(new InputRichMessage(html: '<b>Hello</b>'), 12);
 
         $preparedResult = TestHelper::createSuccessStubApi([
             'message_id' => 7,

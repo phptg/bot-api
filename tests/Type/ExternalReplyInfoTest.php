@@ -13,6 +13,7 @@ use Phptg\BotApi\Type\ExternalReplyInfo;
 use Phptg\BotApi\Type\MessageOriginUser;
 use Phptg\BotApi\Type\PaidMediaPhoto;
 use Phptg\BotApi\Type\User;
+use Phptg\BotApi\Type\Widget;
 
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertEquals;
@@ -55,6 +56,7 @@ final class ExternalReplyInfoTest extends TestCase
         assertNull($externalReplyInfo->venue);
         assertNull($externalReplyInfo->paidMedia);
         assertNull($externalReplyInfo->checklist);
+        assertNull($externalReplyInfo->widget);
     }
 
     public function testFromTelegramResult(): void
@@ -141,6 +143,12 @@ final class ExternalReplyInfoTest extends TestCase
                 'file_id' => 'f8',
                 'file_unique_id' => 'fu8',
                 'duration' => 15,
+            ],
+            'widget' => [
+                'id' => 'widget123',
+                'width' => 320,
+                'height' => 240,
+                'html' => '<b>Hello!</b>',
             ],
             'has_media_spoiler' => true,
             'contact' => [
@@ -243,6 +251,12 @@ final class ExternalReplyInfoTest extends TestCase
         assertSame('f6', $externalReplyInfo->video?->fileId);
         assertSame('f7', $externalReplyInfo->videoNote?->fileId);
         assertSame('f8', $externalReplyInfo->voice?->fileId);
+
+        assertInstanceOf(Widget::class, $externalReplyInfo->widget);
+        assertSame('widget123', $externalReplyInfo->widget->id);
+        assertSame('<b>Hello!</b>', $externalReplyInfo->widget->html);
+        assertSame(320, $externalReplyInfo->widget->width);
+        assertSame(240, $externalReplyInfo->widget->height);
         assertTrue($externalReplyInfo->hasMediaSpoiler);
         assertSame('+1234567890', $externalReplyInfo->contact?->phoneNumber);
         assertSame('🎲', $externalReplyInfo->dice?->emoji);

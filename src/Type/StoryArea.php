@@ -12,7 +12,7 @@ namespace Phptg\BotApi\Type;
 final readonly class StoryArea
 {
     public function __construct(
-        public StoryAreaPosition $position,
+        public AreaPosition $position,
         public StoryAreaType $type,
     ) {}
 

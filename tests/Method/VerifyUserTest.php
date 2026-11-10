@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\VerifyUser;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\MessageEntity;
 
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;
@@ -30,7 +31,12 @@ final class VerifyUserTest extends TestCase
 
     public function testFull(): void
     {
-        $method = new VerifyUser(1, 'test');
+        $method = new VerifyUser(
+            1,
+            'test',
+            'MarkdownV2',
+            [new MessageEntity('text_link', 0, 4, 'https://example.com')],
+        );
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('verifyUser', $method->getApiMethod());
@@ -38,6 +44,15 @@ final class VerifyUserTest extends TestCase
             [
                 'user_id' => 1,
                 'custom_description' => 'test',
+                'custom_description_parse_mode' => 'MarkdownV2',
+                'custom_description_entities' => [
+                    [
+                        'type' => 'text_link',
+                        'offset' => 0,
+                        'length' => 4,
+                        'url' => 'https://example.com',
+                    ],
+                ],
             ],
             $method->getData(),
         );

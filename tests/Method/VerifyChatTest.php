@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Method\VerifyChat;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Tests\Support\TestHelper;
+use Phptg\BotApi\Type\MessageEntity;
 
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;
@@ -30,7 +31,12 @@ final class VerifyChatTest extends TestCase
 
     public function testFull(): void
     {
-        $method = new VerifyChat('id1', 'test');
+        $method = new VerifyChat(
+            'id1',
+            'test',
+            'MarkdownV2',
+            [new MessageEntity('text_link', 0, 4, 'https://example.com')],
+        );
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('verifyChat', $method->getApiMethod());
@@ -38,6 +44,15 @@ final class VerifyChatTest extends TestCase
             [
                 'chat_id' => 'id1',
                 'custom_description' => 'test',
+                'custom_description_parse_mode' => 'MarkdownV2',
+                'custom_description_entities' => [
+                    [
+                        'type' => 'text_link',
+                        'offset' => 0,
+                        'length' => 4,
+                        'url' => 'https://example.com',
+                    ],
+                ],
             ],
             $method->getData(),
         );

@@ -1,5 +1,34 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.23.0 November 10, 2026
+
+- New #233: Add `SendWidget`, `SendSharedWidget`, `AnswerWidgetQuery`, `EditMessageWidgetData`, `EditSharedWidgetData`,
+  `GetChatShareThemeBackdrops`, `GetUniqueGift` and `DeleteBusinessAccountGift` methods.
+- New #233: Add `Widget`, `WidgetQuery`, `SharedWidgetQuery`, `WidgetQueryWallet`, `TonNft`, `TonNftAttribute`,
+  `TonWalletCardSticker`, `TonWalletCard`, `TonWalletTransfer`, `InputWidgetMessageContent`,
+  `InputSharedWidgetMessageContent`, `ChatShareThemeBackdrops`, `ChatShareThemeBackdrop`, `RichTextTonAddress`
+  and `PaidMessagesWaived` types.
+- New #233: Add `WidgetQueryType` interface and widget query types: `WidgetQueryTypeData`, `WidgetQueryTypeSignData`
+  and `WidgetQueryTypeSentTransaction`.
+- New #233: Add `EmojiType` interface and emoji types: `EmojiTypeEmoji` and `EmojiTypeCustomEmoji`.
+- New #233: Add `ChatShareTheme` interface and chat share theme types: `ChatShareThemeEmoji` and
+  `ChatShareThemeUniqueGift`.
+- New #233: Add `widget` field to `Message` and `ExternalReplyInfo` types.
+- New #233: Add `widgetQuery` and `sharedWidgetQuery` fields to `Update` type.
+- New #233: Add `richTexts` field to `TextQuote` type.
+- New #233: Add `quoteRichTexts` field to `ReplyParameters` type.
+- New #233: Add `tonWalletCard` field to `ChatFullInfo` type.
+- New #233: Add `tonWalletTransfer` and `paidMessagesWaived` fields to `Message` type.
+- New #233: Add `shareTheme` field to `ChatFullInfo` type.
+- New #233: Add `BANK_CARD_NUMBER` and `TON_ADDRESS` constants to `MessageEntityType`.
+- New #233: Add `customDescriptionParseMode` and `customDescriptionEntities` parameters to `VerifyUser` and
+  `VerifyChat` methods.
+- Chg #233: Rename `StoryAreaPosition` type to `AreaPosition`.
+- Chg #233: Make `receiverUserId` field of `EphemeralMessageParameters` type optional.
+- Chg #233: Make `chatId` parameter of `SendMessage`, `SendRichMessage`, `SendAnimation`, `SendAudio`,
+  `SendContact`, `SendDocument`, `SendLivePhoto`, `SendLocation`, `SendPhoto`, `SendSticker`, `SendVenue`,
+  `SendVideo`, `SendVideoNote` and `SendVoice` methods optional and move it after the required parameters.
+
 ## 0.22.1 October 30, 2026
 
 - Enh #223: Convert the PHP warning raised on failure to read a local file in `NativeTransport` into an exception with

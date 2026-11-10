@@ -29,8 +29,8 @@ final readonly class SendPhoto implements MethodInterface
      * @param MessageEntity[]|null $captionEntities
      */
     public function __construct(
-        private int|string $chatId,
         private string|InputFile $photo,
+        private int|string|null $chatId = null,
         private ?string $businessConnectionId = null,
         private ?int $messageThreadId = null,
         private ?string $caption = null,

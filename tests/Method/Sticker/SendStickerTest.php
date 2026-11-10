@@ -23,14 +23,13 @@ final class SendStickerTest extends TestCase
 {
     public function testBase(): void
     {
-        $method = new SendSticker(12, 'https://example.com/sticker.webp');
+        $method = new SendSticker('fid1');
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('sendSticker', $method->getApiMethod());
         assertSame(
             [
-                'chat_id' => 12,
-                'sticker' => 'https://example.com/sticker.webp',
+                'sticker' => 'fid1',
             ],
             $method->getData(),
         );
@@ -42,8 +41,8 @@ final class SendStickerTest extends TestCase
         $replyParameters = new ReplyParameters(23);
         $replyMarkup = new ForceReply();
         $method = new SendSticker(
-            12,
             $sticker,
+            12,
             'bcid1',
             99,
             '👍',
@@ -92,7 +91,7 @@ final class SendStickerTest extends TestCase
 
     public function testPrepareResult(): void
     {
-        $method = new SendSticker(12, 'https://example.com/sticker.webp');
+        $method = new SendSticker('fid1', 12);
 
         $preparedResult = TestHelper::createSuccessStubApi([
             'message_id' => 7,

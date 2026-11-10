@@ -24,14 +24,13 @@ final class SendAudioTest extends TestCase
 {
     public function testBase(): void
     {
-        $method = new SendAudio(12, 'https://example.com/audio.mp3');
+        $method = new SendAudio('fid1');
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('sendAudio', $method->getApiMethod());
         assertSame(
             [
-                'chat_id' => 12,
-                'audio' => 'https://example.com/audio.mp3',
+                'audio' => 'fid1',
             ],
             $method->getData(),
         );
@@ -45,8 +44,8 @@ final class SendAudioTest extends TestCase
         $replyParameters = new ReplyParameters(23);
         $replyMarkup = new ForceReply();
         $method = new SendAudio(
-            12,
             $audio,
+            12,
             'bcid1',
             99,
             'Caption',
@@ -107,7 +106,7 @@ final class SendAudioTest extends TestCase
 
     public function testPrepareResult(): void
     {
-        $method = new SendAudio(12, 'https://example.com/audio.mp3');
+        $method = new SendAudio('fid1', 12);
 
         $preparedResult = TestHelper::createSuccessStubApi([
             'message_id' => 7,

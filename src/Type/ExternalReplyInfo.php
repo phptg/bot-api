@@ -47,5 +47,6 @@ final readonly class ExternalReplyInfo
         public ?Venue $venue = null,
         public ?PaidMediaInfo $paidMedia = null,
         public ?Checklist $checklist = null,
+        public ?Widget $widget = null,
     ) {}
 }

@@ -22,13 +22,12 @@ final class SendLocationTest extends TestCase
 {
     public function testBase(): void
     {
-        $method = new SendLocation(12, 1.1, 2.2);
+        $method = new SendLocation(1.1, 2.2);
 
         assertSame(HttpMethod::POST, $method->getHttpMethod());
         assertSame('sendLocation', $method->getApiMethod());
         assertSame(
             [
-                'chat_id' => 12,
                 'latitude' => 1.1,
                 'longitude' => 2.2,
             ],
@@ -41,9 +40,9 @@ final class SendLocationTest extends TestCase
         $replyParameters = new ReplyParameters(23);
         $replyMarkup = new ForceReply();
         $method = new SendLocation(
-            12,
             1.1,
             2.2,
+            12,
             'test',
             99,
             2.23,
@@ -99,7 +98,7 @@ final class SendLocationTest extends TestCase
 
     public function testPrepareResult(): void
     {
-        $method = new SendLocation(12, 1.1, 2.2);
+        $method = new SendLocation(1.1, 2.2, 12);
 
         $preparedResult = TestHelper::createSuccessStubApi([
             'message_id' => 7,

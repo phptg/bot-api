@@ -76,5 +76,7 @@ final readonly class ChatFullInfo
         public ?Audio $firstProfileAudio = null,
         public ?User $guardBot = null,
         public ?Community $community = null,
+        public ?TonWalletCard $tonWalletCard = null,
+        public ?ChatShareTheme $shareTheme = null,
     ) {}
 }

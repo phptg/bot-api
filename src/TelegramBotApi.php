@@ -11,6 +11,7 @@ use Psr\Log\LoggerInterface;
 use SensitiveParameter;
 use Phptg\BotApi\Method\AnswerCallbackQuery;
 use Phptg\BotApi\Method\AnswerChatJoinRequestQuery;
+use Phptg\BotApi\Method\AnswerWidgetQuery;
 use Phptg\BotApi\Method\ApproveChatJoinRequest;
 use Phptg\BotApi\Method\ApproveSuggestedPost;
 use Phptg\BotApi\Method\BanChatMember;
@@ -27,6 +28,7 @@ use Phptg\BotApi\Method\CreateForumTopic;
 use Phptg\BotApi\Method\DeclineChatJoinRequest;
 use Phptg\BotApi\Method\DeclineSuggestedPost;
 use Phptg\BotApi\Method\DeleteAllMessageReactions;
+use Phptg\BotApi\Method\DeleteBusinessAccountGift;
 use Phptg\BotApi\Method\DeleteChatPhoto;
 use Phptg\BotApi\Method\DeleteChatStickerSet;
 use Phptg\BotApi\Method\DeleteForumTopic;
@@ -37,6 +39,8 @@ use Phptg\BotApi\Method\EditChatInviteLink;
 use Phptg\BotApi\Method\EditChatSubscriptionInviteLink;
 use Phptg\BotApi\Method\EditForumTopic;
 use Phptg\BotApi\Method\EditGeneralForumTopic;
+use Phptg\BotApi\Method\EditMessageWidgetData;
+use Phptg\BotApi\Method\EditSharedWidgetData;
 use Phptg\BotApi\Method\EditStory;
 use Phptg\BotApi\Method\ExportChatInviteLink;
 use Phptg\BotApi\Method\ForwardMessage;
@@ -53,6 +57,7 @@ use Phptg\BotApi\Method\GetChatAdministrators;
 use Phptg\BotApi\Method\GetChatMember;
 use Phptg\BotApi\Method\GetChatMemberCount;
 use Phptg\BotApi\Method\GetChatMenuButton;
+use Phptg\BotApi\Method\GetChatShareThemeBackdrops;
 use Phptg\BotApi\Method\GetFile;
 use Phptg\BotApi\Method\GetForumTopicIconStickers;
 use Phptg\BotApi\Method\GetManagedBotAccessSettings;
@@ -64,6 +69,7 @@ use Phptg\BotApi\Method\GetMyDescription;
 use Phptg\BotApi\Method\GetMyName;
 use Phptg\BotApi\Method\GetMyShortDescription;
 use Phptg\BotApi\Method\GetMyStarBalance;
+use Phptg\BotApi\Method\GetUniqueGift;
 use Phptg\BotApi\Method\GetUserChatBoosts;
 use Phptg\BotApi\Method\GetUserGifts;
 use Phptg\BotApi\Method\GetUserPersonalChatMessages;
@@ -120,7 +126,9 @@ use Phptg\BotApi\Method\SendVideoNote;
 use Phptg\BotApi\Method\SendChatJoinRequestWebApp;
 use Phptg\BotApi\Method\SendRichMessage;
 use Phptg\BotApi\Method\SendRichMessageDraft;
+use Phptg\BotApi\Method\SendSharedWidget;
 use Phptg\BotApi\Method\SendVoice;
+use Phptg\BotApi\Method\SendWidget;
 use Phptg\BotApi\Method\SetBusinessAccountBio;
 use Phptg\BotApi\Method\SetBusinessAccountGiftSettings;
 use Phptg\BotApi\Method\SetBusinessAccountName;
@@ -211,6 +219,7 @@ use Phptg\BotApi\Type\ChatFullInfo;
 use Phptg\BotApi\Type\ChatInviteLink;
 use Phptg\BotApi\Type\ChatMember;
 use Phptg\BotApi\Type\ChatPermissions;
+use Phptg\BotApi\Type\ChatShareThemeBackdrops;
 use Phptg\BotApi\Type\EphemeralMessageParameters;
 use Phptg\BotApi\Type\File;
 use Phptg\BotApi\Type\ForceReply;
@@ -262,6 +271,7 @@ use Phptg\BotApi\Type\Story;
 use Phptg\BotApi\Type\SentGuestMessage;
 use Phptg\BotApi\Type\SuggestedPostParameters;
 use Phptg\BotApi\Type\StoryArea;
+use Phptg\BotApi\Type\UniqueGift;
 use Phptg\BotApi\Type\Update\Update;
 use Phptg\BotApi\Type\Update\WebhookInfo;
 use Phptg\BotApi\Type\User;
@@ -477,6 +487,16 @@ final class TelegramBotApi
     {
         return $this->call(
             new AnswerWebAppQuery($webAppQueryId, $result),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#answerwidgetquery
+     */
+    public function answerWidgetQuery(string $widgetQueryId, ?string $data = null): FailResult|true
+    {
+        return $this->call(
+            new AnswerWidgetQuery($widgetQueryId, $data),
         );
     }
 
@@ -787,6 +807,18 @@ final class TelegramBotApi
     ): FailResult|true {
         return $this->call(
             new DeleteAllMessageReactions($chatId, $userId, $actorChatId),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#deletebusinessaccountgift
+     */
+    public function deleteBusinessAccountGift(
+        string $businessConnectionId,
+        string $ownedGiftId,
+    ): FailResult|true {
+        return $this->call(
+            new DeleteBusinessAccountGift($businessConnectionId, $ownedGiftId),
         );
     }
 
@@ -1217,6 +1249,37 @@ final class TelegramBotApi
     }
 
     /**
+     * @see https://core.telegram.org/bots/api#editmessagewidgetdata
+     */
+    public function editMessageWidgetData(
+        int|string|null $chatId = null,
+        ?int $messageId = null,
+        ?string $inlineMessageId = null,
+        ?string $publicData = null,
+        ?string $chatData = null,
+    ): FailResult|true {
+        return $this->call(
+            new EditMessageWidgetData(
+                $chatId,
+                $messageId,
+                $inlineMessageId,
+                $publicData,
+                $chatData,
+            ),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#editsharedwidgetdata
+     */
+    public function editSharedWidgetData(string $widgetId, string $publicData, ?int $cacheTime = null): FailResult|true
+    {
+        return $this->call(
+            new EditSharedWidgetData($widgetId, $publicData, $cacheTime),
+        );
+    }
+
+    /**
      * @see https://core.telegram.org/bots/api#editstory
      *
      * @param MessageEntity[]|null $captionEntities
@@ -1483,6 +1546,14 @@ final class TelegramBotApi
     }
 
     /**
+     * @see https://core.telegram.org/bots/api#getchatsharethemebackdrops
+     */
+    public function getChatShareThemeBackdrops(): FailResult|ChatShareThemeBackdrops
+    {
+        return $this->call(new GetChatShareThemeBackdrops());
+    }
+
+    /**
      * @see https://core.telegram.org/bots/api#getcustomemojistickers
      *
      * @param string[] $customEmojiIds
@@ -1634,6 +1705,16 @@ final class TelegramBotApi
         ?array $allowedUpdates = null,
     ): FailResult|array {
         return $this->call(new GetUpdates($offset, $limit, $timeout, $allowedUpdates));
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#getuniquegift
+     */
+    public function getUniqueGift(string $name): FailResult|UniqueGift
+    {
+        return $this->call(
+            new GetUniqueGift($name),
+        );
     }
 
     /**
@@ -2060,8 +2141,8 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendanimation
      */
     public function sendAnimation(
-        int|string $chatId,
         InputFile|string $animation,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?int $duration = null,
@@ -2085,8 +2166,8 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendAnimation(
-                $chatId,
                 $animation,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $duration,
@@ -2117,8 +2198,8 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendaudio
      */
     public function sendAudio(
-        int|string $chatId,
         string|InputFile $audio,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?string $caption = null,
@@ -2140,8 +2221,8 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendAudio(
-                $chatId,
                 $audio,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $caption,
@@ -2187,9 +2268,9 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendcontact
      */
     public function sendContact(
-        int|string $chatId,
         string $phoneNumber,
         string $firstName,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?string $lastName = null,
@@ -2206,9 +2287,9 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendContact(
-                $chatId,
                 $phoneNumber,
                 $firstName,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $lastName,
@@ -2294,8 +2375,8 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#senddocument
      */
     public function sendDocument(
-        int|string $chatId,
         string|InputFile $document,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         string|InputFile|null $thumbnail = null,
@@ -2315,8 +2396,8 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendDocument(
-                $chatId,
                 $document,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $thumbnail,
@@ -2476,9 +2557,9 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendlocation
      */
     public function sendLocation(
-        int|string $chatId,
         float $latitude,
         float $longitude,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?float $horizontalAccuracy = null,
@@ -2497,9 +2578,9 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendLocation(
-                $chatId,
                 $latitude,
                 $longitude,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $horizontalAccuracy,
@@ -2559,9 +2640,9 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendlivephoto
      */
     public function sendLivePhoto(
-        int|string $chatId,
         string|InputFile $livePhoto,
         string|InputFile $photo,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?int $directMessagesTopicId = null,
@@ -2581,9 +2662,9 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendLivePhoto(
-                $chatId,
                 $livePhoto,
                 $photo,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $directMessagesTopicId,
@@ -2610,8 +2691,8 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendmessage
      */
     public function sendMessage(
-        int|string $chatId,
         string $text,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?string $parseMode = null,
@@ -2629,8 +2710,8 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendMessage(
-                $chatId,
                 $text,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $parseMode,
@@ -2732,8 +2813,8 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendphoto
      */
     public function sendPhoto(
-        int|string $chatId,
         string|InputFile $photo,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?string $caption = null,
@@ -2753,8 +2834,8 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendPhoto(
-                $chatId,
                 $photo,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $caption,
@@ -2865,8 +2946,8 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendsticker
      */
     public function sendSticker(
-        int|string $chatId,
         InputFile|string $sticker,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?string $emoji = null,
@@ -2882,8 +2963,8 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendSticker(
-                $chatId,
                 $sticker,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $emoji,
@@ -2904,11 +2985,11 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendvenue
      */
     public function sendVenue(
-        int|string $chatId,
         float $latitude,
         float $longitude,
         string $title,
         string $address,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?string $foursquareId = null,
@@ -2927,11 +3008,11 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendVenue(
-                $chatId,
                 $latitude,
                 $longitude,
                 $title,
                 $address,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $foursquareId,
@@ -2957,8 +3038,8 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendvideo
      */
     public function sendVideo(
-        int|string $chatId,
         string|InputFile $video,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?int $duration = null,
@@ -2985,8 +3066,8 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendVideo(
-                $chatId,
                 $video,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $duration,
@@ -3018,8 +3099,8 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendvideonote
      */
     public function sendVideoNote(
-        int|string $chatId,
         string|InputFile $videoNote,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?int $duration = null,
@@ -3037,8 +3118,8 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendVideoNote(
-                $chatId,
                 $videoNote,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $duration,
@@ -3063,8 +3144,8 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendvoice
      */
     public function sendVoice(
-        int|string $chatId,
         string|InputFile $voice,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?string $caption = null,
@@ -3083,8 +3164,8 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendVoice(
-                $chatId,
                 $voice,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $caption,
@@ -3116,8 +3197,8 @@ final class TelegramBotApi
      * @see https://core.telegram.org/bots/api#sendrichmessage
      */
     public function sendRichMessage(
-        int|string $chatId,
         InputRichMessage $richMessage,
+        int|string|null $chatId = null,
         ?string $businessConnectionId = null,
         ?int $messageThreadId = null,
         ?int $directMessagesTopicId = null,
@@ -3132,8 +3213,8 @@ final class TelegramBotApi
     ): FailResult|Message {
         return $this->call(
             new SendRichMessage(
-                $chatId,
                 $richMessage,
+                $chatId,
                 $businessConnectionId,
                 $messageThreadId,
                 $directMessagesTopicId,
@@ -3168,6 +3249,98 @@ final class TelegramBotApi
                 $messageThreadId,
                 $canStop,
                 $keepOnStop,
+            ),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#sendsharedwidget
+     *
+     * @param MessageEntity[]|null $captionEntities
+     */
+    public function sendSharedWidget(
+        int|string $chatId,
+        string $widgetId,
+        ?int $messageThreadId = null,
+        ?string $chatData = null,
+        ?string $caption = null,
+        ?string $parseMode = null,
+        ?array $captionEntities = null,
+        ?bool $showCaptionAboveMedia = null,
+        ?bool $disableNotification = null,
+        ?bool $protectContent = null,
+        ?bool $allowPaidBroadcast = null,
+        ?string $messageEffectId = null,
+        ?ReplyParameters $replyParameters = null,
+        InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup = null,
+    ): FailResult|Message {
+        return $this->call(
+            new SendSharedWidget(
+                $chatId,
+                $widgetId,
+                $messageThreadId,
+                $chatData,
+                $caption,
+                $parseMode,
+                $captionEntities,
+                $showCaptionAboveMedia,
+                $disableNotification,
+                $protectContent,
+                $allowPaidBroadcast,
+                $messageEffectId,
+                $replyParameters,
+                $replyMarkup,
+            ),
+        );
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#sendwidget
+     *
+     * @param MessageEntity[]|null $captionEntities
+     */
+    public function sendWidget(
+        int|string $chatId,
+        string $html,
+        ?int $messageThreadId = null,
+        ?int $width = null,
+        ?int $height = null,
+        ?string $publicData = null,
+        ?string $chatData = null,
+        ?string $caption = null,
+        ?string $parseMode = null,
+        ?array $captionEntities = null,
+        ?bool $showCaptionAboveMedia = null,
+        ?bool $allowQueries = null,
+        ?bool $isShared = null,
+        ?bool $disableNotification = null,
+        ?bool $protectContent = null,
+        ?bool $allowPaidBroadcast = null,
+        ?string $messageEffectId = null,
+        ?ReplyParameters $replyParameters = null,
+        InlineKeyboardMarkup|ReplyKeyboardMarkup|ReplyKeyboardRemove|ForceReply|null $replyMarkup = null,
+    ): FailResult|Message {
+        return $this->call(
+            new SendWidget(
+                $chatId,
+                $html,
+                $messageThreadId,
+                $width,
+                $height,
+                $publicData,
+                $chatData,
+                $caption,
+                $parseMode,
+                $captionEntities,
+                $showCaptionAboveMedia,
+                $allowQueries,
+                $isShared,
+                $disableNotification,
+                $protectContent,
+                $allowPaidBroadcast,
+                $messageEffectId,
+                $replyParameters,
+                $replyMarkup,
             ),
         );
     }
@@ -3722,22 +3895,34 @@ final class TelegramBotApi
     }
 
     /**
+     * @param MessageEntity[]|null $customDescriptionEntities
+     *
      * @see https://core.telegram.org/bots/api#verifychat
      */
-    public function verifyChat(int|string $chatId, ?string $customDescription = null): FailResult|true
-    {
+    public function verifyChat(
+        int|string $chatId,
+        ?string $customDescription = null,
+        ?string $customDescriptionParseMode = null,
+        ?array $customDescriptionEntities = null,
+    ): FailResult|true {
         return $this->call(
-            new VerifyChat($chatId, $customDescription),
+            new VerifyChat($chatId, $customDescription, $customDescriptionParseMode, $customDescriptionEntities),
         );
     }
 
     /**
+     * @param MessageEntity[]|null $customDescriptionEntities
+     *
      * @see https://core.telegram.org/bots/api#verifyuser
      */
-    public function verifyUser(int $userId, ?string $customDescription = null): FailResult|true
-    {
+    public function verifyUser(
+        int $userId,
+        ?string $customDescription = null,
+        ?string $customDescriptionParseMode = null,
+        ?array $customDescriptionEntities = null,
+    ): FailResult|true {
         return $this->call(
-            new VerifyUser($userId, $customDescription),
+            new VerifyUser($userId, $customDescription, $customDescriptionParseMode, $customDescriptionEntities),
         );
     }
 

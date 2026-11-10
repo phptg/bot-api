@@ -16,9 +16,12 @@ use Phptg\BotApi\Type\ChatFullInfo;
 use Phptg\BotApi\Type\ChatLocation;
 use Phptg\BotApi\Type\ChatPermissions;
 use Phptg\BotApi\Type\ChatPhoto;
+use Phptg\BotApi\Type\ChatShareThemeEmoji;
+use Phptg\BotApi\Type\EmojiTypeEmoji;
 use Phptg\BotApi\Type\Message;
 use Phptg\BotApi\Type\ReactionTypeCustomEmoji;
 use Phptg\BotApi\Type\Audio;
+use Phptg\BotApi\Type\TonWalletCard;
 use Phptg\BotApi\Type\UniqueGiftColors;
 use Phptg\BotApi\Type\User;
 use Phptg\BotApi\Type\UserRating;
@@ -90,6 +93,8 @@ final class ChatFullInfoTest extends TestCase
         assertNull($info->firstProfileAudio);
         assertNull($info->guardBot);
         assertNull($info->community);
+        assertNull($info->tonWalletCard);
+        assertNull($info->shareTheme);
     }
 
     public function testFromTelegramResult(): void
@@ -225,6 +230,36 @@ final class ChatFullInfoTest extends TestCase
                 'id' => 987,
                 'name' => 'My Community',
             ],
+            'ton_wallet_card' => [
+                'address' => 'EQCDwallet',
+                'amount' => '100500',
+                'stickers' => [
+                    [
+                        'position' => [
+                            'x_percentage' => 50.0,
+                            'y_percentage' => 25.0,
+                            'width_percentage' => 30.0,
+                            'height_percentage' => 40.0,
+                            'rotation_angle' => 15.0,
+                            'corner_radius_percentage' => 5.0,
+                        ],
+                        'nft' => [
+                            'address' => 'EQABnft',
+                            'index' => '1',
+                            'name' => 'NftName',
+                            'description' => 'NftDescription',
+                        ],
+                    ],
+                ],
+                'background_nft_address' => 'EQABnft',
+            ],
+            'share_theme' => [
+                'type' => 'emoji',
+                'emojis' => [
+                    ['type' => 'emoji', 'emoji' => '🎁'],
+                ],
+                'background_backdrop_id' => 123,
+            ],
         ], null, ChatFullInfo::class);
 
         assertSame(23, $info->id);
@@ -332,5 +367,15 @@ final class ChatFullInfoTest extends TestCase
         assertSame('GuardBot', $info->guardBot->firstName);
         assertSame(987, $info->community?->id);
         assertSame('My Community', $info->community->name);
+
+        assertInstanceOf(TonWalletCard::class, $info->tonWalletCard);
+        assertSame('EQCDwallet', $info->tonWalletCard->address);
+        assertSame('100500', $info->tonWalletCard->amount);
+        assertSame('EQABnft', $info->tonWalletCard->backgroundNftAddress);
+
+        assertInstanceOf(ChatShareThemeEmoji::class, $info->shareTheme);
+        assertInstanceOf(EmojiTypeEmoji::class, $info->shareTheme->emojis[0]);
+        assertSame('🎁', $info->shareTheme->emojis[0]->emoji);
+        assertSame(123, $info->shareTheme->backgroundBackdropId);
     }
 }

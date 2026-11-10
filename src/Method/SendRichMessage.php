@@ -26,8 +26,8 @@ use Phptg\BotApi\Type\SuggestedPostParameters;
 final readonly class SendRichMessage implements MethodInterface
 {
     public function __construct(
-        private int|string $chatId,
         private InputRichMessage $richMessage,
+        private int|string|null $chatId = null,
         private ?string $businessConnectionId = null,
         private ?int $messageThreadId = null,
         private ?int $directMessagesTopicId = null,

@@ -29,8 +29,8 @@ final readonly class SendVideo implements MethodInterface
      * @param MessageEntity[]|null $captionEntities
      */
     public function __construct(
-        private int|string $chatId,
         private string|InputFile $video,
+        private int|string|null $chatId = null,
         private ?string $businessConnectionId = null,
         private ?int $messageThreadId = null,
         private ?int $duration = null,
