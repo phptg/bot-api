@@ -235,13 +235,13 @@ final class CurlTransportTest extends TestCase
             execResult: '{"ok":true,"result":[]}',
             getinfoResult: [CURLINFO_HTTP_CODE => 200],
         );
-        $transport = new CurlTransport(curl: $curl, timeout: 2.5);
+        $transport = new CurlTransport(curl: $curl, timeout: 2);
 
         $transport->post('//url/logOut', '', []);
 
         $options = $curl->getOptions();
         assertNotNull($options);
-        assertSame(2.5, $options[CURLOPT_TIMEOUT]);
+        assertSame(2, $options[CURLOPT_TIMEOUT]);
 
         $transport->downloadFile('https://example.test/hello.jpg');
 
@@ -256,7 +256,7 @@ final class CurlTransportTest extends TestCase
             execResult: '{"ok":true,"result":[]}',
             getinfoResult: [CURLINFO_HTTP_CODE => 200],
         );
-        $transport = new CurlTransport(curl: $curl, downloadFileTimeout: 2.5);
+        $transport = new CurlTransport(curl: $curl, downloadFileTimeout: 2);
 
         $transport->get('getMe');
 

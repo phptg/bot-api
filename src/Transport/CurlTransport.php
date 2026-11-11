@@ -28,15 +28,15 @@ final readonly class CurlTransport implements TransportInterface
     /**
      * @param MimeTypeResolverInterface $mimeTypeResolver MIME type resolver for determining file types. Defaults
      * to {@see ApacheMimeTypeResolver}.
-     * @param float|null $timeout Maximum time in seconds for each API request. `null` means no timeout.
-     * @param float|null $downloadFileTimeout Maximum time in seconds for {@see CurlTransport::downloadFile()}.
+     * @param int|null $timeout Maximum time in seconds for each API request. `null` means no timeout.
+     * @param int|null $downloadFileTimeout Maximum time in seconds for {@see CurlTransport::downloadFile()}.
      * `null` means no timeout.
      * @param CurlInterface $curl cURL interface implementation for making HTTP requests.
      */
     public function __construct(
         private MimeTypeResolverInterface $mimeTypeResolver = new ApacheMimeTypeResolver(),
-        private ?float $timeout = null,
-        private ?float $downloadFileTimeout = null,
+        private ?int $timeout = null,
+        private ?int $downloadFileTimeout = null,
         private CurlInterface $curl = new Curl(),
     ) {
         $this->curlShareHandle = $this->createCurlShareHandle();

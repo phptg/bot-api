@@ -42,13 +42,13 @@ final class CurlTransportDownloadFileTest extends TestCase
     public function testTimeout(): void
     {
         $curl = new CurlMock('hello-content');
-        $transport = new CurlTransport(curl: $curl, downloadFileTimeout: 2.5);
+        $transport = new CurlTransport(curl: $curl, downloadFileTimeout: 2);
 
         $transport->downloadFile('https://example.test/hello.jpg');
 
         $options = $curl->getOptions();
         assertNotNull($options);
-        assertSame(2.5, $options[CURLOPT_TIMEOUT]);
+        assertSame(2, $options[CURLOPT_TIMEOUT]);
     }
 
     public function testInitException(): void
