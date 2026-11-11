@@ -245,7 +245,9 @@ final class CurlTransportTest extends TestCase
 
         $transport->downloadFile('https://example.test/hello.jpg');
 
-        assertArrayNotHasKey(CURLOPT_TIMEOUT, $curl->getOptions());
+        $downloadOptions = $curl->getOptions();
+        assertNotNull($downloadOptions);
+        assertArrayNotHasKey(CURLOPT_TIMEOUT, $downloadOptions);
     }
 
     public function testDownloadFileTimeout(): void
