@@ -32,6 +32,8 @@ $api = new TelegramBotApi($token, transport: $transport);
 Constructor parameters:
 
 - `$mimeTypeResolver` — [MIME type resolver](mime-type-resolvers.md) for determining file types. Defaults to `ApacheMimeTypeResolver`.
+- `$timeout` — maximum time in seconds for each API request (`get()`, `post()`, `postWithFiles()`). Defaults to `null` (no timeout).
+- `$downloadFileTimeout` — maximum time in seconds for `downloadFile()`. Defaults to `null` (no timeout).
 
 ## Native
 

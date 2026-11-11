@@ -14,6 +14,7 @@ use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Transport\CurlTransport;
 use Phptg\BotApi\Type\InputFile;
 
+use function PHPUnit\Framework\assertArrayNotHasKey;
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertInstanceOf;
@@ -226,5 +227,39 @@ final class CurlTransportTest extends TestCase
             ],
             $curl->getShareOptions(),
         );
+    }
+
+    public function testTimeout(): void
+    {
+        $curl = new CurlMock(
+            execResult: '{"ok":true,"result":[]}',
+            getinfoResult: [CURLINFO_HTTP_CODE => 200],
+        );
+        $transport = new CurlTransport(curl: $curl, timeout: 2.5);
+
+        $transport->post('//url/logOut', '', []);
+
+        $options = $curl->getOptions();
+        assertNotNull($options);
+        assertSame(2.5, $options[CURLOPT_TIMEOUT]);
+
+        $transport->downloadFile('https://example.test/hello.jpg');
+
+        assertArrayNotHasKey(CURLOPT_TIMEOUT, $curl->getOptions());
+    }
+
+    public function testDownloadFileTimeout(): void
+    {
+        $curl = new CurlMock(
+            execResult: '{"ok":true,"result":[]}',
+            getinfoResult: [CURLINFO_HTTP_CODE => 200],
+        );
+        $transport = new CurlTransport(curl: $curl, downloadFileTimeout: 2.5);
+
+        $transport->get('getMe');
+
+        $options = $curl->getOptions();
+        assertNotNull($options);
+        assertArrayNotHasKey(CURLOPT_TIMEOUT, $options);
     }
 }

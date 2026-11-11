@@ -1,5 +1,9 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.23.1 November 11, 2026
+
+- New #234: Add `timeout` and `downloadFileTimeout` parameters to `CurlTransport`.
+
 ## 0.23 November 10, 2026
 
 - New #233: Add `SendWidget`, `SendSharedWidget`, `AnswerWidgetQuery`, `EditMessageWidgetData`, `EditSharedWidgetData`,
