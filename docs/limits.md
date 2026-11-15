@@ -6,6 +6,17 @@ or a bulk notification to all the bot's subscribers. See
 [Broadcasting to Users](https://core.telegram.org/bots/faq#broadcasting-to-users) in the Telegram Bots FAQ
 for the exact values.
 
+The bulk notification limit can be increased with paid broadcasts: the feature is enabled in `@BotFather`, and
+each message over the free amount costs Telegram Stars withdrawn from the bot's balance. To allow such sending,
+pass `true` as the `allowPaidBroadcast` parameter of a send method:
+
+```php
+$api->sendMessage('Hello!', $chatId, allowPaidBroadcast: true);
+```
+
+Bots with increased limits are only charged for messages that are broadcasted successfully. See
+[Paid Broadcasts](https://core.telegram.org/bots/api#paid-broadcasts) in the Telegram Bot API documentation.
+
 ## Detecting a rate limit in the package
 
 The package does not throw an exception on a 429 error — a request that hits a rate limit returns
@@ -15,7 +26,7 @@ a `FailResult` instance with:
 - `parameters` — a `Phptg\BotApi\Type\ResponseParameters` object, whose `retryAfter` field contains
   the number of seconds left to wait before the request can be repeated.
 
-## Example: sending messages to all subscribers
+## Example of sending messages to all subscribers
 
 Sending messages in a loop with pauses is acceptable for small scripts, but in a real application such a loop
 blocks the process it runs in. The common solution is a queue: put each message into a queue (a database table,
@@ -63,16 +74,3 @@ while ($task = $queue->take()) {
 The worker must take tasks at a rate allowed by the limits. Many queue implementations support rate limiting
 and delayed execution out of the box, so the `retryAfter` delay returned with a 429 error can be applied
 without waiting in the worker process itself.
-
-## Paid broadcasts
-
-The bulk notification limit can be increased with paid broadcasts: the feature is enabled in @BotFather, and
-each message over the free amount costs Telegram Stars withdrawn from the bot's balance. To allow such sending,
-pass `true` as the `allowPaidBroadcast` parameter of a send method:
-
-```php
-$api->sendMessage('Hello!', $chatId, allowPaidBroadcast: true);
-```
-
-Bots with increased limits are only charged for messages that are broadcasted successfully. See
-[Paid Broadcasts](https://core.telegram.org/bots/api#paid-broadcasts) in the Telegram Bot API documentation.
