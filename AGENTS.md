@@ -275,6 +275,9 @@ The return type is `FailResult|<result type>`.
 
 ## CHANGELOG
 
+Only changes to production code (the `src/` directory) go into the changelog. Documentation, tests, CI and other
+non-production changes are not listed.
+
 Entries go under the existing `## X.Y.Z under development` heading (create one if the top section
 is already released). Format: `- <Type> #<PR>: <text>`, wrapped at 120 characters, continuation
 lines indented by two spaces.

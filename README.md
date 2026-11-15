@@ -146,6 +146,7 @@ $api->downloadFile($file)->saveTo('/local/path/to/file.jpg');
 - [Logging](docs/logging.md)
 - [Webhook handling](docs/webhook-handling.md)
 - [Custom requests](docs/custom-requests.md)
+- [Limits](docs/limits.md)
 - [Internals](docs/internals.md)
 
 If you have any questions or problems with this package, use [author telegram chat](https://t.me/predvoditelev_chat) for communication.
