@@ -34,6 +34,11 @@ Constructor parameters:
 - `$mimeTypeResolver` — [MIME type resolver](mime-type-resolvers.md) for determining file types. Defaults to `ApacheMimeTypeResolver`.
 - `$timeout` — maximum time in seconds for each API request (`get()`, `post()`, `postWithFiles()`). Defaults to `null` (no timeout).
 - `$downloadFileTimeout` — maximum time in seconds for `downloadFile()`. Defaults to `null` (no timeout).
+- `$proxy` — proxy server URL, for example `socks5://user:password@127.0.0.1:1080` or `http://127.0.0.1:3128`.
+  All schemes supported by cURL are allowed. Defaults to `null` (no proxy).
+- `$extraCurlOptions` — additional cURL options applied to every request, for example
+  `[CURLOPT_HTTPHEADER => ['User-Agent: MyBot/1.0'], CURLOPT_VERBOSE => true]`. They take precedence over
+  the options the transport sets itself, so be careful not to break the request. Defaults to an empty array.
 
 ## Native
 

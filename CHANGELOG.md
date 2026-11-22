@@ -1,5 +1,9 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.24.1 under development
+
+- New #238: Add `proxy` and `extraCurlOptions` parameters to `CurlTransport`.
+
 ## 0.24 November 22, 2026
 
 - New #237: Add `SetMySettings` method.
