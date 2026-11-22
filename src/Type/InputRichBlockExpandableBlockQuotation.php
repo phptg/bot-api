@@ -17,11 +17,11 @@ use Phptg\BotApi\RichTextConverter;
 final readonly class InputRichBlockExpandableBlockQuotation implements InputRichBlock
 {
     /**
-     * @param RichTextContent $text
+     * @param InputRichBlock[] $blocks
      * @param RichTextContent|null $credit
      */
     public function __construct(
-        public string|array|RichText $text,
+        public array $blocks,
         public string|array|RichText|null $credit = null,
     ) {}
 
@@ -38,7 +38,10 @@ final readonly class InputRichBlockExpandableBlockQuotation implements InputRich
         return array_filter(
             [
                 'type' => $this->getType(),
-                'text' => RichTextConverter::toRequestArray($this->text),
+                'blocks' => array_map(
+                    static fn(InputRichBlock $block) => $block->toRequestArray($fileCollector),
+                    $this->blocks,
+                ),
                 'credit' => RichTextConverter::toRequestArray($this->credit),
             ],
             static fn(mixed $value): bool => $value !== null,

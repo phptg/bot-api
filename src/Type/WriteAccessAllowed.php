@@ -15,5 +15,6 @@ final readonly class WriteAccessAllowed
         public ?bool $fromRequest = null,
         public ?string $webAppName = null,
         public ?bool $fromAttachmentMenu = null,
+        public ?User $inviter = null,
     ) {}
 }

@@ -149,6 +149,7 @@ use Phptg\BotApi\Method\SetMyDefaultAdministratorRights;
 use Phptg\BotApi\Method\SetMyDescription;
 use Phptg\BotApi\Method\SetMyName;
 use Phptg\BotApi\Method\SetMyProfilePhoto;
+use Phptg\BotApi\Method\SetMySettings;
 use Phptg\BotApi\Method\SetMyShortDescription;
 use Phptg\BotApi\Method\SetUserEmojiStatus;
 use Phptg\BotApi\Method\Sticker\AddStickerToSet;
@@ -211,6 +212,7 @@ use Phptg\BotApi\Type\BotAccessSettings;
 use Phptg\BotApi\Type\BotCommand;
 use Phptg\BotApi\Type\BotCommandScope;
 use Phptg\BotApi\Type\BotDescription;
+use Phptg\BotApi\Type\BotFullInfo;
 use Phptg\BotApi\Type\BotName;
 use Phptg\BotApi\Type\BotShortDescription;
 use Phptg\BotApi\Type\BusinessConnection;
@@ -274,7 +276,6 @@ use Phptg\BotApi\Type\StoryArea;
 use Phptg\BotApi\Type\UniqueGift;
 use Phptg\BotApi\Type\Update\Update;
 use Phptg\BotApi\Type\Update\WebhookInfo;
-use Phptg\BotApi\Type\User;
 use Phptg\BotApi\Type\UserChatBoosts;
 use Phptg\BotApi\Type\UserProfileAudios;
 use Phptg\BotApi\Type\UserProfilePhotos;
@@ -1601,7 +1602,7 @@ final class TelegramBotApi
     /**
      * @see https://core.telegram.org/bots/api#getchat
      */
-    public function getMe(): FailResult|User
+    public function getMe(): FailResult|BotFullInfo
     {
         return $this->call(new GetMe());
     }
@@ -3601,6 +3602,47 @@ final class TelegramBotApi
     public function setMyProfilePhoto(InputProfilePhoto $photo): FailResult|true
     {
         return $this->call(new SetMyProfilePhoto($photo));
+    }
+
+    /**
+     * @see https://core.telegram.org/bots/api#setmysettings
+     */
+    public function setMySettings(
+        ?bool $supportsInlineQueries = null,
+        ?string $inlineQueryPlaceholder = null,
+        ?bool $needsInlineQueryLocation = null,
+        ?int $inlineFeedbackShareDenominator = null,
+        ?bool $canJoinGroups = null,
+        ?bool $canReadAllGroupMessages = null,
+        ?bool $canConnectToBusiness = null,
+        ?bool $canManageBots = null,
+        ?bool $supportsGuestQueries = null,
+        ?bool $supportsJoinRequestQueries = null,
+        ?bool $hasTopicsEnabled = null,
+        ?bool $allowsUsersToCreateTopics = null,
+        ?bool $hasTopicSidebar = null,
+        ?bool $canCommunicateWithBots = null,
+        ?string $callbackQueryMode = null,
+    ): FailResult|true {
+        return $this->call(
+            new SetMySettings(
+                $supportsInlineQueries,
+                $inlineQueryPlaceholder,
+                $needsInlineQueryLocation,
+                $inlineFeedbackShareDenominator,
+                $canJoinGroups,
+                $canReadAllGroupMessages,
+                $canConnectToBusiness,
+                $canManageBots,
+                $supportsGuestQueries,
+                $supportsJoinRequestQueries,
+                $hasTopicsEnabled,
+                $allowsUsersToCreateTopics,
+                $hasTopicSidebar,
+                $canCommunicateWithBots,
+                $callbackQueryMode,
+            ),
+        );
     }
 
     /**

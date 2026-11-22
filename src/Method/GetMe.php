@@ -7,12 +7,12 @@ namespace Phptg\BotApi\Method;
 use Phptg\BotApi\ParseResult\ValueProcessor\ObjectValue;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\MethodInterface;
-use Phptg\BotApi\Type\User;
+use Phptg\BotApi\Type\BotFullInfo;
 
 /**
- * @see https://core.telegram.org/bots/api#getchat
+ * @see https://core.telegram.org/bots/api#getme
  *
- * @template-implements MethodInterface<User>
+ * @template-implements MethodInterface<BotFullInfo>
  */
 final readonly class GetMe implements MethodInterface
 {
@@ -32,10 +32,10 @@ final readonly class GetMe implements MethodInterface
     }
 
     /**
-     * @return ObjectValue<User>
+     * @return ObjectValue<BotFullInfo>
      */
     public function getResultType(): ObjectValue
     {
-        return new ObjectValue(User::class);
+        return new ObjectValue(BotFullInfo::class);
     }
 }

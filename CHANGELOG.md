@@ -1,5 +1,18 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.24 November 22, 2026
+
+- New #237: Add `SetMySettings` method.
+- New #237: Add `BotFullInfo` type.
+- New #237: Add `inviter` field to `WriteAccessAllowed` type.
+- Chg #237: Remove bot-only fields (`canJoinGroups`, `canReadAllGroupMessages`, `supportsGuestQueries`,
+  `supportsInlineQueries`, `canConnectToBusiness`, `hasMainWebApp`, `hasTopicsEnabled`,
+  `allowsUsersToCreateTopics`, `canManageBots` and `supportsJoinRequestQueries`) from `User` type — they were
+  moved to the new `BotFullInfo` type.
+- Chg #237: `getMe()` method now returns `BotFullInfo` instead of `User`.
+- Chg #237: Replace `text` field with `blocks` field in `RichBlockExpandableBlockQuotation` and
+  `InputRichBlockExpandableBlockQuotation` types.
+
 ## 0.23.1 November 11, 2026
 
 - New #234: Add `timeout` and `downloadFileTimeout` parameters to `CurlTransport`.
