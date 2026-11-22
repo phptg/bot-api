@@ -276,7 +276,6 @@ use Phptg\BotApi\Type\StoryArea;
 use Phptg\BotApi\Type\UniqueGift;
 use Phptg\BotApi\Type\Update\Update;
 use Phptg\BotApi\Type\Update\WebhookInfo;
-use Phptg\BotApi\Type\User;
 use Phptg\BotApi\Type\UserChatBoosts;
 use Phptg\BotApi\Type\UserProfileAudios;
 use Phptg\BotApi\Type\UserProfilePhotos;
