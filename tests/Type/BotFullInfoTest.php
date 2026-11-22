@@ -34,7 +34,6 @@ final class BotFullInfoTest extends TestCase
         );
 
         assertSame(1, $botFullInfo->id);
-        assertSame(true, $botFullInfo->isBot);
         assertSame('My Bot', $botFullInfo->firstName);
         assertSame(true, $botFullInfo->canJoinGroups);
         assertSame(false, $botFullInfo->canReadAllGroupMessages);
@@ -77,7 +76,6 @@ final class BotFullInfoTest extends TestCase
         );
 
         assertSame(1, $botFullInfo->id);
-        assertSame(true, $botFullInfo->isBot);
         assertSame('My Bot', $botFullInfo->firstName);
         assertSame('my_bot', $botFullInfo->username);
         assertSame(['my_bot', 'my_bot_2'], $botFullInfo->activeUsernames);
@@ -105,7 +103,6 @@ final class BotFullInfoTest extends TestCase
         ], null, BotFullInfo::class);
 
         assertSame(1, $botFullInfo->id);
-        assertSame(true, $botFullInfo->isBot);
         assertSame('My Bot', $botFullInfo->firstName);
         assertSame(true, $botFullInfo->canJoinGroups);
         assertNull($botFullInfo->username);
@@ -137,7 +134,6 @@ final class BotFullInfoTest extends TestCase
         ], null, BotFullInfo::class);
 
         assertSame(1, $botFullInfo->id);
-        assertSame(true, $botFullInfo->isBot);
         assertSame('My Bot', $botFullInfo->firstName);
         assertSame('my_bot', $botFullInfo->username);
         assertSame(['my_bot', 'my_bot_2'], $botFullInfo->activeUsernames);
