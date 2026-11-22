@@ -1,10 +1,9 @@
 # Telegram Bot API for PHP Change Log
 
-## under development
+## 0.24 November 22, 2026
 
 - New #237: Add `SetMySettings` method.
-- New #237: Add `BotFullInfo` type with `activeUsernames`, `inlineQueryPlaceholder`,
-  `needsInlineQueryLocation` and `hasTopicSidebar` fields.
+- New #237: Add `BotFullInfo` type.
 - New #237: Add `inviter` field to `WriteAccessAllowed` type.
 - Chg #237: Remove bot-only fields (`canJoinGroups`, `canReadAllGroupMessages`, `supportsGuestQueries`,
   `supportsInlineQueries`, `canConnectToBusiness`, `hasMainWebApp`, `hasTopicsEnabled`,
