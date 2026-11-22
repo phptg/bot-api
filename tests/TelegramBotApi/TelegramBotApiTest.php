@@ -2760,6 +2760,15 @@ final class TelegramBotApiTest extends TestCase
         assertTrue($result);
     }
 
+    public function testSetMySettings(): void
+    {
+        $api = TestHelper::createSuccessStubApi(true);
+
+        $result = $api->setMySettings(callbackQueryMode: 'inline');
+
+        assertTrue($result);
+    }
+
     public function testSetMyShortDescription(): void
     {
         $api = TestHelper::createSuccessStubApi(true);
