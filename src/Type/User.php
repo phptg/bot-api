@@ -20,16 +20,6 @@ final readonly class User
         public ?string $languageCode = null,
         public ?true $isPremium = null,
         public ?true $addedToAttachmentMenu = null,
-        public ?bool $canJoinGroups = null,
-        public ?bool $canReadAllGroupMessages = null,
-        public ?bool $supportsGuestQueries = null,
-        public ?bool $supportsInlineQueries = null,
-        public ?bool $canConnectToBusiness = null,
-        public ?bool $hasMainWebApp = null,
-        public ?bool $hasTopicsEnabled = null,
-        public ?bool $allowsUsersToCreateTopics = null,
-        public ?bool $canManageBots = null,
-        public ?bool $supportsJoinRequestQueries = null,
     ) {}
 
     /**
@@ -47,16 +37,6 @@ final readonly class User
                 'language_code' => $this->languageCode,
                 'is_premium' => $this->isPremium,
                 'added_to_attachment_menu' => $this->addedToAttachmentMenu,
-                'can_join_groups' => $this->canJoinGroups,
-                'can_read_all_group_messages' => $this->canReadAllGroupMessages,
-                'supports_guest_queries' => $this->supportsGuestQueries,
-                'supports_inline_queries' => $this->supportsInlineQueries,
-                'can_connect_to_business' => $this->canConnectToBusiness,
-                'has_main_web_app' => $this->hasMainWebApp,
-                'has_topics_enabled' => $this->hasTopicsEnabled,
-                'allows_users_to_create_topics' => $this->allowsUsersToCreateTopics,
-                'can_manage_bots' => $this->canManageBots,
-                'supports_join_request_queries' => $this->supportsJoinRequestQueries,
             ],
             static fn(mixed $value): bool => $value !== null,
         );
