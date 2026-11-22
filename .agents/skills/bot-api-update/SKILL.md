@@ -47,9 +47,9 @@ fully gitignored, and the own subdirectory keeps these files apart from the othe
 mkdir -p runtime/bot-api-update
 curl -fsS -o runtime/bot-api-update/api-changelog.html https://core.telegram.org/bots/api-changelog
 curl -fsS -o runtime/bot-api-update/api.html https://core.telegram.org/bots/api
-python3 .claude/skills/bot-api-update/scripts/telegram_page_to_md.py \
+python3 .agents/skills/bot-api-update/scripts/telegram_page_to_md.py \
     runtime/bot-api-update/api-changelog.html runtime/bot-api-update/api-changelog.md
-python3 .claude/skills/bot-api-update/scripts/telegram_page_to_md.py \
+python3 .agents/skills/bot-api-update/scripts/telegram_page_to_md.py \
     runtime/bot-api-update/api.html runtime/bot-api-update/api.md
 ```
 
