@@ -17,6 +17,7 @@ use Phptg\BotApi\Type\AcceptedGiftTypes;
 use Phptg\BotApi\Type\BotAccessSettings;
 use Phptg\BotApi\Type\BotCommand;
 use Phptg\BotApi\Type\BotDescription;
+use Phptg\BotApi\Type\BotFullInfo;
 use Phptg\BotApi\Type\BotName;
 use Phptg\BotApi\Type\BotShortDescription;
 use Phptg\BotApi\Type\BusinessConnection;
@@ -58,7 +59,6 @@ use Phptg\BotApi\Type\Story;
 use Phptg\BotApi\Type\UniqueGift;
 use Phptg\BotApi\Type\Update\Update;
 use Phptg\BotApi\Type\Update\WebhookInfo;
-use Phptg\BotApi\Type\User;
 use Phptg\BotApi\Type\UserChatBoosts;
 use Phptg\BotApi\Type\UserProfileAudios;
 use Phptg\BotApi\Type\UserProfilePhotos;
@@ -110,21 +110,37 @@ final class TelegramBotApiTest extends TestCase
     {
         $logger = new SimpleLogger();
         $method = new GetMe();
-        $response = new ApiResponse(200, '{"ok":true,"result":{"id":1,"is_bot":false,"first_name":"Sergei"}}');
+        $resultPayload = [
+            'id' => 1,
+            'is_bot' => true,
+            'first_name' => 'My Bot',
+            'can_join_groups' => true,
+            'can_read_all_group_messages' => false,
+            'supports_guest_queries' => true,
+            'supports_inline_queries' => false,
+            'needs_inline_query_location' => true,
+            'can_connect_to_business' => false,
+            'has_main_web_app' => true,
+            'has_topics_enabled' => false,
+            'allows_users_to_create_topics' => true,
+            'has_topic_sidebar' => false,
+            'can_manage_bots' => true,
+            'supports_join_request_queries' => false,
+        ];
+        $response = new ApiResponse(
+            200,
+            '{"ok":true,"result":' . json_encode($resultPayload) . '}',
+        );
         $api = TestHelper::createSuccessStubApi($response, logger: $logger);
 
         $result = $api->call($method);
 
-        assertInstanceOf(User::class, $result);
+        assertInstanceOf(BotFullInfo::class, $result);
         assertSame(1, $result->id);
 
         $decodedResponse = [
             'ok' => true,
-            'result' => [
-                'id' => 1,
-                'is_bot' => false,
-                'first_name' => 'Sergei',
-            ],
+            'result' => $resultPayload,
         ];
         assertSame(
             [
@@ -1407,13 +1423,25 @@ final class TelegramBotApiTest extends TestCase
     {
         $api = TestHelper::createSuccessStubApi([
             'id' => 1,
-            'is_bot' => false,
-            'first_name' => 'Sergei',
+            'is_bot' => true,
+            'first_name' => 'My Bot',
+            'can_join_groups' => true,
+            'can_read_all_group_messages' => false,
+            'supports_guest_queries' => true,
+            'supports_inline_queries' => false,
+            'needs_inline_query_location' => true,
+            'can_connect_to_business' => false,
+            'has_main_web_app' => true,
+            'has_topics_enabled' => false,
+            'allows_users_to_create_topics' => true,
+            'has_topic_sidebar' => false,
+            'can_manage_bots' => true,
+            'supports_join_request_queries' => false,
         ]);
 
         $result = $api->getMe();
 
-        assertInstanceOf(User::class, $result);
+        assertInstanceOf(BotFullInfo::class, $result);
         assertSame(1, $result->id);
     }
 

@@ -211,6 +211,7 @@ use Phptg\BotApi\Type\BotAccessSettings;
 use Phptg\BotApi\Type\BotCommand;
 use Phptg\BotApi\Type\BotCommandScope;
 use Phptg\BotApi\Type\BotDescription;
+use Phptg\BotApi\Type\BotFullInfo;
 use Phptg\BotApi\Type\BotName;
 use Phptg\BotApi\Type\BotShortDescription;
 use Phptg\BotApi\Type\BusinessConnection;
@@ -1601,7 +1602,7 @@ final class TelegramBotApi
     /**
      * @see https://core.telegram.org/bots/api#getchat
      */
-    public function getMe(): FailResult|User
+    public function getMe(): FailResult|BotFullInfo
     {
         return $this->call(new GetMe());
     }
