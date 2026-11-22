@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Type;
 
+use Phptg\BotApi\ParseResult\ValueProcessor\ArrayMap;
+use Phptg\BotApi\ParseResult\ValueProcessor\RichBlockValue;
 use Phptg\BotApi\ParseResult\ValueProcessor\RichTextValue;
 
 /**
@@ -16,12 +18,12 @@ use Phptg\BotApi\ParseResult\ValueProcessor\RichTextValue;
 final readonly class RichBlockExpandableBlockQuotation implements RichBlock
 {
     /**
-     * @param RichTextContent $text
+     * @param list<RichBlock> $blocks
      * @param RichTextContent|null $credit
      */
     public function __construct(
-        #[RichTextValue]
-        public string|array|RichText $text,
+        #[ArrayMap(RichBlockValue::class)]
+        public array $blocks,
         #[RichTextValue]
         public string|array|RichText|null $credit = null,
     ) {}
