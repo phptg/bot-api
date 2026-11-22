@@ -28,15 +28,25 @@ final readonly class CurlTransport implements TransportInterface
     /**
      * @param MimeTypeResolverInterface $mimeTypeResolver MIME type resolver for determining file types. Defaults
      * to {@see ApacheMimeTypeResolver}.
-     * @param int|null $timeout Maximum time in seconds for each API request. `null` means no timeout.
+     * @param int|null $timeout Maximum time in seconds for each API request. Sets the cURL `CURLOPT_TIMEOUT`
+     * option for `get()`, `post()` and `postWithFiles()`. `null` means the option is not set.
      * @param int|null $downloadFileTimeout Maximum time in seconds for {@see CurlTransport::downloadFile()}.
-     * `null` means no timeout.
+     * Sets the cURL `CURLOPT_TIMEOUT` option for it. `null` means the option is not set.
+     * @param string|null $proxy Proxy server URL, for example `socks5://user:password@127.0.0.1:1080` or
+     * `http://127.0.0.1:3128`. Sets the cURL `CURLOPT_PROXY` option. All schemes supported by cURL are allowed.
+     * `null` means the option is not set.
+     * @param array<int, mixed> $extraCurlOptions Additional cURL options applied to every request, for example
+     * `[CURLOPT_HTTPHEADER => ['User-Agent: MyBot/1.0'], CURLOPT_VERBOSE => true]`. They take precedence over
+     * the options set by the parameters above and by the transport itself, so be careful not to break
+     * the request. Defaults to an empty array.
      * @param CurlInterface $curl cURL interface implementation for making HTTP requests.
      */
     public function __construct(
         private MimeTypeResolverInterface $mimeTypeResolver = new ApacheMimeTypeResolver(),
         private ?int $timeout = null,
         private ?int $downloadFileTimeout = null,
+        private ?string $proxy = null,
+        private array $extraCurlOptions = [],
         private CurlInterface $curl = new Curl(),
     ) {
         $this->curlShareHandle = $this->createCurlShareHandle();
@@ -123,6 +133,10 @@ final readonly class CurlTransport implements TransportInterface
         if ($this->downloadFileTimeout !== null) {
             $options[CURLOPT_TIMEOUT] = $this->downloadFileTimeout;
         }
+        if ($this->proxy !== null) {
+            $options[CURLOPT_PROXY] = $this->proxy;
+        }
+        $options = $this->extraCurlOptions + $options;
 
         try {
             $curl = $this->curl->init();
@@ -152,6 +166,10 @@ final readonly class CurlTransport implements TransportInterface
         if ($this->timeout !== null) {
             $options[CURLOPT_TIMEOUT] = $this->timeout;
         }
+        if ($this->proxy !== null) {
+            $options[CURLOPT_PROXY] = $this->proxy;
+        }
+        $options = $this->extraCurlOptions + $options;
 
         $curl = $this->curl->init();
 

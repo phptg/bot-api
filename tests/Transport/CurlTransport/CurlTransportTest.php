@@ -264,4 +264,108 @@ final class CurlTransportTest extends TestCase
         assertNotNull($options);
         assertArrayNotHasKey(CURLOPT_TIMEOUT, $options);
     }
+
+    public function testProxy(): void
+    {
+        $curl = new CurlMock(
+            execResult: '{"ok":true,"result":[]}',
+            getinfoResult: [CURLINFO_HTTP_CODE => 200],
+        );
+        $transport = new CurlTransport(curl: $curl, proxy: 'socks5://user:password@127.0.0.1:1080');
+
+        $transport->get('getMe');
+        $options = $curl->getOptions();
+        assertNotNull($options);
+        assertSame('socks5://user:password@127.0.0.1:1080', $options[CURLOPT_PROXY]);
+
+        $transport->post('//url/logOut', '', []);
+        $options = $curl->getOptions();
+        assertNotNull($options);
+        assertSame('socks5://user:password@127.0.0.1:1080', $options[CURLOPT_PROXY]);
+
+        $transport->postWithFiles('//url/sendPhoto', [], []);
+        $options = $curl->getOptions();
+        assertNotNull($options);
+        assertSame('socks5://user:password@127.0.0.1:1080', $options[CURLOPT_PROXY]);
+
+        $transport->downloadFile('https://example.test/hello.jpg');
+        $downloadOptions = $curl->getOptions();
+        assertNotNull($downloadOptions);
+        assertSame('socks5://user:password@127.0.0.1:1080', $downloadOptions[CURLOPT_PROXY]);
+    }
+
+    public function testWithoutProxy(): void
+    {
+        $curl = new CurlMock(
+            execResult: '{"ok":true,"result":[]}',
+            getinfoResult: [CURLINFO_HTTP_CODE => 200],
+        );
+        $transport = new CurlTransport(curl: $curl);
+
+        $transport->get('getMe');
+        $options = $curl->getOptions();
+        assertNotNull($options);
+        assertArrayNotHasKey(CURLOPT_PROXY, $options);
+
+        $transport->downloadFile('https://example.test/hello.jpg');
+        $downloadOptions = $curl->getOptions();
+        assertNotNull($downloadOptions);
+        assertArrayNotHasKey(CURLOPT_PROXY, $downloadOptions);
+    }
+
+    public function testExtraCurlOptions(): void
+    {
+        $curl = new CurlMock(
+            execResult: '{"ok":true,"result":[]}',
+            getinfoResult: [CURLINFO_HTTP_CODE => 200],
+        );
+        $transport = new CurlTransport(
+            extraCurlOptions: [
+                CURLOPT_HTTPHEADER => ['User-Agent: MyBot/1.0'],
+                CURLOPT_CONNECTTIMEOUT => 5,
+            ],
+            curl: $curl,
+        );
+
+        $transport->get('getMe');
+        $options = $curl->getOptions();
+        assertNotNull($options);
+        assertSame(['User-Agent: MyBot/1.0'], $options[CURLOPT_HTTPHEADER]);
+        assertSame(5, $options[CURLOPT_CONNECTTIMEOUT]);
+
+        $transport->post('//url/logOut', '', ['Content-Type' => 'application/json; charset=utf-8']);
+        $options = $curl->getOptions();
+        assertNotNull($options);
+        assertSame(['User-Agent: MyBot/1.0'], $options[CURLOPT_HTTPHEADER]);
+
+        $transport->postWithFiles('//url/sendPhoto', [], []);
+        $options = $curl->getOptions();
+        assertNotNull($options);
+        assertSame(['User-Agent: MyBot/1.0'], $options[CURLOPT_HTTPHEADER]);
+
+        $transport->downloadFile('https://example.test/hello.jpg');
+        $downloadOptions = $curl->getOptions();
+        assertNotNull($downloadOptions);
+        assertSame(['User-Agent: MyBot/1.0'], $downloadOptions[CURLOPT_HTTPHEADER]);
+        assertSame(5, $downloadOptions[CURLOPT_CONNECTTIMEOUT]);
+    }
+
+    public function testExtraCurlOptionsPrecedence(): void
+    {
+        $curl = new CurlMock(
+            execResult: '{"ok":true,"result":[]}',
+            getinfoResult: [CURLINFO_HTTP_CODE => 200],
+        );
+        $transport = new CurlTransport(
+            timeout: 2,
+            extraCurlOptions: [CURLOPT_TIMEOUT => 5],
+            curl: $curl,
+        );
+
+        $transport->get('getMe');
+
+        $options = $curl->getOptions();
+        assertNotNull($options);
+        assertSame(5, $options[CURLOPT_TIMEOUT]);
+    }
 }
