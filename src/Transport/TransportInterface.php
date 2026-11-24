@@ -29,7 +29,7 @@ interface TransportInterface
      *
      * @param string $url The URL to request.
      * @param string $body The request body.
-     * @param array<string, string> $headers The request headers as an associative array
+     * @param array<non-empty-string, string> $headers The request headers as an associative array
      * (header name => header value).
      *
      * @return ApiResponse The API response.
