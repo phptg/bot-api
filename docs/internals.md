@@ -1,5 +1,14 @@
 # Internals
 
+## Agent skills
+
+- `AGENTS.md` — the project guidelines.
+- `.agents/skills/` — the skills an agent loads when a task matches the description in its `SKILL.md`.
+  Skills written for this repository are committed; the shared PHPTG ones are installed by `llm/skills` and git-ignored.
+- `skills.json` — the configuration of [`llm/skills`](https://github.com/roxblnfk/skills), a Composer
+  plugin that installs skills into `.agents/skills/` after `composer install` and `composer update`.
+  `composer skills:update` syncs by hand — never with `--clean`, which deletes committed skills too.
+
 ## Manual testing with real telegram bot API
 
 - Open directory `/tests/RealTelegramApi/`.

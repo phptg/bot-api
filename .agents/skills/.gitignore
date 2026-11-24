@@ -1,0 +1,4 @@
+*
+!/.gitignore
+!/bot-api-update/
+!/bot-api-update/**

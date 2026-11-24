@@ -1,0 +1,15 @@
+{
+    "$schema": "https://raw.githubusercontent.com/roxblnfk/skills/master/resources/skills.schema.json",
+    "clean": false,
+    "discovery": false,
+    "dependencies": {
+        "composer": false
+    },
+    "sources": [
+        {
+            "from": "github",
+            "package": "phptg/dev-skills",
+            "ref": "master"
+        }
+    ]
+}
