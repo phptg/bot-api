@@ -1,5 +1,9 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.24.2 November 24, 2026
+
+- Enh #240: Clarify in `TransportInterface::post()` that header names are always non-empty strings.
+
 ## 0.24.1 November 22, 2026
 
 - New #238: Add `proxy` and `extraCurlOptions` parameters to `CurlTransport`.
