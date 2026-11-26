@@ -37,7 +37,7 @@ jobs:
         run: composer cs-fix
 
       - name: Run Rector
-        run: ./vendor/bin/rector --output-format=github
+        run: ./vendor/bin/rector
 
       - name: Commit changes
         env:
