@@ -124,8 +124,11 @@ final readonly class Api
             $url .= '?' . http_build_query($queryParameters);
         }
 
-        if ($method instanceof LongPollingMethodInterface && $method->getLongPollingTimeout() > 0) {
-            return $this->transport->longPoll($url, $method->getLongPollingTimeout());
+        if ($method instanceof LongPollingMethodInterface) {
+            $longPollingTimeout = $method->getLongPollingTimeout();
+            if ($longPollingTimeout > 0) {
+                return $this->transport->longPoll($url, $longPollingTimeout);
+            }
         }
 
         return $this->transport->get($url);

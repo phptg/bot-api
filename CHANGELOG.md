@@ -2,9 +2,9 @@
 
 ## 0.25 under development
 
-- Chg #241: Add `longPoll()` method to `TransportInterface`.
-- Chg #241: Throw `InvalidArgumentException` on a negative `timeout` in `GetUpdates`.
+- New #241: Add `longPoll()` method to `TransportInterface`.
 - New #241: Add `LongPollingMethodInterface` extending `MethodInterface` and implemented by `GetUpdates`.
+- Chg #241: Throw `InvalidArgumentException` on a negative `timeout` in `GetUpdates`.
 - Enh #241: Declare the `timeout` parameter of `GetUpdates` and `getUpdates()` as `non-negative-int|null` and the
   `timeout` and `downloadFileTimeout` parameters of `CurlTransport` as `positive-int|null` in PHPDoc.
 - Bug #241: `NativeTransport` no longer interrupts `getUpdates()` with a `timeout` greater than
