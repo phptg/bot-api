@@ -1729,6 +1729,17 @@ final class TelegramBotApiTest extends TestCase
         assertNull($transport->longPollingTimeout());
     }
 
+    public function testNonLongPollingMethod(): void
+    {
+        $transport = TransportMock::successResult(5);
+        $api = new TelegramBotApi('stub-token', transport: $transport);
+
+        $api->getChatMemberCount(1);
+
+        assertSame('https://api.telegram.org/botstub-token/getChatMemberCount?chat_id=1', $transport->url());
+        assertNull($transport->longPollingTimeout());
+    }
+
     public function testPostMethodWithParams(): void
     {
         $transport = TransportMock::successResult([
