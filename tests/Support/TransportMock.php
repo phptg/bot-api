@@ -29,6 +29,8 @@ final class TransportMock implements TransportInterface
      */
     private ?array $sentFiles = null;
 
+    private ?int $longPollingTimeout = null;
+
     /**
      * @param resource|null $downloadFileResource
      */
@@ -50,6 +52,13 @@ final class TransportMock implements TransportInterface
     public function get(string $url): ApiResponse
     {
         $this->url = $url;
+        return $this->response;
+    }
+
+    public function longPoll(string $url, int $timeout): ApiResponse
+    {
+        $this->url = $url;
+        $this->longPollingTimeout = $timeout;
         return $this->response;
     }
 
@@ -114,5 +123,13 @@ final class TransportMock implements TransportInterface
     public function sentFiles(): ?array
     {
         return $this->sentFiles;
+    }
+
+    /**
+     * Returns the timeout passed to `longPoll()` or `null` if `longPoll()` was not called.
+     */
+    public function longPollingTimeout(): ?int
+    {
+        return $this->longPollingTimeout;
     }
 }

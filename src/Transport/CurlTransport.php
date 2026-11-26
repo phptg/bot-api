@@ -28,9 +28,10 @@ final readonly class CurlTransport implements TransportInterface
     /**
      * @param MimeTypeResolverInterface $mimeTypeResolver MIME type resolver for determining file types. Defaults
      * to {@see ApacheMimeTypeResolver}.
-     * @param int|null $timeout Maximum time in seconds for each API request. Sets the cURL `CURLOPT_TIMEOUT`
-     * option for `get()`, `post()` and `postWithFiles()`. `null` means the option is not set.
-     * @param int|null $downloadFileTimeout Maximum time in seconds for {@see CurlTransport::downloadFile()}.
+     * @param positive-int|null $timeout Maximum time in seconds for each API request. Sets the cURL `CURLOPT_TIMEOUT`
+     * option for `get()`, `post()` and `postWithFiles()`. For `longPoll()` the limit is extended to the long
+     * polling timeout plus 10 seconds, when it is greater. `null` means the option is not set.
+     * @param positive-int|null $downloadFileTimeout Maximum time in seconds for {@see CurlTransport::downloadFile()}.
      * Sets the cURL `CURLOPT_TIMEOUT` option for it. `null` means the option is not set.
      * @param string|null $proxy Proxy server URL, for example `socks5://user:password@127.0.0.1:1080` or
      * `http://127.0.0.1:3128`. Sets the cURL `CURLOPT_PROXY` option. All schemes supported by cURL are allowed.
@@ -58,7 +59,17 @@ final readonly class CurlTransport implements TransportInterface
             CURLOPT_HTTPGET => true,
             CURLOPT_URL => $url,
         ];
-        return $this->send($options);
+        return $this->send($options, $this->timeout);
+    }
+
+    public function longPoll(string $url, int $timeout): ApiResponse
+    {
+        $options = [
+            CURLOPT_HTTPGET => true,
+            CURLOPT_URL => $url,
+        ];
+        $requestTimeout = $this->timeout === null ? null : max($this->timeout, $timeout + 10);
+        return $this->send($options, $requestTimeout);
     }
 
     public function post(string $url, string $body, array $headers): ApiResponse
@@ -74,7 +85,7 @@ final readonly class CurlTransport implements TransportInterface
             CURLOPT_POSTFIELDS => $body,
             CURLOPT_HTTPHEADER => $header,
         ];
-        return $this->send($options);
+        return $this->send($options, $this->timeout);
     }
 
     public function postWithFiles(string $url, array $data, array $files): ApiResponse
@@ -88,7 +99,7 @@ final readonly class CurlTransport implements TransportInterface
             CURLOPT_URL => $url,
             CURLOPT_POSTFIELDS => $data,
         ];
-        return $this->send($options);
+        return $this->send($options, $this->timeout);
     }
 
     private function toCurlFile(InputFile $file): CURLFile|CURLStringFile
@@ -158,13 +169,14 @@ final readonly class CurlTransport implements TransportInterface
 
     /**
      * @param array<int, mixed> $options
+     * @param positive-int|null $timeout Maximum time in seconds for the request. `null` means no limit.
      */
-    private function send(array $options): ApiResponse
+    private function send(array $options, ?int $timeout): ApiResponse
     {
         $options[CURLOPT_RETURNTRANSFER] = true;
         $options[CURLOPT_SHARE] = $this->curlShareHandle;
-        if ($this->timeout !== null) {
-            $options[CURLOPT_TIMEOUT] = $this->timeout;
+        if ($timeout !== null) {
+            $options[CURLOPT_TIMEOUT] = $timeout;
         }
         if ($this->proxy !== null) {
             $options[CURLOPT_PROXY] = $this->proxy;

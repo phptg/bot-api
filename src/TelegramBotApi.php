@@ -1696,6 +1696,7 @@ final class TelegramBotApi
     /**
      * @see https://core.telegram.org/bots/api#getupdates
      *
+     * @param non-negative-int|null $timeout
      * @param string[]|null $allowedUpdates
      * @return FailResult|Update[]
      */

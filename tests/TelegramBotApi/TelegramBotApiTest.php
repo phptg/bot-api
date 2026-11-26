@@ -1696,6 +1696,39 @@ final class TelegramBotApiTest extends TestCase
         );
     }
 
+    public function testLongPollingMethod(): void
+    {
+        $transport = TransportMock::successResult([]);
+        $api = new TelegramBotApi('stub-token', transport: $transport);
+
+        $api->getUpdates(timeout: 30);
+
+        assertSame('https://api.telegram.org/botstub-token/getUpdates?timeout=30', $transport->url());
+        assertSame(30, $transport->longPollingTimeout());
+    }
+
+    public function testLongPollingMethodWithZeroTimeout(): void
+    {
+        $transport = TransportMock::successResult([]);
+        $api = new TelegramBotApi('stub-token', transport: $transport);
+
+        $api->getUpdates(timeout: 0);
+
+        assertSame('https://api.telegram.org/botstub-token/getUpdates?timeout=0', $transport->url());
+        assertNull($transport->longPollingTimeout());
+    }
+
+    public function testLongPollingMethodWithoutTimeout(): void
+    {
+        $transport = TransportMock::successResult([]);
+        $api = new TelegramBotApi('stub-token', transport: $transport);
+
+        $api->getUpdates();
+
+        assertSame('https://api.telegram.org/botstub-token/getUpdates', $transport->url());
+        assertNull($transport->longPollingTimeout());
+    }
+
     public function testPostMethodWithParams(): void
     {
         $transport = TransportMock::successResult([

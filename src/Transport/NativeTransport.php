@@ -36,6 +36,17 @@ final readonly class NativeTransport implements TransportInterface
         );
     }
 
+    public function longPoll(string $url, int $timeout): ApiResponse
+    {
+        return $this->send(
+            $url,
+            [
+                'method' => 'GET',
+                'timeout' => $timeout + 10,
+            ],
+        );
+    }
+
     public function post(string $url, string $body, array $headers): ApiResponse
     {
         $header = [];

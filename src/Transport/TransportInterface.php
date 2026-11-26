@@ -25,6 +25,18 @@ interface TransportInterface
     public function get(string $url): ApiResponse;
 
     /**
+     * Performs a GET request where the server may hold the connection for up to $timeout seconds before responding,
+     * that is, long polling. Implementations must not fail such a request because of their own timeouts: any total or
+     * inactivity timeout applied to the request must be longer than $timeout.
+     *
+     * @param string $url The URL to request.
+     * @param positive-int $timeout The maximum number of seconds the server may hold the connection before responding.
+     *
+     * @return ApiResponse The API response.
+     */
+    public function longPoll(string $url, int $timeout): ApiResponse;
+
+    /**
      * Performs a POST request.
      *
      * @param string $url The URL to request.

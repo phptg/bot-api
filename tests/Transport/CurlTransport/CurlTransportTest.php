@@ -47,6 +47,28 @@ final class CurlTransportTest extends TestCase
         assertInstanceOf(CurlShareHandle::class, $options[CURLOPT_SHARE]);
     }
 
+    public function testLongPoll(): void
+    {
+        $curl = new CurlMock(
+            execResult: '{"ok":true,"result":[]}',
+            getinfoResult: [CURLINFO_HTTP_CODE => 200],
+        );
+        $transport = new CurlTransport(curl: $curl);
+
+        $response = $transport->longPoll('//url/getUpdates?timeout=30', 30);
+
+        assertSame(200, $response->statusCode);
+        assertSame('{"ok":true,"result":[]}', $response->body);
+
+        $options = $curl->getOptions();
+        assertNotNull($options);
+        assertCount(4, $options);
+        assertTrue($options[CURLOPT_HTTPGET]);
+        assertSame('//url/getUpdates?timeout=30', $options[CURLOPT_URL]);
+        assertTrue($options[CURLOPT_RETURNTRANSFER]);
+        assertInstanceOf(CurlShareHandle::class, $options[CURLOPT_SHARE]);
+    }
+
     public function testPost(): void
     {
         $curl = new CurlMock(
@@ -250,6 +272,32 @@ final class CurlTransportTest extends TestCase
         assertArrayNotHasKey(CURLOPT_TIMEOUT, $downloadOptions);
     }
 
+    /**
+     * @param positive-int|null $transportTimeout
+     * @param positive-int $longPollingTimeout
+     */
+    #[TestWith([null, 30, null])]
+    #[TestWith([30, 50, 60])]
+    #[TestWith([30, 5, 30])]
+    public function testLongPollTimeout(?int $transportTimeout, int $longPollingTimeout, ?int $expected): void
+    {
+        $curl = new CurlMock(
+            execResult: '{"ok":true,"result":[]}',
+            getinfoResult: [CURLINFO_HTTP_CODE => 200],
+        );
+        $transport = new CurlTransport(curl: $curl, timeout: $transportTimeout);
+
+        $transport->longPoll('//url/getUpdates', $longPollingTimeout);
+
+        $options = $curl->getOptions();
+        assertNotNull($options);
+        if ($expected === null) {
+            assertArrayNotHasKey(CURLOPT_TIMEOUT, $options);
+        } else {
+            assertSame($expected, $options[CURLOPT_TIMEOUT]);
+        }
+    }
+
     public function testDownloadFileTimeout(): void
     {
         $curl = new CurlMock(
@@ -284,6 +332,11 @@ final class CurlTransportTest extends TestCase
         assertSame('socks5://user:password@127.0.0.1:1080', $options[CURLOPT_PROXY]);
 
         $transport->postWithFiles('//url/sendPhoto', [], []);
+        $options = $curl->getOptions();
+        assertNotNull($options);
+        assertSame('socks5://user:password@127.0.0.1:1080', $options[CURLOPT_PROXY]);
+
+        $transport->longPoll('//url/getUpdates', 30);
         $options = $curl->getOptions();
         assertNotNull($options);
         assertSame('socks5://user:password@127.0.0.1:1080', $options[CURLOPT_PROXY]);
@@ -343,6 +396,11 @@ final class CurlTransportTest extends TestCase
         assertNotNull($options);
         assertSame(['User-Agent: MyBot/1.0'], $options[CURLOPT_HTTPHEADER]);
 
+        $transport->longPoll('//url/getUpdates', 30);
+        $options = $curl->getOptions();
+        assertNotNull($options);
+        assertSame(['User-Agent: MyBot/1.0'], $options[CURLOPT_HTTPHEADER]);
+
         $transport->downloadFile('https://example.test/hello.jpg');
         $downloadOptions = $curl->getOptions();
         assertNotNull($downloadOptions);
@@ -363,6 +421,12 @@ final class CurlTransportTest extends TestCase
         );
 
         $transport->get('getMe');
+
+        $options = $curl->getOptions();
+        assertNotNull($options);
+        assertSame(5, $options[CURLOPT_TIMEOUT]);
+
+        $transport->longPoll('getUpdates', 30);
 
         $options = $curl->getOptions();
         assertNotNull($options);

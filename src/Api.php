@@ -56,7 +56,7 @@ final readonly class Api
 
         $url = $this->baseUrl . '/bot' . $this->token . '/' . $method->getApiMethod();
         $response = match ($method->getHttpMethod()) {
-            HttpMethod::GET => $this->sendGetRequest($url, $method->getData()),
+            HttpMethod::GET => $this->sendGetRequest($url, $method),
             HttpMethod::POST => $this->sendPostRequest($url, $method->getData()),
         };
 
@@ -111,20 +111,26 @@ final readonly class Api
     }
 
     /**
-     * @param array<string, mixed> $data
+     * @param MethodInterface<mixed> $method
      */
-    private function sendGetRequest(string $url, array $data): ApiResponse
+    private function sendGetRequest(string $url, MethodInterface $method): ApiResponse
     {
         $queryParameters = array_map(
             static fn($value) => is_scalar($value) ? $value : json_encode($value, JSON_THROW_ON_ERROR),
-            $data,
+            $method->getData(),
         );
 
         if (!empty($queryParameters)) {
             $url .= '?' . http_build_query($queryParameters);
         }
 
-        return $this->transport->get($url);
+        $longPollingTimeout = $method instanceof LongPollingMethodInterface
+            ? $method->getLongPollingTimeout()
+            : 0;
+
+        return $longPollingTimeout > 0
+            ? $this->transport->longPoll($url, $longPollingTimeout)
+            : $this->transport->get($url);
     }
 
     /**

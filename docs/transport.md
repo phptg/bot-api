@@ -32,7 +32,9 @@ $api = new TelegramBotApi($token, transport: $transport);
 Constructor parameters:
 
 - `$mimeTypeResolver` — [MIME type resolver](mime-type-resolvers.md) for determining file types. Defaults to `ApacheMimeTypeResolver`.
-- `$timeout` — maximum time in seconds for each API request (`get()`, `post()`, `postWithFiles()`). Defaults to `null` (no timeout).
+- `$timeout` — maximum time in seconds for each API request (`get()`, `post()`, `postWithFiles()`). For `longPoll()`
+  the limit is extended to the long polling timeout plus 10 seconds, when it is greater, so the request is not
+  interrupted while the server is holding it. Defaults to `null` (no timeout).
 - `$downloadFileTimeout` — maximum time in seconds for `downloadFile()`. Defaults to `null` (no timeout).
 - `$proxy` — proxy server URL, for example `socks5://user:password@127.0.0.1:1080` or `http://127.0.0.1:3128`.
   All schemes supported by cURL are allowed. Defaults to `null` (no proxy).
@@ -66,6 +68,10 @@ $api = new TelegramBotApi($token, transport: $transport);
 Constructor parameters:
 
 - `$mimeTypeResolver` — [MIME type resolver](mime-type-resolvers.md) for determining file types. Defaults to `ApacheMimeTypeResolver`.
+
+For `longPoll()` the transport sets the stream `timeout` option to the long polling timeout plus 10 seconds, so
+long polling requests are not interrupted by
+[`default_socket_timeout`](https://www.php.net/manual/en/filesystem.configuration.php#ini.default-socket-timeout).
 
 Available MIME type resolvers:
 

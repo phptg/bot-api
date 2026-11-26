@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phptg\BotApi\Tests\Method\Update;
 
 use PHPUnit\Framework\TestCase;
+use InvalidArgumentException;
 use Phptg\BotApi\Transport\HttpMethod;
 use Phptg\BotApi\Method\Update\GetUpdates;
 use Phptg\BotApi\Tests\Support\TestHelper;
@@ -22,6 +23,16 @@ final class GetUpdatesTest extends TestCase
         assertSame(HttpMethod::GET, $method->getHttpMethod());
         assertSame('getUpdates', $method->getApiMethod());
         assertSame([], $method->getData());
+        assertSame(0, $method->getLongPollingTimeout());
+    }
+
+    public function testNegativeTimeout(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('The "timeout" must be a non-negative integer. -1 given.');
+
+        // @phpstan-ignore argument.type (negative timeout is passed on purpose)
+        new GetUpdates(timeout: -1);
     }
 
     public function testFull(): void
@@ -42,6 +53,7 @@ final class GetUpdatesTest extends TestCase
             ],
             $method->getData(),
         );
+        assertSame(5000, $method->getLongPollingTimeout());
     }
 
     public function testPrepareResult(): void
