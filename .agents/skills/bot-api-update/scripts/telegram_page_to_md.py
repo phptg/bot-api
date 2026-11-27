@@ -37,8 +37,8 @@ def convert(source: str) -> str:
     start = source.find(marker)
     body = source[start:] if start != -1 else source
 
-    body = re.sub(r"<script.*?</script>", "", body, flags=re.IGNORECASE | re.DOTALL)
-    body = re.sub(r"<style.*?</style>", "", body, flags=re.IGNORECASE | re.DOTALL)
+    body = re.sub(r"<script[^>]*>.*?</script[^>]*>", "", body, flags=re.IGNORECASE | re.DOTALL)
+    body = re.sub(r"<style[^>]*>.*?</style[^>]*>", "", body, flags=re.IGNORECASE | re.DOTALL)
 
     # Anchor icons would otherwise turn into stray emphasis markers.
     body = re.sub(r"<i class=\"anchor-icon\"></i>", "", body, flags=re.IGNORECASE)
