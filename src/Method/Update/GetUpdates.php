@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Method\Update;
 
+use InvalidArgumentException;
 use Phptg\BotApi\ParseResult\ValueProcessor\ArrayOfObjectsValue;
 use Phptg\BotApi\Transport\HttpMethod;
-use Phptg\BotApi\MethodInterface;
+use Phptg\BotApi\LongPollingMethodInterface;
 use Phptg\BotApi\Type\Update\Update;
 
 /**
  * @see https://core.telegram.org/bots/api#getupdates
  *
- * @template-implements MethodInterface<array<Update>>
+ * @template-implements LongPollingMethodInterface<array<Update>>
  */
-final readonly class GetUpdates implements MethodInterface
+final readonly class GetUpdates implements LongPollingMethodInterface
 {
     /**
+     * @param non-negative-int|null $timeout
      * @param string[]|null $allowedUpdates
      */
     public function __construct(
@@ -24,7 +26,13 @@ final readonly class GetUpdates implements MethodInterface
         private ?int $limit = null,
         private ?int $timeout = null,
         private ?array $allowedUpdates = null,
-    ) {}
+    ) {
+        if ($this->timeout < 0) {
+            throw new InvalidArgumentException(
+                'The "timeout" must be a non-negative integer. ' . $this->timeout . ' given.',
+            );
+        }
+    }
 
     public function getHttpMethod(): HttpMethod
     {
@@ -47,6 +55,11 @@ final readonly class GetUpdates implements MethodInterface
             ],
             static fn(mixed $value): bool => $value !== null,
         );
+    }
+
+    public function getLongPollingTimeout(): int
+    {
+        return $this->timeout ?? 0;
     }
 
     /**

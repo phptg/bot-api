@@ -56,6 +56,39 @@ final class NativeTransportTest extends TestCase
         );
     }
 
+    public function testLongPoll(): void
+    {
+        $transport = new NativeTransport();
+
+        StreamMock::enable(
+            responseHeaders: [
+                'HTTP/1.1 200 OK',
+                'Content-Type: text/json',
+            ],
+            responseBody: '{"ok":true,"result":[]}',
+        );
+
+        $response = $transport->longPoll('http://url/getUpdates?timeout=90', 90);
+
+        $request = StreamMock::disable();
+
+        assertSame(200, $response->statusCode);
+        assertSame('{"ok":true,"result":[]}', $response->body);
+        assertSame(
+            [
+                'path' => 'http://url/getUpdates?timeout=90',
+                'options' => [
+                    'http' => [
+                        'method' => 'GET',
+                        'timeout' => 100,
+                        'ignore_errors' => true,
+                    ],
+                ],
+            ],
+            $request,
+        );
+    }
+
     public function testPost(): void
     {
         $transport = new NativeTransport();

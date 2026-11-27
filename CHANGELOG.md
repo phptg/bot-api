@@ -1,5 +1,16 @@
 # Telegram Bot API for PHP Change Log
 
+## 0.25 under development
+
+- New #241: Add `longPoll()` method to `TransportInterface`.
+- New #241: Add `LongPollingMethodInterface` extending `MethodInterface` and implemented by `GetUpdates`.
+- Chg #241: Throw `InvalidArgumentException` on a negative `timeout` in `GetUpdates`.
+- Enh #241: Declare the `timeout` parameter of `GetUpdates` and `getUpdates()` as `non-negative-int|null` and the
+  `timeout` and `downloadFileTimeout` parameters of `CurlTransport` as `positive-int|null` in PHPDoc.
+- Bug #241: `CurlTransport` and `NativeTransport` no longer interrupt `getUpdates()` while the server is holding
+  the request: the request timeout is extended to the long polling timeout plus 10 seconds, so it is no longer
+  limited by the `timeout` parameter of `CurlTransport` or by `default_socket_timeout` (60 seconds by default).
+
 ## 0.24.2 November 24, 2026
 
 - Enh #240: Clarify in `TransportInterface::post()` that header names are always non-empty strings.

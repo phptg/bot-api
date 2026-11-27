@@ -21,6 +21,12 @@ use function is_string;
 final readonly class NativeTransport implements TransportInterface
 {
     /**
+     * Extra seconds added to the long polling timeout when setting the stream timeout, so the request is not
+     * interrupted by `default_socket_timeout` while the server is holding it.
+     */
+    private const LONG_POLLING_TIMEOUT_MARGIN = 10;
+
+    /**
      * @param MimeTypeResolverInterface $mimeTypeResolver MIME type resolver for determining file types. Defaults
      * to {@see ApacheMimeTypeResolver}.
      */
@@ -33,6 +39,17 @@ final readonly class NativeTransport implements TransportInterface
         return $this->send(
             $url,
             ['method' => 'GET'],
+        );
+    }
+
+    public function longPoll(string $url, int $timeout): ApiResponse
+    {
+        return $this->send(
+            $url,
+            [
+                'method' => 'GET',
+                'timeout' => $timeout + self::LONG_POLLING_TIMEOUT_MARGIN,
+            ],
         );
     }
 
