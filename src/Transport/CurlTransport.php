@@ -23,6 +23,12 @@ use function is_string;
  */
 final readonly class CurlTransport implements TransportInterface
 {
+    /**
+     * Extra seconds added to the long polling timeout when the request timeout is set, so the request is not
+     * interrupted by the transport while the server is holding it.
+     */
+    private const LONG_POLLING_TIMEOUT_MARGIN = 10;
+
     private CurlShareHandle $curlShareHandle;
 
     /**
@@ -68,7 +74,9 @@ final readonly class CurlTransport implements TransportInterface
             CURLOPT_HTTPGET => true,
             CURLOPT_URL => $url,
         ];
-        $requestTimeout = $this->timeout === null ? null : max($this->timeout, $timeout + 10);
+        $requestTimeout = $this->timeout === null
+            ? null
+            : max($this->timeout, $timeout + self::LONG_POLLING_TIMEOUT_MARGIN);
         return $this->send($options, $requestTimeout);
     }
 
