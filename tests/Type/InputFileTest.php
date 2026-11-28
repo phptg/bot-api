@@ -40,12 +40,11 @@ final class InputFileTest extends TestCase
      */
     public static function dataFromResource(): iterable
     {
-        // PHP recognizes `file://` URIs with a host only when the path uses forward slashes on Windows.
         $path = str_replace('\\', '/', __FILE__);
         yield 'plain path' => [$path];
         yield 'file URI' => ['file://' . $path];
-        yield 'file URI with localhost host' => ['file://localhost' . $path];
-        yield 'file URI in uppercase' => ['FILE://LOCALHOST' . $path];
+        yield 'file URI with localhost host' => ['file://localhost/' . ltrim($path, '/')];
+        yield 'file URI in uppercase' => ['FILE://LOCALHOST/' . ltrim($path, '/')];
     }
 
     #[DataProvider('dataFromResource')]

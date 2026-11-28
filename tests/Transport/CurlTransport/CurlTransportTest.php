@@ -254,12 +254,11 @@ final class CurlTransportTest extends TestCase
      */
     public static function dataPostWithLocalFileResource(): iterable
     {
-        // PHP recognizes `file://` URIs with a host only when the path uses forward slashes on Windows.
         $path = str_replace('\\', '/', __DIR__ . '/photo.png');
         yield 'plain path' => [$path, $path];
         yield 'file URI' => ['file://' . $path, $path];
-        yield 'file URI with localhost host' => ['file://localhost' . $path, $path];
-        yield 'file URI in uppercase' => ['FILE://LOCALHOST' . $path, $path];
+        yield 'file URI with localhost host' => ['file://localhost/' . ltrim($path, '/'), $path];
+        yield 'file URI in uppercase' => ['FILE://LOCALHOST/' . ltrim($path, '/'), $path];
     }
 
     #[DataProvider('dataPostWithLocalFileResource')]
