@@ -17,6 +17,7 @@ use Phptg\BotApi\Type\InputFile;
 
 use function is_int;
 use function is_string;
+use function strlen;
 
 /**
  * @api
@@ -115,12 +116,13 @@ final readonly class CurlTransport implements TransportInterface
         $mimeType = $this->mimeTypeResolver->resolve($file);
 
         if (is_string($file->pathOrResource)) {
-            return new CURLFile($file->pathOrResource, $mimeType, $file->filename());
+            return new CURLFile(self::toPlainFilePath($file->pathOrResource), $mimeType, $file->filename());
         }
 
         $metadata = stream_get_meta_data($file->pathOrResource);
-        if (isset($metadata['uri']) && !str_contains($metadata['uri'], '://')) {
-            return new CURLFile($metadata['uri'], $mimeType, $file->filename());
+        $uri = $metadata['uri'] ?? null;
+        if ($uri !== null && $metadata['wrapper_type'] === 'plainfile') {
+            return new CURLFile(self::toPlainFilePath($uri), $mimeType, $file->filename());
         }
 
         if ($metadata['seekable']) {
@@ -134,6 +136,21 @@ final readonly class CurlTransport implements TransportInterface
         }
 
         return new CURLStringFile($contents, $file->filename() ?? '', $mimeType ?? 'application/octet-stream');
+    }
+
+    private static function toPlainFilePath(string $uri): string
+    {
+        if (!str_starts_with(strtolower($uri), 'file://')) {
+            return $uri;
+        }
+
+        $path = substr($uri, strlen('file://'));
+        if (str_starts_with(strtolower($path), 'localhost/')) {
+            $path = substr($path, strlen('localhost'));
+        }
+
+        // A Windows drive letter path has no leading slash: `file:///C:/dir/document.pdf` is `C:/dir/document.pdf`.
+        return preg_match('{^/[a-zA-Z]:}', $path) === 1 ? substr($path, 1) : $path;
     }
 
     public function downloadFile(string $url): mixed

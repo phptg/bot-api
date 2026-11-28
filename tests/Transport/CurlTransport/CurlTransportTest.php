@@ -7,6 +7,7 @@ namespace Phptg\BotApi\Tests\Transport\CurlTransport;
 use CurlShareHandle;
 use CURLFile;
 use CURLStringFile;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Tests\Curl\CurlMock;
@@ -20,6 +21,7 @@ use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertIsArray;
 use function PHPUnit\Framework\assertNotNull;
+use function PHPUnit\Framework\assertNotFalse;
 use function PHPUnit\Framework\assertSame;
 use function PHPUnit\Framework\assertTrue;
 
@@ -155,6 +157,30 @@ final class CurlTransportTest extends TestCase
         assertInstanceOf(CurlShareHandle::class, $options[CURLOPT_SHARE]);
     }
 
+    /**
+     * @return iterable<string, array{string, string}>
+     */
+    public static function dataPostWithLocalFileByUri(): iterable
+    {
+        $path = str_replace('\\', '/', __DIR__ . '/photo.png');
+        yield 'file URI' => ['file://' . $path, $path];
+        yield 'file URI with Windows drive letter path' => ['file:///C:/dir/photo.png', 'C:/dir/photo.png'];
+    }
+
+    #[DataProvider('dataPostWithLocalFileByUri')]
+    public function testPostWithLocalFileByUri(string $uri, string $expectedPath): void
+    {
+        $curl = new CurlMock();
+        $transport = new CurlTransport(curl: $curl);
+
+        $transport->postWithFiles('//url/sendPhoto', [], ['photo' => new InputFile($uri)]);
+
+        assertEquals(
+            ['photo' => new CURLFile($expectedPath, 'image/png', 'photo.png')],
+            $curl->getOptions()[CURLOPT_POSTFIELDS] ?? null,
+        );
+    }
+
     #[TestWith(['text/plain', 'test.txt'])]
     #[TestWith(['application/octet-stream', 'data.bin'])]
     #[TestWith(['application/octet-stream', null])]
@@ -209,25 +235,63 @@ final class CurlTransportTest extends TestCase
         assertSame('', $postFields['file']->postname);
     }
 
-    public function testSeekableResource(): void
+    public function testPostWithDataResource(): void
     {
         $curl = new CurlMock();
         $transport = new CurlTransport(curl: $curl);
 
-        $resource = TestHelper::openFile(__DIR__ . '/photo.png', 'r');
+        $resource = TestHelper::openFile('data://text/plain,hi', 'r');
+        $transport->postWithFiles('//url/method', [], ['file' => new InputFile($resource)]);
+        fclose($resource);
+
+        $postFields = $curl->getOptions()[CURLOPT_POSTFIELDS] ?? null;
+        assertIsArray($postFields);
+        assertEquals(new CURLStringFile('hi', '', 'application/octet-stream'), $postFields['file']);
+    }
+
+    /**
+     * @return iterable<string, array{string, string}>
+     */
+    public static function dataPostWithLocalFileResource(): iterable
+    {
+        $path = str_replace('\\', '/', __DIR__ . '/photo.png');
+        yield 'plain path' => [$path, $path];
+        yield 'file URI' => ['file://' . $path, $path];
+        yield 'file URI with localhost host' => ['file://localhost/' . ltrim($path, '/'), $path];
+        yield 'file URI in uppercase' => ['FILE://LOCALHOST/' . ltrim($path, '/'), $path];
+    }
+
+    #[DataProvider('dataPostWithLocalFileResource')]
+    public function testPostWithLocalFileResource(string $uri, string $expectedPath): void
+    {
+        $curl = new CurlMock();
+        $transport = new CurlTransport(curl: $curl);
+
+        $resource = TestHelper::openFile($uri, 'r');
         stream_get_contents($resource);
-        $transport->postWithFiles(
-            'sendPhoto',
-            [],
-            [
-                'photo' => new InputFile($resource),
-            ],
-        );
+        $transport->postWithFiles('//url/sendPhoto', [], ['photo' => new InputFile($resource)]);
+        fclose($resource);
 
         assertEquals(
-            [
-                'photo' => new CURLFile(__DIR__ . '/photo.png', 'image/png', 'photo.png'),
-            ],
+            ['photo' => new CURLFile($expectedPath, 'image/png', 'photo.png')],
+            $curl->getOptions()[CURLOPT_POSTFIELDS] ?? null,
+        );
+    }
+
+    public function testPostWithTmpFile(): void
+    {
+        $curl = new CurlMock();
+        $transport = new CurlTransport(curl: $curl);
+
+        $resource = tmpfile();
+        assertNotFalse($resource);
+        $path = stream_get_meta_data($resource)['uri'] ?? null;
+        assertNotNull($path);
+        $transport->postWithFiles('//url/sendPhoto', [], ['photo' => new InputFile($resource)]);
+        fclose($resource);
+
+        assertEquals(
+            ['photo' => new CURLFile($path, null, basename($path))],
             $curl->getOptions()[CURLOPT_POSTFIELDS] ?? null,
         );
     }

@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace Phptg\BotApi\Tests\Type;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
 use Phptg\BotApi\Tests\Support\TestHelper;
 use Phptg\BotApi\Type\InputFile;
 
+use function PHPUnit\Framework\assertNotFalse;
+use function PHPUnit\Framework\assertNotNull;
 use function PHPUnit\Framework\assertNull;
 use function PHPUnit\Framework\assertSame;
 
@@ -31,9 +35,22 @@ final class InputFileTest extends TestCase
         assertSame('txt', $file->extension());
     }
 
-    public function testFromResource(): void
+    /**
+     * @return iterable<string, array{string}>
+     */
+    public static function dataFromResource(): iterable
     {
-        $resource = TestHelper::openFile(__FILE__, 'rb');
+        $path = str_replace('\\', '/', __FILE__);
+        yield 'plain path' => [$path];
+        yield 'file URI' => ['file://' . $path];
+        yield 'file URI with localhost host' => ['file://localhost/' . ltrim($path, '/')];
+        yield 'file URI in uppercase' => ['FILE://LOCALHOST/' . ltrim($path, '/')];
+    }
+
+    #[DataProvider('dataFromResource')]
+    public function testFromResource(string $uri): void
+    {
+        $resource = TestHelper::openFile($uri, 'rb');
         $file = new InputFile($resource);
 
         assertSame($resource, $file->pathOrResource);
@@ -43,9 +60,25 @@ final class InputFileTest extends TestCase
         fclose($resource);
     }
 
-    public function testFromVirtualResource(): void
+    public function testFromTmpFile(): void
     {
-        $resource = TestHelper::openFile('php://temp', 'r+b');
+        $resource = tmpfile();
+        assertNotFalse($resource);
+
+        $uri = stream_get_meta_data($resource)['uri'] ?? null;
+        assertNotNull($uri);
+
+        $file = new InputFile($resource);
+        assertSame(basename($uri), $file->filename());
+
+        fclose($resource);
+    }
+
+    #[TestWith(['php://temp', 'r+b'])]
+    #[TestWith(['data://text/plain,hi', 'r'])]
+    public function testFromVirtualResource(string $uri, string $mode): void
+    {
+        $resource = TestHelper::openFile($uri, $mode);
         $file = new InputFile($resource);
 
         assertNull($file->filename());

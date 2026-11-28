@@ -10,6 +10,12 @@
 - Bug #241: `CurlTransport` and `NativeTransport` no longer interrupt `getUpdates()` while the server is holding
   the request: the request timeout is extended to the long polling timeout plus 10 seconds, so it is no longer
   limited by the `timeout` parameter of `CurlTransport` or by `default_socket_timeout` (60 seconds by default).
+- Bug #244: `InputFile::filename()` now recognizes a file opened via `file://` as a regular file, so the filename and
+  MIME type are derived from its path; previously the file was sent with an empty filename and the
+  `application/octet-stream` type. This affects `NativeTransport` as well.
+- Bug #244: `CurlTransport` now recognizes a file opened via `file://` as a regular file and streams it from disk by
+  libcurl instead of reading it into memory. A `file://` URI passed as the `InputFile` path is converted to a plain
+  path as well.
 
 ## 0.24.2 November 24, 2026
 
